@@ -74,24 +74,44 @@
 
 //    0-49, F
 
-// function dun(a) {
-//   if (a <= 100 && a >= 90) {
+// function dun(score) {
+//   if (score <= 100 && score >= 90) {
 //     return "A";
-//   } else if (a <= 89 && a >= 80) {
+//   } else if (score <= 89 && score >= 80) {
 //     return "B";
-//   } else if (a <= 79 && a >= 70) {
+//   } else if (score <= 79 && score >= 70) {
 //     return "C";
-//   } else if (a <= 69 && a >= 60) {
+//   } else if (score <= 69 && score >= 60) {
 //     return "D";
-//   } else if (a <= 59) {
+//   } else if (score <= 59) {
 //     return "F";
 //   } else {
 //     return "Wrong number";
 //   }
 // }
 
-// const d = dun(70);
-// console.log(d);
+// // const d = dun(70);
+// // console.log(d);
+
+// // Switch case return
+
+// function sendMessage(onoo) {
+//   const grade = dun(onoo);
+
+//   switch (grade) {
+//     case "A":
+//       return "Excellent";
+//     case "B":
+//       return "Good";
+//     case "C":
+//       return "Average";
+//     case "D":
+//       return "Poor";
+//     default:
+//       return "Fail";
+//   }
+// }
+// console.log(sendMessage(79), dun(100));
 
 // 6.Өгөгдсөн сарыг шалгаад тохирох улирлыг хэвлэнэ үү .
 
@@ -105,7 +125,7 @@
 //   } else if (months <= 8 && months >= 6) {
 //     return "Summer";
 //   } else if (months <= 5 && months >= 3) {
-//     return "Spring"; 
+//     return "Spring";
 //   } else if (months === 2 || months === 1) {
 //     return "Winter";
 //   } else {
@@ -148,3 +168,98 @@
 // }
 
 // console.log(weatherFunction("sunny", 25));
+
+// 9. Өгөгдсөн насыг шалгаад 18-аас дээш бол "You are old enough to drive", 18-аас доош бол 18 хүрэхэд дутуу байгаа жилтэй нь хамт "You are left with 3 years to drive" гэж хэвлэнэ үү.
+
+// function driveLimitAge(age) {
+//   if (age >= 18) {
+//     return "You are old enough to drive";
+//   } else if (age < 18) {
+//     return `You are left with ${18 - age} years to drive`;
+//   }
+// }
+// console.log(driveLimitAge(20));
+
+// 10.Өгөгдсөн гурвалжны гурван талыг зөв эсэхийг шалгана уу .
+
+// 11.Өгөгдсөн үсгийг шалгаад эгшиг бол "vowel" , гийгүүлэгч бол "consonant" гэж хэвлэнэ үү .
+
+// function givenLetter(letter) {
+//   if (
+//     letter === "a" ||
+//     letter === "e" ||
+//     letter === "u" ||
+//     letter === "i" ||
+//     letter === "o"
+//   ) {
+//     return "Vowel";
+//   } else if (
+//     !letter === "a" ||
+//     !letter === "e" ||
+//     !letter === "u" ||
+//     !letter === "i" ||
+//     !letter === "o"
+//   ) {
+//     return "consonant";
+//   } else {
+//     return "Please enter Vowel or Consonant";
+//   }
+// }
+// console.log(givenLetter(2));
+
+// For loop
+
+// for (let i = 0 ; i <= 100; i+=2) {
+// // let tegshToo = i+2;
+// //   console.log(i % 2 == 0);
+// console.log(i);
+
+// }
+
+// function findSum(number) {
+//   let plussedNumbers = 0;
+//   for (let i = 1; i <= number; i++) {
+//     plussedNumbers = plussedNumbers + i;
+//   }
+//   return plussedNumbers;
+// }
+// console.log(findSum(5));
+
+// //
+// //
+// //
+
+// function firstNumber(num) {
+//   for (let i = 2; i < num; i++) {
+//     if (num % i === 0) {
+//       return false;
+//     } else if (num % i !== 0) {
+//         return true;
+//     }
+//   }
+// //   return true;
+// }
+
+// const isFirstNumber = firstNumber(21);
+// console.log(isFirstNumber);
+
+// const arr = [2, 4, 6, "ss", true, "2"];
+
+// arr.push("Hello", 15);
+
+// for (let i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
+// }
+
+function sumOfEven(arr) {
+  let sumOfArrayIndex = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      sumOfArrayIndex = sumOfArrayIndex + arr[i];
+    }
+  }
+  return sumOfArrayIndex;
+}
+const lastSumOfEvenArray = sumOfEven([2, 45, 32, 44, 67, 12]);
+console.log(lastSumOfEvenArray);
