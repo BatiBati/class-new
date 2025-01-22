@@ -251,15 +251,123 @@
 //     console.log(arr[i]);
 // }
 
-function sumOfEven(arr) {
-  let sumOfArrayIndex = 0;
+// function sumOfEven(arr) {
+//   let sumOfArrayIndex = 0;
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] % 2 === 0) {
-      sumOfArrayIndex = sumOfArrayIndex + arr[i];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] % 2 === 0) {
+//       sumOfArrayIndex = sumOfArrayIndex + arr[i];
+//     }
+//   }
+//   return sumOfArrayIndex;
+// }
+// const lastSumOfEvenArray = sumOfEven([2, 45, 32, 44, 67, 12]);
+// console.log(lastSumOfEvenArray);
+
+// 1. Өгөгдсөн массивын гишүүдийн нийлбэрийг ол.
+
+// function sumOfNumbers(number) {
+//   let sum = 0;
+//   for (let i = 0; i <= number.length; i++) {
+//     sum += i;
+//   }
+//   return sum;
+// }
+
+// console.log(sumOfNumbers([1, 2, 3, 4]));
+
+// 2. Өгөгдсөн массивын 0-ээс их элементүүдийн нийлбэрийг ол.
+
+// function tegeesIh(num) {
+//   let sumOfArr = 0;
+//   for (let i = 0; i < num.length; i++) {
+//     if (num[i] > 0) {
+//       sumOfArr += num[i];
+//     }
+//   }
+//   return sumOfArr;
+// }
+
+// let ihToonuud = tegeesIh([-1, -3, 5, 1, -5]);
+// console.log(ihToonuud);
+
+// 3. Өгөгдсөн массивын хамгийн бага элементийг ол.
+
+// function less(numb) {
+//   let lessNumber = numb[0];
+//   for (let i = 0; i < numb.length; i++) {
+//     if (numb[i] < lessNumber) {
+//       lessNumber = numb[i];
+//     }
+//   }
+//   return lessNumber;
+// }
+// console.log(less([-1, 2, 4, -12, 200]));
+
+// 4. Өгөгдсөн массивын хамгийн их элемент хэд дэх нь вэ? Хэрэв хамгийн их элементийн тоо 1-ээс олон бол бага дугаарыг нь хэвлэнэ.
+
+// function ih(ihNumb) {
+//   let largeNumber = ihNumb[0];
+//   let largeNumberIndex = 0;
+//   for (let i = 0; i < ihNumb.length; i++) {
+//     if (ihNumb[i] >= largeNumber) {
+//       largeNumber = ihNumb[i];
+//       largeNumberIndex = i;
+//     }
+//   }
+//   return largeNumberIndex;
+// }
+// console.log(ih([300, 300, 20, 100, 23, 1000, 1000, 23, 324, 1000, 314]));
+
+// 5. Өгөгдсөн Массивийн элэментүүдийг эсрэг дарааллаар буцаа
+
+// function reverse(el) {
+//   let reversedLetters = [];
+//   for (let i = el.length - 1; i >= 0; i--) {
+//     reversedLetters.push(el[i]);
+//   }
+//   return reversedLetters;
+// }
+// console.log(reverse(["a", "b", "c", "d", "e"]));
+
+// 6. Хөрш элэментүүдээсээ их буюу орой элэментүүдийн тоог буцаа
+
+// function largeNumber(number) {
+//   let oroiToo = 0;
+
+//   for (let i = 1; i < number.length - 1; i++) {
+//     if (number[i] > number[i + 1] && number[i] > number[i - 1]) {
+//       oroiToo = oroiToo + 1;
+//     }
+//   }
+//   if (number[0] > number[1]) {
+//     oroiToo = oroiToo + 1;
+//   }
+//   if (number.length - 1 > number.length - 2) {
+//     oroiToo = oroiToo + 1;
+//   }
+//   return oroiToo;
+// }
+// console.log(largeNumber([50, 20, 30, 12, 444, 2, 20, 5, 12, 11, 20]));
+
+// 7. Өгөгдсөн массивийн бүх хосыг хэвлэ
+
+function twinNumbers(number) {
+  for (let i = 0; i < number.length; i++) {
+    for (let j = i[1]; j < number.length; j++) {
+      if (i === j) {
+        return number;
+      } 
     }
   }
-  return sumOfArrayIndex;
+ 
 }
-const lastSumOfEvenArray = sumOfEven([2, 45, 32, 44, 67, 12]);
-console.log(lastSumOfEvenArray);
+console.log(twinNumbers([1, 2, 4, 55, 1, 55]));
+
+// 8. Массив болон тоо өгөгдөв. Нийлбэр нь өгөгдсөн тоотой тэнцүү байдаг хосын тоог ол
+
+// 9. Өгөгдсөн 2 массивийн огтлолцлыг ол
+
+// 10. Өгөгдсөн массивийн сөрөг тоонуудыг зүүн талд нь байрлуул
+
+// 11. Дараалсан тоонуудаас бүрдэх массив өгөгдөх байсан боловч 1 тоо нь дутуу байв. Тэр тоог ол
