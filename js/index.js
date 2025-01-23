@@ -7,6 +7,8 @@
 //   }
 // }
 
+const { ar } = require("faker/lib/locales");
+
 // const result = isEven(7);
 // console.log(result);
 
@@ -350,24 +352,71 @@
 // }
 // console.log(largeNumber([50, 20, 30, 12, 444, 2, 20, 5, 12, 11, 20]));
 
-// 7. Өгөгдсөн массивийн бүх хосыг хэвлэ
+// 7. Өгөгдсөн массивийн бүх хосыг хэвлэ.
 
-function twinNumbers(number) {
-  for (let i = 0; i < number.length; i++) {
-    for (let j = i[1]; j < number.length; j++) {
-      if (i === j) {
-        return number;
-      } 
-    }
-  }
- 
-}
-console.log(twinNumbers([1, 2, 4, 55, 1, 55]));
+// function findTwinNumbers(number) {
+//   let twinNumbers = [];
+//   for (let i = 0; i < number.length; i++) {
+//     for (let j = i + 1; j < number.length; j++) {
+//       if (number[i] === number[j]) {
+//         twinNumbers.push(number[j]);
+//       }
 
-// 8. Массив болон тоо өгөгдөв. Нийлбэр нь өгөгдсөн тоотой тэнцүү байдаг хосын тоог ол
+//     }
+//   }
+//   return twinNumbers;
+// }
+// console.log(findTwinNumbers([1, 2, 4, 55, 1, 55, 4]));
 
-// 9. Өгөгдсөн 2 массивийн огтлолцлыг ол
+// 8. Массив болон тоо өгөгдөв. Нийлбэр нь өгөгдсөн тоотой тэнцүү байдаг хосын тоог ол.
+
+// function arrayAndNumber(arr, target) {
+//   let sum;
+//   for (let i = 1; i <= target; i++) {
+//     arr.push(i);
+//     for (let j = i + 1; j <= arr.length; i++) {
+//       if (i + j === target) {
+//         sum = target;
+//       }
+//       return sum;
+//     }
+
+//     console.log(arr[i]);
+//   }
+// }
+
+// console.log(arrayAndNumber([], 12));
+
+// 9. Өгөгдсөн 2 массивийн огтлолцлыг ол.
+
+// function ogtlol (arr1, arr2) {
+
+// }
+
+// console.log();
 
 // 10. Өгөгдсөн массивийн сөрөг тоонуудыг зүүн талд нь байрлуул
 
+// function leftside(arr) {
+//   let leftArr = [];
+//   for (let i = 0; i <= arr.length; i++) {
+//     if (arr[i] < 0) {
+//       leftArr.push(arr[i]);
+//     }
+//     if (leftArr[i] < )
+//   }
+
+// }
+// console.log(leftside([1, 2, 3, -1, -5]));
+
 // 11. Дараалсан тоонуудаас бүрдэх массив өгөгдөх байсан боловч 1 тоо нь дутуу байв. Тэр тоог ол
+
+function lostedNumber(arr) {
+  let lost = [];
+  for (let i = 0; i <= arr.length; i++) {
+    lost.push(arr[i]);
+   arr.length = lost;
+  } 
+  return lost;
+}
+console.log(lostedNumber([1, 2, 3, 4, 6, 7, 8, 9, 10]));
