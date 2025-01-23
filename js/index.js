@@ -7,7 +7,7 @@
 //   }
 // }
 
-const { ar } = require("faker/lib/locales");
+// const { ar } = require("faker/lib/locales");
 
 // const result = isEven(7);
 // console.log(result);
@@ -371,52 +371,85 @@ const { ar } = require("faker/lib/locales");
 // 8. Массив болон тоо өгөгдөв. Нийлбэр нь өгөгдсөн тоотой тэнцүү байдаг хосын тоог ол.
 
 // function arrayAndNumber(arr, target) {
-//   let sum;
-//   for (let i = 1; i <= target; i++) {
-//     arr.push(i);
-//     for (let j = i + 1; j <= arr.length; i++) {
-//       if (i + j === target) {
-//         sum = target;
+//   let targetTwinNumbers = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = i + 1; j < arr.length; j++) {
+//       if (arr[i] + arr[j] === target) {
+//         targetTwinNumbers.push([arr[i], arr[j]]);
 //       }
-//       return sum;
 //     }
-
-//     console.log(arr[i]);
 //   }
+//   return targetTwinNumbers;
 // }
-
-// console.log(arrayAndNumber([], 12));
+// console.log(arrayAndNumber([2, 5, 8, 11, 1, 10], 13));
 
 // 9. Өгөгдсөн 2 массивийн огтлолцлыг ол.
 
-// function ogtlol (arr1, arr2) {
+// function ogtlol(arr1, arr2) {
+//   let sameArr = [];
 
+//   for (let i = 0; i < arr1.length; i++) {
+//     for (let j = 0; j < arr2.length; j++) {
+//       if (arr1[i] === arr2[j]) {
+//         sameArr.push(arr2[j]);
+//       }
+//     }
+//   }
+//   return sameArr;
 // }
-
-// console.log();
+// console.log(ogtlol([1, 2, 4, 6, 7, 8, 9, 10], [1, 2, 9, 10, 20, 30, 40]));
 
 // 10. Өгөгдсөн массивийн сөрөг тоонуудыг зүүн талд нь байрлуул
 
 // function leftside(arr) {
-//   let leftArr = [];
-//   for (let i = 0; i <= arr.length; i++) {
+//   let lowerArr = [];
+//   for (let i = 0; i < arr.length; i++) {
 //     if (arr[i] < 0) {
-//       leftArr.push(arr[i]);
+//       lowerArr.push(arr[i]);
 //     }
-//     if (leftArr[i] < )
 //   }
-
+//   for (let j = 0; j < arr.length; j++) {
+//     if (arr[j] > 0) {
+//       lowerArr.push(arr[j]);
+//     }
+//   }
+//   return lowerArr;
 // }
-// console.log(leftside([1, 2, 3, -1, -5]));
+// console.log(leftside([1, 2, -6, 3, -1, -5]));
 
 // 11. Дараалсан тоонуудаас бүрдэх массив өгөгдөх байсан боловч 1 тоо нь дутуу байв. Тэр тоог ол
 
 function lostedNumber(arr) {
-  let lost = [];
-  for (let i = 0; i <= arr.length; i++) {
-    lost.push(arr[i]);
-   arr.length = lost;
-  } 
-  return lost;
+  let maxNumber = arr[0];
+  let minNumber = arr[0];
+  let newArr = [];
+  let arrSum = 0;
+  let newArrSum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < minNumber) {
+      minNumber = arr[i];
+    }
+  }
+  for (let j = 0; j < arr.length; j++) {
+    if (arr[j] > maxNumber) {
+      maxNumber = arr[j];
+    }
+  }
+
+  for (let k = minNumber; k <= maxNumber; k++) {
+    newArr.push(k);
+  }
+
+  for (let q = 0; q < arr.length; q++) {
+    arrSum = arrSum + arr[q];
+  }
+
+  for (let u = 0; u < newArr.length; u++) {
+    newArrSum = newArrSum + newArr[u];
+  }
+  let lostedNumberr = newArrSum - arrSum;
+  return lostedNumberr;
 }
-console.log(lostedNumber([1, 2, 3, 4, 6, 7, 8, 9, 10]));
+
+console.log(lostedNumber([9, 10, 1, 2, 3, 4, 5, 7, 8, 11, 12]));
+//  console.log(lostedNumber([9, 10, 1, 2, 3, 4, 6, 7, 8]));
