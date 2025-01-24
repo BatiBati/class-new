@@ -419,37 +419,102 @@
 
 // 11. Дараалсан тоонуудаас бүрдэх массив өгөгдөх байсан боловч 1 тоо нь дутуу байв. Тэр тоог ол
 
-function lostedNumber(arr) {
-  let maxNumber = arr[0];
-  let minNumber = arr[0];
-  let newArr = [];
-  let arrSum = 0;
-  let newArrSum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < minNumber) {
-      minNumber = arr[i];
+// function lostedNumber(arr) {
+//   let maxNumber = arr[0];
+//   let minNumber = arr[0];
+//   let newArr = [];
+//   let arrSum = 0;
+//   let newArrSum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] < minNumber) {
+//       minNumber = arr[i];
+//     }
+//   }
+//   for (let j = 0; j < arr.length; j++) {
+//     if (arr[j] > maxNumber) {
+//       maxNumber = arr[j];
+//     }
+//   }
+
+//   for (let k = minNumber; k <= maxNumber; k++) {
+//     newArr.push(k);
+//   }
+
+//   for (let q = 0; q < arr.length; q++) {
+//     arrSum = arrSum + arr[q];
+//   }
+
+//   for (let u = 0; u < newArr.length; u++) {
+//     newArrSum = newArrSum + newArr[u];
+//   }
+//   let lostedNumberr = newArrSum - arrSum;
+//   return lostedNumberr;
+// }
+
+// console.log(lostedNumber([9, 10, 1, 2, 3, 4, 5, 7, 8, 11, 12]));
+
+// 1. Массив болон тоо өгөгдөв. Өгөгдсөн тоо массив дотор байгаа бол дугаарыг нь, байхгүй бол -1 буцаа.
+
+// function isNumberInArray(arr, number) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === number) {
+//       return i;
+//     } else {
+//     }
+//   }
+//   return -1;
+// }
+
+// console.log(isNumberInArray([1, 46, 43, 23, 6, 12, 7, 4, 34, 86, 200], 12));
+
+// 2. Өгөгдсөн массивын элементүүдийг хойш нь нэг цикл шилжилт хий. Өөрөөр хэлбэл 1-рийг 2-рт, 2-рыг 3-рт, гэх мэт сүүлийн элементийг 1-рт тус тус шилжүүл.     Жишээ нь: 1 2 3 4 5 -> 5 1 2 3 4
+
+// function changeLocationOfNumber(arr) {
+//   let changedArr = [arr[arr.length - 1]];
+
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     changedArr.push(arr[i]);
+//   }
+//   return changedArr;
+// }
+
+// console.log(changeLocationOfNumber([1, 2, 3, 4, 10, 5, 6]));
+
+// 3. Өгөгдсөн массив өсөх эрэмбээр байвал true үгүй бол false буцаа.
+
+// function lowToUpperArray(arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     if (arr[i] > arr[i + 1]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+// console.log(lowToUpperArray([1, 2, 0, 6, 10]));
+
+// 4. HackerLand University has the following grading policy:
+// - Every student receives a  in the inclusive range from 0 to 100 .
+// - Any  less than 40 is a failing grade.
+// Sam is a professor at the university and likes to round each student's  according to these rules:
+// If the difference between the grade  and the next multiple of 5 is less than 3, round grade up to the next multiple of  5.
+// If the value of  is less than 38, no rounding occurs as the result will still be a failing grade.
+// Examples:
+// grade = 84 round to 85  (85 - 84 is less than 3)
+// grade = 29  do not round (result is less than 38)
+// grade = 57  do not round (60 - 57 is 3 or higher)
+// Given the initial value of  for each of Sam's  students, write code to automate the rounding process.
+
+function checkLessOrThan(grade) {
+  let rightGrade = [];
+  let 
+  for (let i = 0; i < grade.length; i++) {
+    if (grade[i] % 5 > 3) {
+      grade[i] 
     }
   }
-  for (let j = 0; j < arr.length; j++) {
-    if (arr[j] > maxNumber) {
-      maxNumber = arr[j];
-    }
-  }
-
-  for (let k = minNumber; k <= maxNumber; k++) {
-    newArr.push(k);
-  }
-
-  for (let q = 0; q < arr.length; q++) {
-    arrSum = arrSum + arr[q];
-  }
-
-  for (let u = 0; u < newArr.length; u++) {
-    newArrSum = newArrSum + newArr[u];
-  }
-  let lostedNumberr = newArrSum - arrSum;
-  return lostedNumberr;
+  return rightGrade;
 }
 
-console.log(lostedNumber([9, 10, 1, 2, 3, 4, 5, 7, 8, 11, 12]));
-//  console.log(lostedNumber([9, 10, 1, 2, 3, 4, 6, 7, 8]));
+function isNumberLessThan() {}
+
+console.log(checkLessOrThan([84, 100, 29, 50, 70, 25]));
