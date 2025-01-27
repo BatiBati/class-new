@@ -7,6 +7,10 @@
 //   }
 // }
 
+const { ar } = require("faker/lib/locales");
+
+// const { ar, tr } = require("faker/lib/locales");
+
 // const { ar } = require("faker/lib/locales");
 
 // const result = isEven(7);
@@ -184,6 +188,11 @@
 
 // 10.Өгөгдсөн гурвалжны гурван талыг зөв эсэхийг шалгана уу .
 
+// function isTriangle(a, b, c) {
+//   return a + b > c && b + c > a && c + a > b;
+// }
+// console.log(isTriangle(10, 15, 20));
+
 // 11.Өгөгдсөн үсгийг шалгаад эгшиг бол "vowel" , гийгүүлэгч бол "consonant" гэж хэвлэнэ үү .
 
 // function givenLetter(letter) {
@@ -265,7 +274,7 @@
 // }
 // const lastSumOfEvenArray = sumOfEven([2, 45, 32, 44, 67, 12]);
 // console.log(lastSumOfEvenArray);
-
+// Bodlogo 2
 // 1. Өгөгдсөн массивын гишүүдийн нийлбэрийг ол.
 
 // function sumOfNumbers(number) {
@@ -453,6 +462,8 @@
 
 // console.log(lostedNumber([9, 10, 1, 2, 3, 4, 5, 7, 8, 11, 12]));
 
+// Bodlogo 3
+
 // 1. Массив болон тоо өгөгдөв. Өгөгдсөн тоо массив дотор байгаа бол дугаарыг нь, байхгүй бол -1 буцаа.
 
 // function isNumberInArray(arr, number) {
@@ -478,7 +489,7 @@
 //   return changedArr;
 // }
 
-// console.log(changeLocationOfNumber([1, 2, 3, 4, 10, 5, 6]));
+// console.log(changeLocationOfNumber([1, 2, 3, 4, 5, 6]));
 
 // 3. Өгөгдсөн массив өсөх эрэмбээр байвал true үгүй бол false буцаа.
 
@@ -490,7 +501,7 @@
 //   }
 //   return true;
 // }
-// console.log(lowToUpperArray([1, 2, 0, 6, 10]));
+// console.log(lowToUpperArray([1, 2, 3, 6, 10]));
 
 // 4. HackerLand University has the following grading policy:
 // - Every student receives a  in the inclusive range from 0 to 100 .
@@ -504,17 +515,141 @@
 // grade = 57  do not round (60 - 57 is 3 or higher)
 // Given the initial value of  for each of Sam's  students, write code to automate the rounding process.
 
-function checkLessOrThan(grade) {
-  let rightGrade = [];
-  let 
-  for (let i = 0; i < grade.length; i++) {
-    if (grade[i] % 5 > 3) {
-      grade[i] 
-    }
-  }
-  return rightGrade;
-}
+// function checkLessOrThan(grades) {
+//   for (let i = 0; i < grades.length; i++) {
+//     if (grades[i] > 40) {
+//       let changeNumber = 5 - (grades[i] % 5);
+//       if (changeNumber < 3) {
+//         grades[i] += changeNumber;
+//       }
+//     }
+//   }
+//   return grades;
+// }
 
-function isNumberLessThan() {}
+// console.log(checkLessOrThan([84, 100, 29, 57, 73, 25, 93]));
 
-console.log(checkLessOrThan([84, 100, 29, 50, 70, 25]));
+// Bodlogo 4
+
+// 1. Remove Duplicates from Sorted Array-leet
+// nums = [1, 4, 6, 6, 8, 10]
+
+// function removeDuplicates(nums) {
+//   let duplicateNumb = nums[0];
+//   let firstIndex = duplicateNumb;
+//   let newArr = [];
+//   newArr.push(firstIndex);
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] !== duplicateNumb) {
+//       duplicateNumb = nums[i];
+//       newArr.push(duplicateNumb);
+//     }
+//   }
+//   return newArr;
+// }
+// console.log(removeDuplicates([1, 1, 4, 6, 6, 8, 10, 10, 11]));
+
+// 2.  Өгөгдсөн гурвалжингийн гурвалжин болж чадах эсэхийг шалгаад, талбайг ол.
+
+// function isTriangle(a, b, c) {
+//   if (a + b > c && b + c > a && c + a > b) {
+
+//   }
+//   return;
+// }
+// console.log(isTriangle(10, 15, 20));
+
+// 3. Өгөгдсөн утасны дугаарыг аль оператор болохыг буцаа.
+
+// function findNumberOfOperation(phoneNumber) {
+//   let whichOperator = phoneNumber[0] + phoneNumber[1];
+//   if (whichOperator == 99) return "Mobicom";
+//   if (whichOperator == 88) return "Unitel";
+//   if (whichOperator == 91 || whichOperator == 96) return "Skytel";
+//   if (whichOperator == 93) return "G-Mobile";
+// }
+
+// const operatorNumber = findNumberOfOperation("96444444");
+// console.log(operatorNumber);
+
+// 4. Өгөгдсөн тойргийг талбайг ол.
+
+// 5. arr = [4, 3, 6, 65, 8, 7, 90, 10, 5] өсөх дарааллаар эрэмблэ.
+
+// function lowToUpper(arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let j = 0; j < arr.length - 1; j++) {
+//       if (arr[j] > arr[j + 1]) {
+//         let savedNumber = arr[j + 1];
+//         arr[j + 1] = arr[j];
+//         arr[j] = savedNumber;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// const array = lowToUpper([4, 3, 6, 65, 8, 7, 90, 10, 5]);
+
+// //                Loop-0-0 [3, 4, 6, 8, 7, 65, 10, 5, 90]
+// //                Loop-0-1 [3, 4, 6, 7, 8, 10, 5, 65, 90]
+// //                Loop-0-2 [3, 4, 6, 7, 8, 5, 10, 65, 90]
+// //                Loop-0-3 [3, 4, 6, 7, 5, 8, 10, 65, 90]
+// //                Loop-0-4 [3, 4, 6, 5, 7, 8, 10, 65, 90]
+// //                Loop-0-5 [3, 4, 5, 6, 7, 8, 10, 65, 90]
+
+// console.log(array);
+
+// 6. Given a sorted array of distinct integers and a target value, return the index if the target is found.
+// If not, return the index where it would be if it were inserted in order.
+// Example 1:
+
+// Input: nums = [1,3,5,6], target = 5 Output: 2
+// Example 2:
+
+// Input: nums = [1,3,5,6], target = 2 Output: 1
+
+// function findMissedNumber(arr) {
+//   if (arr.length === 0) return 0;
+//   let newArr;
+//   for (let i = 0; i < arr.length; i++) {
+//     // console.log(`First ${arr[i]}`, `second ${arr[i+1]}`,`third ${arr[i]+1}` );
+
+//     if (arr[i] + arr[i + 1] === arr[i] + 1) {
+//       let oldNumber = arr[i + 2];
+//       let missedNumber = arr[i] + 1;
+//       oldNumber = missedNumber;
+//     }
+//   }
+//   return oldNumber;
+// }
+// console.log(findMissedNumber([1, 2, 4, 5, 6]));
+// //                Loop-0  [1, 2, 4, 5, 6]
+// //                Loop-1  []
+
+
+
+
+
+
+
+
+
+const arr = [1, 2, 4, 5, 6];
+
+// Calculate the expected sum of numbers from 1 to n
+const n = arr.length + 1; // Since one number is missing, the total count is one more
+const expectedSum = (n * (n + 1)) / 2; //21
+ 
+// Calculate the actual sum of the array manually
+let actualSum = 0;
+for (let i = 0; i < arr.length; i++) {
+  actualSum += arr[i];
+
+}console.log(actualSum);
+
+
+// The missing number is the difference between the expected and actual sum
+const missingNumber = expectedSum - actualSum;
+
+console.log(missingNumber);
