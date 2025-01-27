@@ -7,7 +7,7 @@
 //   }
 // }
 
-const { ar } = require("faker/lib/locales");
+// const { ar } = require("faker/lib/locales");
 
 // const { ar, tr } = require("faker/lib/locales");
 
@@ -526,7 +526,6 @@ const { ar } = require("faker/lib/locales");
 //   }
 //   return grades;
 // }
-
 // console.log(checkLessOrThan([84, 100, 29, 57, 73, 25, 93]));
 
 // Bodlogo 4
@@ -550,27 +549,44 @@ const { ar } = require("faker/lib/locales");
 // console.log(removeDuplicates([1, 1, 4, 6, 6, 8, 10, 10, 11]));
 
 // 2.  Өгөгдсөн гурвалжингийн гурвалжин болж чадах эсэхийг шалгаад, талбайг ол.
+//     S = p(45-a)(45-b)(45-c)
 
 // function isTriangle(a, b, c) {
 //   if (a + b > c && b + c > a && c + a > b) {
-
+//     let trianglePerimeter = (a + b + c) / 2;
+//     let first = trianglePerimeter - a;
+//     let second = trianglePerimeter - b;
+//     let third = trianglePerimeter - c;
+//     let triangleS = Math.sqrt(trianglePerimeter * first * second * third);
+//     return triangleS;
 //   }
-//   return;
 // }
-// console.log(isTriangle(10, 15, 20));
+// console.log(isTriangle(3, 4, 5));
 
 // 3. Өгөгдсөн утасны дугаарыг аль оператор болохыг буцаа.
 
 // function findNumberOfOperation(phoneNumber) {
-//   let whichOperator = phoneNumber[0] + phoneNumber[1];
-//   if (whichOperator == 99) return "Mobicom";
-//   if (whichOperator == 88) return "Unitel";
-//   if (whichOperator == 91 || whichOperator == 96) return "Skytel";
-//   if (whichOperator == 93) return "G-Mobile";
+//   if (phoneNumber.length === 8) {
+//     let whichOperator = phoneNumber[0] + phoneNumber[1];
+//     if (whichOperator == 99) return "Mobicom";
+//     if (whichOperator == 88) return "Unitel";
+//     if (whichOperator == 91 || whichOperator == 96) return "Skytel";
+//     if (whichOperator == 93) return "G-Mobile";
+//   }
 // }
 
-// const operatorNumber = findNumberOfOperation("96444444");
-// console.log(operatorNumber);
+function whichOperator(phoneNumber) {
+  let mobicom = 99;
+  let unitel = 88;
+  let skytel = 96;
+  let gMobile = 98;
+
+  if (phoneNumber % 10 === mobicom) return "Mobicom";
+
+}
+
+const operatorNumber = whichOperator(96444444);
+console.log(operatorNumber);
 
 // 4. Өгөгдсөн тойргийг талбайг ол.
 
@@ -611,10 +627,7 @@ const { ar } = require("faker/lib/locales");
 
 // function findMissedNumber(arr) {
 //   if (arr.length === 0) return 0;
-//   let newArr;
 //   for (let i = 0; i < arr.length; i++) {
-//     // console.log(`First ${arr[i]}`, `second ${arr[i+1]}`,`third ${arr[i]+1}` );
-
 //     if (arr[i] + arr[i + 1] === arr[i] + 1) {
 //       let oldNumber = arr[i + 2];
 //       let missedNumber = arr[i] + 1;
@@ -624,32 +637,23 @@ const { ar } = require("faker/lib/locales");
 //   return oldNumber;
 // }
 // console.log(findMissedNumber([1, 2, 4, 5, 6]));
-// //                Loop-0  [1, 2, 4, 5, 6]
-// //                Loop-1  []
+//                   Loop-0  [1, 2, 4, 5, 6]
+//                   Loop-1  []
 
+// const arr = [1, 2, 4, 5, 6];
 
+// // Calculate the expected sum of numbers from 1 to n
+// const n = arr.length + 1; // Since one number is missing, the total count is one more
+// const expectedSum = (n * (n + 1)) / 2; //21
 
+// // Calculate the actual sum of the array manually
+// let actualSum = 0;
+// for (let i = 0; i < arr.length; i++) {
+//   actualSum += arr[i];
 
+// }console.log(actualSum);
 
+// // The missing number is the difference between the expected and actual sum
+// const missingNumber = expectedSum - actualSum;
 
-
-
-
-const arr = [1, 2, 4, 5, 6];
-
-// Calculate the expected sum of numbers from 1 to n
-const n = arr.length + 1; // Since one number is missing, the total count is one more
-const expectedSum = (n * (n + 1)) / 2; //21
- 
-// Calculate the actual sum of the array manually
-let actualSum = 0;
-for (let i = 0; i < arr.length; i++) {
-  actualSum += arr[i];
-
-}console.log(actualSum);
-
-
-// The missing number is the difference between the expected and actual sum
-const missingNumber = expectedSum - actualSum;
-
-console.log(missingNumber);
+// console.log(missingNumber);
