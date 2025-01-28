@@ -7,7 +7,7 @@
 //   }
 // }
 
-const { tr } = require("faker/lib/locales");
+// const { tr } = require("faker/lib/locales");
 
 // const { ar } = require("faker/lib/locales");
 
@@ -682,22 +682,66 @@ const { tr } = require("faker/lib/locales");
 
 // 7. Өгөгдсөн хоёр натурал тооны хамгийн их ерөнхий хуваагчийг ол.
 
+// function gcd(n1, n2) {
+//   let divisor = n1;
+//   while (!(n1 % divisor === 0 && n2 % divisor === 0)) {
+//     divisor--;
+//     // console.log(divisor);
+//   }
+//   return divisor;
+// }
 
+// console.log(gcd(1234, 7893));
 
+// 8. Хүү n гишгүүртэй шатаар өгсөхдөө 2 янзаар урагшилж чадна.
+//  Зогсож байгаа гишгүүрийнхээ дараах гишгүүрт, эсвэл 1 алгасаад дараагийн гишгүүрт алхаж очно.
+//  Нэгдүгээр гишгүүрийн өмнө зогсож байгаа хүү n-р гишгүүр хүртэл хичнээн ялгаатай маршрутаар алхаж очиж вэ?
 
+// function stairs(stair) {
+//   if (stair === 0) return 0;
 
+//   let totalStairs = [];
+//   let differentWayToStairs = 0;
+//   for (let i = 1; i <= stair; i++) {
+//     totalStairs.push(stair % i);
+//   }
+//   return totalStairs;
+// }
 
+// console.log(stairs(3));
 
+// function factorial(num) {
+//   if (num === 0) {
+//     return 1;
+//   }
+//   return num * factorial(num - 1);
+// }
 
+// console.log(factorial(3));
 
+// 9. Фибоначчийн дарааллын n-р гишүүнийг ол.
 
+// function fibonacci(n) {
+//   let nOfArray = [0, 1];
 
+//   for (let i = 2; i <= n; i++) {
+//     nOfArray.push(nOfArray[i - 2] + nOfArray[i - 1]);
+//   }
+//   console.log(nOfArray);
+//   return nOfArray[n];
 
+// }
+// console.log(fibonacci(5));
 
+// 10. Өгөгдөн массивийн i аас j дэх гишүүдийн хамгийн багыг ол.
 
+// function findMinimun(i, j) {
+//   let minimun;
+// }
 
+// console.log(findMinimun([4, 40, 6, 65], [7, 2, 6, 4]));
 
-// 5. arr = [4, 3, 6, 65, 8, 7, 90, 10, 5] өсөх дарааллаар эрэмблэ.
+// 11. arr = [4, 3, 6, 65, 8, 7, 90, 10, 5] өсөх дарааллаар эрэмблэ.
 
 // function lowToUpper(arr) {
 //   for (let i = 0; i < arr.length - 1; i++) {
@@ -748,3 +792,34 @@ const { tr } = require("faker/lib/locales");
 //                   Loop-1  []
 
 // const arr = [1, 2, 4, 5, 6];
+
+function duplicatedNumber(arr) {
+  const duplicatedNumberSum = {};
+  let duplicated = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if ((duplicated = arr[i])) {
+      duplicatedNumberSum[arr[i]] = duplicated++;
+    }
+  }
+  console.log(duplicatedNumberSum);
+}
+
+console.log(duplicatedNumber([1, 2, 2, 5, 5, 5, 6, 7, 2]));
+
+//1. Namaig Tom  gedeg bi 20 nastai. Mongol ornoos irsen. Bor ongiin nvdtei. Saaral ongiin nvdnii shil zvvdeg. Sags togloh durtai. Bi gats biy.
+
+// const person = {
+//   firstName: "Tom",
+//   age: 20,
+//   country: "Mongolia",
+//   eyeColor: "Bor",
+//   glass: "Saaral",
+//   sport: "Sags",
+// };
+// let myInformation = `Namaig ${person.firstName} gedeg.
+//                      Bi ${person.age} nastai.
+//                      ${person.country}-s irsen.
+//                      ${person.eyeColor} ungiin nudtei.
+//                      ${person.glass} ungiin shil zuudeg.
+//                      ${person.sport} togloh durtai`;
+// console.log(myInformation);
