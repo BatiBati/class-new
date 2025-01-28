@@ -735,15 +735,51 @@
 
 // 10. Өгөгдөн массивийн i аас j дэх гишүүдийн хамгийн багыг ол.
 
-// function findMinimun(i, j) {
-//   let minimun;
+// function findMinimun(arr, i, j) {
+//   for (let k = i; k <= j; k++) {
+//     if (arr[i] > arr[k]) {
+//       arr[i] = arr[k];
+//     }
+//   }
+//   return arr[i];
 // }
-
-// console.log(findMinimun([4, 40, 6, 65], [7, 2, 6, 4]));
+// const i = 0;
+// const j = 2;
+// const arr = [41, 20, 10, 54, 13, 6, 7, 1, 34, 9];
+// console.log(findMinimun(arr, i, j));
 
 // 11. arr = [4, 3, 6, 65, 8, 7, 90, 10, 5] өсөх дарааллаар эрэмблэ.
 
-// function lowToUpper(arr) {
+// function bubbleSort(arr) {
+//   let savedNumber;
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let j = 0; j < arr.length - 1; j++) {
+//       if (arr[j] > arr[j + 1]) {
+//         savedNumber = arr[j + 1];
+//         arr[j + 1] = arr[j];
+//         arr[j] = savedNumber;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+// const array = bubbleSort([4, 3, 6, 65, 8, 7, 90, 10, 5]);
+// console.log(array);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 //   for (let i = 0; i < arr.length - 1; i++) {
 //     for (let j = 0; j < arr.length - 1; j++) {
 //       if (arr[j] > arr[j + 1]) {
@@ -756,7 +792,7 @@
 //   return arr;
 // }
 
-// const array = lowToUpper([4, 3, 6, 65, 8, 7, 90, 10, 5]);
+// const array = bubbleSort([4, 3, 6, 65, 8, 7, 90, 10, 5]);
 
 // //                Loop-0-0 [3, 4, 6, 8, 7, 65, 10, 5, 90]
 // //                Loop-0-1 [3, 4, 6, 7, 8, 10, 5, 65, 90]
@@ -766,6 +802,42 @@
 // //                Loop-0-5 [3, 4, 5, 6, 7, 8, 10, 65, 90]
 
 // console.log(array);
+
+//
+//
+
+function selectionSort(arr) {
+  let minNum = arr[0];
+  for (let i = 0; i < arr.length - 1; i++) {
+    // if (arr[i] < minNum) {
+    //   minNum = arr[i];
+    // }
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] < minNum) {
+        minNum = arr[j];
+      }
+
+      // minNum = arr[i];
+      let targetNumber = arr[minNum];
+      arr[minNum] = arr[j];
+      arr[j] = targetNumber;
+    }
+  }
+  // return arr;
+  console.log(arr);
+}
+
+const arr = [10, 3, 6, 5, 1, 9, 7, 8, 4, 2];
+
+console.log(selectionSort(arr));
+
+//
+//
+//
+//
+//
+
+//
 
 // 6. Given a sorted array of distinct integers and a target value, return the index if the target is found.
 // If not, return the index where it would be if it were inserted in order.
@@ -792,20 +864,20 @@
 //                   Loop-1  []
 
 // const arr = [1, 2, 4, 5, 6];
+// ------------------------------------------------------------------Object------------------------------------------------------------------
+// function duplicatedNumber(arr) {
+//   const duplicatedNumberSum = {};
+//   let duplicated = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if ((duplicated = arr[i])) {
+//       duplicatedNumberSum[arr[i]] = duplicated++;
+//     }
+//   }
+//   console.log(duplicatedNumberSum);
+// }
 
-function duplicatedNumber(arr) {
-  const duplicatedNumberSum = {};
-  let duplicated = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if ((duplicated = arr[i])) {
-      duplicatedNumberSum[arr[i]] = duplicated++;
-    }
-  }
-  console.log(duplicatedNumberSum);
-}
-
-console.log(duplicatedNumber([1, 2, 2, 5, 5, 5, 6, 7, 2]));
-
+// console.log(duplicatedNumber([1, 2, 2, 5, 5, 5, 6, 7, 2]));
+// ------------------------------------------------------------------------------------------------------------------------------------------
 //1. Namaig Tom  gedeg bi 20 nastai. Mongol ornoos irsen. Bor ongiin nvdtei. Saaral ongiin nvdnii shil zvvdeg. Sags togloh durtai. Bi gats biy.
 
 // const person = {
