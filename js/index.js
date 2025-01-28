@@ -7,6 +7,8 @@
 //   }
 // }
 
+const { tr } = require("faker/lib/locales");
+
 // const { ar } = require("faker/lib/locales");
 
 // const { ar, tr } = require("faker/lib/locales");
@@ -564,31 +566,136 @@
 // console.log(isTriangle(3, 4, 5));
 
 // 3. Өгөгдсөн утасны дугаарыг аль оператор болохыг буцаа.
+// Жишээ № 3.1
 
 // function findNumberOfOperation(phoneNumber) {
 //   if (phoneNumber.length === 8) {
-//     let whichOperator = phoneNumber[0] + phoneNumber[1];
-//     if (whichOperator == 99) return "Mobicom";
-//     if (whichOperator == 88) return "Unitel";
-//     if (whichOperator == 91 || whichOperator == 96) return "Skytel";
-//     if (whichOperator == 93) return "G-Mobile";
+//     let number = phoneNumber[0] + phoneNumber[1];
+
+//     if (number == 99) return "Mobicom";
+//     if (number == 88) return "Unitel";
+//     if (number == 96) return "Skytel";
+//     if (number == 93) return "G-Mobile";
 //   }
 // }
 
-function whichOperator(phoneNumber) {
-  let mobicom = 99;
-  let unitel = 88;
-  let skytel = 96;
-  let gMobile = 98;
+// const operatorNumber = findNumberOfOperation("99556135");
+// console.log(operatorNumber);
 
-  if (phoneNumber % 10 === mobicom) return "Mobicom";
+// Жишээ № 3.2 For Loop
 
-}
+// function whichOperator(phoneNumber) {
+//   let sum = 0;
+//   a = phoneNumber;
 
-const operatorNumber = whichOperator(96444444);
-console.log(operatorNumber);
+//   for (let i = 1; i < phoneNumber; i *= 10) {
+//     const lastDigit = a % 10;
+
+//     sum += lastDigit;
+//     a = (a - lastDigit) / 10;
+//     if (a === 99) return "Mobicom";
+//     if (a === 88) return "Unitel";
+//     if (a === 96) return "Skytel";
+//     if (a === 98) return "G-Mobile";
+//   }
+// }
+// const operatorNumber = whichOperator(98556135);
+// console.log(operatorNumber);
+
+// Жишээ № 3.3 While Loop
+
+// function whichOperator(phoneNumber) {
+//   let sum = 0;
+//   while (phoneNumber >= 0) {
+
+//     const lastDigit = phoneNumber % 10;
+
+//     sum += lastDigit;
+//     phoneNumber = (phoneNumber - lastDigit) / 10;
+//     if (phoneNumber === 99) return "Mobicom";
+//     if (phoneNumber === 88) return "Unitel";
+//     if (phoneNumber === 96) return "Skytel";
+//     if (phoneNumber === 98) return "G-Mobile";
+//   }
+// }
+
+// const operatorNumber = whichOperator(98556135);
+// console.log(operatorNumber);
 
 // 4. Өгөгдсөн тойргийг талбайг ол.
+
+// function findRoundArea (radius) {
+//   let S = (radius * radius)*(Math.PI);
+//   return S;
+// }
+// console.log(findRoundArea(3));
+
+// 5. Өгөгдсөн тооны цифрүүдийн нийлбэрийг ол.
+// Жишээ № 1 For Loop
+
+// function sumOfDigits(number) {
+//   let sumOfNumber = 0;
+//   for (let i = 1; i <= number; i++) {
+//     sumOfNumber += i;
+//   }
+//   return sumOfNumber;
+// }
+// console.log(sumOfDigits(5));
+
+// Жишээ № 2 While Loop
+
+// function sumOfDigits(number) {
+//   let sumOfNumber = 0;
+//   let i = 1;
+//   while (i <= number) {
+//     sumOfNumber += i;
+//     i++;
+//   }
+//   return sumOfNumber;
+// }
+// console.log(sumOfDigits(5));
+
+// 6. Өгөгдсөн тоо палиндром бол true үгүй бол false буцаа. Палиндром тоо гэдэг нь тонгорогсон тоотойгоо тэнцүү тоог хэлнэ.
+
+// function isPalindrome(number) {
+//   const digits = [];
+
+//   while (number > 0) {
+//     digits.push(number % 10);
+//     number = (number - (number % 10)) / 10;
+//   }
+//   for (let i = 0; i <= digits.length / 2; i++) {
+//     if (digits[i] !== digits[digits.length - 1 - i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// console.log(isPalindrome(484));
+
+// TEST
+// let number = [2, 4, 2];
+// for (let i = 0; i < number.length; i++) {
+//   console.log(`1. number[i]: ${number[i]}    `, `2.number.length ${number.length}    `, `3.number.length-1 ${number.length-1}    `, `4.number.length-1-i ${number.length-1-i}  `, `5.i ${i}   `, `5.number[number.length-1-i] ${number[number.length-1-i]}  `);
+// }
+
+// 7. Өгөгдсөн хоёр натурал тооны хамгийн их ерөнхий хуваагчийг ол.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 5. arr = [4, 3, 6, 65, 8, 7, 90, 10, 5] өсөх дарааллаар эрэмблэ.
 
@@ -641,19 +748,3 @@ console.log(operatorNumber);
 //                   Loop-1  []
 
 // const arr = [1, 2, 4, 5, 6];
-
-// // Calculate the expected sum of numbers from 1 to n
-// const n = arr.length + 1; // Since one number is missing, the total count is one more
-// const expectedSum = (n * (n + 1)) / 2; //21
-
-// // Calculate the actual sum of the array manually
-// let actualSum = 0;
-// for (let i = 0; i < arr.length; i++) {
-//   actualSum += arr[i];
-
-// }console.log(actualSum);
-
-// // The missing number is the difference between the expected and actual sum
-// const missingNumber = expectedSum - actualSum;
-
-// console.log(missingNumber);
