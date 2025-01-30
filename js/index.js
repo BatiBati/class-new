@@ -907,3 +907,52 @@
 //                      ${person.glass} ungiin shil zuudeg.
 //                      ${person.sport} togloh durtai`;
 // console.log(myInformation);
+
+// const today = new Date();
+// console.log(today.getDate());
+// console.log(today.getDay());
+// console.log(today.getFullYear());
+// console.log(today.getHours());
+// console.log(today.getMilliseconds());
+// console.log(today.getMinutes());
+// console.log(today.getMonth());
+
+// const obj = {
+//     method() {},
+//   };
+//   new obj.method(); // TypeError: obj.method is not a constructor
+
+const strReverse = (arr) => {
+  //   let empty = "";
+  //   for (let i = arr.length - 1; i >= 0; i--) {
+  //     empty += arr[i];
+  //   }
+  //   return empty;
+  // Reverse a string in JS--------------------------------------
+  // return arr.split("").reverse().join("");
+  // Remove a character from a string in JS--------------------------------------
+  // return arr.replace("H", "");
+  // Delete the first character from JS String--------------------------------------
+  // return arr.slice(1);
+  // Remove Text from a String in JS--------------------------------------
+  //  return arr.replace("l", "")
+  // Iterate Over String Characters in JS-------------------------------------
+  //   let iterateOfArr = arr;
+  //   for (let i = 0; i <= iterateOfArr.length; i++) {
+  //     console.log(iterateOfArr[i]);
+  //   }
+  // Sort a string in JS -------------------------------------
+  //   return arr.split("").sort().join("");
+  // Check if String Has Only Alphabets in JS -------------------------------------
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    let code = arr.charCodeAt(i);
+    // if ()
+    console.log(code);
+  }
+  // console.log(arr.charAt(arr.length - 1));
+
+  //   return newArr.charCodeAt(2);
+};
+
+console.log(strReverse("bca4itry"));
