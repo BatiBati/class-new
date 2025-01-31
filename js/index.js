@@ -805,7 +805,7 @@
 //
 //
 // function selectionSort(arr) {
-//   for (let i = 0; i < arr.length - 1; i++) {
+//   for (let i = 0; i <= arr.length - 1; i++) {
 //     let minIndex = i;
 //     for (let j = i; j < arr.length; j++) {
 //       if (arr[minIndex] > arr[j]) {
@@ -813,15 +813,42 @@
 //         console.log(arr);
 //       }
 //     }
-
 //     let temp = arr[minIndex];
 //     arr[minIndex] = arr[i];
 //     arr[i] = temp;
+
 //   }
-//   // return arr;
+//   return arr;
 // }
 // const arr = [10, 3, 6, 5, 1, 9, 7, 8, 4, 2];
 // console.log(selectionSort(arr));
+
+// const swap = (arr, i, j) => {
+//   const temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// };
+
+// const findMinIndex = (arr, i, j) => {
+//   let minIndex = i;
+//   for (let k = i; k <= j; k++) {
+//     if (arr[minIndex] > arr[j]) {
+//       minIndex = k;
+//     }
+//   }
+//   return minIndex;
+// };
+
+// const sort = (arr) => {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     const minIndex = findMinIndex(arr, i, arr.length - 1);
+//     swap(arr, i, minIndex);
+//   }
+// };
+
+// const numbers = [10, 3, 6, 5, 1, 9, 100, 7, 8, 4, 2];
+// sort(numbers);
+// console.log(numbers);
 
 // function selectionSort(arr) {
 //   for (let i = 0; i < arr.length - 1; i++) {
@@ -922,37 +949,37 @@
 //   };
 //   new obj.method(); // TypeError: obj.method is not a constructor
 
-const strReverse = (arr) => {
-  //   let empty = "";
-  //   for (let i = arr.length - 1; i >= 0; i--) {
-  //     empty += arr[i];
-  //   }
-  //   return empty;
-  // Reverse a string in JS--------------------------------------
-  // return arr.split("").reverse().join("");
-  // Remove a character from a string in JS--------------------------------------
-  // return arr.replace("H", "");
-  // Delete the first character from JS String--------------------------------------
-  // return arr.slice(1);
-  // Remove Text from a String in JS--------------------------------------
-  //  return arr.replace("l", "")
-  // Iterate Over String Characters in JS-------------------------------------
-  //   let iterateOfArr = arr;
-  //   for (let i = 0; i <= iterateOfArr.length; i++) {
-  //     console.log(iterateOfArr[i]);
-  //   }
-  // Sort a string in JS -------------------------------------
-  //   return arr.split("").sort().join("");
-  // Check if String Has Only Alphabets in JS -------------------------------------
+// const strReverse = (arr) => {
+//   let empty = "";
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     empty += arr[i];
+//   }
+//   return empty;
+// Reverse a string in JS--------------------------------------
+// return arr.split("").reverse().join("");
+// Remove a character from a string in JS--------------------------------------
+// return arr.replace("H", "");
+// Delete the first character from JS String--------------------------------------
+// return arr.slice(1);
+// Remove Text from a String in JS--------------------------------------
+//  return arr.replace("l", "")
+// Iterate Over String Characters in JS-------------------------------------
+//   let iterateOfArr = arr;
+//   for (let i = 0; i <= iterateOfArr.length; i++) {
+//     console.log(iterateOfArr[i]);
+//   }
+// Sort a string in JS -------------------------------------
+//   return arr.split("").sort().join("");
+// Check if String Has Only Alphabets in JS -------------------------------------
 
-  for (let i = 0; i < arr.length - 1; i++) {
-    let code = arr.charCodeAt(i);
-    // if ()
-    console.log(code);
-  }
-  // console.log(arr.charAt(arr.length - 1));
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     let code = arr.charCodeAt(i);
+//     // if ()
+//     console.log(code);
+//   }
+//   // console.log(arr.charAt(arr.length - 1));
 
-  //   return newArr.charCodeAt(2);
-};
+//   //   return newArr.charCodeAt(2);
+// };
 
-console.log(strReverse("bca4itry"));
+// console.log(strReverse("bca4itry"));
