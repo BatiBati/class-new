@@ -79,3 +79,17 @@
 // console.log(herssso);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "en",
+  get language() {
+    return this.language;
+  },
+};
+person.country = "MGL";
+person.city = "UB";
+person.district = "BGL";
+
+console.log(person);
