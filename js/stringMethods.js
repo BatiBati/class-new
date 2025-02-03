@@ -33,9 +33,17 @@ const strReverse = (arr) => {
   // let capitalize = arr[0];
   // let upperCase = capitalize.toUpperCase();
   // return upperCase;
+  // Convert Comma-Separated String to Array in JS -------------------------------------
+  // let convertToComma = arr.split(",");
+  // console.log(convertToComma);
 
-  let s = null;
-  console.log(typeof s);
+  const a = "Hello";
+  const g = a.replace("l", "5");
+  const h = a.includes("4");
+  console.log(a.trimStart());
+  
+  console.log(g);
+  console.log(h);
 };
 
-console.log(strReverse("bcai4trsy"));
+console.log(strReverse("bcai4trsy, bcai4trsy"));

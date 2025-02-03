@@ -58,6 +58,6 @@
 
 // Reduce Method------------------------
 
-const arr = [0, 5, -4, 3, 0];
+// const arr = [0, 5, -4, 3, 0];
 
-console.log(arr);
+// console.log(arr);
