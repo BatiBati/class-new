@@ -4,8 +4,8 @@
 
 .container {
   margin: auto;
-  width: 500px;
-  height: 400px;
+  width: 300px;
+  height: 200px;
   background-color: rgb(35, 36, 77);
   border-radius: 10%;
   display: flex;
@@ -20,13 +20,14 @@
   justify-content: center;
 }
 
-.buttons {
+.button {
   border: 0px;
   border-radius: 10px;
   width: 50px;
 }
 
-.realTime {
+.timers {
+  display: flex;
   color: white;
-  font-size: 50px;
+  font-size: 30px;
 }
