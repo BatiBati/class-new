@@ -9,6 +9,7 @@ const generateTime = (duration) => {
   const sec = duration % 60;
   const min = ((duration - sec) / 60) % 60;
   const hour = Math.floor(duration / 3600);
+
   return {
     sec,
     min,
@@ -25,7 +26,7 @@ startBtn.addEventListener("click", () => {
     sec.innerHTML = times.sec < 10 ? "0" + times.sec : times.sec;
     min.innerHTML = times.min.toString().padStart(2, "0");
     hour.innerHTML = times.hour.toString().padStart(2, "0");
-  }, 100);
+  }, 1);
 });
 
 stopBtn.addEventListener("click", () => {
