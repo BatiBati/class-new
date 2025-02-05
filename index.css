@@ -1,0 +1,27 @@
+#container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#countContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 25px;
+  padding: 15px;
+}
+
+#box {
+  gap: 15px;
+}
