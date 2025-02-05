@@ -3,21 +3,25 @@ const button = document.querySelectorAll("button");
 const tipSum = document.querySelector(".tipSum");
 const reset = document.querySelector(".reset");
 const tipsContainer = document.querySelectorAll(".tipsContainer button");
-
 // --------------- Example - 2 ---------------
 
-const tipValues = [5, 10, 15, 25, 35, 50, 65, 80];
+const tipValues = [1.05, 1.1, 1.15, 1.25, 1.35, 1.5, 1.65, 1.8];
 
 for (const i in tipsContainer) {
   tipsContainer[i].innerHTML = tipValues[i];
 }
 
-for (let i = 0; i > tipsContainer.length; i++) {
+for (let i = 0; i < tipsContainer.length; i++) {
   tipsContainer[i].addEventListener("click", () => {
-    const toNumber = parseFloat(input.value);
-    tipSum.innerHTML = toNumber + toNumber * tipValues[i];
+    const toNumber = Number(input.value);
+    tipSum.innerHTML = toNumber * tipValues[i];
   });
 }
+
+reset.addEventListener("click", () => {
+  input.value = null;
+  tipSum.innerHTML = null;
+});
 
 // --------------- Example - 1 ---------------
 // button[0].addEventListener("click", () => {
