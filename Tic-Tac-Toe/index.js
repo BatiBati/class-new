@@ -2,6 +2,8 @@ const box = document.querySelectorAll(".idContainer");
 const buttons = document.querySelectorAll("button");
 const player = document.querySelector(".Player");
 
+const buttonsToFunc = buttons;
+
 let turn = "X";
 let winnerArr = [
   [0, 1, 2], // Row 1
@@ -20,4 +22,9 @@ for (let i = 0; i < buttons.length; i++) {
     buttons[i].innerHTML = turn;
     turn = turn === "X" ? "O" : "X";
   });
+  console.log(buttons[i]);
+}
+
+for (let i = 0; i < winnerArr.length; i++) {
+  console.log(winnerArr[i]);
 }
