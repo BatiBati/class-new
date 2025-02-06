@@ -1,0 +1,26 @@
+#container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.valuesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.valuesContainer div {
+  display: flex;
+  width: 200px;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.checkedClass {
+  text-decoration: line-through;
+}
