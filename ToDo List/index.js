@@ -2,19 +2,16 @@ const input = document.querySelector("input");
 const toDoList = document.querySelector(".valuesContainer");
 const addBtn = document.querySelector(".inputContainer > button");
 
+const isInput = null;
+
 const toDos = () => {
+
+
   const checkBox = document.createElement("input");
   checkBox.setAttribute("type", "checkbox");
 
-  // if(toDoList.div.div === classList("checkedClass")) {
-
-  // }
-
-  //     checkBox.addEventListener("change", () => {
-  //         valueContainer.classList.add("checkedClass");
-  //       });
-
   const valueContainer = document.createElement("div");
+
   valueContainer.innerHTML = input.value;
 
   const deleteBtn = document.createElement("button");
@@ -31,6 +28,7 @@ const toDos = () => {
 
 const inputTodo = () => {
   addBtn.addEventListener("click", () => {
+    if (input.value === isInput) return;
     toDos();
   });
 };
