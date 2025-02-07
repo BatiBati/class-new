@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+}
+#container {
+  width: 100vw;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameCont {
+}
+
+.gameCont h1 {
+  font-size: 30px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 110px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #47a5c4;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #2488ba;
+}
+
+.cube {
+  width: 170px;
+  height: 200px;
+  text-align: center;
+  font-size: 170px;
+}
+.list {
+  margin-top: 20px;
+  width: fit-content;
+  height: fit-content;
+  background-color: green;
+}
+
+.diceCont {
+  width: 50px;
+  height: 20px;
+
+}

@@ -2,20 +2,21 @@ const input = document.querySelector("input");
 const toDoList = document.querySelector(".valuesContainer");
 const addBtn = document.querySelector(".inputContainer > button");
 
-const isInput = null;
+console.log(typeof input.value);
 
 const toDos = () => {
-
-
   const checkBox = document.createElement("input");
   checkBox.setAttribute("type", "checkbox");
 
   const valueContainer = document.createElement("div");
-
   valueContainer.innerHTML = input.value;
 
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = "Delete";
+
+  deleteBtn.addEventListener("click", () => {
+    listItem.remove();
+  });
 
   const listItem = document.createElement("div");
 
@@ -28,8 +29,12 @@ const toDos = () => {
 
 const inputTodo = () => {
   addBtn.addEventListener("click", () => {
-    if (input.value === isInput) return;
-    toDos();
+    if (input.value !== "") {
+      toDos();
+      input.value = "";
+    } else {
+      return alert("Please enter Todo");
+    }
   });
 };
 inputTodo();
