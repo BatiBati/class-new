@@ -1,0 +1,42 @@
+.navBar {
+  width: 80%;
+  margin: auto;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+  font-weight: 700;
+  padding: 96px 80px;
+}
+
+.firstPageStyle button {
+  color: green;
+  font-weight: 700;
+
+  border-radius: 100%;
+}
+.categore {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+}
+
+.downloadCv {
+  padding: 5px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #111827;
+  border-radius: 15px;
+}
+.divider {
+  color: rgb(189, 187, 187);
+}
+
+.h3Color {
+  color: rgb(146, 145, 145);
+  cursor: pointer;
+}
