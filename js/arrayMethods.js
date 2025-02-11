@@ -61,3 +61,10 @@
 // const arr = [0, 5, -4, 3, 0];
 
 // console.log(arr);
+
+const arr = [1, 2, 3, 4, 5];
+const result = arr.filter((filtered) => {
+  element = filtered;
+});
+
+console.log(result);
