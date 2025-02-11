@@ -1,0 +1,16 @@
+.container {
+background-color: green;
+}
+
+
+.top {
+    border-radius: 15px;
+    width: 75px;
+    margin: auto;
+    padding: 6px;
+    background-color: #e5e7eb;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #4b5563;
+  }

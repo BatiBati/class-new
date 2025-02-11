@@ -13,11 +13,9 @@
 .firstPageStyle button {
   color: green;
   font-weight: 700;
-
   border-radius: 100%;
 }
 .categore {
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
