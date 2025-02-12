@@ -1,8 +1,9 @@
 .container {
   width: 80%;
   margin: auto;
+  height: fit-content;
   padding: 96px 80px;
-  background-color: #f9fafb;
+  background-color: #edf0f2;
 }
 
 .top {
@@ -45,4 +46,43 @@
 
 .experience1Middle {
   width: 400px;
+}
+
+.inside {
+  width: 90%;
+  margin: auto;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px rgb(220, 221, 220);
+  margin-top: 50px;
+}
+
+.list {
+  display: flex;
+  margin-top: 15px;
+}
+
+.left {
+  width: 40%;
+}
+
+.right {
+  width: 30%;
+  text-align: end;
+}
+
+.dateStyle {
+  font-size: 18px;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.h2 {
+  margin-bottom: 10px;
+}
+
+.expMiddle {
+  width: 40%;
 }
