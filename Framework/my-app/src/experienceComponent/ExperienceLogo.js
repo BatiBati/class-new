@@ -9,7 +9,14 @@ export const ExperienceLogo = (props) => {
 
       <div className={style.expMiddle}>
         <h2 className={style.h2}>{props.centerTop}</h2>
-        <li>{props.centerBot}</li>
+
+        {props.lists.map((el, index) => {
+          return (
+            <li className={style.liColor} key={index}>
+              {el}
+            </li>
+          );
+        })}
       </div>
       <div className={style.right}>{props.right}</div>
     </div>

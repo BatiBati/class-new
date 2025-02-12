@@ -7,40 +7,33 @@ const experienceArr = [
   {
     left: "/image/logo-upwork.png",
     centerTop: "Sr.Frontend Developer",
-    centerTBot: "Sr.Frontend Developer",
+    lists: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Ut pretium arcu et massa semper, id fringilla leo semper.",
+      "Sed quis justo ac magna.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    ],
     right: "Nov 2021 - Present",
   },
   {
     left: "/image/logo-upwork.png",
     centerTop: "Team Lead",
-    centerTBot: "Sr.Frontend Developer",
+    lists: [
+      "Sed quis justo ac magna.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Sed quis justo ac magna.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    ],
     right: "Jul 2017 - Oct 2021",
   },
   {
     left: "/image/logo-upwork.png",
     centerTop: "Full Stack Developer",
-    centerTBot: "Sr.Frontend Developer",
+    lists: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    ],
     right: "Dec 2015 - May 2017",
   },
-
-  // {
-  //   logo: "/image/logo-upwork.png",
-  //   text: "Sr.Frontend Developer",
-  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //   date: "Nov 2021 - Present",
-  // },
-  // {
-  //   logo: "/image/logo-upwork.png",
-  //   text: "Team Lead",
-  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //   date: "Jul 2017 - Oct 2021",
-  // },
-  // {
-  //   logo: "/image/logo-upwork.png",
-  //   text: "Full Stack Developer",
-  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //   date: "Dec 2015 - May 2017",
-  // },
 ];
 
 export default function Experience() {

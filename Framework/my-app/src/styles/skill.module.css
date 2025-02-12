@@ -6,16 +6,19 @@
 }
 
 .top {
-  border-radius: 15px;
-  width: fit-content;
+  width: 100%;
   margin: auto;
-  padding: 5px 20px;
-  background-color: #dddee0;
-  font-size: 14px;
-  font-weight: 400;
   display: flex;
   justify-content: center;
+}
+
+.topInside {
   color: #4b5563;
+  border-radius: 15px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 10px;
+  background-color: #e5e7eb;
 }
 
 .middle {
@@ -34,8 +37,29 @@
   margin-top: 20px;
 }
 
+.contInside {
+  width: 100%;
+  height: 100%;
+}
+
 .skills {
   width: 79px;
   height: 100px;
   color: #4b5563;
+}
+
+.usedTechStyle {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+}
+
+.imgCont {
+  width: 50%;
+  height: 100%;
+}
+
+.imgCont img {
+  width: 100%;
+  height: 100%;
 }
