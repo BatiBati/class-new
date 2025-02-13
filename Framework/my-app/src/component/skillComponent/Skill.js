@@ -32,8 +32,10 @@ export default function Skill() {
         {skillArr.map((element, index) => {
           return (
             <div key={index} className={style.skills}>
-              <img src={element.image} />
-              {element.title}
+              <div>
+                <img src={element.image} />
+              </div>
+              <div>{element.title} </div>
             </div>
           );
         })}

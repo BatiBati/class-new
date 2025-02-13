@@ -15,11 +15,15 @@ export default function about() {
         </div>
         <div className={style.leftSideMiddle}>
           <div>
-            <img src="./image/LocationIcon.png" />{" "}
+            <div className={style.imgCont}>
+              <img src="./image/LocationIcon.png" />
+            </div>
             <div>Ulaanbaatar, Mongolia</div>
           </div>
           <div>
-            <div className={style.dott}></div>
+            <div className={style.dotCont}>
+              <div className={style.dott}></div>
+            </div>
             <div> Available for new projects </div>
           </div>
         </div>

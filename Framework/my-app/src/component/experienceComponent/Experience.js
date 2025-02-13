@@ -6,7 +6,7 @@ import { ExperienceLogo } from "./ExperienceLogo";
 const experienceArr = [
   {
     left: "/image/logo-upwork.png",
-    centerTop: "Sr.Frontend Developer",
+    centerTop: "Sr. Frontend Developer",
     lists: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "Ut pretium arcu et massa semper, id fringilla leo semper.",
@@ -43,7 +43,7 @@ export default function Experience() {
       <ButtonExplain text="Here is a quick summary of my most recent experiences:" />
       {experienceArr.map((element, index) => {
         return (
-          <div className={style.inside}>
+          <div key={index} className={style.inside}>
             <ExperienceLogo key={index} {...element} />
           </div>
         );

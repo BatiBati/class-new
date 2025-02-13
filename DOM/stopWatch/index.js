@@ -26,7 +26,7 @@ startBtn.addEventListener("click", () => {
     sec.innerHTML = times.sec < 10 ? "0" + times.sec : times.sec;
     min.innerHTML = times.min.toString().padStart(2, "0");
     hour.innerHTML = times.hour.toString().padStart(2, "0");
-  }, 1);
+  }, 1000);
 });
 
 stopBtn.addEventListener("click", () => {

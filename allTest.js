@@ -43,3 +43,5 @@ for (let i = 0; i < countContainer.length; i++) {
 resetBtn.addEventListener("click", () => {
   value.innerHTML = 0;
 });
+
+

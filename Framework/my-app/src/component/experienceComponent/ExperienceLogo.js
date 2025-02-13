@@ -12,9 +12,10 @@ export const ExperienceLogo = (props) => {
 
         {props.lists.map((el, index) => {
           return (
-            <li className={style.liColor} key={index}>
-              {el}
-            </li>
+            <div className={style.liCont}>
+              <li className={style.liColor} key={index}></li>
+              <p>{el}</p>
+            </div>
           );
         })}
       </div>

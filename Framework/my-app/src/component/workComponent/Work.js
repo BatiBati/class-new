@@ -81,9 +81,10 @@ export default function Work() {
         <GrayButton text={"Work"} />
       </div>
       <ButtonExplain text={"Some of the noteworthy projects I have built:"} />
+
       {arr.map((el, index) => {
         return (
-          <div className={style.cont}>
+          <div key={index} className={style.cont}>
             <WorkInside key={index} {...el} reverse={index} />
           </div>
         );

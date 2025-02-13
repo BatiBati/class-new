@@ -3,11 +3,11 @@
   margin: auto;
   height: fit-content;
   padding: 96px 80px;
-  background-color: #edf0f2;
+  background-color: #f9fafb;
   display: flex;
   flex-direction: column;
- align-items: center;
-}
+  align-items: center;
+}s
 
 .top {
   border-radius: 15px;
@@ -85,11 +85,18 @@
 
 .h2 {
   margin-bottom: 10px;
-
 }
 
-.liColor{
+.liColor {
   color: #4b5563;
+  width: 15px;
+}
+
+.liCont {
+  display: flex;
+}
+.liCont {
+  margin-bottom: 5px;
 }
 
 .expMiddle {

@@ -30,6 +30,7 @@
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto;
   grid-template-rows: auto auto;
+  justify-content: space-between;
   gap: 15px;
   margin-top: 20px;
 }
@@ -40,7 +41,10 @@
 }
 
 .skills {
-  width: 79px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
   height: 100px;
   color: #4b5563;
 }
