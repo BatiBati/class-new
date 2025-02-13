@@ -17,15 +17,19 @@
 }
 .categore {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
-  width: 30%;
+  width: fit-content;
+  gap: 20px;
 }
 
 .downloadCv {
-  padding: 5px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  padding: 5px 10px;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   background-color: #111827;
   border-radius: 15px;
@@ -37,4 +41,5 @@
 .h3Color {
   color: rgb(146, 145, 145);
   cursor: pointer;
+  font-weight: 500;
 }

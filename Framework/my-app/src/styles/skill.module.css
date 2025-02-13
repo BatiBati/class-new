@@ -6,19 +6,16 @@
 }
 
 .top {
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background-color: #e5e7eb;
+}
+.categore {
   width: 100%;
-  margin: auto;
+  height: fit-content;
   display: flex;
   justify-content: center;
-}
-
-.topInside {
-  color: #4b5563;
-  border-radius: 15px;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px 10px;
-  background-color: #e5e7eb;
 }
 
 .middle {

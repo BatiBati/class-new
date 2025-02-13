@@ -1,10 +1,5 @@
 import style from "../styles/skill.module.css";
 
 export const GrayButton = (props) => {
-  return (
-    <div className={style.top}>
-      {props.outside}
-      <div className={style.topInside}>{props.text}</div>
-    </div>
-  );
+  return <div className={style.top}>{props.text}</div>;
 };

@@ -10,7 +10,7 @@ export default function Navbar() {
         <h3 className={style.h3Color}>Contact</h3>
         <div className={style.divider}>|</div>
         <img src="/image/icon.png" />
-        <button className={style.downloadCv}>Download CV</button>
+        <div className={style.downloadCv}>Download CV</div>
       </div>
     </div>
   );

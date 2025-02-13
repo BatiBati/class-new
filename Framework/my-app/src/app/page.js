@@ -1,8 +1,8 @@
 import Navbar from "../component/Navbar";
 import About from "../component/About";
-import Skill from "../skillComponent/Skill";
-import Experience from "../experienceComponent/Experience";
-import Work from "../workComponent/Work";
+import Skill from "../component/skillComponent/Skill";
+import Experience from "../component/experienceComponent/Experience";
+import Work from "../component/workComponent/Work";
 
 export default function Home() {
   return (
