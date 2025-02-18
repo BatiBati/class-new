@@ -1,7 +1,7 @@
 .container {
   width: 377px;
   height: fit-content;
-  background-color: rgb(228, 221, 221);
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
   padding: 24px 16px;
   display: flex;
@@ -30,6 +30,7 @@
   width: 80%;
   border: 1px solid rgb(232, 232, 232);
   border-radius: 10px;
+  padding: 5px;
 }
 
 .input button {
@@ -47,16 +48,16 @@
 }
 
 .types {
-  justify-content: start;
   display: flex;
+  justify-content: start;
   gap: 10px;
 }
 
 .toDoTypes {
-  color: white;
+  color: #363636;
   padding: 5px 10px;
   width: fit-content;
-  background-color: #3c82f6;
+  background: #f3f4f6;
   border-radius: 10px;
   font-weight: 500;
   display: flex;
@@ -71,6 +72,9 @@
   gap: 15px;
   align-items: center;
   justify-content: space-between;
+  background-color: #f9fafb;
+  border-radius: 5px;
+  padding: 20px 20px;
 }
 
 .deleteButton {
@@ -89,7 +93,7 @@
 .todosItem {
   display: flex;
   gap: 10px;
-  background-color: white;
+
   width: 80%;
   border-radius: 5px;
 }
