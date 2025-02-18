@@ -29,6 +29,7 @@ export default function Home() {
     const newList = list.filter((_, i) => i !== index);
 
     setList(newList);
+    console.log(newList);
   };
 
   const filteredList = list.filter((item, index) => {
