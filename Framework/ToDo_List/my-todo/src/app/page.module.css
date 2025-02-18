@@ -1,7 +1,7 @@
 .container {
   width: 377px;
   height: fit-content;
-  background-color: rgb(241, 236, 236);
+  background-color: rgb(228, 221, 221);
   border-radius: 10px;
   padding: 24px 16px;
   display: flex;
@@ -9,6 +9,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 60px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
 }
 
 .container h1 {
@@ -24,6 +25,7 @@
   justify-content: space-between;
   padding: 24px 26px;
 }
+
 .input input {
   width: 80%;
   border: 1px solid rgb(232, 232, 232);
@@ -49,6 +51,7 @@
   display: flex;
   gap: 10px;
 }
+
 .toDoTypes {
   color: white;
   padding: 5px 10px;
@@ -58,6 +61,7 @@
   font-weight: 500;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .todos {
@@ -79,6 +83,7 @@
   display: flex;
   align-items: center;
   justify-content: end;
+  cursor: pointer;
 }
 
 .todosItem {
@@ -87,4 +92,12 @@
   background-color: white;
   width: 80%;
   border-radius: 5px;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+}
+
+.cursor {
+  cursor: pointer;
 }
