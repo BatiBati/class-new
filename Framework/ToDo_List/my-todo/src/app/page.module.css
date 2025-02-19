@@ -51,6 +51,7 @@
   display: flex;
   justify-content: start;
   gap: 10px;
+  width: 100%;
 }
 
 .toDoTypes {
@@ -103,4 +104,42 @@
 
 .cursor {
   cursor: pointer;
+}
+.noTasks {
+  padding: 20px;
+  color: #6b7280;
+  font-size: 14px;
+}
+.bot {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0px 4px 0px;
+  border-top: 1px solid var(--border-border-border, #e4e4e7);
+}
+
+.bot div {
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.bot p {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+}
+.footer p {
+  color: #3c82f6;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  color: #363636;
+  font-size: 12px;
 }

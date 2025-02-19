@@ -6,6 +6,7 @@ export default function Home() {
   const [value, setValue] = useState("");
   const [list, setList] = useState([]);
   const [selectedType, setSelectedType] = useState("All");
+  const [idCount, setIdCount] = useState(0);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -13,23 +14,26 @@ export default function Home() {
 
   const handleAdd = () => {
     if (value === "") return alert("Please enter Todo");
-
-    setList([...list, { isCompleted: false, value: value }]);
+    setList([...list, { isCompleted: false, value: value, id: idCount }]);
+    setIdCount(idCount + 1);
     setValue("");
   };
 
-  const handleChecked = (index) => {
+  const handleChecked = (id) => {
     const newlistArr = [...list];
-    newlistArr[index].isCompleted = !newlistArr[index].isCompleted;
 
-    setList(newlistArr);
+    for (let i = 0; i > newlistArr.length - 1; i++) {
+      if (id === newlistArr[i].id) {
+        // let index;
+        // newlistArr[index].isCompleted = !newlistArr[index].isCompleted;
+        // setList(newlistArr);
+      }
+    }
   };
 
-  const handleDelete = (index) => {
-    const newList = list.filter((_, i) => i !== index);
-
+  const handleDelete = (value) => {
+    const newList = list.filter((item) => item.value !== value);
     setList(newList);
-    console.log(newList);
   };
 
   const filteredList = list.filter((item, index) => {
@@ -37,6 +41,17 @@ export default function Home() {
     if (selectedType === "Completed") return item.isCompleted === true;
     if (selectedType === "Active") return item.isCompleted == false;
   });
+
+  const checkedList = filteredList.filter((item) => {
+    if (item.isCompleted === true) return true;
+  });
+
+  const deleteCompletedTasks = () => {
+    const clearComplete = list.filter((item) => {
+      return item.isCompleted === false;
+    });
+    setList(clearComplete);
+  };
 
   return (
     <div className={style.container}>
@@ -49,7 +64,6 @@ export default function Home() {
         />
         <button onClick={handleAdd}>Add</button>
       </div>
-
       <div className={style.types}>
         <div
           className={style.toDoTypes}
@@ -88,34 +102,59 @@ export default function Home() {
           Completed
         </div>
       </div>
-
-      {filteredList.map((item, index) => {
-        return (
-          <div className={style.todos} key={item.value + index}>
-            <div className={style.todosItem}>
-              <input
-                type="checkbox"
-                checked={item.isCompleted}
-                className={style.cursor}
-                onChange={() => {
-                  handleChecked(index);
-                }}
-              />
-              <p className={item.isCompleted ? style.lineThrough : ""}>
-                {item.value}
-              </p>
-            </div>
-            <button
-              className={style.deleteButton}
-              onClick={() => {
-                handleDelete(index);
-              }}
-            >
-              Delete
-            </button>
+      {filteredList.length == 0 ? (
+        <div className={style.noTasks}>No tasks yet. Add one above!</div>
+      ) : (
+        filteredList.map((item, index) => {
+          return (
+            <>
+              <div className={style.todos} key={item.value + index}>
+                <div className={style.todosItem}>
+                  <input
+                    type="checkbox"
+                    checked={item.isCompleted}
+                    className={style.cursor}
+                    onChange={() => {
+                      handleChecked(item.id);
+                    }}
+                  />
+                  <p className={item.isCompleted ? style.lineThrough : ""}>
+                    {item.value}
+                  </p>
+                </div>
+                <button
+                  className={style.deleteButton}
+                  onClick={() => {
+                    handleDelete(item.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </>
+          );
+        })
+      )}
+      {filteredList.length === 0 ? (
+        ""
+      ) : (
+        <div className={style.bot}>
+          <p>
+            {checkedList.length} of {filteredList.length} tasks completed
+          </p>
+          <div
+            onClick={() => {
+              deleteCompletedTasks();
+            }}
+          >
+            Clear completed
           </div>
-        );
-      })}
+        </div>
+      )}
+
+      <div className={style.footer}>
+        Powered by <p>Pinecone academy</p>
+      </div>
     </div>
   );
 }
