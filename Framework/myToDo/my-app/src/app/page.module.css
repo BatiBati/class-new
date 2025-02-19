@@ -1,0 +1,26 @@
+.main {
+  background-color: rgb(163, 114, 114);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.inside {
+  width: 350px;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: rgb(94, 146, 146);
+  text-align: center;
+  flex-direction: row;
+
+}
+
+.inside h1 {
+  width: fit-content;
+  height: fit-content;
+}
+
+.inside p {
+  width: fit-content;
+  height: fit-content;
+}
