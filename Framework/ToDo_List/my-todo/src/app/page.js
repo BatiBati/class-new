@@ -20,19 +20,24 @@ export default function Home() {
   };
 
   const handleChecked = (id) => {
-    const newlistArr = [...list];
 
-    for (let i = 0; i > newlistArr.length - 1; i++) {
-      if (id === newlistArr[i].id) {
-        // let index;
-        // newlistArr[index].isCompleted = !newlistArr[index].isCompleted;
-        // setList(newlistArr);
+    const newlistArr = [...list];
+    for (let i = 0; i <= newlistArr.length; i++) {
+
+      if (newlistArr[i].id === id) {
+        newlistArr[i].isCompleted = !newlistArr[i].isCompleted;
+        setList(newlistArr);
+        console.log(newlistArr[i]);
+
       }
     }
   };
 
-  const handleDelete = (value) => {
-    const newList = list.filter((item) => item.value !== value);
+
+
+
+  const handleDelete = (id) => {
+    const newList = list.filter((item) => item.id !== id);
     setList(newList);
   };
 
@@ -41,6 +46,7 @@ export default function Home() {
     if (selectedType === "Completed") return item.isCompleted === true;
     if (selectedType === "Active") return item.isCompleted == false;
   });
+
 
   const checkedList = filteredList.filter((item) => {
     if (item.isCompleted === true) return true;

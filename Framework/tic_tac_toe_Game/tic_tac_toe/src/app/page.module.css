@@ -10,15 +10,26 @@
 }
 
 .cardCont {
-  display: grid;
-  grid-row: auto auto auto;
-  grid-row: auto auto auto;
-  grid-row: auto auto auto;
+  padding: 20px;
+  background-color: green;
+  width: 500px;
+  height: 500px;
 }
 
 .cards {
-  width: 150px;
-  height: 150px;
-  background-color: rgb(202, 222, 157);
+  width: 800px;
+  height: 800px;
+  background-color: rgb(153, 32, 32);
   border-radius: 10px;
+  padding: 10px;
+  border-radius: 10px;
+
+}
+
+.card {
+
+  width: 50px;
+  height: 50px;
+  background-color: green;
+
 }

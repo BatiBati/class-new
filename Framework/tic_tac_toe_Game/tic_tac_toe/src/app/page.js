@@ -41,14 +41,24 @@ const choices = [
 
 export default function Home() {
   return (
+
     <div className={styles.container}>
-      {choices.map(() => {
-        return (
-          <div className={styles.cardCont}>
-            <div className={styles.cards}></div>
-          </div>
-        );
-      })}
+      <div className={styles.cards}>
+        {choices.map((el, index) => {
+          return (
+
+
+
+
+            <div className={styles.card}></div>
+
+
+
+
+          );
+        })}
+      </div>
+
     </div>
   );
 }
