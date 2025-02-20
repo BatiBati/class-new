@@ -19,22 +19,15 @@ export default function Home() {
     setValue("");
   };
 
-  const handleChecked = (id) => {
-
+  const handleChecked = (ide) => {
     const newlistArr = [...list];
     for (let i = 0; i <= newlistArr.length; i++) {
-
-      if (newlistArr[i].id === id) {
+      if (newlistArr[i].id == ide) {
         newlistArr[i].isCompleted = !newlistArr[i].isCompleted;
         setList(newlistArr);
-        console.log(newlistArr[i]);
-
       }
     }
   };
-
-
-
 
   const handleDelete = (id) => {
     const newList = list.filter((item) => item.id !== id);
@@ -46,7 +39,6 @@ export default function Home() {
     if (selectedType === "Completed") return item.isCompleted === true;
     if (selectedType === "Active") return item.isCompleted == false;
   });
-
 
   const checkedList = filteredList.filter((item) => {
     if (item.isCompleted === true) return true;
@@ -114,7 +106,7 @@ export default function Home() {
         filteredList.map((item, index) => {
           return (
             <>
-              <div className={style.todos} key={item.value + index}>
+              <div className={style.todos} key={index}>
                 <div className={style.todosItem}>
                   <input
                     type="checkbox"
