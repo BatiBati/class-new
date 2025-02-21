@@ -1,0 +1,22 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buttonCont {
+  display: flex;
+  gap: 20px;
+}
+
+.decrement {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
