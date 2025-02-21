@@ -19,10 +19,10 @@ export default function Home() {
     setValue("");
   };
 
-  const handleChecked = (ide) => {
+  const handleChecked = (id) => {
     const newlistArr = [...list];
     for (let i = 0; i <= newlistArr.length; i++) {
-      if (newlistArr[i].id == ide) {
+      if (newlistArr[i].id == id) {
         newlistArr[i].isCompleted = !newlistArr[i].isCompleted;
         setList(newlistArr);
       }
