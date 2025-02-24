@@ -4,11 +4,12 @@ import Timer from "@/components/Timer";
 import TicTacToe from "@/components/Tic-tac-toe";
 import TodoList from "@/components/TodoList";
 import MyTimer from "@/components/MyTimer";
+import MemoGame from "@/components/MemoGame";
 
 export default function Home() {
   return (
     <>
-      <MyTimer />
+      <MemoGame />
     </>
   );
 }

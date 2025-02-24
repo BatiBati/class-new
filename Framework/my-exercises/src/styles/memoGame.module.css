@@ -1,0 +1,52 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.cardsCont {
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(217, 217, 217);
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 50px;
+}
+
+.card {
+  background-color: gray;
+  width: 100px;
+  height: 100px;
+  font-size: 100px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: black;
+  cursor: pointer;
+}
+
+.time {
+  width: 100px;
+  height: fit-content;
+  font-size: 25px;
+}
+
+.timeContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  height: fit-content;
+}
+
+.timeContainer button {
+  cursor: pointer;
+}
