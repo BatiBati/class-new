@@ -7,10 +7,9 @@ const formatTime = (time) => {
   const sec = time % 60;
   const min = ((time - sec) / 60) % 60;
 
-
-  return `  ${min
+  return `  ${min.toString().padStart(2, "0")}:${sec
     .toString()
-    .padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+    .padStart(2, "0")}`;
 };
 
 const board = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -19,12 +18,20 @@ export default function Home() {
   const [shown, setShown] = useState([]);
   const [matched, setMatched] = useState([]);
   const [isWon, setIsWon] = useState(false);
-  const [time, setTime] = useState(120);
+  const [time, setTime] = useState(180);
   const [isStart, setIsStarted] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
+  const [restart, setRestart] = useState();
 
   const startGame = () => {
     setIsStarted(true);
+  };
+
+  const restartGame = () => {
+    if (shown.length === 16) return;
+    if (isStart === true) {
+      setTime(180);
+      setIsStarted(false);
+    }
   };
 
   useEffect(() => {
@@ -32,7 +39,7 @@ export default function Home() {
     if (time !== 0) {
       const id = setInterval(() => {
         setTime(time - 1);
-      }, 100);
+      }, 1);
       return () => {
         clearInterval(id);
       };
@@ -66,11 +73,14 @@ export default function Home() {
   }, [matched]);
 
   console.log(time);
+  console.log(isStart);
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.timeContainer}>
           <button onClick={startGame}>Start</button>
+          <button onClick={restartGame}>Restart</button>
           <div className={styles.time}>{formatTime(time)}</div>
         </div>
 
@@ -86,8 +96,8 @@ export default function Home() {
               {matched.includes(index)
                 ? value
                 : shown.includes(index)
-                  ? value
-                  : ""}
+                ? value
+                : ""}
             </div>
           ))}
         </div>

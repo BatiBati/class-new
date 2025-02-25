@@ -6,11 +6,12 @@ import TodoList from "@/components/TodoList";
 import MyTimer from "@/components/MyTimer";
 import MemoGame from "@/components/MemoGame";
 import MyMemoGame from "@/components/MyMemoGame";
+import WeatherApp from "@/components/WeatherApp";
 
 export default function Home() {
   return (
     <>
-      <MyMemoGame />
+      <WeatherApp />
     </>
   );
 }
