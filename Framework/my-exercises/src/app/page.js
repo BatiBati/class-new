@@ -5,11 +5,12 @@ import TicTacToe from "@/components/Tic-tac-toe";
 import TodoList from "@/components/TodoList";
 import MyTimer from "@/components/MyTimer";
 import MemoGame from "@/components/MemoGame";
+import MyMemoGame from "@/components/MyMemoGame";
 
 export default function Home() {
   return (
     <>
-      <MemoGame />
+      <MyMemoGame />
     </>
   );
 }

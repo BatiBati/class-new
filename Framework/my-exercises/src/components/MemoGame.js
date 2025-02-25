@@ -6,9 +6,9 @@ import styles from "@/styles/memoGame.module.css";
 const formatTime = (time) => {
   const sec = time % 60;
   const min = ((time - sec) / 60) % 60;
-  const hour = (time - sec - 60 * min) / 3600;
 
-  return `${hour.toString().padStart(2, "0")}:${min
+
+  return `  ${min
     .toString()
     .padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
 };
@@ -19,7 +19,7 @@ export default function Home() {
   const [shown, setShown] = useState([]);
   const [matched, setMatched] = useState([]);
   const [isWon, setIsWon] = useState(false);
-  const [time, setTime] = useState(180);
+  const [time, setTime] = useState(120);
   const [isStart, setIsStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Home() {
     if (time !== 0) {
       const id = setInterval(() => {
         setTime(time - 1);
-      }, 10);
+      }, 100);
       return () => {
         clearInterval(id);
       };
@@ -86,8 +86,8 @@ export default function Home() {
               {matched.includes(index)
                 ? value
                 : shown.includes(index)
-                ? value
-                : ""}
+                  ? value
+                  : ""}
             </div>
           ))}
         </div>

@@ -1,0 +1,47 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.memoCont {
+    width: 500px;
+    height: 500px;
+    background-color: rgb(162, 168, 168);
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.memo {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(192, 186, 186);
+    border-radius: 100%;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    border: 1px solid rgb(102, 102, 102);
+    cursor: pointer;
+}
+
+.memo:hover {
+    box-shadow: 0, 0, 18px 0;
+    color: rgb(247, 209, 160);
+}
+
+.timeCont {
+    padding: 20px, 10px;
+    background-color: green;
+    gap: 10px
+}
