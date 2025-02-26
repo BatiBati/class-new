@@ -4,39 +4,67 @@ import style from "@/styles/weather.module.css";
 import { useEffect, useState } from "react";
 
 export default function WeatherApp() {
-  const [data, setData] = useState(null);
+  const [cities, setCities] = useState();
+  const [myCities, setMyCities] = useState([]);
+
   useEffect(() => {
-    fetch(
-      "https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=Ulaanbaatar",
-      { method: "GET" }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
+    const getData = async () => {
+      const response = await fetch(
+        "https://countriesnow.space/api/v0.1/countries",
+        { method: "GET" }
+      );
+      const cities = await response.json();
+
+      for (let i = 0; i < cities.data.length; i++) {
+        setCities(cities[i]);
+      }
+    };
+    getData();
   }, []);
 
-  console.log(data);
+  console.log(cities);
 
-  // {data?.current.wind_mph}
   return (
     <>
       <div className={style.container}>
-        <div className={style.left}>
-          <div>
-            <img src="./images/leftLogo.png" />
+        <div className={style.leftContainer}>
+          <div className={style.left}>
+            <div className={style.search}>
+              <img src="./images/search.png"></img>
+              <div className={style.inputCont}>
+                {/* {isCity.map((item, index) => {
+                  return (
+                    <input
+                      type="search"
+                      key={index}
+                      onChange={() => {
+                        handleChange(item);
+                      }}
+                    />
+                  );
+                })} */}
+              </div>
+            </div>
+            <div className={style.leftInsideCont}>
+              {/* <div className={style.date}>{data?.location.localtime}</div> */}
+              <div className={style.date}>2025.01.01</div>
+            </div>
           </div>
         </div>
-        <div className={style.right}>
-          <div>
-            <img src="./images/rightLogo.png" />
-          </div>
 
-          <div className={style.rightCont}>
-            <div className={style.one}></div>
-            <div className={style.two}></div>
-          </div>
+        <div className={style.right}></div>
+
+        <div className={style.logo}>
+          <img src="./images/leftLogo.png" />
+          <img src="./images/rightLogo.png" />
         </div>
+        <div className={style.round1}></div>
+        <div className={style.round2}></div>
+        <div className={style.round3}></div>
+        <div className={style.round4}></div>
+        <div className={style.round5}></div>
+        <div className={style.leftRound}></div>
+        <div className={style.rightRound}></div>
       </div>
     </>
   );
