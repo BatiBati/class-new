@@ -4,34 +4,26 @@ import style from "@/styles/weather.module.css";
 import { useEffect, useState } from "react";
 
 export default function WeatherApp() {
-  // const [cities, setCities] = useState();
-  // const [myCities, setMyCities] = useState([]);
+  const [cities, setCities] = useState();
+  const [value, setValue] = useState("");
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const response = await fetch(
-  //       "https://countriesnow.space/api/v0.1/countries",
-  //       { method: "GET" }
-  //     );
-  //     const cities = await response.json();
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(
+        "https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=Ulaanbaatar",
+        { method: "GET" }
+      );
+      const cities = await response.json();
+      setCities(cities);
+    };
+    getData();
+  }, []);
 
-  //     for (let i = 0; i < cities.data.length; i++) {
-  //       setCities(cities[i]);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
-
-  // console.log(cities);
+  const handleSearch = (event) => {
+    setValue(event.target.value);
+  };
 
   return (
-    // <>
-    //   <div className={style.container}>
-    //     <div className={style.leftContainer}>
-    //       <div className={style.left}>
-    //         <div className={style.search}>
-    //           <img src="./images/search.png"></img>
-    //           <div className={style.inputCont}>
     //             {/* {isCity.map((item, index) => {
     //               return (
     //                 <input
@@ -47,33 +39,53 @@ export default function WeatherApp() {
     //         </div>
     //         <div className={style.leftInsideCont}>
     //           {/* <div className={style.date}>{data?.location.localtime}</div> */}
-    //           <div className={style.date}>2025.01.01</div>
-    //         </div>
-    //       </div>
-    //     </div>
 
-    //     <div className={style.right}></div>
-
-    //     <div className={style.logo}>
-    //       <img src="./images/leftLogo.png" />
-    //       <img src="./images/rightLogo.png" />
-    //     </div>
-    //     <div className={style.round1}></div>
-    //     <div className={style.round2}></div>
-    //     <div className={style.round3}></div>
-    //     <div className={style.round4}></div>
-    //     <div className={style.round5}></div>
-    //     <div className={style.leftRound}></div>
-    //     <div className={style.rightRound}></div>
-    //   </div>
-    // </>
-    //---------------------------------------------------------------------
     <>
       <div className={style.container}>
         <div className={style.first}>
           <div className={style.roundCont}>
             <div className={style.leftLogo}>
               <img src="./images/leftLogo.png/" />
+            </div>
+          </div>
+        </div>
+        <div className={style.sss}>
+          <div className={style.inputCont}>
+            <div className={style.inputsDiv}>
+              <img src="./images/search.png" />
+
+              <input
+                className={style.inputValue}
+                value={value}
+                onChange={() => {
+                  handleSearch();
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={style.leftContainer}>
+          <div className={style.leftWeather}>
+            <div className={style.leftCont}>
+              <div className={style.leftWeatherTop}>
+                <div className={style.dateContain}>
+                  <div className={style.date}>
+                    {cities?.forecast.forecastday[0].date}
+                  </div>
+                  <div className={style.locationName}>
+                    <h1>{cities?.location.name}</h1>
+                  </div>
+                </div>
+                <div className={style.locationSVG}>
+                  <img src="./images/locationIcon.svg" />
+                </div>
+                <div className={style.sunny}>
+                  <img src="./images/sunny.png" />
+                </div>
+              </div>
+              <div className={style.leftWeatherBot}>
+                <h1>BOT</h1>
+              </div>
             </div>
           </div>
         </div>
