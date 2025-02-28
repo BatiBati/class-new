@@ -11,7 +11,7 @@ import MyTestedApps from "@/components/MyTestedApps";
 export default function Home() {
   return (
     <>
-      <MyTestedApps />
+      <WeatherApp />
     </>
   );
 }

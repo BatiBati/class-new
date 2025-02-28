@@ -1,353 +1,160 @@
-.container {
+.splitContainer {
   width: 100vw;
   height: 100vh;
-  position: relative;
 }
-.first {
-  position: absolute;
+
+.container {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f4f6;
-}
-.roundCont {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border-radius: 100%;
-  border: 1px solid rgb(112, 112, 112);
-  background-color: #f3f4f6;
-
-  z-index: 2;
 }
 
-.second {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.leftLogo {
+.left {
   width: 50%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-.secondRoundCont {
-  position: absolute;
-  /* background-color: blueviolet; */
-  width: 340px;
-  height: 340px;
-  border-radius: 100%;
+  background-color: #f3f4f6;
+  position: relative;
   display: flex;
   justify-content: center;
-
-  border: 1px solid rgb(112, 112, 112);
-  opacity: 0.5;
-  z-index: 2;
-}
-
-.rightLogo {
-  position: absolute;
-  z-index: 2;
-  width: 100px;
-  height: 140px;
-  display: flex;
-  justify-content: end;
   align-items: center;
-  /* background-color: green; */
 }
-
-.rightLogoCon {
+.left img {
   width: 100%;
   height: 100%;
-  background-color: gold;
 }
 
-.thirdRound {
-  width: 540px;
-  height: 540px;
-  border-radius: 100%;
-
-  border: 1px solid rgb(112, 112, 112);
-  z-index: 2;
-  opacity: 0.5;
+.right {
+  width: 50%;
+  height: 100%;
+  background-color: #f3f4f6;
 }
 
-.thirdfourth {
+.right img {
+  width: 100%;
+  height: 100%;
+}
+
+.searchInput {
+  width: 50%;
+  height: 5%;
   position: absolute;
-  width: 940px;
-  height: 940px;
-  border-radius: 100%;
-
-  border: 1px solid rgb(112, 112, 112);
-  z-index: 2;
-  opacity: 0.5;
-}
-
-.fifth {
-  position: absolute;
-  width: 1340px;
-  height: 1340px;
-  border-radius: 100%;
-
-  border: 1px solid rgb(112, 112, 112);
-  z-index: 2;
-  opacity: 0.5;
-}
-.sixth {
-  position: absolute;
-  width: 1740px;
-  height: 1740px;
-  border-radius: 100%;
-
-  border: 1px solid rgb(112, 112, 112);
-  z-index: 2;
-  opacity: 0.5;
-}
-
-.halfRoundCont {
-  position: absolute;
-  width: 60px;
-  height: 300px;
-  background: #0f141e;
+  top: 50px;
+  left: 50px;
+  border-radius: 40px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  z-index: 2;
-}
-
-.aa {
-  width: 50%;
-  height: 100%;
-  background-color: #0f141e;
-  display: flex;
   align-items: center;
-  z-index: 1;
-}
-
-.halfRoundCont1 {
-  width: 100%;
-  height: 100%;
-  background: #0f141e;
-  border-radius: 100%;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.halfRoundCont2 {
-  width: 100%;
-  height: 100%;
-  background: #0f141e;
-  border-radius: 100%;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.rrr {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ii {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  /* background-color: green; */
-}
-
-.halfRoundCont11 {
-  width: 100%;
-  height: 36%;
-  background-color: #f3f4f6;
-}
-.halfRoundCont22 {
-  width: 100%;
-  height: 35%;
-  background-color: #f3f4f6;
-  display: flex;
-  align-items: end;
-}
-
-.leftRound {
-  position: absolute;
-  width: 176px;
-  height: 176px;
-  background-image: radial-gradient(#f8b77b, #f49b49, #f8861b);
-  border-radius: 100%;
-  z-index: 2;
-  left: 130px;
-  top: 150px;
-}
-
-.rightRound {
-  position: absolute;
-  width: 128px;
-  height: 128px;
-  z-index: 3;
-  background-image: radial-gradient(#a59cd5, #9c9ec5 15%, #6e72c9);
-
-  border-radius: 100%;
-  right: 215px;
-  bottom: 100px;
-}
-
-.leftInfo {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #b14343;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-}
-
-.leftInside {
-  position: absolute;
-  width: 414px;
-  height: 800px;
-  background-color: rgb(255, 0, 0);
-  z-index: 4;
-  border-radius: 48px;
-}
-
-.inputCont {
-  position: absolute;
-  width: 567px;
-  height: 80px;
-  border-radius: 48px;
-  top: 40px;
-  left: 40px;
-  z-index: 3;
-}
-.inputCont img {
-  width: 48px;
-  height: 48px;
-}
-
-.inputValue {
-  width: 100%;
-  height: 100%;
-  border-radius: 48px;
   background-color: white;
+}
+
+.searchInput img {
+  position: absolute;
+  left: 0;
+  width: 15%;
+  height: 100%;
   padding: 10px;
-  font-size: 32px;
-  border: 0px;
 }
 
-.sss {
+.searchInput input {
+  width: 85%;
+  height: 100%;
   position: absolute;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-.inputsDiv {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  background-color: white;
-  border-radius: 48px;
-  align-items: center;
+  right: 0;
+  border-radius: 40px;
+  padding: 10px;
+  border: 0;
 }
 
-.leftContainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.leftCont {
-  position: absolute;
-  width: 414px;
-  height: 828px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 48px;
-  border: 4px solid rgba(244, 239, 239, 0.75);
-}
-
-.leftWeather {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-}
-.leftWeatherTop {
-  position: absolute;
-  width: 100%;
+.leftCenter {
+  width: 60%;
   height: 70%;
+  border-radius: 40px;
   background-color: white;
-  border-radius: 48px;
-  display: flex;
-  flex-direction: column;
-}
-
-.date {
   position: absolute;
-  left: 20px;
-  top: 20px;
-  width: 100%;
-  height: 20px;
-  color: #6b7280;
+  display: flex;
+  justify-content: center;
 }
 
-.dateContain {
-  width: 50%;
+.dateInfo {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+
+.cityName {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  font-size: 35px;
+}
+.locationIcon {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: 50px;
+  top: 70px;
+}
+.locationIcon img {
+  width: fit-content;
   height: fit-content;
 }
-
-.leftWeatherBot {
+.weatherPic {
   position: absolute;
-  width: 100%;
-  height: 30%;
-  background-color: yellow;
-  bottom: 0px;
-  border-radius: 48px;
-}
-
-.locationName {
-  position: absolute;
-  left: 20px;
-  top: 50px;
-  color: #111827;
-}
-
-.locationSVG {
-  display: flex;
-  justify-content: end;
-  align-items: center;
+  top: 200px;
   width: 50%;
-  height: 15%;
-  padding: 15px;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
-
-.sunny {
+.temperature {
+  position: absolute;
   width: 100%;
-  height: 50%;
+  height: fit-content;
+  bottom: 100px;
+  font-size: 150px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(88, 88, 88);
+}
+.bot {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 10%;
+  bottom: 50px;
+  color: #ff8e27;
+  font-weight: 700;
+  font-size: 24px;
 }
 
-.sunny img {
+.temp {
   width: 100%;
   height: 100%;
+}
+.icons {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+  height: 32px;
+  display: flex;
+}
+
+.cities {
+  width: 50%;
+  height: 100px;
+  position: absolute;
+  top: 120px;
+  left: 60px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(220, 217, 217);
+  z-index: 1;
+  overflow: scroll;
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(49, 47, 47);
 }
