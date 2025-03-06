@@ -1,0 +1,48 @@
+import style from "@/styles/myWeather.module.css"
+
+export default function MyWeather() {
+    return (
+        <div className={style.splitContainer}>
+            <div className={style.container}>
+                <div className={style.left}>
+                    <div className={style.inputCont}>
+                        <div className={style.first}>
+                            <img src="./images/search.png" />
+                        </div>
+                        <div className={style.second}>
+                            <input placeholder="Search" />
+                        </div>
+                    </div>
+                    <div className={style.sunny}>
+                        <div className={style.dateCont}>
+                            <div>
+                                <div className={style.date}>September 10, 2021</div>
+                                <div className={style.catipal}>KRAKOW</div>
+                            </div>
+
+                            <div className={style.searchLogo}>
+                                <img src="./images/locationicon.svg" />
+                            </div>
+                        </div>
+                        <div className={style.sun}>
+                            <img src="./images/sun.svg" />
+                        </div>
+                    </div>
+                </div>
+                <div className={style.right}></div>
+                <div className={style.centerRound}>
+                    <div>
+                        <img src="./images/leftLogo.png" />
+                    </div>
+                    <div>
+                        <img src="./images/rightLogo.png" />
+                    </div>
+                </div>
+                <div className={style.circleOne}></div>
+                <div className={style.circleTwo}></div>
+                <div className={style.circleThree}></div>
+            </div>
+        </div >
+    )
+}
+

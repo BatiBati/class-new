@@ -5,13 +5,14 @@ import TicTacToe from "@/components/Tic-tac-toe";
 import TodoList from "@/components/TodoList";
 import MyTimer from "@/components/MyTimer";
 import MemoGame from "@/components/MemoGame";
-import WeatherApp from "@/components/WeatherApp";
+import WeatherApp from "@/components/weatherApp/WeatherApp";
 import MyTestedApps from "@/components/MyTestedApps";
+import MyWeather from "@/components/weatherApp/MyWeather";
 
 export default function Home() {
   return (
     <>
-      <WeatherApp />
+      <MyWeather />
     </>
   );
 }
