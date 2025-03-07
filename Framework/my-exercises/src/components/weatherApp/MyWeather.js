@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 
 export default function MyWeather() {
   const [data, setData] = useState();
+  const [city, setCity] = useState("");
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     const getData = async () => {
-      const response = fetch(
-        "https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=Ulaanbaatar",
+      const response = await fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=${data}`,
         {
           method: "GET",
         }
@@ -17,9 +19,21 @@ export default function MyWeather() {
       setData(data);
     };
     getData();
-  }, []);
+  }, [city]);
 
-  console.log(data?.current.wind_mph);
+  const handleSearch = (event) => {
+    setValue(event.target.value);
+  };
+
+  const chooseCity = () => {
+
+    if (city === city) {
+      setCity(city)
+    }
+  }
+
+
+
 
   return (
     <div className={style.splitContainer}>
@@ -30,7 +44,7 @@ export default function MyWeather() {
               <img src="./images/search.png" />
             </div>
             <div className={style.second}>
-              <input placeholder="Search" />
+              <input placeholder="Search" onChange={handleSearch} />
             </div>
           </div>
           <div className={style.sunny}>
@@ -48,7 +62,7 @@ export default function MyWeather() {
               <img src="./images/sun.svg" />
             </div>
             <div className={style.temperatureCont}>
-              <div className={style.temperature}>36'</div>
+              <div className={style.temperature} onChange={chooseCity}></div>
               <div className={style.bright}>Bright</div>
             </div>
             <div className={style.logoCont}>
@@ -75,3 +89,5 @@ export default function MyWeather() {
     </div>
   );
 }
+
+// {data?.current.temp_c}
