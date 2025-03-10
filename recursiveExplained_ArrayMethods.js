@@ -6,7 +6,7 @@
 //   return sum;
 // };
 
-const { ar } = require("faker/lib/locales");
+
 
 // const factorialRec = (n) => {
 //   if (n === 0) return 1;
