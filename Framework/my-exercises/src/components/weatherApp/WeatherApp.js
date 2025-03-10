@@ -37,9 +37,7 @@ export default function WeatherApp() {
     getData();
   }, []);
 
-  // const suggestCity = cities.filter((item, index) => {
-  //   if (cities.item === value[index]) return setCities(suggestCity);
-  // });
+
 
   const filteredCities = cities?.data.filter((item) =>
     item.country.includes(value)

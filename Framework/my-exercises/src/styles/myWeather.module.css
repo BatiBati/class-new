@@ -26,6 +26,10 @@
   width: 50%;
   height: 100%;
   background-color: #0f141e;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .centerRound {
@@ -99,7 +103,6 @@
   width: 90%;
   height: 100%;
   display: flex;
-  align-items: center;
   font-size: 20px;
   font-weight: 500;
 }
@@ -131,6 +134,19 @@
   align-items: center;
 }
 
+.moonCont {
+  width: 50%;
+  height: 70%;
+  background: rgba(17, 24, 39, 0.75);
+
+  z-index: 1;
+  border-radius: 48px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .catipal {
   font-size: 30px;
   font-weight: 900;
@@ -156,6 +172,17 @@
   margin: 0px;
 }
 
+.nightTemperature {
+  font-size: 144px;
+  font-weight: 800;
+  height: 144px;
+  background: linear-gradient(180deg, #F9FAFB 0%, rgba(249, 250, 251, 0.00) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0px;
+}
+
 .bright {
   height: fit-content;
   color: #ff8e27;
@@ -175,7 +202,7 @@
 
 .citiesCont {
   width: 400px;
-  height: 210px;
+  height: 128px;
   position: absolute;
   top: 130;
   left: 40;
@@ -191,14 +218,19 @@
   align-items: center;
   gap: 5px;
   overflow: auto;
+  cursor: pointer;
+}
+
+.cities:hover {
+  background-color: rgb(226, 224, 224);
 }
 
 .cities {
   display: flex;
   width: 100%;
-  height: 100%;
-
-  border-radius: 48px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
 }
 
 .citiesImage img {

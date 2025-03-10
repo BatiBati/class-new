@@ -7,11 +7,12 @@ export default function MyWeather() {
   const [data, setData] = useState(null);
   const [value, setValue] = useState("");
   const [city, setCity] = useState([]);
+  const [selectCityName, setSelectCityName] = useState("Ulaanbaatar");
 
   useEffect(() => {
     const getData = async () => {
       const dataResponse = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=Washington`,
+        `https://api.weatherapi.com/v1/forecast.json?key=5318e9f41f86455f93b73750252502&q=${selectCityName}`,
         {
           method: "GET",
         }
@@ -26,7 +27,7 @@ export default function MyWeather() {
       setCity(cityData.data);
     };
     getData();
-  }, []);
+  }, [selectCityName]);
 
   const handleSearch = (event) => {
     setValue(event.target.value);
@@ -37,8 +38,22 @@ export default function MyWeather() {
     return format(date, "MMMM dd, yyyy");
   };
 
-  console.log(city[19]?.name, city[19]?.capital);
+  const filteredCities = city.filter((iteem, ind) => iteem?.capital.includes(value));
+
+  const onClickAndClearValue = (() => {
+    return (setSelectCityName(value), setValue(""));
+  });
+
+
+
+
   console.log(data);
+
+
+
+  // console.log(filteredCities);
+
+  // console.log(`${city[0]?.capital}, ${city[0]?.name} `);
 
   return (
     <div className={style.splitContainer}>
@@ -56,9 +71,9 @@ export default function MyWeather() {
             ""
           ) : (
             <div className={style.citiesCont}>
-              {city.map((item, index) => {
+              {filteredCities.map((item, index) => {
                 return (
-                  <div className={style.cities}>
+                  <div className={style.cities} key={index} onClick={onClickAndClearValue}>
                     <div className={style.citiesImage}>
                       <img src="./images/locationicon.svg" alt="Search Icon" />
                     </div>
@@ -98,7 +113,34 @@ export default function MyWeather() {
             </div>
           </div>
         </div>
-        <div className={style.right}></div>
+        <div className={style.right}>
+          <div className={style.moonCont}>
+            <div className={style.dateCont}>
+              <div>
+                <div className={style.date} style={{ color: "white" }}>{dateFormat()}</div>
+                <div className={style.catipal} style={{ color: "white" }}>{data?.location?.name}</div>
+              </div>
+
+              <div className={style.searchLogo}>
+                <img src="./images/locationicon.svg" />
+              </div>
+            </div>
+            <div className={style.sun}>
+              <img src="./images/moon.svg" />
+            </div>
+            <div className={style.temperatureCont}>
+              <div className={style.nightTemperature}>{data?.forecast?.forecastday[0]?.day?.mintemp_c}</div>
+              <div className={style.bright}>
+                {data?.forecast?.forecastday[0]?.day?.condition?.text}
+              </div>
+            </div>
+            <div className={style.logoCont}>
+              <img src="./images/Home.svg" />
+              <img src="./images/locationIcon.svg" />
+              <img src="./images/Heart.svg" />
+              <img src="./images/User.svg" />
+            </div>
+          </div></div>
         <div className={style.centerRound}>
           <div>
             <img src="./images/leftLogo.png" />
