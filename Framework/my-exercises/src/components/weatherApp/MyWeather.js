@@ -182,7 +182,7 @@ export default function MyWeather() {
             </div>
           </div>
         </div>
-        <div className="absolute w-[140px] h-[140px] rounded-[100%] border border-custom-gray p-4 bg-[#f3f4f6] flex justify-center items-center gap-[20px] ">
+        <div className="absolute w-[140px] h-[140px] rounded-[100%] border border-black p-4 bg-[#f3f4f6] flex justify-center items-center gap-[20px] ">
           <div>
             <img src="./images/leftLogo.png" />
           </div>
@@ -190,9 +190,9 @@ export default function MyWeather() {
             <img src="./images/rightLogo.png" />
           </div>
         </div>
-        <div className="absolute w-[340px] h-[340px] rounded-[100%]"></div>
-        <div className={style.circleTwo}></div>
-        <div className={style.circleThree}></div>
+        <div className="absolute w-[340px] h-[340px] rounded-[100%] border border-black opacity-50"></div>
+        <div className="absolute w-[540px] h-[540px] rounded-[100%] border border-black opacity-50"></div>
+        <div className="absolute w-[940px] h-[940px] rounded-[100%] border border-black opacity-50"></div>
       </div>
     </div>
   );
