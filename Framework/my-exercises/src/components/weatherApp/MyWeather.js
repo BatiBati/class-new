@@ -111,7 +111,7 @@ export default function MyWeather() {
           {/* sunny */}
           <div className="bg-white w-[50%] h-[70%] z-10 rounded-[48px] flex flex-col justify-between p-5">
             {/* dateCont */}
-            <div className="w-full h-[8%] flex justify-between items-center">
+            <div className="w-full h-[8%] flex justify-between items-center p-[10px]">
               <div>
                 <div>{dateFormat()}</div>
                 {/* catipal */}
@@ -150,9 +150,9 @@ export default function MyWeather() {
         {/* right */}
         <div className="w-[50%] h-full bg-[#0f141e] relative flex justify-center items-center">
           {/* moonCont */}
-          <div className="bg-[rgba(17, 24, 39, 0.75)] w-[50%] h-[70%] z-10 rounded-[48px] flex flex-col justify-between p-5">
+          <div className="bg-[#111827] blur-[] w-[50%] h-[70%] z-10 rounded-[48px] flex flex-col justify-between p-5">
             {/* dateCont */}
-            <div className="w-full h-[8%] flex justify-between items-center">
+            <div className="w-full h-[8%] flex justify-between items-center p-[10px]">
               <div>
                 <div className="text-white">{dateFormat()}</div>
                 <div className=" text-[30px] font-[500] text-white">
