@@ -128,16 +128,18 @@ export default function MyWeather() {
               <img src="./images/sun.svg" />
             </div>
             {/* temperatureCont */}
-            <div className="bg-amber-400 ">
+            <div>
               {/* temperature */}
               <div className="text-[100px] font-bold">
                 {data?.current?.temp_c}
               </div>
-              <div className={style.bright}>
+              {/* bright */}
+              <div className="h-fit text-[#ff8327] font-bold text-[24px]">
                 {data?.current?.condition?.text}
               </div>
             </div>
-            <div className={style.logoCont}>
+            {/* logoCont */}
+            <div className="flex items-center justify-between w-[80%] m-auto mt-0 mb-0">
               <img src="./images/Home.svg" />
               <img src="./images/locationIcon.svg" />
               <img src="./images/Heart.svg" />
@@ -145,33 +147,34 @@ export default function MyWeather() {
             </div>
           </div>
         </div>
-        <div className={style.right}>
-          <div className={style.moonCont}>
-            <div className={style.dateCont}>
+        {/* right */}
+        <div className="w-[50%] h-full bg-[#0f141e] relative flex justify-center items-center">
+          {/* moonCont */}
+          <div className="bg-[rgba(17, 24, 39, 0.75)] w-[50%] h-[70%] z-10 rounded-[48px] flex flex-col justify-between p-5">
+            {/* dateCont */}
+            <div className="w-full h-[8%] flex justify-between items-center">
               <div>
-                <div className={style.date} style={{ color: "white" }}>
-                  {dateFormat()}
-                </div>
-                <div className={style.catipal} style={{ color: "white" }}>
+                <div className="text-white">{dateFormat()}</div>
+                <div className=" text-[30px] font-[500] text-white">
                   {data?.location?.name}
                 </div>
               </div>
-              <div className={style.searchLogo}>
+              <div>
                 <img src="./images/locationicon.svg" />
               </div>
             </div>
-            <div className={style.sun}>
+            <div className="flex justify-center">
               <img src="./images/moon.svg" />
             </div>
-            <div className={style.temperatureCont}>
-              <div className={style.nightTemperature}>
+            <div>
+              <div className="text-[100px] font-bold text-white">
                 {data?.forecast?.forecastday[0]?.day?.mintemp_c}
               </div>
-              <div className={style.bright}>
+              <div className="h-fit text-[#ff8327] font-bold text-[24px]">
                 {data?.forecast?.forecastday[0]?.day?.condition?.text}
               </div>
             </div>
-            <div className={style.logoCont}>
+            <div className="flex items-center justify-between w-[80%] m-auto mt-0 mb-0">
               <img src="./images/Home.svg" />
               <img src="./images/locationIcon.svg" />
               <img src="./images/Heart.svg" />
@@ -179,7 +182,7 @@ export default function MyWeather() {
             </div>
           </div>
         </div>
-        <div className={style.centerRound}>
+        <div className="absolute w-[140px] h-[140px] rounded-[100%] border border-custom-gray p-4 bg-[#f3f4f6] flex justify-center items-center gap-[20px] ">
           <div>
             <img src="./images/leftLogo.png" />
           </div>
@@ -187,7 +190,7 @@ export default function MyWeather() {
             <img src="./images/rightLogo.png" />
           </div>
         </div>
-        <div className={style.circleOne}></div>
+        <div className="absolute w-[340px] h-[340px] rounded-[100%]"></div>
         <div className={style.circleTwo}></div>
         <div className={style.circleThree}></div>
       </div>

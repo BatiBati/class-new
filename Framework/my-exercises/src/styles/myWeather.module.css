@@ -22,7 +22,7 @@
 /* align-items: center; */
 /* } */
 
-.right {
+/* .right {
   width: 50%;
   height: 100%;
   background-color: #0f141e;
@@ -30,9 +30,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.centerRound {
+/* .centerRound {
   position: absolute;
   width: 140px;
   height: 140px;
@@ -43,7 +43,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-}
+} */
 
 .circleOne {
   position: absolute;
@@ -135,7 +135,7 @@
   align-items: center;
 } */
 
-.moonCont {
+/* .moonCont {
   width: 50%;
   height: 70%;
   background: rgba(17, 24, 39, 0.75);
@@ -146,7 +146,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
 /* .catipal {
   font-size: 30px;
@@ -184,14 +184,14 @@
   margin: 0px;
 }
 
-.bright {
+/* .bright {
   height: fit-content;
   color: #ff8e27;
   font-weight: 800;
   font-size: 24px;
-}
+} */
 
-.logoCont {
+/* .logoCont {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -199,7 +199,7 @@
   margin: auto;
   margin-bottom: 0;
   margin-top: 0;
-}
+} */
 
 .citiesCont {
   /* width: 400px;
