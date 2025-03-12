@@ -16,15 +16,15 @@ export const HeaderNamu = () => {
       </div>
       <div className="h-full w-[80%] flex justify-end">
         <div className="flex w-1/3">
-          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold">
+          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold text-black">
             <CoffeeIcon />
             Меню
           </div>
-          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold">
+          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold text-black">
             <GiftIcon />
             Бонус
           </div>
-          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold">
+          <div className="flex items-center w-[100%] gap-[4px] text-base  font-semibold text-black">
             <Carriage />
             Захиалга
           </div>
