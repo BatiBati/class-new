@@ -75,7 +75,7 @@ export default function Home() {
             className="w-full bg-[#121316] flex items-center justify-center gap-2 text-white text-base font-semibold border rounded-md py-[10px] px-[12px]"
             onClick={handleSubmit}
           >
-            Continue 1/3 <RightArrow />
+            Continue 1/3 .<RightArrow />
           </button>
         </div>
       </div>
