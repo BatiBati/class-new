@@ -8,12 +8,13 @@ import MemoGame from "@/components/MemoGame";
 import WeatherApp from "@/components/weatherApp/WeatherApp";
 import MyTestedApps from "@/components/MyTestedApps";
 import MyWeather from "@/components/weatherApp/MyWeather";
-import CoffeeNamu from "@/components/CoffeeNamu/CoffeeNamu";
+import { Schema } from "zod";
+import Formtest from "@/components/FormTest";
 
 export default function Home() {
   return (
     <>
-      <CoffeeNamu />
+      <Formtest />
     </>
   );
 }
