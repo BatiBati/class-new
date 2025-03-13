@@ -34,16 +34,18 @@ export default function Home() {
   });
 
   const handlePrev = async () => {
-    setStep((prev) => prev - 1);
+    setStep((prev) => prev + 1);
   };
 
   return (
     <div>
-      <div>
+      <div className="w-screen h-screen bg-amber-500">
         {step === 0 && (
           <div className="flex w-full h-full justify-center items-center">
             <form
-              onSubmit={handleSubmit((data) => console.log(data))}
+              onSubmit={handleSubmit(() => {
+                console.log(formState);
+              })}
               className="p-4 rounded-sm bg-white shadow-md flex flex-col gap-3 w-[300px]"
             >
               <div className="flex flex-col gap-1">
@@ -85,11 +87,11 @@ export default function Home() {
         )}
 
         {step === 1 && (
-          <div className="flex flex-col gap-3">
-            <p>Next Step</p>
+          <div className="w-[250px] h-[250px] bg-amber-900">
+            <p>Next Stepssssssssssss</p>
 
             <button
-              onClick={handlePrev}
+              type="submit"
               className="px-3 py-1 border rounded-sm border-gray-300 cursor-pointer"
             >
               Back
