@@ -47,7 +47,7 @@ export default function Home() {
   const [step, setStep] = useState(0);
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schme),
     defaultValues: {
       firstname: "",
       lastname: "",
@@ -55,13 +55,15 @@ export default function Home() {
     },
   });
 
-  const handlePrev = async () => {};
+  const handlePrev = async () => {
+
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center ">
       {step === 0 && (
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(() => {
             setStep((page) => page + 1);
           })}
         >
@@ -75,7 +77,21 @@ export default function Home() {
             </div>
             <div className="w-full h-[70%] flex flex-col justify-between">
               <div className="w-full flex flex-col gap-4">
-                <FirstnameField />
+                <div className="flex flex-col">
+                  <p className="text-[#334155] font-semibold">
+                    First name <span className="text-red-500">*</span>
+                  </p>
+
+                  <input
+                    placeholder="Enter first name"
+                    className="w-full p-2 border rounded-md"
+                    {...register("firstname")}
+                  />
+
+                  {formState.errors.firstname && (
+                    <div className="text-red-500">{formState.errors.firstname.message}</div>
+                  )}
+                </div>
 
                 {/* <div className="flex flex-col">
                   <p className="text-[#334155] font-semibold">
@@ -116,14 +132,60 @@ export default function Home() {
 
               <button
                 className="w-full bg-[#121316] flex items-center justify-center gap-2 text-white text-base font-semibold border rounded-md py-[10px] px-[12px]"
-                onClick={handlePrev}
+                type="submit"
               >
                 Continue {step}/3 .<RightArrow />
               </button>
             </div>
           </div>
         </form>
+
       )}
+
+
+      {step === 1 && (<form
+        onSubmit={handleSubmit(() => {
+          setStep((page) => page + 1);
+        })}
+      >
+        <div className="w-[480px] h-[655px] p-[32px] flex flex-col justify-between">
+          <div className="w-full h-[30%]">
+            <img src="./images/pineConeLogo.svg" />
+            <p className="font-semibold text-[26px]">Join Us! 😎</p>
+            <p className="text-[#8E8E8E] text-lg">
+              Please provide all current information accurately.
+            </p>
+          </div>
+          <div className="w-full h-[70%] flex flex-col justify-between">
+            <div className="w-full flex flex-col gap-4">
+              <div className="flex flex-col">
+                <p className="text-[#334155] font-semibold">
+                  First name <span className="text-red-500">*</span>
+                </p>
+
+                <input
+                  placeholder="Enter first name"
+                  className="w-full p-2 border rounded-md"
+                  {...register("firstname")}
+                />
+
+                {formState.errors.firstname && (
+                  <div className="text-red-500">{formState.errors.firstname.message}</div>
+                )}
+              </div>
+
+
+            </div>
+
+            <button
+              className="w-full bg-[#121316] flex items-center justify-center gap-2 text-white text-base font-semibold border rounded-md py-[10px] px-[12px]"
+              type="submit"
+            >
+              Continue {step}/3 .<RightArrow />
+            </button>
+          </div>
+        </div>
+      </form>)}
     </div>
   );
 }
