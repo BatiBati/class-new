@@ -3,8 +3,9 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputTag } from "../InputTag/InputTag";
-import { useState } from "react";
 import { RightArrow } from "@/components/assets/RightArrow";
+import { useContext } from "react";
+import { StepContext } from "./StepProvider";
 
 export const schema = z.object({
   firstname: z
@@ -41,21 +42,32 @@ export const schema = z.object({
 });
 
 export const FirstStep = ({ nextPage, maxStep }) => {
+  const { values, setValues } = useContext(StepContext);
   const page = 1;
+
   const { register, formState, handleSubmit } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      firstname: "",
-      lastname: "",
-      username: "",
+      firstname: values.firstname,
+      lastname: values.lastname,
+      username: values.username,
     },
   });
+
+  const saveValues = (data) => {
+    const newValues = { ...values };
+    newValues.firstname = data.firstname;
+    newValues.lastname = data.lastname;
+    newValues.username = data.username;
+    setValues(newValues);
+    nextPage();
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-[#F4F4F4]">
       <form
-        onSubmit={handleSubmit(() => {
-          nextPage();
+        onSubmit={handleSubmit((data) => {
+          saveValues(data);
         })}
       >
         <div className="flex flex-col justify-between gap-5 w-[480px] h-[655px] p-8 bg-white rounded-2xl">

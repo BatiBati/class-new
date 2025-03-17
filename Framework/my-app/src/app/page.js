@@ -5,9 +5,20 @@ import { FirstStep } from "@/components/RegistrationForm/Steps/FirstStep";
 import { SecondStep } from "@/components/RegistrationForm/Steps/SecondStep";
 import { ThirdStep } from "@/components/RegistrationForm/Steps/ThirdStep";
 import { FourthStep } from "@/components/RegistrationForm/Steps/FourthStep";
+import { StepProvider } from "@/components/RegistrationForm/Steps/StepProvider";
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [values, setValues] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    email: "",
+    phonenumber: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const maxStep = 3;
 
   const nextPage = () => {
@@ -21,21 +32,31 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
-      {step === 1 && (
-        <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
-      )}
-      {step === 2 && (
-        <SecondStep
-          pageStep={step}
-          nextPage={nextPage}
-          prevStep={prevPage}
-          maxStep={maxStep}
-        />
-      )}
-      {step === 3 && (
-        <ThirdStep pageStep={step} nextPage={nextPage} prevStep={prevPage} />
-      )}
-      {step === 4 && <FourthStep maxStep={maxStep} prevStep={prevPage} />}
+      <StepProvider values={values} setValues={setValues}>
+        {step === 1 && (
+          <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
+        )}
+
+        {step === 2 && (
+          <SecondStep
+            pageStep={step}
+            nextPage={nextPage}
+            prevStep={prevPage}
+            maxStep={maxStep}
+          />
+        )}
+
+        {step === 3 && (
+          <ThirdStep
+            pageStep={step}
+            nextPage={nextPage}
+            prevStep={prevPage}
+            maxStep={maxStep}
+          />
+        )}
+
+        {step === 4 && <FourthStep maxStep={maxStep} prevStep={prevPage} />}
+      </StepProvider>
     </div>
   );
 }

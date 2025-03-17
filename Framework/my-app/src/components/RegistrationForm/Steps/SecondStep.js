@@ -5,61 +5,64 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { InputTag } from "../InputTag/InputTag";
 import { RightArrow } from "@/components/assets/RightArrow";
 import { LeftArrow } from "@/components/assets/LeftArrow";
-import { useState } from "react";
+import { useContext } from "react";
+import { StepContext } from "./StepProvider";
 
+export const schema = z
+  .object({
+    email: z.string().min(1, { message: "Char at least 1 " }).email(),
+    phonenumber: z
+      .string()
+      .max(8, { message: "Char at least 8 " })
+      .refine(
+        (value) => {
+          const chars = value.split("");
+          return chars.every((char) => {
+            return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(
+              char
+            );
+          });
+        },
+        { message: "Only numbers" }
+      ),
 
-export const UserSchema: ZodType< = z.object({
-  email: z.string().min(1, { message: "Char at least 1 " }).email(),
-  phonenumber: z
-    .string()
-    .max(8, { message: "Char at least 8 " })
-    .refine(
-      (value) => {
-        const chars = value.split("");
-        return chars.every((char) => {
-          return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(
-            char
-          );
-        });
-      },
-      { message: "Only numbers" }
-    ),
-
-  password: z
-    .string()
-    .trim()
-    .min(1, { message: "Char at least 1 " }),
-  confirmPassword: z
-    .string()
-    .trim()
-    .min(1, { message: "Char at least 1 " })
-    .refine((data) => password.value === data,
-      {
-        message: "Password is not matching",
-        path: ["confirmPassword"],
-      })
-});
-
-
+    password: z.string().trim().min(1, { message: "Char at least 1 " }),
+    confirmPassword: z.string().trim().min(1, { message: "Char at least 1 " }),
+  })
+  .refine((data) => data.confirmPassword === data.password, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export const SecondStep = ({ nextPage, prevStep, maxStep }) => {
+  const { values, setValues } = useContext(StepContext);
   const page = 2;
 
   const { register, formState, handleSubmit } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      phonenumber: "",
-      password: "",
-      confirmPassword: "",
+      email: values.email,
+      phonenumber: values.phonenumber,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
     },
   });
+
+  const saveValues = (data) => {
+    const newValues = { ...values };
+    newValues.email = data.email;
+    newValues.phonenumber = data.phonenumber;
+    newValues.password = data.password;
+    newValues.confirmPassword = data.confirmPassword;
+    setValues(newValues);
+    nextPage();
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <form
-        onSubmit={handleSubmit(() => {
-          nextPage();
+        onSubmit={handleSubmit((data) => {
+          saveValues(data);
         })}
       >
         <div className="flex flex-col justify-between gap-5 w-[480px] h-[655px] p-8 bg-white rounded-2xl">
@@ -112,6 +115,7 @@ export const SecondStep = ({ nextPage, prevStep, maxStep }) => {
                 {...register("password")}
                 error={formState.errors["password"]}
                 placeholder={"Password here..."}
+                type="password"
               />
             </div>
             <div className="w-full flex flex-col gap-1.5 mt-3">
@@ -125,6 +129,7 @@ export const SecondStep = ({ nextPage, prevStep, maxStep }) => {
                 {...register("confirmPassword")}
                 error={formState.errors["confirmPassword"]}
                 placeholder={"Confirm password here..."}
+                type="password"
               />
             </div>
           </div>
@@ -140,7 +145,8 @@ export const SecondStep = ({ nextPage, prevStep, maxStep }) => {
               className="bg-[#121316] text-white w-[80%] p-2 mt-3 rounded-md flex items-center justify-center"
               type="submit"
             >
-              Continue {page}/{maxStep} <RightArrow />
+              Continue {page}/{maxStep}
+              <RightArrow />
             </button>
           </div>
         </div>
