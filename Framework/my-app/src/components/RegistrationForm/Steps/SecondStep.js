@@ -1,5 +1,5 @@
 "use client";
-import { z } from "zod";
+import { z, ZodType } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputTag } from "../InputTag/InputTag";
@@ -7,42 +7,43 @@ import { RightArrow } from "@/components/assets/RightArrow";
 import { LeftArrow } from "@/components/assets/LeftArrow";
 import { useState } from "react";
 
+
+export const UserSchema: ZodType< = z.object({
+  email: z.string().min(1, { message: "Char at least 1 " }).email(),
+  phonenumber: z
+    .string()
+    .max(8, { message: "Char at least 8 " })
+    .refine(
+      (value) => {
+        const chars = value.split("");
+        return chars.every((char) => {
+          return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(
+            char
+          );
+        });
+      },
+      { message: "Only numbers" }
+    ),
+
+  password: z
+    .string()
+    .trim()
+    .min(1, { message: "Char at least 1 " }),
+  confirmPassword: z
+    .string()
+    .trim()
+    .min(1, { message: "Char at least 1 " })
+    .refine((data) => password.value === data,
+      {
+        message: "Password is not matching",
+        path: ["confirmPassword"],
+      })
+});
+
+
+
 export const SecondStep = ({ nextPage, prevStep, maxStep }) => {
   const page = 2;
-
-  const schema = z.object({
-    email: z.string().min(1, { message: "Char at least 1 " }).email(),
-    phonenumber: z
-      .string()
-      .max(8, { message: "Char at least 8 " })
-      .refine(
-        (value) => {
-          const chars = value.split("");
-          return chars.every((char) => {
-            return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(
-              char
-            );
-          });
-        },
-        { message: "Only numbers" }
-      ),
-
-    password: z
-      .string({ message: "Please enter username" })
-      .min(1, { message: "Char at least 1 " }),
-    confirmPassword: z
-      .string({ message: "Please enter username" })
-      .min(1, { message: "Char at least 1 " })
-      .refine(
-        (data) => {
-          data.password !== data.confirmPassword;
-        },
-        {
-          message: "Passwords do not match",
-          path: ["confirmPassword"], // The error will appear under confirmPassword
-        }
-      ),
-  });
 
   const { register, formState, handleSubmit } = useForm({
     resolver: zodResolver(schema),
