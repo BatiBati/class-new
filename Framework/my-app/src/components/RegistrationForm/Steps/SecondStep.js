@@ -13,7 +13,7 @@ export const schema = z
     email: z.string().min(1, { message: "Char at least 1 " }).email(),
     phonenumber: z
       .string()
-      .max(8, { message: "Char at least 8 " })
+      .min(8, { message: "Char at least 8 " })
       .refine(
         (value) => {
           const chars = value.split("");

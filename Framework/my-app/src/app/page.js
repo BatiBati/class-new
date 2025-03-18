@@ -17,6 +17,7 @@ export default function Home() {
     phonenumber: "",
     password: "",
     confirmPassword: "",
+    date: "--/--/--",
   });
 
   const maxStep = 3;
@@ -28,7 +29,6 @@ export default function Home() {
   const prevPage = () => {
     setStep((prev) => prev - 1);
   };
-  console.log(step);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
