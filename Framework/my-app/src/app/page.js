@@ -17,7 +17,7 @@ export default function Home() {
     phonenumber: "",
     password: "",
     confirmPassword: "",
-    date: "--/--/--",
+    date: "",
   });
 
   const maxStep = 3;
@@ -33,8 +33,11 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <StepProvider values={values} setValues={setValues}>
+
         {step === 1 && (
-          <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
+          <div className="absolute w-full transition-opacity duration-500 ease-in-out opacity-100">
+            <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
+          </div>
         )}
 
         {step === 2 && (
@@ -56,7 +59,10 @@ export default function Home() {
         )}
 
         {step === 4 && <FourthStep maxStep={maxStep} prevStep={prevPage} />}
+
       </StepProvider>
     </div>
+
+
   );
 }

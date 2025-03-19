@@ -201,9 +201,8 @@ export const Step2 = ({ handleContinue, handlePrev }) => {
             <input
               {...register("date")}
               type="date"
-              className={`w-[416px] h-[44px] border p-[12px] rounded-[8px] ${
-                errors.date ? "border-red-600" : "border-[#8B8E95]"
-              }`}
+              className={`w-[416px] h-[44px] border p-[12px] rounded-[8px] ${errors.date ? "border-red-600" : "border-[#8B8E95]"
+                }`}
             />
             {errors.date && (
               <div className="text-red-600 text-sm">{errors.date.message}</div>
