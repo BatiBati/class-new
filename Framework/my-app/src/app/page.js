@@ -8,7 +8,7 @@ import { FourthStep } from "@/components/RegistrationForm/Steps/FourthStep";
 import { StepProvider } from "@/components/RegistrationForm/Steps/StepProvider";
 
 export default function Home() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -18,6 +18,7 @@ export default function Home() {
     password: "",
     confirmPassword: "",
     date: "",
+    profileImage: "",
   });
 
   const maxStep = 3;
@@ -33,7 +34,6 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <StepProvider values={values} setValues={setValues}>
-
         {step === 1 && (
           <div className="absolute w-full transition-opacity duration-500 ease-in-out opacity-100">
             <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
@@ -59,10 +59,7 @@ export default function Home() {
         )}
 
         {step === 4 && <FourthStep maxStep={maxStep} prevStep={prevPage} />}
-
       </StepProvider>
     </div>
-
-
   );
 }
