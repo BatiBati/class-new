@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FirstStep } from "@/components/RegistrationForm/Steps/FirstStep";
 import { SecondStep } from "@/components/RegistrationForm/Steps/SecondStep";
 import { ThirdStep } from "@/components/RegistrationForm/Steps/ThirdStep";
@@ -8,7 +8,7 @@ import { FourthStep } from "@/components/RegistrationForm/Steps/FourthStep";
 import { StepProvider } from "@/components/RegistrationForm/Steps/StepProvider";
 
 export default function Home() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -31,9 +31,12 @@ export default function Home() {
     setStep((prev) => prev - 1);
   };
 
+  const saveDatas = localStorage.setItem("values");
+  console.log(saveDatas);
+
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <StepProvider values={values} setValues={setValues}>
+    <StepProvider values={values} setValues={setValues}>
+      <div className="w-screen h-screen flex justify-center items-center">
         {step === 1 && (
           <div className="absolute w-full transition-opacity duration-500 ease-in-out opacity-100">
             <FirstStep pageStep={step} nextPage={nextPage} maxStep={maxStep} />
@@ -59,7 +62,7 @@ export default function Home() {
         )}
 
         {step === 4 && <FourthStep maxStep={maxStep} prevStep={prevPage} />}
-      </StepProvider>
-    </div>
+      </div>
+    </StepProvider>
   );
 }
