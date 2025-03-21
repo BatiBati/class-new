@@ -27,8 +27,8 @@ export const schema = z
         { message: "Only numbers" }
       ),
 
-    password: z.string().trim().min(1, { message: "Char at least 1 " }),
-    confirmPassword: z.string().trim().min(1, { message: "Char at least 1 " }),
+    password: z.string().trim().min(8, { message: "Char at least 8 " }),
+    confirmPassword: z.string().trim().min(8, { message: "Char at least 8 " }),
   })
   .refine((data) => data.confirmPassword === data.password, {
     message: "Passwords do not match",

@@ -71,9 +71,6 @@ export const FirstStep = ({ nextPage, maxStep }) => {
     transition: { duration: 0.5 },
   };
 
-  // const localStorage = JSON.parse();
-  // console.log(localStorage);
-
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-[#F4F4F4]">
       <motion.div

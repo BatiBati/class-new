@@ -19,31 +19,43 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-full flex justify-center">
-        <div className="w-[90%] h-[472px] bg-[#F8F1E7] p-[50px] flex mt-4">
-          <div className="w-[50%] h-[100%] flex justify-center items-center relative">
-            <div className="h-[90%] w-[100%] flex justify-center items-center">
-              <Star />
 
-              <Star />
-              <Star />
+      <div className="w-[100%] h-[30%] bg-[#ad7628] p-[50px] flex m-[50px] rounded-2xl">
+        <div className="w-[50%] h-[100%] flex justify-center items-center relative">
+          <div className="h-[90%] w-[100%] flex justify-center items-center">
+            <Star />
 
-              <img src="./images/phone.png" className="h-full" />
-              {/* <div>
+            <Star />
+            <Star />
+
+            <img src="./images/phone.png" className="h-full" />
+          </div>
+          {/* <div>
                 <img src="./images/icedMocha.svg" className="absolute left-0" />
               </div>
               <div>
                 <img src="./images/cupOfCoffe.png" />
               </div> */}
-            </div>
-          </div>
-          <div className="w-[50%] h-[100%] relative">
-            <div className="w-[419px]">
-              <h1 className="text-[#AA714A] text-[32px] font-bold ">
-                Үнэгүй кофе авахад илүү амар боллоо.
-              </h1>
-            </div>
-          </div>
+        </div>
+        <div className="w-[50%] h-[100%] relative bg-amber-950">
+          {/* <div className="w-fit h-[100%] flex flex-col justify-between  bg-amber-500">
+              <div>
+                <h1 className="text-[#AA714A] text-[32px] font-bold w-[329px]">
+                  Үнэгүй кофе авахад илүү амар боллоо.
+                </h1>
+                <p>
+                  <span className="font-bold w-[419px]">Coffee namu app </span>
+                  -Урамшууллын апп татаж аваад, дуртай зүйлээ хаанаас ч, хэзээ ч
+                  хамаагүй захиалаарай.
+                </p>
+              </div>
+
+              <div>
+                <button className="flex items-center gap-2 pl-0">
+                  Апп татах <RightArrow />
+                </button>
+              </div>
+            </div> */}
         </div>
       </div>
     </div>

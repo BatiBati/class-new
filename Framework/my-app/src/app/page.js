@@ -6,9 +6,11 @@ import { SecondStep } from "@/components/RegistrationForm/Steps/SecondStep";
 import { ThirdStep } from "@/components/RegistrationForm/Steps/ThirdStep";
 import { FourthStep } from "@/components/RegistrationForm/Steps/FourthStep";
 import { StepProvider } from "@/components/RegistrationForm/Steps/StepProvider";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [ready, setReady] = useState(false);
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -31,8 +33,21 @@ export default function Home() {
     setStep((prev) => prev - 1);
   };
 
-  const saveDatas = localStorage.setItem("values");
-  console.log(saveDatas);
+  useEffect(() => {
+    if (ready && values) {
+      localStorage.setItem("formValues", JSON.stringify(values));
+    }
+  }, [ready, values]);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("formValues");
+    if (savedData) {
+      setValues(JSON.parse(savedData));
+    }
+    setReady(true);
+  }, []);
+
+  if (!ready) return null;
 
   return (
     <StepProvider values={values} setValues={setValues}>

@@ -9,12 +9,12 @@ import WeatherApp from "@/components/weatherApp/WeatherApp";
 import MyTestedApps from "@/components/MyTestedApps";
 import MyWeather from "@/components/weatherApp/MyWeather";
 import { HomeContext } from "@/components/useContext/HomeContext";
-
+import { UseMemoHook } from "@/components/UseMemoHook";
 
 export default function Home() {
   return (
     <>
-      <HomeContext />
+      <UseMemoHook />
     </>
   );
 }
