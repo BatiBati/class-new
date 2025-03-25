@@ -10,8 +10,8 @@ export const TriangleIcon = () => {
       <path
         d="M1.33301 1L10.6663 7L1.33301 13V1Z"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

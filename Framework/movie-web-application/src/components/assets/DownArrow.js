@@ -10,8 +10,8 @@ export const DownArrow = () => {
       <path
         d="M1 0.5L5 4.5L9 0.5"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
