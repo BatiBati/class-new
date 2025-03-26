@@ -1,4 +1,6 @@
-export const YellowStar = ({ width, height }) => {
+type YellowStarType = { width: number; height: number };
+
+export const YellowStar = ({ width, height }: YellowStarType) => {
   return (
     <svg
       width={width}

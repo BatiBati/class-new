@@ -1,4 +1,6 @@
-export const MovieLogo = ({ stroke, width, height }) => {
+type MovieIconType = { stroke: string; width: number; height: number };
+
+export const MovieLogo = ({ stroke, width, height }: MovieIconType) => {
   return (
     <svg
       width={width}

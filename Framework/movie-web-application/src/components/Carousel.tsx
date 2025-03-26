@@ -1,8 +1,16 @@
 import { DownArrow } from "./assets/DownArrow";
 import { TriangleIcon } from "./assets/TriangleIcon";
 import { YellowStar } from "./assets/YellowStar";
+import { Button } from "./ui/button";
 
-const topMovie = [
+type CarouselItem = {
+  image: string;
+  movieName: string;
+  rate: number;
+  about: string;
+};
+
+const topMovie: CarouselItem[] = [
   {
     image: "/images/Wicked1.png",
     movieName: "Wicked",
@@ -48,41 +56,64 @@ export const Carousel = () => {
                   </span>
                 </div>
                 <div className="text-[12px] w-[70%]">{item.about}</div>
-                <div className="flex gap-2 h-10 py-2 px-2 items-center bg-white w-fit rounded-2xl hover:bg-[#acacac] hover:cursor-pointer">
+                <Button className="w-fit p-2" size="icon" variant="secondary">
                   <div>
                     <TriangleIcon />
                   </div>
-                  <button className="text-black hover:text-white hover:cursor-pointer">
-                    Watch Trailer
-                  </button>
-                </div>
+                  Watch Trailer
+                </Button>
               </div>
               {index === 0 && (
-                <button className="absolute right-[44px] -rotate-90 bg-white w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#d2d2d2]">
+                <Button
+                  className="absolute right-[44px] -rotate-90 rounded-full"
+                  variant="outline"
+                  size="icon"
+                >
                   <DownArrow />
-                </button>
+                </Button>
               )}
               {index === 1 && (
                 <>
-                  <button className="absolute left-[44px] rotate-90 bg-white w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#d2d2d2]">
+                  <Button
+                    className="absolute right-[44px] -rotate-90 rounded-full"
+                    variant="outline"
+                    size="icon"
+                  >
                     <DownArrow />
-                  </button>
-                  <button className="absolute right-[44px] -rotate-90 bg-white w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#d2d2d2]">
+                  </Button>
+                  <Button
+                    className="absolute left-[44px] rotate-90 rounded-full"
+                    variant="outline"
+                    size="icon"
+                  >
                     <DownArrow />
-                  </button>
+                  </Button>
                 </>
               )}
               {index === 2 && (
-                <button className="absolute left-[44px] rotate-90 bg-white w-10 h-10 flex justify-center items-center rounded-full hover:bg-[#d2d2d2]">
+                <Button
+                  className="absolute left-[44px] rotate-90 rounded-full"
+                  variant="outline"
+                  size="icon"
+                >
                   <DownArrow />
-                </button>
+                </Button>
               )}
 
               <div className="absolute bottom-5 w-full flex justify-center">
-                <div className="flex items-center gap-2">
-                  <button className="w-2 h-2 rounded-full bg-white hover:bg-[#747474] hover:cursor-pointer"></button>
-                  <button className="w-2 h-2 rounded-full bg-white hover:bg-[#747474] hover:cursor-pointer"></button>
-                  <button className="w-2 h-2 rounded-full bg-white hover:bg-[#747474] hover:cursor-pointer"></button>
+                <div className="flex items-center   ">
+                  <Button
+                    className="w-1 h-1 rounded-full bg-white"
+                    variant="ghost"
+                  ></Button>
+                  <Button
+                    className="w-2 h-2 rounded-full bg-white"
+                    variant="ghost"
+                  ></Button>
+                  <Button
+                    className="w-2 h-2 rounded-full bg-white"
+                    variant="ghost"
+                  ></Button>
                 </div>
               </div>
             </div>
