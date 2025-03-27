@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { DownArrow } from "./assets/DownArrow";
 import { TriangleIcon } from "./assets/TriangleIcon";
 import { YellowStar } from "./assets/YellowStar";
@@ -35,9 +37,21 @@ const topMovie: CarouselItem[] = [
 ];
 
 export const Carousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleClick = (index: number) => () => {
+    setCurrentIndex(index);
+  };
+
   return (
-    <div className="w-full h-[600px] overflow-scroll">
-      <div className="w-[300%] h-full f-full flex">
+    <div className="w-full h-[600px] overflow-hidden">
+      <div
+        className="w-[300%] h-full f-full flex "
+        style={{
+          transition: "600ms",
+          transform: `translateX(calc(-${currentIndex}00%/3))`,
+        }}
+      >
         {topMovie.map((item, index) => {
           return (
             <div className="w-[100%]  relative flex items-center" key={index}>
@@ -56,7 +70,11 @@ export const Carousel = () => {
                   </span>
                 </div>
                 <div className="text-[12px] w-[70%]">{item.about}</div>
-                <Button className="w-fit p-2" size="icon" variant="secondary">
+                <Button
+                  className="w-fit p-2 hover:cursor-pointer"
+                  size="icon"
+                  variant="secondary"
+                >
                   <div>
                     <TriangleIcon />
                   </div>
@@ -65,55 +83,59 @@ export const Carousel = () => {
               </div>
               {index === 0 && (
                 <Button
-                  className="absolute right-[44px] -rotate-90 rounded-full"
+                  className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
                   variant="outline"
                   size="icon"
+                  onClick={handleClick(1)}
                 >
-                  <DownArrow />
+                  <DownArrow width={10} height={10} />
                 </Button>
               )}
               {index === 1 && (
                 <>
                   <Button
-                    className="absolute right-[44px] -rotate-90 rounded-full"
+                    className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
                     variant="outline"
                     size="icon"
+                    onClick={handleClick(2)}
                   >
-                    <DownArrow />
+                    <DownArrow width={10} height={10} />
                   </Button>
                   <Button
-                    className="absolute left-[44px] rotate-90 rounded-full"
+                    className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
                     variant="outline"
                     size="icon"
+                    onClick={handleClick(0)}
                   >
-                    <DownArrow />
+                    <DownArrow width={10} height={10} />
                   </Button>
                 </>
               )}
               {index === 2 && (
                 <Button
-                  className="absolute left-[44px] rotate-90 rounded-full"
+                  className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
                   variant="outline"
                   size="icon"
+                  onClick={handleClick(1)}
                 >
-                  <DownArrow />
+                  <DownArrow width={10} height={10} />
                 </Button>
               )}
 
-              <div className="absolute bottom-5 w-full flex justify-center">
-                <div className="flex items-center   ">
-                  <Button
-                    className="w-1 h-1 rounded-full bg-white"
-                    variant="ghost"
-                  ></Button>
-                  <Button
-                    className="w-2 h-2 rounded-full bg-white"
-                    variant="ghost"
-                  ></Button>
-                  <Button
-                    className="w-2 h-2 rounded-full bg-white"
-                    variant="ghost"
-                  ></Button>
+              <div className="absolute bottom-5 w-full flex justify-center ">
+                <div className="flex items-center  gap-2 ">
+                  <button
+                    className="w-3 h-3 rounded-full hover:bg-gray-300 bg-white hover:cursor-pointer"
+                    onClick={handleClick(0)}
+                  ></button>
+                  <button
+                    className="w-3 h-3 rounded-full hover:bg-gray-300  bg-white hover:cursor-pointer"
+                    onClick={handleClick(1)}
+                  ></button>
+                  <button
+                    className="w-3 h-3 rounded-full hover:bg-gray-300  bg-white hover:cursor-pointer"
+                    onClick={handleClick(2)}
+                  ></button>
                 </div>
               </div>
             </div>
