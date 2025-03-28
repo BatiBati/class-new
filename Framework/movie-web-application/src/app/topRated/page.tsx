@@ -1,12 +1,12 @@
 "use client";
-import { UpCominMovies } from "@/components/UpcomingMovies";
+import { TopRatedMovies } from "@/components/TopRatedMovies";
 
-export default function Upcoming() {
+export default function TopRated() {
   return (
     <>
       <div className="flex flex-col w-full items-center ">
         <div className="w-fit h-full flex flex-col p-8">
-          <UpCominMovies />
+          <TopRatedMovies />
         </div>
       </div>
     </>

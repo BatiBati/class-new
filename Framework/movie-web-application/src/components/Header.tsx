@@ -5,15 +5,24 @@ import { DownArrow } from "./assets/DownArrow";
 import { MovieLogo } from "./assets/MovieLogo";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
-export const Header = () => {
+type JumpToHomePage = {
+  href: string;
+  isDark: boolean;
+  setIsDark: (value: boolean) => void;
+};
+
+export const Header = ({ href, setIsDark, isDark }: JumpToHomePage) => {
   return (
-    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0">
+    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 dark:bg-black">
       <div className=" flex  justify-between w-[1280px] h-9">
-        <div className="flex items-center gap-2 ">
-          <MovieLogo stroke={"#4338CA"} width={20} height={20} />
-          <span className="text-[#4338CA] font-bold ">Movie Z</span>
-        </div>
+        <Link href={href}>
+          <div className="flex items-center gap-2 ">
+            <MovieLogo stroke={"#4338CA"} width={20} height={20} />
+            <span className="text-[#4338CA] font-bold ">Movie Z</span>
+          </div>
+        </Link>
         <div className="flex gap-4 h-full ">
           <Button
             size="icon"
@@ -35,7 +44,14 @@ export const Header = () => {
             />
           </div>
         </div>
-        <Button size="icon" variant="outline">
+        <Button
+          size="icon"
+          variant="outline"
+          className="hover:cursor-pointer"
+          onClick={() => {
+            setIsDark(!isDark);
+          }}
+        >
           <MoonIcon />
         </Button>
       </div>

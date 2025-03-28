@@ -1,3 +1,4 @@
+"use client";
 import { MailSvg } from "./assets/MailSvg";
 import { MovieLogo } from "./assets/MovieLogo";
 import { Phone } from "./assets/Phone";
