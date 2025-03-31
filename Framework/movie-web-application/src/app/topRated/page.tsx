@@ -1,5 +1,5 @@
 "use client";
-import { TopRatedMovies } from "@/components/TopRatedMovies";
+import { TopRatedMovies } from "@/app/topRated/_components/TopRatedMovies";
 
 export default function TopRated() {
   return (

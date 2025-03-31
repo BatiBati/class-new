@@ -1,5 +1,5 @@
 "use client";
-import { Card } from "./Card";
+import { Card } from "../../_components/Card";
 
 type TopRatedMovieItem = {
   imageUrl: string;

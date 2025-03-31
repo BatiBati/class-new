@@ -3,19 +3,22 @@
 import { MoonIcon, SearchIcon } from "lucide-react";
 import { DownArrow } from "./assets/DownArrow";
 import { MovieLogo } from "./assets/MovieLogo";
-import { Button } from "./ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "./assets/ui/button";
+import { Input } from "@/app/_components/assets/ui/input";
 import Link from "next/link";
+import { useContext } from "react";
+import { IsDarkContext } from "./Provider";
 
 type JumpToHomePage = {
   href: string;
-  isDark: boolean;
-  setIsDark: (value: boolean) => void;
 };
 
-export const Header = ({ href, setIsDark, isDark }: JumpToHomePage) => {
+export const Header = ({ href }: JumpToHomePage) => {
+  const { isDark } = useContext(IsDarkContext);
+  const { setIsDark } = useContext(IsDarkContext);
+
   return (
-    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 dark:bg-black">
+    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
       <div className=" flex  justify-between w-[1280px] h-9">
         <Link href={href}>
           <div className="flex items-center gap-2 ">

@@ -1,5 +1,5 @@
 "use client";
-import { PopularMovies } from "@/components/PopularMovies";
+import { PopularMovies } from "@/app/popular/_components/PopularMovies";
 
 export default function Popular() {
   return (

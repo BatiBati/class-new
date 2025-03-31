@@ -2,8 +2,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PropsWithChildren, useEffect, useState } from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Header } from "@/app/_components/Header";
+import { Footer } from "@/app/_components/Footer";
+import { IsDarkProvider } from "@/app/_components/Provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,7 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const [isDark, setIsDark] = useState(localStorage.getItem("theme") === "1");
+  console.log(isDark);
 
   useEffect(() => {
     localStorage.setItem("theme", isDark ? "1" : "0");
@@ -29,11 +31,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
           isDark ? "dark" : ""
         }`}
       >
-        <Header href={"/"} setIsDark={setIsDark} isDark={isDark} />
-        {children}
-        <div className="w-full flex justify-center">
-          <Footer />
-        </div>
+        <IsDarkProvider isDark={isDark} setIsDark={setIsDark}>
+          <Header href={"/"} />
+          {children}
+          <div className="w-full flex justify-center">
+            <Footer />
+          </div>
+        </IsDarkProvider>
       </body>
     </html>
   );

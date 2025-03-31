@@ -1,5 +1,5 @@
 "use client";
-import { UpCominMovies } from "@/components/UpcomingMovies";
+import { UpCominMovies } from "@/app/upComing/_components/UpcomingMovies";
 
 export default function Upcoming() {
   return (

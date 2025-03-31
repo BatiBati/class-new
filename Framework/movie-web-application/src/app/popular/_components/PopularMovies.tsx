@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "./Card";
+import { Card } from "../../_components/Card";
 
 export type PopularMovieItem = {
   imageUrl: string;

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { RightArrow } from "./assets/RightArrow";
+import { RightArrow } from "@/app/_components/assets/RightArrow";
 
 type Href = {
   href: string;

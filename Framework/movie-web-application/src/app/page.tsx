@@ -1,9 +1,9 @@
 "use client";
-import { Carousel } from "@/components/Carousel";
-import { TopRatedMovies } from "@/components/TopRatedMovies";
-import { UpCominMovies } from "@/components/UpcomingMovies";
-import { SeeMore } from "@/components/SeeMore";
-import { PopularMovies } from "@/components/PopularMovies";
+import { Carousel } from "@/app/_components/Carousel";
+import { TopRatedMovies } from "@/app/topRated/_components/TopRatedMovies";
+import { UpCominMovies } from "@/app/upComing/_components/UpcomingMovies";
+import { SeeMore } from "@/app/_components/SeeMore";
+import { PopularMovies } from "@/app/popular/_components/PopularMovies";
 
 export default function Home() {
   return (

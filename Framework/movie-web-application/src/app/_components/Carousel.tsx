@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DownArrow } from "./assets/DownArrow";
 import { TriangleIcon } from "./assets/TriangleIcon";
 import { YellowStar } from "./assets/YellowStar";
-import { Button } from "./ui/button";
+import { Button } from "./assets/ui/button";
 
 type CarouselItem = {
   image: string;
