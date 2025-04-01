@@ -1,76 +1,41 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Card } from "../../_components/Card";
-
-type TopRatedMovieItem = {
-  imageUrl: string;
-  rate: number;
-  movieName: string;
-};
-
-const topRated: TopRatedMovieItem[] = [
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-  {
-    imageUrl: "/images/LordOfRing.png",
-    rate: 6.9,
-    movieName: "The Lord of the Rings: Fellowship of the Kings",
-  },
-];
-
+import { Movie, Response } from "@/app/upComing/_components/UpcomingMovies";
+import axios from "axios";
+const ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MGYzNDNlZmMwYjgyOTVmMDY3YTBmNDUxYzI2MDAxZSIsIm5iZiI6MTc0MzQwOTc1OC4yMjQsInN1YiI6IjY3ZWE1MjVlNzAwYTZhOTRjNmU1N2VkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bolznFYz55SDoyGnhn3fUZXtdVzZaDyl-l4SzvzDwLc"
 export const TopRatedMovies = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  useEffect(() => {
+    const getMoviesByAxios = async () => {
+      const { data } = await axios.get<Response>(
+        "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setMovies(data.results);
+    };
+    getMoviesByAxios();
+  }, []);
+
+  console.log(movies);
+
+
   return (
     <div className="p-20 pt-10 pb-10 flex flex- col gap-8 ">
       <div className="grid grid-cols-5 grid-rows-2 gap-8 ">
-        {topRated.map((item, index) => {
+        {movies.slice(0, 10).map((movie) => {
           return (
-            <div key={index}>
+            <div key={movie.id}>
               <Card
-                imageUrl={item.imageUrl}
-                rate={item.rate}
-                movieName={item.movieName}
+                imageUrl={movie.poster_path}
+                rate={movie.vote_average}
+                movieName={movie.title}
               />
             </div>
           );
