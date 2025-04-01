@@ -6,8 +6,10 @@ import { MovieLogo } from "./assets/MovieLogo";
 import { Button } from "./assets/ui/button";
 import { Input } from "@/app/_components/assets/ui/input";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IsDarkContext } from "./Provider";
+import axios from "axios";
+import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMovies";
 
 type JumpToHomePage = {
   href: string;
@@ -16,6 +18,24 @@ type JumpToHomePage = {
 export const Header = ({ href }: JumpToHomePage) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
+  const [genre, setGenre] = useState();
+
+  useEffect(() => {
+    const getMoviesGenre = async () => {
+      const { data } = await axios.get(
+        "https://api.themoviedb.org/3/genre/movie/list?language=en",
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setGenre(data);
+    };
+    getMoviesGenre();
+  }, []);
+
+  console.log(genre);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
@@ -30,11 +50,12 @@ export const Header = ({ href }: JumpToHomePage) => {
           <Button
             size="icon"
             variant="outline"
-            className="w-fit p-4 flex items-center"
+            className="w-fit p-4 flex items-center cursor-pointer"
           >
             <DownArrow width={8} height={4} />
             Genre
           </Button>
+
           <div className="flex items-center relative w-[500px] p-3">
             <div className="p-1">
               <SearchIcon width={20} height={20} />

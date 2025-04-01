@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const [isDark, setIsDark] = useState(localStorage.getItem("theme") === "1");
-  console.log(isDark);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("theme", isDark ? "1" : "0");
@@ -31,7 +31,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
           isDark ? "dark" : ""
         }`}
       >
-        <IsDarkProvider isDark={isDark} setIsDark={setIsDark}>
+        <IsDarkProvider
+          isDark={isDark}
+          setIsDark={setIsDark}
+          loading={loading}
+          setLoading={setLoading}
+        >
           <Header href={"/"} />
           {children}
           <div className="w-full flex justify-center">
