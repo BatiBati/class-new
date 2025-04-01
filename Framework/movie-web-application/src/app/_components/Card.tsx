@@ -23,7 +23,7 @@ export const Card = ({ rate, imageUrl, movieName }: CardType) => {
             <span className="text-[12px] text-[#9e9e9e] ">/10</span>
           </span>
         </div>
-        <h5>{movieName}</h5>
+        <h5 className="h-6 overflow-hidden">{movieName}</h5>
       </div>
     </div>
   );
