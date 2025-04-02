@@ -8,7 +8,7 @@ import {
   ACCESS_TOKEN,
   Movie,
   Response,
-} from "../upComing/_components/UpcomingMovies";
+} from "../upComing/_components/UpcomingMoviesAll";
 import axios from "axios";
 import { IsDarkContext } from "./Provider";
 import { Skeleton } from "./assets/ui/skeleton";
@@ -55,7 +55,7 @@ export const Carousel = () => {
           {movies.slice(2, 7).map((movie, index) => {
             return (
               <div
-                className="w-[100%]  relative flex items-center"
+                className="w-[100%]  relative flex items-center rounded-md overflow-hidden"
                 key={movie.id}
               >
                 <img

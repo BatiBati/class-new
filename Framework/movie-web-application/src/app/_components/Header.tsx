@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { IsDarkContext } from "./Provider";
 import axios from "axios";
-import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMovies";
+import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMoviesAll";
 
 type JumpToHomePage = {
   href: string;
@@ -34,8 +34,6 @@ export const Header = ({ href }: JumpToHomePage) => {
     };
     getMoviesGenre();
   }, []);
-
-  console.log(genre);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">

@@ -1,9 +1,11 @@
 "use client";
 import { Carousel } from "@/app/_components/Carousel";
-import { TopRatedMovies } from "@/app/topRated/_components/TopRatedMovies";
-import { UpCominMovies } from "@/app/upComing/_components/UpcomingMovies";
+
 import { SeeMore } from "@/app/_components/SeeMore";
-import { PopularMovies } from "@/app/popular/_components/PopularMovies";
+
+import { UpCominMovies } from "./_components/UpcomingMovies";
+import { PopularMovies } from "./_components/PopularMovies";
+import { TopRatedMovies } from "./_components/TopRatedMovies";
 
 export default function Home() {
   return (
