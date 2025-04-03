@@ -1,7 +1,6 @@
 "use client";
 
 import { MoonIcon, SearchIcon } from "lucide-react";
-import { DownArrow } from "./assets/DownArrow";
 import { MovieLogo } from "./assets/MovieLogo";
 import { Button } from "./assets/ui/button";
 import { Input } from "@/app/_components/assets/ui/input";
@@ -10,19 +9,33 @@ import { useContext, useEffect, useState } from "react";
 import { IsDarkContext } from "./Provider";
 import axios from "axios";
 import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMoviesAll";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { RightArrow } from "./assets/RightArrow";
 
 type JumpToHomePage = {
   href: string;
+};
+type MovieGenres = {
+  genres: GenresFromData[];
+};
+
+export type GenresFromData = {
+  id: number;
+  name: string;
 };
 
 export const Header = ({ href }: JumpToHomePage) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
-  const [genre, setGenre] = useState();
+  const [genre, setGenre] = useState<GenresFromData[]>([]);
 
   useEffect(() => {
     const getMoviesGenre = async () => {
-      const { data } = await axios.get(
+      const { data } = await axios.get<MovieGenres>(
         "https://api.themoviedb.org/3/genre/movie/list?language=en",
         {
           headers: {
@@ -30,7 +43,7 @@ export const Header = ({ href }: JumpToHomePage) => {
           },
         }
       );
-      setGenre(data);
+      setGenre(data.genres);
     };
     getMoviesGenre();
   }, []);
@@ -44,15 +57,49 @@ export const Header = ({ href }: JumpToHomePage) => {
             <span className="text-[#4338CA] font-bold ">Movie Z</span>
           </div>
         </Link>
-        <div className="flex gap-4 h-full ">
-          <Button
-            size="icon"
-            variant="outline"
-            className="w-fit p-4 flex items-center cursor-pointer"
-          >
-            <DownArrow width={8} height={4} />
-            Genre
-          </Button>
+        <div className="flex gap-4 h-full">
+          <div className="flex flex-col gap-3 ">
+            <Popover>
+              <div>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="cursor-pointer">
+                    <div className="rotate-90">
+                      <RightArrow />
+                    </div>
+                    Genre
+                  </Button>
+                </PopoverTrigger>
+                <div className="w-fit h-fit">
+                  <PopoverContent className="w-fit ">
+                    <div className="grid gap-4">
+                      <div className="space-y-2">
+                        <h4 className="font-medium leading-none">Genres</h4>
+                        <p className="text-sm text-muted-foreground">
+                          See lists of movies by genre
+                        </p>
+                      </div>
+                      <div className="border-[1px] border-solid"></div>
+                      <div className="grid grid-cols-5 gap-3 ">
+                        {genre.map((item) => {
+                          return (
+                            <Link>
+                              <button
+                                key={item.id}
+                                className=" flex w-fit border-[1px] rounded-2xl p-2 py-0 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
+                              >
+                                {item.name}
+                                <RightArrow />
+                              </button>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </div>
+              </div>
+            </Popover>
+          </div>
 
           <div className="flex items-center relative w-[500px] p-3">
             <div className="p-1">

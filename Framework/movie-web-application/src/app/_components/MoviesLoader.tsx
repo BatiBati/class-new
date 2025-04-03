@@ -8,7 +8,7 @@ const skeletonNumber = [
 export const MoviesLoader = () => {
   return (
     <>
-      {skeletonNumber.map((_, index) => {
+      {skeletonNumber.slice(0, 10).map((_, index) => {
         return (
           <div key={index}>
             <Skeleton className="w-[230px] h-[345px] bg-[#e4e4e5] rounded-2xl overflow-hidden" />
