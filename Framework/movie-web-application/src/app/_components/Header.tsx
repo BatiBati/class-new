@@ -23,7 +23,7 @@ type MovieGenres = {
   genres: GenresFromData[];
 };
 
-export type GenresFromData = {
+type GenresFromData = {
   id: number;
   name: string;
 };
@@ -82,7 +82,7 @@ export const Header = ({ href }: JumpToHomePage) => {
                       <div className="grid grid-cols-5 gap-3 ">
                         {genre.map((item) => {
                           return (
-                            <Link>
+                            <Link href={"/MovieGenrePage"}>
                               <button
                                 key={item.id}
                                 className=" flex w-fit border-[1px] rounded-2xl p-2 py-0 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"

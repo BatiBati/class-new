@@ -27,9 +27,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${
-          isDark ? "dark" : ""
-        }`}
+        className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""
+          }`}
       >
         <IsDarkProvider
           isDark={isDark}
