@@ -17,8 +17,15 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  const [isDark, setIsDark] = useState(localStorage.getItem("theme") === "1");
+  const [isDark, setIsDark] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme == "0") {
+      setIsDark(false);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("theme", isDark ? "1" : "0");
@@ -27,8 +34,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""
-          }`}
+        className={`${geistSans.variable} ${geistMono.variable} ${
+          isDark ? "dark" : ""
+        }`}
       >
         <IsDarkProvider
           isDark={isDark}
