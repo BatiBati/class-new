@@ -15,11 +15,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { RightArrow } from "./assets/RightArrow";
+import { Arrow } from "../MovieGenrePage/assets/Arrow";
+import { useSearchParams } from "next/navigation";
 
 type JumpToHomePage = {
   href: string;
 };
-type MovieGenres = {
+export type MovieGenres = {
   genres: GenresFromData[];
 };
 
@@ -32,6 +34,8 @@ export const Header = ({ href }: JumpToHomePage) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
   const [genre, setGenre] = useState<GenresFromData[]>([]);
+  const searchParam = useSearchParams();
+  const genreID = searchParam.get("genre") || 0;
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -86,9 +90,23 @@ export const Header = ({ href }: JumpToHomePage) => {
                               href={`/MovieGenrePage?genre=${item.id}`}
                               key={item.id}
                             >
-                              <button className=" flex w-fit border-[1px] rounded-2xl p-2 py-0 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]">
+                              <button
+                                className="flex w-fit border-[1px] rounded-2xl p-2 py-0 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
+                                style={
+                                  genreID == item.id
+                                    ? {
+                                        backgroundColor: "black",
+                                        color: "white",
+                                      }
+                                    : {}
+                                }
+                              >
                                 {item.name}
-                                <RightArrow />
+                                {genre ? (
+                                  <Arrow color={"white"} />
+                                ) : (
+                                  <Arrow color={"black"} />
+                                )}
                               </button>
                             </Link>
                           );

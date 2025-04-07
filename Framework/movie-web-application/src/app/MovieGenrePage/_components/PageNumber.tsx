@@ -13,8 +13,8 @@ import {
 type Pages = {
   page: number;
   setPage: (page: number) => void;
-  lastPage: number
-}
+  lastPage: number;
+};
 
 export const PageNumber = ({ page, setPage, lastPage }: Pages) => {
   const selectedPageNumber = [page - 1, page, page + 1].filter(
@@ -76,13 +76,11 @@ export const PageNumber = ({ page, setPage, lastPage }: Pages) => {
                 {item}
               </PaginationLink>
             </PaginationItem>
-
           );
-        })
-        }
+        })}
         {page !== lastPage &&
-          page + 1 !== lastPage - 1 &&
-          page !== lastPage - 1 ? (
+        page + 1 !== lastPage - 1 &&
+        page !== lastPage - 1 ? (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>

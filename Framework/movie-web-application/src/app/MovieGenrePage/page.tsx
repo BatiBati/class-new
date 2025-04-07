@@ -3,10 +3,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ACCESS_TOKEN } from "../_components/UpcomingMovies";
-import { RightArrow } from "../_components/assets/RightArrow";
 import { useSearchParams } from "next/navigation";
 import { PageNumber } from "./_components/PageNumber";
 import { GenreCard } from "./_components/GenreCard";
+import Link from "next/link";
+import { Arrow } from "@/app/MovieGenrePage/assets/Arrow";
 
 type MovieGenres = {
   genres: GenresFromData[];
@@ -34,18 +35,14 @@ type GenreMovies = {
   results_name: string;
 };
 
-
-
-export default function MovieGenrePage() {
-
+export default function MovieGenrePage({}) {
   const [genres, setGenres] = useState<GenresFromData[]>([]);
   const [genreMovies, setGenreMovies] = useState<GenreMovies[]>([]);
   const searchParam = useSearchParams();
-  const genreID = searchParam.get("genre");
+  const genreID = searchParam.get("genre") || 0;
   const [totalTitles, setTotalTitles] = useState(1);
   const [page, setPage] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(0);
-  const [genreNames, setGenreNames] = useState<string>("16");
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -56,8 +53,7 @@ export default function MovieGenrePage() {
       setGenres(data.genres);
     };
     getMoviesGenre();
-  }, [genreID]);
-  console.log(genreID);
+  }, []);
 
   useEffect(() => {
     const chosenGenreMovie = async () => {
@@ -74,11 +70,8 @@ export default function MovieGenrePage() {
       setGenreMovies(data.results);
     };
     chosenGenreMovie();
-  }, [page]);
-
-  const handleChooseGenre = (genreNames: string, genresId: number) => {
-    setGenreNames(genreNames)
-  }
+  }, [genreID, page]);
+  console.log(genres);
 
   return (
     <div className="flex justify-center">
@@ -93,37 +86,52 @@ export default function MovieGenrePage() {
             <div className="flex flex-wrap pl-0 w-[400px] gap-x-1.5">
               {genres.map((item) => {
                 return (
-                  <div className="flex w-fit h-fit p-1.5" key={item.id}>
-                    <button
-                      key={item.id}
-                      className="flex  w-fit border-[1px] rounded-2xl p-2 py-1 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
-                      onClick={(() => { handleChooseGenre(item.name, item.id) })}
-                    >
-                      {item.name}
-                      <RightArrow />
-                    </button>
-                  </div>
+                  <Link href={`/MovieGenrePage?genre=${item.id}`} key={item.id}>
+                    <div className="flex w-fit h-fit p-1.5 ">
+                      <button
+                        key={item.id}
+                        className="flex  w-fit border-[1px] rounded-2xl p-2 py-1 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
+                        style={
+                          genreID == item.id
+                            ? { backgroundColor: "black", color: "white" }
+                            : {}
+                        }
+                      >
+                        {item.name}
+                        {genreID == item.id ? (
+                          <Arrow color={"white"} />
+                        ) : (
+                          <Arrow color={"black"} />
+                        )}
+                      </button>
+                    </div>
+                  </Link>
                 );
               })}
             </div>
           </div>
           <div className="w-[80%] h-fit text-2xl font-semibold flex flex-col gap-y-6 border-l-2 pl-4">
             <div>
-              <div>
+              <div className="flex gap-1">
                 {totalTitles} titles in
-                <span className="text-red-600" > {genreNames}  </span>
-                genre
+                {genres
+                  .filter((item) => item.id == genreID)
+                  .map((el, index) => {
+                    return <div key={index}>"{el.name}"</div>;
+                  })}
               </div>
               <div className="grid grid-cols-4 gap-3 w-full">
                 {genreMovies.map((item) => {
                   return (
-                    <div className=" h-fit" key={item.id}>
-                      <GenreCard
-                        imageUrl={item.poster_path}
-                        rate={item.vote_average}
-                        movieName={item.title}
-                      />
-                    </div>
+                    <Link href={`/selectedMoviePage/${item.id}`} key={item.id}>
+                      <div className=" h-fit" key={item.id}>
+                        <GenreCard
+                          imageUrl={item.poster_path}
+                          rate={item.vote_average}
+                          movieName={item.title}
+                        />
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
