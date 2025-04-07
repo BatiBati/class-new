@@ -146,8 +146,8 @@ export const UpCominMoviesAll = () => {
             );
           })}
           {page !== lastPage &&
-          page + 1 !== lastPage - 1 &&
-          page !== lastPage - 1 ? (
+            page + 1 !== lastPage - 1 &&
+            page !== lastPage - 1 ? (
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>

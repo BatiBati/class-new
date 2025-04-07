@@ -10,7 +10,7 @@ type CardType = {
 
 export const GenreCard = ({ rate, imageUrl, movieName }: CardType) => {
   return (
-    <div className=" h-[330px] bg-[#e5e5e5] rounded-2xl overflow-hidden ">
+    <div className=" h-[330px] bg-[#e5e5e5] rounded-2xl overflow-hidden cursor-pointer">
       <img
         src={`https://image.tmdb.org/t/p/original${imageUrl}`}
         className="h-[80%] w-full"
