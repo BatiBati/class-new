@@ -45,7 +45,7 @@ export default function MovieGenrePage() {
   const [totalTitles, setTotalTitles] = useState(1);
   const [page, setPage] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(0);
-  const [genreNames, setGenreNames] = useState(12);
+  const [genreNames, setGenreNames] = useState<string>("16");
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -53,17 +53,11 @@ export default function MovieGenrePage() {
         "https://api.themoviedb.org/3/genre/movie/list?language=en",
         { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } }
       );
-
       setGenres(data.genres);
-
-
-
     };
-
     getMoviesGenre();
   }, [genreID]);
-
-
+  console.log(genreID);
 
   useEffect(() => {
     const chosenGenreMovie = async () => {
@@ -78,20 +72,13 @@ export default function MovieGenrePage() {
       setLastPage(data.total_pages);
       setTotalTitles(data.total_results);
       setGenreMovies(data.results);
-
-
-
     };
     chosenGenreMovie();
   }, [page]);
 
-  const handleChooseGenre = () => {
-    const name = genres.filter((item) => { item.name });
-    setGenreNames(name)
+  const handleChooseGenre = (genreNames: string, genresId: number) => {
+    setGenreNames(genreNames)
   }
-
-
-
 
   return (
     <div className="flex justify-center">
@@ -110,7 +97,7 @@ export default function MovieGenrePage() {
                     <button
                       key={item.id}
                       className="flex  w-fit border-[1px] rounded-2xl p-2 py-1 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
-                      onClick={(() => { handleChooseGenre() })}
+                      onClick={(() => { handleChooseGenre(item.name, item.id) })}
                     >
                       {item.name}
                       <RightArrow />
@@ -123,15 +110,9 @@ export default function MovieGenrePage() {
           <div className="w-[80%] h-fit text-2xl font-semibold flex flex-col gap-y-6 border-l-2 pl-4">
             <div>
               <div>
-                {totalTitles} titles in "
-
-
-                <span className="text-red-600" > sss </span>
-
-
-
-
-
+                {totalTitles} titles in
+                <span className="text-red-600" > {genreNames}  </span>
+                genre
               </div>
               <div className="grid grid-cols-4 gap-3 w-full">
                 {genreMovies.map((item) => {
