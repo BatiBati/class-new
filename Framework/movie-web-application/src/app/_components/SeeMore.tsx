@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { RightArrow } from "@/app/_components/assets/RightArrow";
+import { Button } from "./assets/ui/button";
 
 type Href = {
   href: string;
@@ -12,10 +13,10 @@ export const SeeMore = ({ href, movieGenre }: Href) => {
     <div className="flex justify-between">
       <p className="text-2xl font-semibold">{movieGenre}</p>
       <Link href={href}>
-        <button className="flex gap-2 items-center hover:cursor-pointer">
+        <Button className="flex gap-2 items-center hover:cursor-pointer">
           See more
           <RightArrow />
-        </button>
+        </Button>
       </Link>
     </div>
   );

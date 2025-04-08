@@ -32,15 +32,23 @@ type MovieDetails = {
   genres: GenresType[];
 };
 
+type Response = {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+};
+type Cast = {};
+type Crew = {};
+
 export default function SelectedMoviePage() {
   const { id } = useParams<Params>();
   const [movie, setMovie] = useState<MovieDetails | null>(null);
-  const [crew, setCrew] = useState();
-  const [cast, setCast] = useState();
+  const [crew, setCrew] = useState<Crew[]>();
+  const [cast, setCast] = useState<Cast[]>();
 
   useEffect(() => {
     const getMovie = async () => {
-      const { data } = await axios.get(
+      const { data } = await axios.get<MovieDetails>(
         `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
         {
           headers: {
@@ -52,7 +60,7 @@ export default function SelectedMoviePage() {
     };
 
     const getNames = async () => {
-      const { data } = await axios.get(
+      const { data } = await axios.get<Response>(
         `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
         {
           headers: {
@@ -60,26 +68,16 @@ export default function SelectedMoviePage() {
           },
         }
       );
+      setCrew(data);
+      // setCast(data);
       console.log(data);
     };
-
     getMovie();
     getNames();
   }, [id]);
+  console.log("CREW", crew);
 
-  useEffect(() => {
-    const getSimilarMovies = async () => {
-      const { data } = await axios.get(
-        `https://image.tmdb.org/t/p/movie/${id}/similar?language=en-US&page=1`,
-        {
-          headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
-        }
-      );
-      console.log(data);
-    };
-  }, []);
+  console.log("CAST", cast);
 
   return (
     <div className="py-16 w-full flex justify-center">
@@ -175,11 +173,12 @@ export default function SelectedMoviePage() {
           </div>
         </div>
 
-        <div className="w-full bg-amber-300">
-          <div className="flex justify-between bg-amber-100">
-            <div className="bg-amber-400 text-2xl font-semibold">More like this</div>
-            <Button className="bg-amber-400 text-[14px] font-medium">See more <SeeMore href="" /></Button>
+        <div className="w-full">
+          <div className="flex justify-between">
+            <div className=" text-2xl font-semibold">More like this</div>
+            <SeeMore href="/moreLikeThis" movieGenre="" />
           </div>
+          {/* <div className="w-full">{crew?.map(() => {})}</div> */}
         </div>
       </div>
     </div>
