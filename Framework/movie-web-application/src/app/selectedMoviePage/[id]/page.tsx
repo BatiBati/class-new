@@ -7,6 +7,7 @@ import { Triangle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { SeeMore } from "@/app/_components/SeeMore";
 
 type Params = {
   id: string;
@@ -135,7 +136,7 @@ export default function SelectedMoviePage() {
                   </Button>
                 </div>
                 <div className="text-[16px] text-white w-fit">
-                  Play trailer{" "}
+                  Play trailer
                   <span className="text-red-500">Trailer run time</span>
                 </div>
               </div>
@@ -176,12 +177,11 @@ export default function SelectedMoviePage() {
 
         <div className="w-full bg-amber-300">
           <div className="flex justify-between bg-amber-100">
-            <div className="bg-amber-400">ss</div>
-            <div className="bg-amber-400">ss</div>
+            <div className="bg-amber-400 text-2xl font-semibold">More like this</div>
+            <Button className="bg-amber-400 text-[14px] font-medium">See more <SeeMore href="" /></Button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-// https://image.tmdb.org/t/p/movie/${id}/similar?language=en-US&page=1

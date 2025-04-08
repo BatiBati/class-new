@@ -35,7 +35,7 @@ type GenreMovies = {
   results_name: string;
 };
 
-export default function MovieGenrePage({}) {
+export default function MovieGenrePage({ }) {
   const [genres, setGenres] = useState<GenresFromData[]>([]);
   const [genreMovies, setGenreMovies] = useState<GenreMovies[]>([]);
   const searchParam = useSearchParams();
