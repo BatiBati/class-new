@@ -8,6 +8,18 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { SeeMore } from "@/app/_components/SeeMore";
+import { Card } from "@/app/selectedMoviePage/_components/Card";
+import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/app/_components/assets/ui/input";
 
 type Params = {
   id: string;
@@ -33,18 +45,43 @@ type MovieDetails = {
 };
 
 type Response = {
-  id: number;
   cast: Cast[];
   crew: Crew[];
 };
-type Cast = {};
-type Crew = {};
+
+type Cast = {
+  original_name: string;
+  popularity: number;
+  name: string;
+};
+
+type Crew = {
+  job: string;
+  name: string;
+};
+
+interface Star {
+  popularity: number;
+  name: string;
+}
+type SimilarMovies = {
+  results: Similar[];
+};
+type Similar = {
+  poster_path: string;
+  vote_average: number;
+  title: string;
+  id: number;
+  rate: number;
+};
 
 export default function SelectedMoviePage() {
   const { id } = useParams<Params>();
   const [movie, setMovie] = useState<MovieDetails | null>(null);
-  const [crew, setCrew] = useState<Crew[]>();
-  const [cast, setCast] = useState<Cast[]>();
+  const [director, setDirector] = useState<string>();
+  const [writer, setWriter] = useState<string>();
+  const [stars, setStars] = useState<Star[]>([]);
+  const [similarMovie, setSimilarMovie] = useState<Similar[]>([]);
 
   useEffect(() => {
     const getMovie = async () => {
@@ -68,20 +105,43 @@ export default function SelectedMoviePage() {
           },
         }
       );
-      setCrew(data);
-      // setCast(data);
-      console.log(data);
+
+      const director = data.crew.find((item) => item.job.includes("Director"));
+      if (director) {
+        setDirector(director.name);
+      }
+
+      const writer = data.crew.find((item) => item.job.includes("Writer"));
+      if (writer) {
+        setWriter(writer.name);
+      }
+
+      const stars = data.cast.filter((item) => item.popularity > 2);
+      setStars(stars);
     };
     getMovie();
     getNames();
   }, [id]);
-  console.log("CREW", crew);
 
-  console.log("CAST", cast);
+  useEffect(() => {
+    const getSimilarMovie = async () => {
+      const { data } = await axios.get<SimilarMovies>(
+        `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setSimilarMovie(data.results);
+    };
+    getSimilarMovie();
+  }, [id]);
+  console.log(similarMovie);
 
   return (
-    <div className="py-16 w-full flex justify-center">
-      <div className="w-[1080px] gap-6 flex flex-col">
+    <div className="py-16 w-full flex justify-center ">
+      <div className="w-[1080px] gap-6 flex flex-col relative">
         <div className=" w-full">
           <div className="flex justify-between gap-6">
             <div>
@@ -127,17 +187,20 @@ export default function SelectedMoviePage() {
                 alt="PosterBig"
                 className="w-[760px] h-[428px]"
               />
-              <div className="absolute left-6 bottom-6  flex items-center gap-2">
-                <div>
-                  <Button className="bg-white w-10 h-10 rounded-full rotate-90 cursor-pointer ">
-                    <Triangle />
-                  </Button>
-                </div>
-                <div className="text-[16px] text-white w-fit">
-                  Play trailer
-                  <span className="text-red-500">Trailer run time</span>
-                </div>
-              </div>
+              {/* <div className="absolute left-6 bottom-6 flex items-center gap-2"> */}
+
+              <Dialog>
+                <DialogTrigger asChild className="absolute left-2 bottom-2">
+                  <Button variant="outline">Edit Profile</Button>
+                </DialogTrigger>
+                <DialogContent className="w-[997px] h-[561px]">
+                  <DialogHeader>
+                    <DialogTitle></DialogTitle>
+                  </DialogHeader>
+
+                  <DialogFooter></DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
@@ -161,24 +224,47 @@ export default function SelectedMoviePage() {
         <div className="flex flex-col gap-5 w-full">
           <div className="flex gap-2 w-full border-b-[1px] border-gray pb-2">
             <div className="w-[100px]  text-[16px] font-bold">Director</div>
-            <div>Director name</div>
+            <div>{director}</div>
           </div>
           <div className="flex gap-2 w-full border-b-[1px] border-gray pb-2">
             <div className="w-[100px]  text-[16px] font-bold">Writers</div>
-            <div>Writers name</div>
+            <div>{writer}</div>
           </div>
           <div className="flex gap-2 w-full border-b-[1px] border-gray pb-2">
             <div className="w-[100px]  text-[16px] font-bold">Stars</div>
-            <div>Stars name</div>
+            <div>
+              {stars.map((itm, idx) => {
+                return (
+                  <span key={idx} className="px-2 pl-0">
+                    {itm.name}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-6">
           <div className="flex justify-between">
             <div className=" text-2xl font-semibold">More like this</div>
-            <SeeMore href="/moreLikeThis" movieGenre="" />
+
+            <SeeMore href={`/moreLikeThis/${id}`} movieGenre="" />
           </div>
-          {/* <div className="w-full">{crew?.map(() => {})}</div> */}
+          <div className="flex w-full justify-between">
+            {similarMovie.slice(0, 5).map((movie) => {
+              return (
+                <Link href={`/selectedMoviePage/${movie.id}`} key={movie.id}>
+                  <div className="cursor-pointer  ">
+                    <Card
+                      imageUrl={movie.poster_path}
+                      rate={movie.vote_average}
+                      movieName={movie.title}
+                    />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
