@@ -38,7 +38,14 @@ export const Carousel = () => {
   const handleClick = (index: number) => () => {
     setCurrentIndex(index);
   };
-  console.log(movies);
+  useEffect(() => {
+    setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        const newIndex = prevIndex + 1;
+        return newIndex === 5 ? 0 : newIndex;
+      });
+    }, 6000);
+  }, []);
 
   return (
     <div className="w-full h-[600px] overflow-hidden">
@@ -48,7 +55,7 @@ export const Carousel = () => {
         <div
           className="w-[500%] h-full f-full flex "
           style={{
-            transition: "900ms",
+            transition: "1000ms",
             transform: `translateX(calc(-${currentIndex}00%/5))`,
           }}
         >

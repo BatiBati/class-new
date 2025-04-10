@@ -128,9 +128,9 @@ export const UpCominMoviesAll = () => {
             </PaginationItem>
           )}
 
-          {selectedPageNumber.map((item) => {
+          {selectedPageNumber.map((item, i) => {
             return (
-              <PaginationItem className="cursor-pointer">
+              <PaginationItem className="cursor-pointer" key={i}>
                 <PaginationLink
                   onClick={() => {
                     handlePage(item);

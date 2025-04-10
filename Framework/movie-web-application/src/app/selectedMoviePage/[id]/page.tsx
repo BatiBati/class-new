@@ -82,6 +82,23 @@ export default function SelectedMoviePage() {
   const [writer, setWriter] = useState<string>();
   const [stars, setStars] = useState<Star[]>([]);
   const [similarMovie, setSimilarMovie] = useState<Similar[]>([]);
+  const [trailer, setTrailer] = useState(null);
+
+  useEffect(() => {
+    const getTrailer = async () => {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3//movie/${id}/videos?language=en-US`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setTrailer(data.results[0].key);
+      console.log(data);
+    };
+    getTrailer();
+  }, [id]);
 
   useEffect(() => {
     const getMovie = async () => {
@@ -137,7 +154,6 @@ export default function SelectedMoviePage() {
     };
     getSimilarMovie();
   }, [id]);
-  console.log(similarMovie);
 
   return (
     <div className="py-16 w-full flex justify-center ">
@@ -187,20 +203,39 @@ export default function SelectedMoviePage() {
                 alt="PosterBig"
                 className="w-[760px] h-[428px]"
               />
-              {/* <div className="absolute left-6 bottom-6 flex items-center gap-2"> */}
+              <div className="absolute left-6 bottom-6 ">
+                <Dialog>
+                  <DialogTrigger
+                    asChild
+                    className="absolute left-2 bottom-2 flex items-center gap-1 w-[130px]  "
+                  >
+                    <div>
+                      <Button variant="outline">
+                        <Triangle className="rotate-90" />
+                      </Button>
+                      <div className="text-white font-normal hover:text-black hover:underline">
+                        Play trailer
+                      </div>
+                    </div>
+                  </DialogTrigger>
 
-              <Dialog>
-                <DialogTrigger asChild className="absolute left-2 bottom-2">
-                  <Button variant="outline">Edit Profile</Button>
-                </DialogTrigger>
-                <DialogContent className="w-[997px] h-[561px]">
-                  <DialogHeader>
-                    <DialogTitle></DialogTitle>
-                  </DialogHeader>
+                  <DialogContent className="w-1 h-1 bg-transparent">
+                    <DialogHeader>
+                      <DialogTitle></DialogTitle>
+                      <iframe
+                        className="absolute left-[-450px] top-[-100px] z-40 w-[1000px] h-[500px]"
+                        width="1716"
+                        height="965"
+                        src={`https://www.youtube.com/embed/${trailer}`}
+                        title='"She&#39;s the One" – Robbie Williams Meets Nicole Appleton | Better Man | Paramount Movies'
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      ></iframe>
+                    </DialogHeader>
 
-                  <DialogFooter></DialogFooter>
-                </DialogContent>
-              </Dialog>
+                    <DialogFooter></DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           </div>
         </div>

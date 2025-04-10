@@ -14,7 +14,7 @@ import { UseMemoHook } from "@/components/UseMemoHook";
 export default function Home() {
   return (
     <>
-      <UseMemoHook />
+      <TodoList />
     </>
   );
 }
