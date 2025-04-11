@@ -24,14 +24,12 @@ import { Triangle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Params } from "next/dist/server/request/params";
 
-
 export const Carousel = () => {
   const { id } = useParams<Params>();
   const [trailer, setTrailer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { loading, setLoading } = useContext(IsDarkContext);
   const [movies, setMovies] = useState<Movie[]>([]);
-
 
   useEffect(() => {
     setLoading(true);
@@ -69,8 +67,6 @@ export const Carousel = () => {
   };
 
   console.log(id);
-
-
 
   useEffect(() => {
     setInterval(() => {

@@ -135,9 +135,9 @@ export default function MoreLikeThis() {
                 </PaginationItem>
               )}
 
-              {selectedPageNumber.map((item) => {
+              {selectedPageNumber.map((item, index) => {
                 return (
-                  <PaginationItem className="cursor-pointer">
+                  <PaginationItem className="cursor-pointer" key={index}>
                     <PaginationLink
                       onClick={() => {
                         handlePage(item);

@@ -53,7 +53,7 @@ export const Header = ({ href }: JumpToHomePage) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
+    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0">
       <div className=" flex  justify-between w-[1280px] h-9">
         <Link href={href}>
           <div className="flex items-center gap-2 ">
