@@ -1,32 +1,20 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { DownArrow } from "./assets/DownArrow";
-import { TriangleIcon } from "./assets/TriangleIcon";
-import { YellowStar } from "./assets/YellowStar";
-import { Button } from "./assets/ui/button";
+import { DownArrow } from "../assets/DownArrow";
+import { YellowStar } from "../assets/YellowStar";
+import { Button } from "../assets/ui/button";
 import {
   ACCESS_TOKEN,
   Movie,
   Response,
-} from "../upComing/_components/UpcomingMoviesAll";
+} from "../../upComing/_components/UpcomingMoviesAll";
 import axios from "axios";
-import { IsDarkContext } from "./Provider";
-import { Skeleton } from "./assets/ui/skeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Triangle } from "lucide-react";
-import { useParams } from "next/navigation";
-import { Params } from "next/dist/server/request/params";
+import { IsDarkContext } from "../Provider";
+import { Skeleton } from "../assets/ui/skeleton";
+import { GetTrailerApi } from "./_components/GetTrailerApi";
+import Link from "next/link";
 
 export const Carousel = () => {
-  const { id } = useParams<Params>();
-  const [trailer, setTrailer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { loading, setLoading } = useContext(IsDarkContext);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -44,29 +32,15 @@ export const Carousel = () => {
       );
       setMovies(data.results);
       setLoading(false);
+      console.log(data.results);
     };
 
-    const getTrailer = async () => {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3//movie/${id}/videos?language=en-US`,
-        {
-          headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
-        }
-      );
-      setTrailer(data.results[0].key);
-      console.log(data);
-    };
     getMoviesByAxios();
-    getTrailer();
   }, []);
 
   const handleClick = (index: number) => () => {
     setCurrentIndex(index);
   };
-
-  console.log(id);
 
   useEffect(() => {
     setInterval(() => {
@@ -113,35 +87,7 @@ export const Carousel = () => {
                     </span>
                   </div>
                   <div className="text-[12px] w-[70%]">{movie.overview}</div>
-                  <Dialog>
-                    <DialogTrigger
-                      asChild
-                      className="flex items-center gap-1 w-[130px]"
-                    >
-                      <div>
-                        <Button variant="outline">
-                          <Triangle className="rotate-90" />
-                          Watch Trailer
-                        </Button>
-                      </div>
-                    </DialogTrigger>
-
-                    <DialogContent className="w-1 h-1 bg-transparent">
-                      <DialogHeader>
-                        <DialogTitle></DialogTitle>
-                        <iframe
-                          className="absolute left-[-450px] top-[-100px] z-40 w-[1000px] h-[500px]"
-                          width="1716"
-                          height="965"
-                          src={`https://www.youtube.com/embed/${trailer}`}
-                          title='"She&#39;s the One" – Robbie Williams Meets Nicole Appleton | Better Man | Paramount Movies'
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        ></iframe>
-                      </DialogHeader>
-
-                      <DialogFooter></DialogFooter>
-                    </DialogContent>
-                  </Dialog>
+                  <GetTrailerApi movieId={movie.id} />
                 </div>
                 {index === 0 && (
                   <Button

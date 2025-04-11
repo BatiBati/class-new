@@ -30,7 +30,7 @@ type GenresType = {
   name: string;
 };
 
-type MovieDetails = {
+export type MovieDetails = {
   adult: boolean;
   title: string;
   id: number;
@@ -95,7 +95,6 @@ export default function SelectedMoviePage() {
         }
       );
       setTrailer(data.results[0].key);
-      console.log(data);
     };
     getTrailer();
   }, [id]);

@@ -1,5 +1,5 @@
 "use client";
-import { Carousel } from "@/app/_components/Carousel";
+import { Carousel } from "@/app/_components/Carousel/Carousel";
 
 import { SeeMore } from "@/app/_components/SeeMore";
 
