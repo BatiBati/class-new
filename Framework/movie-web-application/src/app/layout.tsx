@@ -1,7 +1,7 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, Suspense, useEffect, useState } from "react";
 import { Header } from "@/app/_components/Header";
 import { Footer } from "@/app/_components/Footer";
 import { IsDarkProvider } from "@/app/_components/Provider";
@@ -38,18 +38,20 @@ export default function RootLayout({ children }: PropsWithChildren) {
           isDark ? "dark" : ""
         }`}
       >
-        <IsDarkProvider
-          isDark={isDark}
-          setIsDark={setIsDark}
-          loading={loading}
-          setLoading={setLoading}
-        >
-          <Header href={"/"} />
-          {children}
-          <div className="w-full flex justify-center">
-            <Footer />
-          </div>
-        </IsDarkProvider>
+        <Suspense>
+          <IsDarkProvider
+            isDark={isDark}
+            setIsDark={setIsDark}
+            loading={loading}
+            setLoading={setLoading}
+          >
+            <Header href={"/"} />
+            {children}
+            <div className="w-full flex justify-center">
+              <Footer />
+            </div>
+          </IsDarkProvider>
+        </Suspense>
       </body>
     </html>
   );
