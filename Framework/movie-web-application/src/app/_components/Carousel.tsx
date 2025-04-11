@@ -12,11 +12,26 @@ import {
 import axios from "axios";
 import { IsDarkContext } from "./Provider";
 import { Skeleton } from "./assets/ui/skeleton";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Triangle } from "lucide-react";
+import { useParams } from "next/navigation";
+import { Params } from "next/dist/server/request/params";
+
 
 export const Carousel = () => {
+  const { id } = useParams<Params>();
+  const [trailer, setTrailer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { loading, setLoading } = useContext(IsDarkContext);
   const [movies, setMovies] = useState<Movie[]>([]);
+
 
   useEffect(() => {
     setLoading(true);
@@ -32,12 +47,31 @@ export const Carousel = () => {
       setMovies(data.results);
       setLoading(false);
     };
+
+    const getTrailer = async () => {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3//movie/${id}/videos?language=en-US`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setTrailer(data.results[0].key);
+      console.log(data);
+    };
     getMoviesByAxios();
+    getTrailer();
   }, []);
 
   const handleClick = (index: number) => () => {
     setCurrentIndex(index);
   };
+
+  console.log(id);
+
+
+
   useEffect(() => {
     setInterval(() => {
       setCurrentIndex((prevIndex) => {
@@ -59,10 +93,10 @@ export const Carousel = () => {
             transform: `translateX(calc(-${currentIndex}00%/5))`,
           }}
         >
-          {movies.slice(2, 7).map((movie, index) => {
+          {movies.slice(0, 5).map((movie, index) => {
             return (
               <div
-                className="w-[100%]  relative flex items-center rounded-md overflow-hidden"
+                className="w-[100%] relative flex items-center rounded-md overflow-hidden"
                 key={movie.id}
               >
                 <img
@@ -70,7 +104,7 @@ export const Carousel = () => {
                   className="w-full h-full "
                 />
 
-                <div className="w-[404px] h-[300px] p-2 absolute left-[140px] flex flex-col text-white justify-between ">
+                <div className="w-[404px] h-fit p-2 absolute left-[140px] flex flex-col gap-4 text-white justify-between">
                   Now playing:
                   <span className="text-4xl font-bold text-white">
                     {movie.title}
@@ -83,16 +117,35 @@ export const Carousel = () => {
                     </span>
                   </div>
                   <div className="text-[12px] w-[70%]">{movie.overview}</div>
-                  <Button
-                    className="w-fit p-2 hover:cursor-pointer"
-                    size="icon"
-                    variant="secondary"
-                  >
-                    <div>
-                      <TriangleIcon />
-                    </div>
-                    Watch Trailer
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger
+                      asChild
+                      className="flex items-center gap-1 w-[130px]"
+                    >
+                      <div>
+                        <Button variant="outline">
+                          <Triangle className="rotate-90" />
+                          Watch Trailer
+                        </Button>
+                      </div>
+                    </DialogTrigger>
+
+                    <DialogContent className="w-1 h-1 bg-transparent">
+                      <DialogHeader>
+                        <DialogTitle></DialogTitle>
+                        <iframe
+                          className="absolute left-[-450px] top-[-100px] z-40 w-[1000px] h-[500px]"
+                          width="1716"
+                          height="965"
+                          src={`https://www.youtube.com/embed/${trailer}`}
+                          title='"She&#39;s the One" – Robbie Williams Meets Nicole Appleton | Better Man | Paramount Movies'
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        ></iframe>
+                      </DialogHeader>
+
+                      <DialogFooter></DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 {index === 0 && (
                   <Button
