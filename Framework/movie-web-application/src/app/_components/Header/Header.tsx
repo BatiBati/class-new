@@ -37,7 +37,8 @@ export const Header = ({ href }: JumpToHomePage) => {
   const [genre, setGenre] = useState<GenresFromData[]>([]);
   const searchParam = useSearchParams();
   const genreID = searchParam.get("genre") || 0;
-  const [searchValue, setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState("");
+  const [searchedValue, setSearchedValue] = useState("");
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -54,13 +55,24 @@ export const Header = ({ href }: JumpToHomePage) => {
     getMoviesGenre();
   }, []);
 
+  useEffect(() => {
+    const getSearchMovie = async () => {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        }
+      );
+      setSearchedValue(data.results);
+    };
+    getSearchMovie();
+  }, [searchValue]);
+
   const handleEventChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
-
-  useEffect(() => { }, [])
-
-  console.log(searchValue);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0">
@@ -105,9 +117,9 @@ export const Header = ({ href }: JumpToHomePage) => {
                                 style={
                                   genreID == item.id
                                     ? {
-                                      backgroundColor: "black",
-                                      color: "white",
-                                    }
+                                        backgroundColor: "black",
+                                        color: "white",
+                                      }
                                     : {}
                                 }
                               >
@@ -141,6 +153,10 @@ export const Header = ({ href }: JumpToHomePage) => {
               onChange={handleEventChange}
             />
           </div>
+          {searchValue.length > 0 &&
+            searchValue.map((el, i) => {
+              return <div></div>;
+            })}
         </div>
         <Button
           size="icon"
