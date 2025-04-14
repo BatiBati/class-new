@@ -1,23 +1,24 @@
 "use client";
 
 import { MoonIcon, SearchIcon } from "lucide-react";
-import { MovieLogo } from "../assets/MovieLogo";
-import { Button } from "../assets/ui/button";
+import { MovieLogo } from "./assets/MovieLogo";
+import { Button } from "./assets/ui/button";
 import { Input } from "@/app/_components/assets/ui/input";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import { IsDarkContext } from "../Provider";
+import { IsDarkContext } from "./Provider";
 import axios from "axios";
-import { ACCESS_TOKEN } from "../../upComing/_components/UpcomingMoviesAll";
+import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMoviesAll";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { RightArrow } from "../assets/RightArrow";
-import { Arrow } from "../../MovieGenrePage/assets/Arrow";
+import { RightArrow } from "./assets/RightArrow";
+import { Arrow } from "../MovieGenrePage/assets/Arrow";
 import { useSearchParams } from "next/navigation";
 import { ChangeEvent } from "react";
+import { YellowStar } from "./assets/YellowStar";
 
 type JumpToHomePage = {
   href: string;
@@ -31,14 +32,32 @@ type GenresFromData = {
   name: string;
 };
 
-export const Header = ({ href }: JumpToHomePage) => {
+export type MappedSearchValueType = {
+  results: SearchValueType[];
+}
+
+export type SearchValueType = {
+  id: number;
+  original_title: string;
+  vote_average: number;
+  release_date: string;
+  poster_path: string;
+}
+
+export type JumpToSearchedPage = {
+  searchedValue: SearchValueType[];
+}
+
+type TwoTypes = JumpToHomePage & JumpToSearchedPage
+
+export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
   const [genre, setGenre] = useState<GenresFromData[]>([]);
   const searchParam = useSearchParams();
   const genreID = searchParam.get("genre") || 0;
   const [searchValue, setSearchValue] = useState("");
-  const [searchedValue, setSearchedValue] = useState("");
+  const [searchedValue, setSearchedValue] = useState<SearchValueType[]>([]);
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -57,7 +76,7 @@ export const Header = ({ href }: JumpToHomePage) => {
 
   useEffect(() => {
     const getSearchMovie = async () => {
-      const { data } = await axios.get(
+      const { data } = await axios.get<MappedSearchValueType>(
         `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=1`,
         {
           headers: {
@@ -66,6 +85,7 @@ export const Header = ({ href }: JumpToHomePage) => {
         }
       );
       setSearchedValue(data.results);
+
     };
     getSearchMovie();
   }, [searchValue]);
@@ -74,8 +94,11 @@ export const Header = ({ href }: JumpToHomePage) => {
     setSearchValue(event.target.value);
   };
 
+  console.log("das", searchedValue);
+
+
   return (
-    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0">
+    <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
       <div className=" flex  justify-between w-[1280px] h-9">
         <Link href={href}>
           <div className="flex items-center gap-2 ">
@@ -83,7 +106,7 @@ export const Header = ({ href }: JumpToHomePage) => {
             <span className="text-[#4338CA] font-bold ">Movie Z</span>
           </div>
         </Link>
-        <div className="flex gap-4 h-full">
+        <div className="flex gap-4 h-full relative">
           <div className="flex flex-col gap-3 ">
             <Popover>
               <div>
@@ -117,9 +140,9 @@ export const Header = ({ href }: JumpToHomePage) => {
                                 style={
                                   genreID == item.id
                                     ? {
-                                        backgroundColor: "black",
-                                        color: "white",
-                                      }
+                                      backgroundColor: "black",
+                                      color: "white",
+                                    }
                                     : {}
                                 }
                               >
@@ -151,12 +174,58 @@ export const Header = ({ href }: JumpToHomePage) => {
               placeholder="Search..."
               className="absolute w-full pl-7"
               onChange={handleEventChange}
+              value={MoveToSearchedValue}
             />
+
           </div>
-          {searchValue.length > 0 &&
-            searchValue.map((el, i) => {
-              return <div></div>;
-            })}
+
+
+          {searchValue.length === 0 ? "" : (<div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
+            <div className="overflow-y-auto">
+              {searchedValue.map((movie) => {
+                return (
+                  <div className="w-full h-[116px] border-b-2 flex p-2 gap-4"
+                    key={movie.id}>
+                    <div className="w-[70px] rounded-[8px] overflow-hidden bg-amber-500 ">
+                      <img className="w-[67px] h-[100px]"
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        alt={movie.original_title} />
+                    </div>
+                    <div className="w-[90%] h-full flex flex-col justify-between">
+                      <div>
+                        <span className="text-[20px] font-semibold">{movie.original_title}</span>
+                        <div className="flex items-center text-[14px] font-medium gap-0.5">
+                          <YellowStar width={16} height={16} />
+                          {movie.vote_average.toFixed(1)} <span className="text-[12px] font-normal opacity-30">/10</span>
+                        </div>
+                      </div>
+                      <div className="w-full flex justify-between">
+                        <div className="text-[14px] font-medium">
+                          {movie.release_date && movie.release_date.slice(0, 4)}
+                        </div>
+                        <div>
+                          <Link href={"/SearchedMovies"} >
+                            <Button variant={"outline"} className="cursor-pointer">
+                              See more <RightArrow />
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                )
+
+
+              })}
+
+            </div>
+            <div className="px-4 py-2 text-[14px] font-normal">See all results for "{searchValue}"
+            </div>
+          </div>)
+          }
+
+
         </div>
         <Button
           size="icon"
@@ -169,6 +238,6 @@ export const Header = ({ href }: JumpToHomePage) => {
           <MoonIcon />
         </Button>
       </div>
-    </div>
+    </div >
   );
 };
