@@ -9,11 +9,11 @@ import { GenreCard } from "./_components/GenreCard";
 import Link from "next/link";
 import { Arrow } from "@/app/MovieGenrePage/assets/Arrow";
 
-type MovieGenres = {
+export type MovieGenres = {
   genres: GenresFromData[];
 };
 
-type GenresFromData = {
+export type GenresFromData = {
   id: number;
   name: string;
 };
@@ -35,7 +35,7 @@ type GenreMovies = {
   results_name: string;
 };
 
-export default function MovieGenrePage({}) {
+export default function MovieGenrePage({ }) {
   const [genres, setGenres] = useState<GenresFromData[]>([]);
   const [genreMovies, setGenreMovies] = useState<GenreMovies[]>([]);
   const searchParam = useSearchParams();

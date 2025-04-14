@@ -1,22 +1,23 @@
 "use client";
 
 import { MoonIcon, SearchIcon } from "lucide-react";
-import { MovieLogo } from "./assets/MovieLogo";
-import { Button } from "./assets/ui/button";
+import { MovieLogo } from "../assets/MovieLogo";
+import { Button } from "../assets/ui/button";
 import { Input } from "@/app/_components/assets/ui/input";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import { IsDarkContext } from "./Provider";
+import { IsDarkContext } from "../Provider";
 import axios from "axios";
-import { ACCESS_TOKEN } from "../upComing/_components/UpcomingMoviesAll";
+import { ACCESS_TOKEN } from "../../upComing/_components/UpcomingMoviesAll";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { RightArrow } from "./assets/RightArrow";
-import { Arrow } from "../MovieGenrePage/assets/Arrow";
+import { RightArrow } from "../assets/RightArrow";
+import { Arrow } from "../../MovieGenrePage/assets/Arrow";
 import { useSearchParams } from "next/navigation";
+import { ChangeEvent } from "react";
 
 type JumpToHomePage = {
   href: string;
@@ -36,6 +37,7 @@ export const Header = ({ href }: JumpToHomePage) => {
   const [genre, setGenre] = useState<GenresFromData[]>([]);
   const searchParam = useSearchParams();
   const genreID = searchParam.get("genre") || 0;
+  const [searchValue, setSearchValue] = useState("")
 
   useEffect(() => {
     const getMoviesGenre = async () => {
@@ -51,6 +53,14 @@ export const Header = ({ href }: JumpToHomePage) => {
     };
     getMoviesGenre();
   }, []);
+
+  const handleEventChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  useEffect(() => { }, [])
+
+  console.log(searchValue);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0">
@@ -95,9 +105,9 @@ export const Header = ({ href }: JumpToHomePage) => {
                                 style={
                                   genreID == item.id
                                     ? {
-                                        backgroundColor: "black",
-                                        color: "white",
-                                      }
+                                      backgroundColor: "black",
+                                      color: "white",
+                                    }
                                     : {}
                                 }
                               >
@@ -128,6 +138,7 @@ export const Header = ({ href }: JumpToHomePage) => {
               type="search"
               placeholder="Search..."
               className="absolute w-full pl-7"
+              onChange={handleEventChange}
             />
           </div>
         </div>

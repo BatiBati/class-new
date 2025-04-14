@@ -32,7 +32,6 @@ export const Carousel = () => {
       );
       setMovies(data.results);
       setLoading(false);
-      console.log(data.results);
     };
 
     getMoviesByAxios();
@@ -120,6 +119,47 @@ export const Carousel = () => {
                   </>
                 )}
                 {index === 2 && (
+                  <>
+                    <Button
+                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                      variant="outline"
+                      size="icon"
+                      onClick={handleClick(2)}
+                    >
+                      <DownArrow width={10} height={10} />
+                    </Button>
+                    <Button
+                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                      variant="outline"
+                      size="icon"
+                      onClick={handleClick(0)}
+                    >
+                      <DownArrow width={10} height={10} />
+                    </Button>
+                  </>
+                )}
+                {index === 3 && (
+                  <>
+                    <Button
+                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                      variant="outline"
+                      size="icon"
+                      onClick={handleClick(2)}
+                    >
+                      <DownArrow width={10} height={10} />
+                    </Button>
+                    <Button
+                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                      variant="outline"
+                      size="icon"
+                      onClick={handleClick(0)}
+                    >
+                      <DownArrow width={10} height={10} />
+                    </Button>
+                  </>
+                )}
+
+                {index === 4 && (
                   <Button
                     className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
                     variant="outline"
@@ -143,6 +183,14 @@ export const Carousel = () => {
                     <button
                       className="w-3 h-3 rounded-full hover:bg-gray-300  bg-white hover:cursor-pointer"
                       onClick={handleClick(2)}
+                    ></button>
+                    <button
+                      className="w-3 h-3 rounded-full hover:bg-gray-300  bg-white hover:cursor-pointer"
+                      onClick={handleClick(3)}
+                    ></button>
+                    <button
+                      className="w-3 h-3 rounded-full hover:bg-gray-300  bg-white hover:cursor-pointer"
+                      onClick={handleClick(4)}
                     ></button>
                   </div>
                 </div>

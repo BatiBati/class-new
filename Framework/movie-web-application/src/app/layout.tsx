@@ -2,7 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PropsWithChildren, Suspense, useEffect, useState } from "react";
-import { Header } from "@/app/_components/Header";
+import { Header } from "@/app/_components/Header/Header";
 import { Footer } from "@/app/_components/Footer";
 import { IsDarkProvider } from "@/app/_components/Provider";
 

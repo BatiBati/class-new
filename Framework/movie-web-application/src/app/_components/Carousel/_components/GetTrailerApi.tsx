@@ -30,11 +30,9 @@ export const GetTrailerApi = ({ movieId }: GetTrailerMovieApiProps) => {
         }
       );
       setTrailer(data.results[0].key);
-      console.log(data);
     };
     getTrailer();
   });
-  console.log(trailer);
 
   return (
     <Dialog>
