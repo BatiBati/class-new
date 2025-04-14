@@ -87,6 +87,7 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
       setSearchedValue(data.results);
 
     };
+    
     getSearchMovie();
   }, [searchValue]);
 
