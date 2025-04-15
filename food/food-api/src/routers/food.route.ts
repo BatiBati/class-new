@@ -7,9 +7,9 @@ import { postFood } from "../controllers/food/post-food";
 const foodRouter = Router();
 
 foodRouter
-  .get("food", getFood)
-  .delete("food", deleteFood)
-  .patch("food", patchFood)
-  .post("food", postFood);
+  .get("/food", getFood)
+  .delete("/food", deleteFood)
+  .patch("/food", patchFood)
+  .post("/food", postFood);
 
 export default foodRouter;

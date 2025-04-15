@@ -1,5 +1,9 @@
 import express from "express";
 import foodRouter from "./routers/food.route";
+import { connectToDataBase } from "./database/connect-todb";
+import categoryRouter from "./routers/category.route";
+
+connectToDataBase();
 
 const app = express();
 

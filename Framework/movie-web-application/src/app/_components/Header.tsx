@@ -34,7 +34,7 @@ type GenresFromData = {
 
 export type MappedSearchValueType = {
   results: SearchValueType[];
-}
+};
 
 export type SearchValueType = {
   id: number;
@@ -42,15 +42,15 @@ export type SearchValueType = {
   vote_average: number;
   release_date: string;
   poster_path: string;
-}
+};
 
 export type JumpToSearchedPage = {
   searchedValue: SearchValueType[];
-}
+};
 
-type TwoTypes = JumpToHomePage & JumpToSearchedPage
+type TwoTypes = JumpToHomePage & JumpToSearchedPage;
 
-export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
+export const Header = ({ href }: TwoTypes) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
   const [genre, setGenre] = useState<GenresFromData[]>([]);
@@ -85,9 +85,8 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
         }
       );
       setSearchedValue(data.results);
-
     };
-    
+
     getSearchMovie();
   }, [searchValue]);
 
@@ -96,7 +95,6 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
   };
 
   console.log("das", searchedValue);
-
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
@@ -141,9 +139,9 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
                                 style={
                                   genreID == item.id
                                     ? {
-                                      backgroundColor: "black",
-                                      color: "white",
-                                    }
+                                        backgroundColor: "black",
+                                        color: "white",
+                                      }
                                     : {}
                                 }
                               >
@@ -175,58 +173,68 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
               placeholder="Search..."
               className="absolute w-full pl-7"
               onChange={handleEventChange}
-              value={MoveToSearchedValue}
             />
-
           </div>
 
-
-          {searchValue.length === 0 ? "" : (<div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
-            <div className="overflow-y-auto">
-              {searchedValue.map((movie) => {
-                return (
-                  <div className="w-full h-[116px] border-b-2 flex p-2 gap-4"
-                    key={movie.id}>
-                    <div className="w-[70px] rounded-[8px] overflow-hidden bg-amber-500 ">
-                      <img className="w-[67px] h-[100px]"
-                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                        alt={movie.original_title} />
-                    </div>
-                    <div className="w-[90%] h-full flex flex-col justify-between">
-                      <div>
-                        <span className="text-[20px] font-semibold">{movie.original_title}</span>
-                        <div className="flex items-center text-[14px] font-medium gap-0.5">
-                          <YellowStar width={16} height={16} />
-                          {movie.vote_average.toFixed(1)} <span className="text-[12px] font-normal opacity-30">/10</span>
-                        </div>
+          {searchValue.length === 0 ? (
+            ""
+          ) : (
+            <div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
+              <div className="overflow-y-auto">
+                {searchedValue.slice(0, 7).map((movie) => {
+                  return (
+                    <div
+                      className="w-full h-[116px] border-b-2 flex p-2 gap-4"
+                      key={movie.id}
+                    >
+                      <div className="w-[70px] rounded-[8px] overflow-hidden">
+                        <img
+                          className="w-[67px] h-[100px]"
+                          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                          alt={movie.original_title}
+                        />
                       </div>
-                      <div className="w-full flex justify-between">
-                        <div className="text-[14px] font-medium">
-                          {movie.release_date && movie.release_date.slice(0, 4)}
-                        </div>
+                      <div className="w-[90%] h-full flex flex-col justify-between">
                         <div>
-                          <Link href={"/SearchedMovies"} >
-                            <Button variant={"outline"} className="cursor-pointer">
-                              See more <RightArrow />
-                            </Button>
-                          </Link>
+                          <span className="text-[20px] font-semibold">
+                            {movie.original_title}
+                          </span>
+                          <div className="flex items-center text-[14px] font-medium gap-0.5">
+                            <YellowStar width={16} height={16} />
+                            {movie.vote_average.toFixed(1)}{" "}
+                            <span className="text-[12px] font-normal opacity-30">
+                              /10
+                            </span>
+                          </div>
+                        </div>
+                        <div className="w-full flex justify-between">
+                          <div className="text-[14px] font-medium">
+                            {movie.release_date &&
+                              movie.release_date.slice(0, 4)}
+                          </div>
+                          <div>
+                            <Link
+                              href={`/SearchedMovies?searchValue=${searchValue}`}
+                            >
+                              <Button
+                                variant={"outline"}
+                                className="cursor-pointer"
+                              >
+                                See more <RightArrow />
+                              </Button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                  </div>
-                )
-
-
-              })}
-
+                  );
+                })}
+              </div>
+              <div className="px-4 py-2 text-[14px] font-normal">
+                See all results for "{searchValue}"
+              </div>
             </div>
-            <div className="px-4 py-2 text-[14px] font-normal">See all results for "{searchValue}"
-            </div>
-          </div>)
-          }
-
-
+          )}
         </div>
         <Button
           size="icon"
@@ -239,6 +247,6 @@ export const Header = ({ href, MoveToSearchedValue }: TwoTypes) => {
           <MoonIcon />
         </Button>
       </div>
-    </div >
+    </div>
   );
 };

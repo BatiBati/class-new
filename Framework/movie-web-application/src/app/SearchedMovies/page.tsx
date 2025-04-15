@@ -1,35 +1,26 @@
-"use client"
-import Link from "next/link";
-import { Arrow } from "../MovieGenrePage/assets/Arrow";
-import { PageNumber } from "../MovieGenrePage/_components/PageNumber";
-import { GenreCard } from "../MovieGenrePage/_components/GenreCard";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { ACCESS_TOKEN } from "../_components/UpcomingMovies";
-import { MappedSearchValueType, SearchValueType } from "../_components/Header";
+"use client";
 
-
+import { useSearchParams } from "next/navigation";
 
 export default function SearchedMovies() {
-  const [searchValue, setSearchValue] = useState<SearchValueType[]>([])
+  const searchParam = useSearchParams();
+  const genres = searchParam.get("genre") || 0;
+  console.log(genres);
 
-  useEffect(() => {
-    const getSearchMovie = async () => {
-      const { data } = await axios.get<MappedSearchValueType>(
-        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=1`,
-        {
-          headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
-        }
-      );
-      setSearchValue(data.results);
-
-    };
-    getSearchMovie();
-  }, []);
-
-
+  // useEffect(() => {
+  //   const getSearchMovie = async () => {
+  //     const { data } = await axios.get<MappedSearchValueType>(
+  //       `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=1`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${ACCESS_TOKEN}`,
+  //         },
+  //       }
+  //     );
+  //     setSearchValue(data.results);
+  //   };
+  //   getSearchMovie();
+  // }, []);
 
   return (
     <div className="flex justify-center">
@@ -60,14 +51,11 @@ export default function SearchedMovies() {
                     </Link>
                   );
                 })} */}
-
               </div>
             </div>
-
             <div className="w-full flex justify-end">
               {/* <PageNumber page={page} setPage={setPage} lastPage={lastPage} /> */}
             </div>
-
             sss
           </div>
           <div className=" flex flex-col gap-5 w-[40%] pl-4">
@@ -102,9 +90,8 @@ export default function SearchedMovies() {
               })} */}
             </div>
           </div>
-
         </div>
       </div>
     </div>
   );
-};
+}
