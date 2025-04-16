@@ -33,7 +33,7 @@ export default function RootLayout({
           <Header />
         </div>
 
-        {children}
+        <div className="min-h-[90vh]"> {children}</div>
         <div className="flex items-end">
           <Footer />
         </div>

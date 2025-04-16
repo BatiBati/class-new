@@ -1,9 +1,12 @@
 import { foodModel } from "../../models/food.model";
 
-export const postFood = async (req, res) => {
-  const { foodName } = req.body;
+export const createFoodController = async (req, res) => {
+  const { foodName, price, image, ingredients } = req.body;
   await foodModel.create({
     foodName,
+    price,
+    image,
+    ingredients,
     createdAt: new Date(),
     updatedAt: new Date(),
   });

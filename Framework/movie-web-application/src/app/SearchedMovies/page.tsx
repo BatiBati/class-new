@@ -5,7 +5,11 @@ import { useSearchParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { GenreCard } from "../MovieGenrePage/_components/GenreCard";
-import { GenreMovies, GenresFromData, MovieGenres } from "../MovieGenrePage/page";
+import {
+  GenreMovies,
+  GenresFromData,
+  MovieGenres,
+} from "../MovieGenrePage/page";
 import Link from "next/link";
 import { ACCESS_TOKEN } from "../_components/UpcomingMovies";
 import { Arrow } from "@/app/MovieGenrePage/assets/Arrow";
@@ -17,18 +21,16 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
 type SearchedMovieType = {
   results: GenreMovies[];
-  total_results: number
-}
-
+  total_results: number;
+};
 
 export default function SearchedMovies() {
   const searchParam = useSearchParams();
   const searchValue = searchParam.get("searchValue") || 0;
-
 
   const searchParamm = useSearchParams();
   const genreID = searchParamm.get("genre") || 0;
@@ -54,14 +56,12 @@ export default function SearchedMovies() {
     const getSearchedMovie = async () => {
       const { data } = await axios.get<SearchedMovieType>(
         `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${page}`
-      )
+      );
       setSearchedMovies(data.results);
-      setLastPage(data.total_results)
-
-
+      setLastPage(data.total_results);
     };
-    getSearchedMovie()
-  }, [searchValue, page])
+    getSearchedMovie();
+  }, [searchValue, page]);
 
   const handlePrev = () => {
     if (page > 1) {
@@ -80,6 +80,7 @@ export default function SearchedMovies() {
   const selectedPageNumber = [page - 1, page, page + 1].filter(
     (number) => number > 1 && lastPage > number
   );
+  console.log(searchedMovies.length);
 
   return (
     <div className="flex justify-center">
@@ -88,7 +89,12 @@ export default function SearchedMovies() {
         <div className="flex w-[1280px] justify-between">
           <div className="w-[80%] h-fit text-2xl font-semibold flex flex-col gap-y-6 border-r-2 ">
             {searchedMovies.length} results for "{searchValue}"
-            <div className="grid grid-cols-4 gap-12 w-full ">
+            {searchedMovies.length === 0 && (
+              <div className="w-full flex justify-center text-2xl font-light">
+                No results
+              </div>
+            )}
+            <div className="grid grid-cols-4 gap-12 w-full pr-2.5">
               {searchedMovies.map((item) => {
                 return (
                   <Link href={`/selectedMoviePage/${item.id}`} key={item.id}>
@@ -99,85 +105,90 @@ export default function SearchedMovies() {
                         movieName={item.title}
                       />
                     </div>
-                  </Link>)
+                  </Link>
+                );
               })}
             </div>
             <div className="w-full flex justify-end">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem className="cursor-pointer">
-                    <PaginationPrevious onClick={handlePrev} />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink
-                      onClick={() => {
-                        handlePage(1);
-                      }}
-                      style={{
-                        backgroundColor: page === 1 ? "#CFCFCF" : "#FFF",
-                        color: page === 1 ? "#FFFFFF" : "black",
-                      }}
-                      className="cursor-pointer"
-                    >
-                      1
-                    </PaginationLink>
-                  </PaginationItem>
-
-                  {page > 3 && (
-                    <PaginationItem>
-                      <PaginationEllipsis />
+              {searchedMovies.length > 3 && (
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem className="cursor-pointer">
+                      <PaginationPrevious onClick={handlePrev} />
                     </PaginationItem>
-                  )}
+                    <PaginationItem>
+                      <PaginationLink
+                        onClick={() => {
+                          handlePage(1);
+                        }}
+                        style={{
+                          backgroundColor: page === 1 ? "#CFCFCF" : "#FFF",
+                          color: page === 1 ? "#FFFFFF" : "black",
+                        }}
+                        className="cursor-pointer"
+                      >
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
 
-                  {selectedPageNumber.map((item, i) => {
-                    return (
-                      <PaginationItem className="cursor-pointer" key={i}>
-                        <PaginationLink
-                          onClick={() => {
-                            handlePage(item);
-                          }}
-                          style={{
-                            backgroundColor: item === page ? "#CFCFCF" : "#FFFFFF",
-                            color: item === page ? "#FFFFFF" : "black",
-                          }}
-                        >
-                          {item}
-                        </PaginationLink>
+                    {page > 3 && (
+                      <PaginationItem>
+                        <PaginationEllipsis />
                       </PaginationItem>
-                    );
-                  })}
-                  {page !== lastPage &&
+                    )}
+
+                    {selectedPageNumber.map((item, i) => {
+                      return (
+                        <PaginationItem className="cursor-pointer" key={i}>
+                          <PaginationLink
+                            onClick={() => {
+                              handlePage(item);
+                            }}
+                            style={{
+                              backgroundColor:
+                                item === page ? "#CFCFCF" : "#FFFFFF",
+                              color: item === page ? "#FFFFFF" : "black",
+                            }}
+                          >
+                            {item}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    })}
+                    {page !== lastPage &&
                     page + 1 !== lastPage - 1 &&
                     page !== lastPage - 1 ? (
-                    <PaginationItem>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                  ) : (
-                    ""
-                  )}
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                    ) : (
+                      ""
+                    )}
 
-                  <PaginationItem className="cursor-pointer">
-                    <PaginationLink
-                      onClick={() => {
-                        handlePage(lastPage);
-                      }}
-                      style={{
-                        backgroundColor: page === lastPage ? "#CFCFCF" : "#FFFFFF",
-                        color: page === lastPage ? "#FFFFFF" : "black",
-                      }}
-                    >
-                      {lastPage}
-                    </PaginationLink>
-                  </PaginationItem>
-                  {lastPage === selectedPageNumber.length - 1 ? (
-                    ""
-                  ) : (
                     <PaginationItem className="cursor-pointer">
-                      <PaginationNext onClick={handleNext} />
+                      <PaginationLink
+                        onClick={() => {
+                          handlePage(lastPage);
+                        }}
+                        style={{
+                          backgroundColor:
+                            page === lastPage ? "#CFCFCF" : "#FFFFFF",
+                          color: page === lastPage ? "#FFFFFF" : "black",
+                        }}
+                      >
+                        {lastPage}
+                      </PaginationLink>
                     </PaginationItem>
-                  )}
-                </PaginationContent>
-              </Pagination>
+                    {lastPage === selectedPageNumber.length - 1 ? (
+                      ""
+                    ) : (
+                      <PaginationItem className="cursor-pointer">
+                        <PaginationNext onClick={handleNext} />
+                      </PaginationItem>
+                    )}
+                  </PaginationContent>
+                </Pagination>
+              )}
             </div>
           </div>
           <div className=" flex flex-col gap-5 w-[40%] pl-4">

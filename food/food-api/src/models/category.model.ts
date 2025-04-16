@@ -15,4 +15,4 @@ const categorySchema = new Schema({
   },
 });
 
-export const categoryModel = model("food", categorySchema);
+export const categoryModel = model("category", categorySchema);

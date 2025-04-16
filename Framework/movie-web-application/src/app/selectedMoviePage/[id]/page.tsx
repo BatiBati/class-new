@@ -4,7 +4,7 @@ import { ACCESS_TOKEN } from "@/app/upComing/_components/UpcomingMoviesAll";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { Triangle } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { SeeMore } from "@/app/_components/SeeMore";

@@ -34,8 +34,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""
-          }`}
+        className={`${geistSans.variable} ${geistMono.variable} ${
+          isDark ? "dark" : ""
+        }`}
       >
         <Suspense>
           <IsDarkProvider
@@ -45,7 +46,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             setLoading={setLoading}
           >
             <Header href={"/"} />
-            {children}
+            <div style={{ minHeight: "calc(100vh - 339px)" }}>{children}</div>
             <div className="w-full flex justify-center">
               <Footer />
             </div>

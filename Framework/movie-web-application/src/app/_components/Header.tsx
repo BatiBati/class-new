@@ -48,9 +48,7 @@ export type JumpToSearchedPage = {
   searchedValue: SearchValueType[];
 };
 
-type TwoTypes = JumpToHomePage & JumpToSearchedPage;
-
-export const Header = ({ href }: TwoTypes) => {
+export const Header = ({ href }: JumpToHomePage) => {
   const { isDark } = useContext(IsDarkContext);
   const { setIsDark } = useContext(IsDarkContext);
   const [genre, setGenre] = useState<GenresFromData[]>([]);
@@ -93,6 +91,7 @@ export const Header = ({ href }: TwoTypes) => {
   const handleEventChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
+  console.log(searchedValue.length);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
@@ -137,9 +136,9 @@ export const Header = ({ href }: TwoTypes) => {
                                 style={
                                   searchValueId == item.id
                                     ? {
-                                      backgroundColor: "black",
-                                      color: "white",
-                                    }
+                                        backgroundColor: "black",
+                                        color: "white",
+                                      }
                                     : {}
                                 }
                               >
@@ -178,9 +177,10 @@ export const Header = ({ href }: TwoTypes) => {
             ""
           ) : (
             <div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
-
-
               <div className="overflow-y-auto">
+                <div className="w-full flex justify-center">
+                  {searchedValue.length === 0 && "No results"}
+                </div>
                 {searchedValue.slice(0, 7).map((movie) => {
                   return (
                     <div
@@ -213,9 +213,7 @@ export const Header = ({ href }: TwoTypes) => {
                               movie.release_date.slice(0, 4)}
                           </div>
                           <div>
-                            <Link
-                              href={`/SearchedMovies?searchValue=${searchValue}`}
-                            >
+                            <Link href={`/selectedMoviePage/${movie.id}`}>
                               <Button
                                 variant={"outline"}
                                 className="cursor-pointer"
@@ -230,9 +228,11 @@ export const Header = ({ href }: TwoTypes) => {
                   );
                 })}
               </div>
-              <div className="px-4 py-2 text-[14px] font-normal">
-                See all results for "{searchValue}"
-              </div>
+              <Link href={`/SearchedMovies?searchValue=${searchValue}`}>
+                <div className="px-4 py-2 text-[14px] font-normal">
+                  See all results for "{searchValue}"
+                </div>
+              </Link>
             </div>
           )}
         </div>
