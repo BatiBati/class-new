@@ -18,13 +18,13 @@ export type GenresFromData = {
   name: string;
 };
 
-type GenreMovieData = {
+export type GenreMovieData = {
   results: GenreMovies[];
   total_results: number;
   total_pages: number;
 };
 
-type GenreMovies = {
+export type GenreMovies = {
   title: string;
   backdrop_path: string;
   genre_ids: number[];
@@ -71,7 +71,7 @@ export default function MovieGenrePage({ }) {
     };
     chosenGenreMovie();
   }, [genreID, page]);
-  console.log(genres);
+
 
   return (
     <div className="flex justify-center">

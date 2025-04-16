@@ -1,26 +1,85 @@
 "use client";
 
+import axios from "axios";
 import { useSearchParams } from "next/navigation";
+
+import { useEffect, useState } from "react";
+import { GenreCard } from "../MovieGenrePage/_components/GenreCard";
+import { GenreMovies, GenresFromData, MovieGenres } from "../MovieGenrePage/page";
+import Link from "next/link";
+import { ACCESS_TOKEN } from "../_components/UpcomingMovies";
+import { Arrow } from "@/app/MovieGenrePage/assets/Arrow";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
+type SearchedMovieType = {
+  results: GenreMovies[];
+  total_results: number
+}
+
 
 export default function SearchedMovies() {
   const searchParam = useSearchParams();
-  const genres = searchParam.get("genre") || 0;
-  console.log(genres);
+  const searchValue = searchParam.get("searchValue") || 0;
 
-  // useEffect(() => {
-  //   const getSearchMovie = async () => {
-  //     const { data } = await axios.get<MappedSearchValueType>(
-  //       `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=1`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${ACCESS_TOKEN}`,
-  //         },
-  //       }
-  //     );
-  //     setSearchValue(data.results);
-  //   };
-  //   getSearchMovie();
-  // }, []);
+
+  const searchParamm = useSearchParams();
+  const genreID = searchParamm.get("genre") || 0;
+
+  const [searchedMovies, setSearchedMovies] = useState<GenreMovies[]>([]);
+  const [genres, setGenres] = useState<GenresFromData[]>([]);
+  const [page, setPage] = useState(1);
+
+  const [lastPage, setLastPage] = useState<number>(0);
+
+  useEffect(() => {
+    const getMoviesGenre = async () => {
+      const { data } = await axios.get<MovieGenres>(
+        "https://api.themoviedb.org/3/genre/movie/list?language=en",
+        { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } }
+      );
+      setGenres(data.genres);
+    };
+    getMoviesGenre();
+  }, []);
+
+  useEffect(() => {
+    const getSearchedMovie = async () => {
+      const { data } = await axios.get<SearchedMovieType>(
+        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${page}`
+      )
+      setSearchedMovies(data.results);
+      setLastPage(data.total_results)
+
+
+    };
+    getSearchedMovie()
+  }, [searchValue, page])
+
+  const handlePrev = () => {
+    if (page > 1) {
+      setPage((prev) => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const handlePage = (page: number) => {
+    setPage(page);
+  };
+
+  const selectedPageNumber = [page - 1, page, page + 1].filter(
+    (number) => number > 1 && lastPage > number
+  );
 
   return (
     <div className="flex justify-center">
@@ -28,35 +87,98 @@ export default function SearchedMovies() {
         <div className="text-3xl font-semibold">Search filter</div>
         <div className="flex w-[1280px] justify-between">
           <div className="w-[80%] h-fit text-2xl font-semibold flex flex-col gap-y-6 border-r-2 ">
-            <div>
-              <div className="flex gap-1">
-                {/* {totalTitles} titles in
-                {genres
-                  .filter((item) => item.id == genreID)
-                  .map((el, index) => {
-                    return <div key={index}>`{el.name}`</div>;
-                  })} */}
-              </div>
-              <div className="grid grid-cols-4 gap-3 w-full">
-                {/* {genreMovies.map((item) => {
-                  return (
-                    <Link href={`/selectedMoviePage/${item.id}`} key={item.id}>
-                      <div className=" h-fit" key={item.id}>
-                        <GenreCard
-                          imageUrl={item.poster_path}
-                          rate={item.vote_average}
-                          movieName={item.title}
-                        />
-                      </div>
-                    </Link>
-                  );
-                })} */}
-              </div>
+            {searchedMovies.length} results for "{searchValue}"
+            <div className="grid grid-cols-4 gap-12 w-full ">
+              {searchedMovies.map((item) => {
+                return (
+                  <Link href={`/selectedMoviePage/${item.id}`} key={item.id}>
+                    <div className=" h-fit" key={item.id}>
+                      <GenreCard
+                        imageUrl={`${item.poster_path}`}
+                        rate={item.vote_average}
+                        movieName={item.title}
+                      />
+                    </div>
+                  </Link>)
+              })}
             </div>
             <div className="w-full flex justify-end">
-              {/* <PageNumber page={page} setPage={setPage} lastPage={lastPage} /> */}
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem className="cursor-pointer">
+                    <PaginationPrevious onClick={handlePrev} />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink
+                      onClick={() => {
+                        handlePage(1);
+                      }}
+                      style={{
+                        backgroundColor: page === 1 ? "#CFCFCF" : "#FFF",
+                        color: page === 1 ? "#FFFFFF" : "black",
+                      }}
+                      className="cursor-pointer"
+                    >
+                      1
+                    </PaginationLink>
+                  </PaginationItem>
+
+                  {page > 3 && (
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  )}
+
+                  {selectedPageNumber.map((item, i) => {
+                    return (
+                      <PaginationItem className="cursor-pointer" key={i}>
+                        <PaginationLink
+                          onClick={() => {
+                            handlePage(item);
+                          }}
+                          style={{
+                            backgroundColor: item === page ? "#CFCFCF" : "#FFFFFF",
+                            color: item === page ? "#FFFFFF" : "black",
+                          }}
+                        >
+                          {item}
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  })}
+                  {page !== lastPage &&
+                    page + 1 !== lastPage - 1 &&
+                    page !== lastPage - 1 ? (
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  ) : (
+                    ""
+                  )}
+
+                  <PaginationItem className="cursor-pointer">
+                    <PaginationLink
+                      onClick={() => {
+                        handlePage(lastPage);
+                      }}
+                      style={{
+                        backgroundColor: page === lastPage ? "#CFCFCF" : "#FFFFFF",
+                        color: page === lastPage ? "#FFFFFF" : "black",
+                      }}
+                    >
+                      {lastPage}
+                    </PaginationLink>
+                  </PaginationItem>
+                  {lastPage === selectedPageNumber.length - 1 ? (
+                    ""
+                  ) : (
+                    <PaginationItem className="cursor-pointer">
+                      <PaginationNext onClick={handleNext} />
+                    </PaginationItem>
+                  )}
+                </PaginationContent>
+              </Pagination>
             </div>
-            sss
           </div>
           <div className=" flex flex-col gap-5 w-[40%] pl-4">
             <div className="w-full">
@@ -64,7 +186,7 @@ export default function SearchedMovies() {
               <p className="w-fit">See lists of movies by genre</p>
             </div>
             <div className="flex flex-wrap pl-0 w-[400px] gap-x-1.5">
-              {/* {genres.map((item) => {
+              {genres.map((item) => {
                 return (
                   <Link href={`/MovieGenrePage?genre=${item.id}`} key={item.id}>
                     <div className="flex w-fit h-fit p-1.5 ">
@@ -87,7 +209,7 @@ export default function SearchedMovies() {
                     </div>
                   </Link>
                 );
-              })} */}
+              })}
             </div>
           </div>
         </div>

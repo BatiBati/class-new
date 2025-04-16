@@ -55,7 +55,7 @@ export const Header = ({ href }: TwoTypes) => {
   const { setIsDark } = useContext(IsDarkContext);
   const [genre, setGenre] = useState<GenresFromData[]>([]);
   const searchParam = useSearchParams();
-  const genreID = searchParam.get("genre") || 0;
+  const searchValueId = searchParam.get("genre") || 0;
   const [searchValue, setSearchValue] = useState("");
   const [searchedValue, setSearchedValue] = useState<SearchValueType[]>([]);
 
@@ -93,8 +93,6 @@ export const Header = ({ href }: TwoTypes) => {
   const handleEventChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
-
-  console.log("das", searchedValue);
 
   return (
     <div className="flex items-center justify-center w-full h-[59px] mt-7  pt-0 pb-0 ">
@@ -137,11 +135,11 @@ export const Header = ({ href }: TwoTypes) => {
                               <button
                                 className="flex w-fit border-[1px] rounded-2xl p-2 py-0 items-center gap-1 border-[#E4E4E7] cursor-pointer hover:bg-[#EFEFEF]"
                                 style={
-                                  genreID == item.id
+                                  searchValueId == item.id
                                     ? {
-                                        backgroundColor: "black",
-                                        color: "white",
-                                      }
+                                      backgroundColor: "black",
+                                      color: "white",
+                                    }
                                     : {}
                                 }
                               >
@@ -180,6 +178,8 @@ export const Header = ({ href }: TwoTypes) => {
             ""
           ) : (
             <div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
+
+
               <div className="overflow-y-auto">
                 {searchedValue.slice(0, 7).map((movie) => {
                   return (
