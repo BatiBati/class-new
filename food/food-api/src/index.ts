@@ -1,9 +1,11 @@
 import express from "express";
-import foodRouter from "./routers/food.route";
+
 import { connectToDataBase } from "./database/connect-todb";
-import categoryRouter from "./routers/category.route";
-import foodOrder from "./routers/foodOrder.route";
-import user from "./routers/user.route";
+
+import { foodRouter } from "./routers/food.route";
+import { categoryRouter } from "./routers/category.route";
+import { foodOrder } from "./routers/foodOrder.route";
+import { user } from "./routers/user.route";
 
 connectToDataBase();
 
@@ -24,7 +26,7 @@ app.get("/about", (req, res) => {
 app.use("/food", foodRouter);
 app.use("/category", categoryRouter);
 app.use("/foodOrder", foodOrder);
-app.use("/user", user)
+app.use("/user", user);
 
 app.listen(port, () => {
   console.log(`Example app listening on port${port}`);

@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { createCategoryController } from "../controllers/category/createCategoryController";
-import { deleteCategoryController } from "../controllers/category/deleteCategoryController";
-import { updateCategoryController } from "../controllers/category/updateCategoryController";
-import { getCategoryController } from "../controllers/category/getCategoryController";
+import {
+  createCategoryController,
+  deleteCategoryController,
+  getCategoryController,
+  updateCategoryController,
+} from "../controllers/category";
 
-const categoryRouter = Router();
-
-categoryRouter
-  .get("/", getCategoryController)
+export const categoryRouter = Router()
+  .get("/:id", getCategoryController)
   .delete("/", deleteCategoryController)
-  .patch("/:id", updateCategoryController)
-  .post("/", createCategoryController);
-
-export default categoryRouter;
+  .post("/", createCategoryController)
+  .patch("/", updateCategoryController);
