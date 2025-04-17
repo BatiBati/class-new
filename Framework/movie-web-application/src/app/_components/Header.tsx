@@ -176,7 +176,7 @@ export const Header = ({ href }: JumpToHomePage) => {
           {searchValue.length === 0 ? (
             ""
           ) : (
-            <div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col">
+            <div className="bg-[#f3f3f4] rounded-2xl w-[650px] h-fit max-h-[700px]  absolute left-0.5 top-10 z-20 p-3 flex flex-col dark:bg-black">
               <div className="overflow-y-auto">
                 <div className="w-full flex justify-center">
                   {searchedValue.length === 0 && "No results"}
@@ -202,7 +202,7 @@ export const Header = ({ href }: JumpToHomePage) => {
                           <div className="flex items-center text-[14px] font-medium gap-0.5">
                             <YellowStar width={16} height={16} />
                             {movie.vote_average.toFixed(1)}{" "}
-                            <span className="text-[12px] font-normal opacity-30">
+                            <span className="text-[12px] font-normal opacity-30 dark:text-white dark:opacity-50">
                               /10
                             </span>
                           </div>

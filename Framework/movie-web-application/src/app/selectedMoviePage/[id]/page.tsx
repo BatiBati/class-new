@@ -175,7 +175,7 @@ export default function SelectedMoviePage() {
                       <span className="text-[18px] font-semibold">
                         {movie?.vote_average.toFixed(1)}
                       </span>
-                      <span className="opacity-15 text-[16px] "> / 10</span>
+                      <span className="opacity-15 text-[16px] dark:opacity-50"> /10</span>
                     </div>
 
                     {movie?.vote_count}
@@ -209,20 +209,20 @@ export default function SelectedMoviePage() {
                     className="absolute left-2 bottom-2 flex items-center gap-1 w-[130px]  "
                   >
                     <div>
-                      <Button variant="outline">
-                        <Triangle className="rotate-90" />
+                      <Button className="rounded-full flex justify-center items-center rotate-90 bg-white hover:bg-white">
+                        <Triangle stroke="black" />
                       </Button>
-                      <div className="text-white font-normal hover:text-black hover:underline">
+                      <div className="text-white font-normal  hover:underline">
                         Play trailer
                       </div>
                     </div>
                   </DialogTrigger>
 
-                  <DialogContent className="w-1 h-1 bg-transparent">
+                  <DialogContent className="w-fit h-fit bg-transparent">
                     <DialogHeader>
                       <DialogTitle></DialogTitle>
                       <iframe
-                        className="absolute left-[-450px] top-[-100px] z-40 w-[1000px] h-[500px]"
+                        className="absolute left-[-450px] top-[-300px] z-40 w-[1000px] h-[500px]"
                         width="1716"
                         height="965"
                         src={`https://www.youtube.com/embed/${trailer}`}

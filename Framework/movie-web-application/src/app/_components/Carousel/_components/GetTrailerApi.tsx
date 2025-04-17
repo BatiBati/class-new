@@ -38,7 +38,7 @@ export const GetTrailerApi = ({ movieId }: GetTrailerMovieApiProps) => {
     <Dialog>
       <DialogTrigger asChild className="flex items-center gap-1 w-[130px]">
         <div>
-          <Button variant="outline">
+          <Button variant="outline" className="text-black dark:text-black dark:bg-white">
             <Triangle className="rotate-90" />
             Watch Trailer
           </Button>
@@ -49,7 +49,7 @@ export const GetTrailerApi = ({ movieId }: GetTrailerMovieApiProps) => {
         <DialogHeader>
           <DialogTitle></DialogTitle>
           <iframe
-            className="absolute left-[-450px] top-[-100px] z-40 w-[1000px] h-[500px]"
+            className="absolute left-[-450px] top-[-300px] z-40 w-[1000px] h-[500px]"
             width="1716"
             height="965"
             src={`https://www.youtube.com/embed/${trailer}`}

@@ -80,7 +80,7 @@ export const Carousel = () => {
                   </span>
                   <div className="flex items-center font-semibold text-[18px] gap-2">
                     <YellowStar width={23} height={20} />
-                    {movie.vote_average}
+                    {movie.vote_average.toFixed(1)}
                     <span className="font-normal opacity-50 text-[16px]">
                       /10
                     </span>
@@ -90,7 +90,7 @@ export const Carousel = () => {
                 </div>
                 {index === 0 && (
                   <Button
-                    className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                    className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                     variant="outline"
                     size="icon"
                     onClick={handleClick(1)}
@@ -101,7 +101,7 @@ export const Carousel = () => {
                 {index === 1 && (
                   <>
                     <Button
-                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(2)}
@@ -109,7 +109,7 @@ export const Carousel = () => {
                       <DownArrow width={10} height={10} />
                     </Button>
                     <Button
-                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(0)}
@@ -121,7 +121,7 @@ export const Carousel = () => {
                 {index === 2 && (
                   <>
                     <Button
-                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(2)}
@@ -129,7 +129,7 @@ export const Carousel = () => {
                       <DownArrow width={10} height={10} />
                     </Button>
                     <Button
-                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(0)}
@@ -141,7 +141,7 @@ export const Carousel = () => {
                 {index === 3 && (
                   <>
                     <Button
-                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute right-[44px] -rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(2)}
@@ -149,7 +149,7 @@ export const Carousel = () => {
                       <DownArrow width={10} height={10} />
                     </Button>
                     <Button
-                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                      className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                       variant="outline"
                       size="icon"
                       onClick={handleClick(0)}
@@ -161,7 +161,7 @@ export const Carousel = () => {
 
                 {index === 4 && (
                   <Button
-                    className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer"
+                    className="absolute left-[44px] rotate-90 rounded-full hover:cursor-pointer dark:bg-white"
                     variant="outline"
                     size="icon"
                     onClick={handleClick(1)}
