@@ -22,11 +22,11 @@ const userSchema = new Schema({
     required: true,
   },
   orderedFoods: {
-    type: [Number],
+    type: String,
     required: true,
   },
   ttl: {
-    type: Date,
+    type: String,
     required: true,
   },
   isVerified: {

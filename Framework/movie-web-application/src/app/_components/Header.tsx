@@ -136,9 +136,9 @@ export const Header = ({ href }: JumpToHomePage) => {
                                 style={
                                   searchValueId == item.id
                                     ? {
-                                        backgroundColor: "black",
-                                        color: "white",
-                                      }
+                                      backgroundColor: "black",
+                                      color: "white",
+                                    }
                                     : {}
                                 }
                               >
