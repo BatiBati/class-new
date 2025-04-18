@@ -1,13 +1,15 @@
 import { Router } from "express";
 import {
   createCategoryController,
-  deleteCategoryController,
+  deleteOneCategoryController,
   getCategoryController,
+  getOneCategoryController,
   updateCategoryController,
 } from "../controllers/category";
 
 export const categoryRouter = Router()
-  .get("/:id", getCategoryController)
-  .delete("/", deleteCategoryController)
+  .get("/", getCategoryController)
+  .get("/:id", getOneCategoryController)
+  .delete("/:id", deleteOneCategoryController)
   .post("/", createCategoryController)
-  .patch("/", updateCategoryController);
+  .put("/:id", updateCategoryController);

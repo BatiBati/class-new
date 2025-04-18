@@ -1,4 +1,5 @@
 export * from "./createCategoryController";
-export * from "./deleteCategoryController";
+export * from "./deleteOneCategoryController";
 export * from "./getCategoryController";
 export * from "./updateCategoryController";
+export * from "./getOneCategoryController";

@@ -1,4 +1,5 @@
 export * from "./createFoodController";
-export * from "./deleteFoodController";
+export * from "./deleteOneFoodController";
 export * from "./getFoodController";
+export * from "./getOneFoodController";
 export * from "./updateFoodController";
