@@ -1,8 +1,13 @@
-export const Logo = () => {
+type SizeType = {
+  width: number;
+  heigth: number;
+};
+
+export const Logo = ({ width, heigth }: SizeType) => {
   return (
     <svg
-      width="146"
-      height="44"
+      width={width}
+      height={heigth}
       viewBox="0 0 146 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -6,6 +6,7 @@ import { foodRouter } from "./routers/food.route";
 import { categoryRouter } from "./routers/category.route";
 import { foodOrder } from "./routers/foodOrder.route";
 import { user } from "./routers/user.route";
+import cors from "cors";
 
 connectToDataBase();
 
@@ -14,6 +15,7 @@ const app = express();
 const port = 3001;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
