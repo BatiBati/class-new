@@ -7,7 +7,7 @@ export const getFoodController: RequestHandler = async (req, res) => {
     const foods = await foodModel
       .find(categoryId ? { category: categoryId } : {})
       .populate("category");
-    res.status(200).json(foods);
+    res.status(200).json({ foods });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
