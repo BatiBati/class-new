@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { TodayOfferFood } from "./_components/TodayOfferFood";
+import { AllCategories } from "./_components/AllCategories";
 
 type Response = {
   data: FoodType[];
@@ -30,5 +32,8 @@ export default function Home() {
   }, []);
   console.log(foods);
 
-  return <div>Hi</div>;
+  return <div className="flex flex-col items-center">
+    <TodayOfferFood />
+    <AllCategories />
+  </div>;
 }
