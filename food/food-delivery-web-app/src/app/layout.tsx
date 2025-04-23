@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -26,21 +26,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [header, setHeader] = useState(true);
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {header && <div className="flex items-start">
-          <Header setHeader={setHeader} />
-        </div>}
-
         <div className="min-h-[90vh]"> {children}</div>
-        {header && <div className="flex items-end">
-          <Footer />
-        </div>}
       </body>
     </html>
   );

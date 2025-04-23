@@ -56,9 +56,7 @@ export const FoodCard = ({ id }: IdNumber) => {
                   ${food.price}
                 </p>
               </div>
-              <p className="text-black text-[14px]">
-                {food.ingredients}
-              </p>
+              <p className="text-black text-[14px]">{food.ingredients}</p>
             </div>
           </div>
         );

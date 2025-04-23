@@ -1,8 +1,8 @@
 "use client";
 
-import { TodayOfferFood } from "./_components/TodayOfferFood";
-import { CategoryNames } from "./_components/CategoryNames";
-import { HomePageFoodMenu } from "./_components/HomePageFoodMenu";
+import { TodayOfferFood } from "../_components/TodayOfferFood";
+import { CategoryNames } from "../_components/CategoryNames";
+import { HomePageFoodMenu } from "../_components/HomePageFoodMenu";
 
 export default function Home() {
   return (

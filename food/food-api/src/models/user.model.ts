@@ -19,10 +19,12 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
+    enum: ["USER", "ADMIN"],
     required: true,
   },
   orderedFoods: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "foodOrder",
     required: true,
   },
   ttl: {

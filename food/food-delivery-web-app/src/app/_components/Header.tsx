@@ -6,20 +6,13 @@ import { ShoppingBox } from "./assets/ShoppingBox";
 import { Aman } from "./assets/Aman";
 import Link from "next/link";
 
-
-type HeaderType = {
-  setHeader: (value: boolean) => void;
-}
-
-export const Header = ({ setHeader }: HeaderType) => {
-
-
+export const Header = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="w-[1440px] h-[68px]  flex justify-between items-center pl-[88px] pr-[88px] bg-[#18181B]">
         <Logo width={146} heigth={44} />
         <div className="flex gap-3.5">
-          <Link href={"/Login"} onClick={(() => { setHeader(false) })}>
+          <Link href={"/AuthenticationPage"}>
             <Button className="w-[75px] h-[36px] bg-[#f4f4f5] hover:bg-[#a39c9b] rounded-full text-[#18181B] cursor-pointer">
               Sign up
             </Button>
@@ -50,6 +43,6 @@ export const Header = ({ setHeader }: HeaderType) => {
           </Button>
         </div> */}
       </div>
-    </div >
+    </div>
   );
 };

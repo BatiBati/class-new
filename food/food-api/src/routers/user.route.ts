@@ -8,6 +8,7 @@ import {
 
 export const user = Router()
   .get("/", getUserController)
-  .delete("/", deleteUserController)
+  .delete("/:id", deleteUserController)
   .post("/", createUserController)
-  .patch("/", updateUserController);
+  .patch("/", updateUserController)
+  .put("/", updateUserController);

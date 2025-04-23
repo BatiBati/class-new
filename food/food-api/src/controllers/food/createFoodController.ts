@@ -1,6 +1,7 @@
+import { RequestHandler } from "express";
 import { foodModel } from "../../models/food.model";
 
-export const createFoodController = async (req, res) => {
+export const createFoodController: RequestHandler = async (req, res) => {
   const { foodName, price, image, ingredients, category } = req.body;
   try {
     const foods = await foodModel.create({
@@ -13,7 +14,7 @@ export const createFoodController = async (req, res) => {
       createdAt: new Date(),
     });
 
-    return res.status(200).json(foods);
+    res.status(200).json(foods);
   } catch (error) {
     res.status(500).json({ error, message: "Server error" });
   }
