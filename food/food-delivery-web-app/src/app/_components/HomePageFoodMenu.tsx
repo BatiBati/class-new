@@ -32,7 +32,7 @@ export const HomePageFoodMenu = () => {
   }, []);
 
   return (
-    <div className="w-[1440px] flex justify-center bg-[#404040]">
+    <div className="w-[1440px] flex justify-center bg-[#404040] pb-14">
       <div className="w-[1264px] ">
         {categories.slice(0, 4).map((category) => {
           return (

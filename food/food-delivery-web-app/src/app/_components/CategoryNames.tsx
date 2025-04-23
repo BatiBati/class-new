@@ -27,30 +27,35 @@ export const CategoryNames = () => {
   }, []);
 
   return (
-    <div className="w-[1440px] h-[176px] bg-[#404040] flex flex-col justify-between pt-8 pb-8 p-[48px]">
+    <div className="w-[1440px] bg-[#404040] flex flex-col justify-between gap-9 pt-8 pb-8 p-[48px]">
       <div className="text-[30px] font-semibold text-white">Categories</div>
-      <div className="w-full ">
-        <Carousel>
-          <div className="flex justify-center">
-            <CarouselContent className="  w-[1248px]">
-              {categories.map((category, i) => {
+
+      <div className="w-full">
+        <Carousel
+          opts={{
+            align: "start",
+          }}
+
+        >
+          <div className="w-full flex justify-center ">
+            <CarouselContent className="w-[1200px] flex gap-10">
+              {categories.map((category) => {
                 return (
-                  <div key={i} className="w-fit">
-                    <CarouselItem>
-                      <div className="bg-white w-fit rounded-full pl-3 pr-3 pt-1 pb-1 flex justify-center">
-                        {category.categoryName}
-                      </div>
-                    </CarouselItem>
-                  </div>
-                );
+                  <CarouselItem className="md:basis-1/9 bg-white flex justify-center rounded-full  " >
+                    <div >
+                      {category.categoryName}
+                    </div>
+                  </CarouselItem>
+                )
               })}
             </CarouselContent>
           </div>
-
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      </div>
-    </div>
+      </div >
+
+
+    </div >
   );
 };

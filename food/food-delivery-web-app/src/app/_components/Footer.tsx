@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { LogoCol } from "./assets/LogoCol";
+import { motion } from "framer-motion"
 
 const runningWords = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11];
 
@@ -36,16 +37,33 @@ export const Footer = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-[1440px] h-[755px] bg-[#18181B] text-white relative">
+      <div className="w-[1440px] h-[755px] bg-[#18181B] text-white relative overflow-hidden">
         <div className="w-full absolute top-[60px]">
-          <div className="w-[230%] bg-[#EF4444] px-24 flex gap-[34px] py-7 animate-[marquee_15s_linear_infinite]">
-            {runningWords.map((_, index) => {
-              return (<div className="text-[30px] font-semibold"
-                key={index}>Fresh fast delivered</div>)
-            })}
+          <div className="flex w-screen h-fit text-white overflow-y-scroll top-15 flex-row bg-[#EF4444]">
+            <motion.div
+              animate={{ x: ["-0%", "-10%", "-20%", "-30%", "-42%"] }}
+              transition={{
+                duration: 15,
+                ease: "linear",
+                repeat: Infinity,
+                times: [0, 0.25, 0.5, 0.75, 1],
+              }}
+              className="flex h-15 flex-row text-nowrap  gap-7 justify-start items-center "
+            >
+              {runningWords.map((_, index) => {
+                return (
+                  <div
+                    className="text-[30px] font-semibold"
+                    key={index}>
+                    Fresh fast delivered
+                  </div>
+                )
+              })}
+            </motion.div>
           </div>
+
           <div className=" flex justify-center">
-            <div className="w-fit flex justify-center absolute top-[228px] bg-amber-500">
+            <div className="w-fit flex justify-center absolute top-[228px]">
               <div className="w-[1264px] h-fit relative flex justify-center gap-28">
                 <div className="absolute left-0 top-0">
                   <LogoCol />
@@ -58,7 +76,7 @@ export const Footer = () => {
                 </div>
                 <div className="w-fit gap-4 flex flex-col">
                   <span className="text-[#71717A]">Menu</span>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-4">
                     {categories.map((item, index) => {
                       return (
                         <span key={index} className="cursor-pointer">

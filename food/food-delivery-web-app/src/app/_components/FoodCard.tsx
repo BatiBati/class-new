@@ -36,11 +36,11 @@ export const FoodCard = ({ id }: IdNumber) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-9">
+    <div className="grid grid-cols-3 gap-9 ">
       {foods.map((food) => {
         return (
           <div
-            className="w-[398px] h-[342px] bg-white rounded-[20px] overflow-hidden p-4"
+            className="w-[398px] h-[342px] bg-white rounded-[20px] overflow-hidden flex flex-col p-5 gap-5"
             key={food._id}
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative">
@@ -49,16 +49,15 @@ export const FoodCard = ({ id }: IdNumber) => {
                 <PlusSvg />
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full gap-2 h-fit flex flex-col justify-between">
               <div className="flex justify-between items-center">
                 <p className="text-[#EF4444]">{food.foodName}</p>
                 <p className="text-black text-[24px] font-semibold">
                   ${food.price}
                 </p>
               </div>
-              <p>
-                Fluffy pancakes stacked with fruits, cream, syrup, and powdered
-                sugar.
+              <p className="text-black text-[14px]">
+                {food.ingredients}
               </p>
             </div>
           </div>
