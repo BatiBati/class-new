@@ -13,7 +13,7 @@ export const Order = () => {
       <div className="h-full w-full bg-white rounded-lg overflow-hidden">
         <div className=" p-4 flex justify-between items-center bg-[#f4f4f5]">
           <div>
-            <div className="text-[20px] font-bold">Order</div>
+            <div className="text-[20px] font-bold">Orders</div>
             <div className="text-[12px] font-medium text-[#71717A]">
               32 items
             </div>
@@ -24,7 +24,7 @@ export const Order = () => {
             <ChangeDeliveryState />
           </div>
         </div>
-        <div className="">
+        <div>
           <DataTable />
         </div>
       </div>

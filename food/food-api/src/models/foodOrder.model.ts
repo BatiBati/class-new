@@ -6,6 +6,10 @@ const foodOrderItemSchema = new Schema({
     ref: "food",
     required: true,
   },
+  quantity: {
+    type: Number,
+    required: true,
+  },
 });
 
 const foodOrderSchema = new Schema({

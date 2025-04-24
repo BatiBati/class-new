@@ -23,7 +23,7 @@ const userSchema = new Schema({
     required: true,
   },
   orderedFoods: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: "foodOrder",
     required: true,
   },
