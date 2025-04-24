@@ -5,9 +5,12 @@ import {
   getFoodOrderController,
   updateFoodOrderController,
 } from "../controllers/foodOrder";
+import { getOneFoodOrderController } from "../controllers/foodOrder/getOneFoodOrderController";
 
 export const foodOrder = Router()
   .get("/", getFoodOrderController)
-  .delete("/", deleteFoodOrderController)
+  .get("/:id", getOneFoodOrderController)
+  .delete("/:id", deleteFoodOrderController)
   .post("/", createFoodOrderController)
-  .patch("/", updateFoodOrderController);
+  .patch("/:id", updateFoodOrderController)
+  .put("/:id", updateFoodOrderController);

@@ -2,15 +2,21 @@ import { RequestHandler } from "express";
 import { foodOrderModel } from "../../models/foodOrder.model";
 
 export const updateFoodOrderController: RequestHandler = async (req, res) => {
-  const { foodName, price, image, ingredients } = req.body;
-  await foodOrderModel.findByIdAndUpdate(req.params.id, {
-    foodName,
-    price,
-    image,
-    ingredients,
-  });
+  const { foodName, totalPrice, image, ingredients, deliveryAddress } = req.body;
+  const { id } = req.params;
+  try {
+    await foodOrderModel.findByIdAndUpdate(id, {
+      foodName,
+      totalPrice,
+      image,
+      ingredients,
+      deliveryAddress,
+    });
 
-  res.status(200).json({
-    message: "Food updated",
-  });
+    res.status(200).json({
+      message: "Food updated",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
 };

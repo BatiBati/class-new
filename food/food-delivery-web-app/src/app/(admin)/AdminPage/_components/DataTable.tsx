@@ -59,22 +59,18 @@ const invoices = [
 ];
 
 type Response = {
-  foods: FoodType[];
-};
+  foods: FoodOrderType[]
+}
+type FoodOrderType = {
 
-type FoodType = {
-  foodName: string;
-  _id: string;
-  price: number;
-  updatedAt: string;
-};
+}
 
 export const DataTable = () => {
-  const [foods, setFoods] = useState<FoodType[]>([]);
-  const getFoodData = async () => {
+  const [foodOrder, setFoodOrder] = useState();
+  const getFoodOrder = async () => {
     try {
-      const response = await axios.get<Response>("http://localhost:3001/food");
-      setFoods(response.data.foods);
+      const response = await axios.get<Response>("http://localhost:3001/foodOrder");
+      setFoodOrder(response.data.foods);
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -82,7 +78,7 @@ export const DataTable = () => {
   };
 
   useEffect(() => {
-    getFoodData();
+    getFoodOrder();
   }, []);
 
   return (
@@ -90,14 +86,19 @@ export const DataTable = () => {
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader className="bg-red-400 ">
         <TableRow className="flex w-full justify-between items-center ">
-          <Checkbox />
+          <div className="p-4">
+            <Checkbox />
+          </div>
+
           <TableHead>№</TableHead>
           <TableHead>Customer</TableHead>
           <TableHead>Food</TableHead>
           <TableHead>Date</TableHead>
           <TableHead>Total</TableHead>
           <TableHead>Delivery address</TableHead>
-          <TableHead>Delivery state</TableHead>
+          <div className="p-4">
+            <TableHead>Delivery state</TableHead>
+          </div>
         </TableRow>
       </TableHeader>
 
@@ -107,14 +108,18 @@ export const DataTable = () => {
             key={invoice.invoice}
             className="flex w-full justify-between items-center"
           >
-            <Checkbox />
+            <div className="p-4">
+              <Checkbox />
+            </div>
             <TableCell>{invoice.invoice}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentMethod}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.totalAmount}</TableCell>
+            <div className="p-4">
+              <TableCell>{invoice.totalAmount}</TableCell>
+            </div>
           </TableRow>
         ))}
       </TableBody>

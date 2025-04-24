@@ -1,11 +1,14 @@
-import { foodModel } from "../../models/food.model";
+import { RequestHandler } from "express";
 import { foodOrderModel } from "../../models/foodOrder.model";
 
-export const deleteFoodOrderController = async (req, res) => {
-  const { id } = req.body;
+export const deleteFoodOrderController: RequestHandler = async (req, res) => {
 
-  await foodOrderModel.deleteOne(id, {});
-  return res.status(200).json({
-    message: "Food order Deleted",
-  });
+  try {
+    await foodOrderModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      message: "Food order Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
 };
