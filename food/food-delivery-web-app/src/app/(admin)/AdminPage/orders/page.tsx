@@ -1,11 +1,11 @@
 "use client";
 
-import { DataTable, FoodOrderType, Response } from "./DataTable";
-import { DatePickerWithRange } from "./DatePickerWithRange";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { DatePickerWithRange } from "../_components/DatePickerWithRange";
+import { DataTable } from "../_components/DataTable";
 
-export const Order = () => {
+export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
 
   const getFoodOrder = async () => {
@@ -45,4 +45,4 @@ export const Order = () => {
       </div>
     </div>
   );
-};
+}

@@ -16,60 +16,16 @@ import { SelectArrow } from "./SelectArrow";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UpDownArrow } from "./assets/UpDownArrow";
 import { Button } from "@/components/ui/button";
+import { ChangeDeliveryState } from "./ChangeDeliveryState";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
-
-type Response = {
+export type Response = {
   foodOrder: FoodOrderType[];
 };
-type FoodOrderType = {
+export type FoodOrderType = {
   _id: string;
   deliveryAddress: string;
   foodOrderItems: FoodsTypes[];
-  status: string;
+  status: FoodStatus[];
   totalPrice: number;
   user: UserType;
   createdAt: string;
@@ -95,8 +51,13 @@ type FoodsTypes = {
   quantity: number;
 };
 
+type FoodStatus = {
+  status: string;
+};
+
 export const DataTable = () => {
   const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
+  const [orderStatus, setOrderStatus] = useState<FoodStatus>();
 
   const getFoodOrder = async () => {
     try {
@@ -105,6 +66,7 @@ export const DataTable = () => {
       );
       setFoodOrder(response.data.foodOrder);
       console.log(response.data.foodOrder);
+      setOrderStatus(response.status);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -112,7 +74,7 @@ export const DataTable = () => {
 
   useEffect(() => {
     getFoodOrder();
-  }, []);
+  }, [orderStatus]);
 
   return (
     <Table>
@@ -128,7 +90,7 @@ export const DataTable = () => {
           <TableHead className="p-4">
             <div className="flex justify-between items-center">
               <div>Date</div>
-              <Button className="w-[10px] h-[10px] rounded-full bg-white">
+              <Button className="w-[10px] h-[10px] rounded-full bg-red-500">
                 <UpDownArrow />
               </Button>
             </div>
@@ -139,7 +101,7 @@ export const DataTable = () => {
         </TableRow>
       </TableHeader>
 
-      <TableBody className="w-full text-[#71717a] ">
+      <TableBody className="w-full text-[#71717a]">
         {foodOrder.map((order) => (
           <TableRow key={order._id} className="w-full">
             <TableCell className="p-4 w-[30px]">
@@ -159,9 +121,11 @@ export const DataTable = () => {
             <TableCell className="p-4 text-red-500">
               {order.totalPrice}₮
             </TableCell>
-            <TableCell className="p-4 w-[30px] ">
+            <TableCell className="p-4 w-[30px] overflow-hidden">
               {order.deliveryAddress}
             </TableCell>
+
+            <ChangeDeliveryState order={order} />
           </TableRow>
         ))}
       </TableBody>
