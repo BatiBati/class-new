@@ -3,10 +3,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DatePickerWithRange } from "../_components/DatePickerWithRange";
-import { DataTable } from "../_components/DataTable";
+import { DataTable, FoodOrderType, Response } from "../_components/DataTable";
+import { PaginationPage } from "../_components/PaginationPage";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 
 export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
+  
 
   const getFoodOrder = async () => {
     try {
@@ -21,14 +25,18 @@ export default function Order() {
 
   useEffect(() => {
     getFoodOrder();
-  }, [orderLength]);
+  }, []);
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className="flex flex-col gap-4 bg-[#F4F4F5] p-10 w-full">
       <div className="w-full flex justify-end">
-        <img src="/images/AdminAvatar.png" />
+
+        <Avatar className="w-10 h-10">
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </div>
-      <div className="h-full w-full bg-white rounded-lg overflow-hidden">
-        <div className=" p-4 flex justify-between items-center bg-[#f4f4f5]">
+      <div className="h-full w-full bg-white rounded-lg overflow-hidden ">
+        <div className=" p-4 flex justify-between items-center">
           <div>
             <div className="text-[20px] font-bold">Orders</div>
             <div className="text-[12px] font-medium text-[#71717A]">
@@ -42,6 +50,10 @@ export default function Order() {
         <div>
           <DataTable />
         </div>
+
+      </div>
+      <div className="w-full flex justify-end">
+        <PaginationPage />
       </div>
     </div>
   );

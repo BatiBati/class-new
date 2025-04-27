@@ -46,7 +46,7 @@ export const FoodCard = ({ id }: IdNumber) => {
             <div className="rounded-xl overflow-hidden h-[210px] relative">
               <img src="/images/TestFoodPic.png" className="h-full w-full" />
               <div className="absolute right-1 bottom-2 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer">
-                <PlusSvg />
+                <PlusSvg stroke={"#EF4444"} />
               </div>
             </div>
             <div className="w-full gap-2 h-fit flex flex-col justify-between">

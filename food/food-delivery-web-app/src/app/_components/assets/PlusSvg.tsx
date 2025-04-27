@@ -1,4 +1,8 @@
-export const PlusSvg = () => {
+export type StokeTpye = {
+  stroke: string
+}
+
+export const PlusSvg = ({ stroke }: StokeTpye) => {
   return (
     <svg
       width="16"
@@ -9,7 +13,7 @@ export const PlusSvg = () => {
     >
       <path
         d="M6.33341 1.33337V10.6667M1.66675 6.00004H11.0001"
-        stroke="#EF4444"
+        stroke={stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

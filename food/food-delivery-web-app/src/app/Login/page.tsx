@@ -1,6 +1,8 @@
 "use client"
 
-import { CreateAccount } from "./_components/CreateAccount"
+import { CreateAccount } from "../(auth)/AuthenticationPage/_components/CreateAccount"
+
+
 
 export default function Login() {
 

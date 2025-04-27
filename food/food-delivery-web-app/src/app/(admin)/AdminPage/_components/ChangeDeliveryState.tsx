@@ -25,7 +25,7 @@ const changeStatus = ["DELIVERED", "CANCELLED", "PENDING"];
 
 export const ChangeDeliveryState = ({ order }: PropsType) => {
   const [selectedStatus, setSelectedStatus] = useState(order.status);
-  console.log(order);
+
 
   const updateDeliveryState = async () => {
     try {
@@ -34,7 +34,6 @@ export const ChangeDeliveryState = ({ order }: PropsType) => {
 
       const response = await axios.put(url, data);
       console.log("Delivery state updated:", response.data);
-      console.log(data);
     } catch (error) {
       console.error("Error updating delivery state:", error);
     }
@@ -46,16 +45,14 @@ export const ChangeDeliveryState = ({ order }: PropsType) => {
         <div className="w-full h-full flex justify-center items-center">
           <Button
             variant="outline"
-            className={`rounded-full border-[1px] ${
-              order.status === "PENDING" ? "border-red-500" : ""
-            } ${
-              order.status === "DELIVERED" ? "border-green-500" : ""
-            } flex gap-[10px]`}
+            className={`rounded-full border-[1px] ${order.status === "PENDING" ? "border-red-500" : ""
+              } ${order.status === "DELIVERED" ? "border-green-500" : ""
+              } flex gap-[10px]`}
           >
             {order.status}
-            <Button className="w-fit h-fit bg-white hover:bg-[#71717A]">
+            <div className="w-fit h-fit bg-white ">
               <UpDownArrow />
-            </Button>
+            </div>
           </Button>
         </div>
       </DialogTrigger>

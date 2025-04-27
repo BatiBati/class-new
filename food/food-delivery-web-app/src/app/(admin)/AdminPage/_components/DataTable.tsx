@@ -25,7 +25,7 @@ export type FoodOrderType = {
   _id: string;
   deliveryAddress: string;
   foodOrderItems: FoodsTypes[];
-  status: FoodStatus[];
+  status: string;
   totalPrice: number;
   user: UserType;
   createdAt: string;
@@ -51,13 +51,9 @@ type FoodsTypes = {
   quantity: number;
 };
 
-type FoodStatus = {
-  status: string;
-};
 
 export const DataTable = () => {
   const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
-  const [orderStatus, setOrderStatus] = useState<FoodStatus>();
 
   const getFoodOrder = async () => {
     try {
@@ -65,8 +61,8 @@ export const DataTable = () => {
         "http://localhost:3001/foodOrder"
       );
       setFoodOrder(response.data.foodOrder);
-      console.log(response.data.foodOrder);
-      setOrderStatus(response.status);
+      console.log(response);
+
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -74,7 +70,7 @@ export const DataTable = () => {
 
   useEffect(() => {
     getFoodOrder();
-  }, [orderStatus]);
+  }, []);
 
   return (
     <Table>
@@ -82,7 +78,7 @@ export const DataTable = () => {
       <TableHeader className="w-full text-[#71717a]">
         <TableRow>
           <TableHead className="p-4 w-[30px]">
-            <Checkbox />
+            <Checkbox className="bg-red-500" />
           </TableHead>
           <TableHead className="p-4">№</TableHead>
           <TableHead className="p-4">Customer</TableHead>
@@ -105,7 +101,7 @@ export const DataTable = () => {
         {foodOrder.map((order) => (
           <TableRow key={order._id} className="w-full">
             <TableCell className="p-4 w-[30px]">
-              <Checkbox />
+              <Checkbox className="bg-red-500" />
             </TableCell>
             <TableCell className="p-4 w-[30px] align-middle">1</TableCell>
             <TableCell className="p-4">{order.user.email}</TableCell>
@@ -118,14 +114,16 @@ export const DataTable = () => {
               </div>
             </TableCell>
             <TableCell className="p-4">{order.createdAt}</TableCell>
-            <TableCell className="p-4 text-red-500">
+            <TableCell className="p-4 text-red-600">
               {order.totalPrice}₮
             </TableCell>
-            <TableCell className="p-4 w-[30px] overflow-hidden">
+            <TableCell className="p-4 max-w-[500px] overflow-x-scroll">
               {order.deliveryAddress}
             </TableCell>
 
-            <ChangeDeliveryState order={order} />
+            <TableCell>
+              <ChangeDeliveryState order={order} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
