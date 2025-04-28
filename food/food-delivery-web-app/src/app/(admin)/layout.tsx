@@ -11,7 +11,6 @@ export default function AdminPageLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <div className="w-screen h-screen flex">
       <div className="flex flex-col gap-10 h-full w-fit py-9 px-5">
@@ -25,27 +24,21 @@ export default function AdminPageLayout({
           </div>
         </div>
         <div className="flex flex-col gap-6">
-
-
-
-          <Link href={"/foodMenu"}>
-
+          <Link href={"/AdminPage/foodMenu"}>
             <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
               <FoodMenu />
               <div className="text-[14px] text-[#09090b]">Food menu</div>
             </div>
           </Link>
 
-
-          <Link href={"/orders"}>
+          <Link href={"/AdminPage/orders"}>
             <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
               <Van />
               <div className="text-[14px] text-[#09090b]">Orders</div>
             </div>
           </Link>
 
-
-          <Link href={"/settings"}>
+          <Link href={"/AdminPage/settings"}>
             <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
               <Settings />
               <div className="text-[14px] text-[#09090b]">Settings</div>
