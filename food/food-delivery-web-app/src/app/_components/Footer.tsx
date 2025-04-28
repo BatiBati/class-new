@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { LogoCol } from "./assets/LogoCol";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const runningWords = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11];
 
@@ -13,6 +13,7 @@ export type Response = {
 
 export type Categories = {
   categoryName: string;
+  _id: string;
 };
 
 export const Footer = () => {
@@ -24,7 +25,6 @@ export const Footer = () => {
         "http://localhost:3001/category"
       );
       setCategory(response.data.category);
-
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -33,7 +33,6 @@ export const Footer = () => {
   useEffect(() => {
     getCategoryData();
   }, []);
-
 
   return (
     <div className="w-full flex justify-center">
@@ -52,12 +51,10 @@ export const Footer = () => {
             >
               {runningWords.map((_, index) => {
                 return (
-                  <div
-                    className="text-[30px] font-semibold"
-                    key={index}>
+                  <div className="text-[30px] font-semibold" key={index}>
                     Fresh fast delivered
                   </div>
-                )
+                );
               })}
             </motion.div>
           </div>

@@ -7,10 +7,8 @@ import { DataTable, FoodOrderType, Response } from "../_components/DataTable";
 import { PaginationPage } from "../_components/PaginationPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-
 export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
-  
 
   const getFoodOrder = async () => {
     try {
@@ -29,7 +27,6 @@ export default function Order() {
   return (
     <div className="flex flex-col gap-4 bg-[#F4F4F5] p-10 w-full">
       <div className="w-full flex justify-end">
-
         <Avatar className="w-10 h-10">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
@@ -50,7 +47,6 @@ export default function Order() {
         <div>
           <DataTable />
         </div>
-
       </div>
       <div className="w-full flex justify-end">
         <PaginationPage />

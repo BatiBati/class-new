@@ -35,27 +35,25 @@ export const CategoryNames = () => {
           opts={{
             align: "start",
           }}
-
         >
           <div className="w-full flex justify-center ">
             <CarouselContent className="w-[1200px] flex gap-10">
               {categories.map((category) => {
                 return (
-                  <CarouselItem className="md:basis-1/9 bg-white flex justify-center rounded-full  " >
-                    <div >
-                      {category.categoryName}
-                    </div>
+                  <CarouselItem
+                    className="md:basis-1/9 bg-white flex justify-center rounded-full  "
+                    key={category._id}
+                  >
+                    <div>{category.categoryName}</div>
                   </CarouselItem>
-                )
+                );
               })}
             </CarouselContent>
           </div>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      </div >
-
-
-    </div >
+      </div>
+    </div>
   );
 };
