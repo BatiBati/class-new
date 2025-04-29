@@ -1,7 +1,10 @@
 "use client";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Foods } from "./Foods";
+import { CountFoods } from "./CountFoods";
+import { Button } from "@/components/ui/button";
+import { AddCategory } from "./AddCategory";
 
 type Response = {
   category: CategoryType[];
@@ -12,7 +15,10 @@ type CategoryType = {
   _id: string;
 };
 
-export const CategoryCompBot = () => {
+type FoodsLengthType = {
+  foodsLength: number;
+};
+export const CategoryCompTop = ({ foodsLength }: FoodsLengthType) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
 
   const getCategoryData = async () => {
@@ -31,22 +37,24 @@ export const CategoryCompBot = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 ">
+    <div className="flex flex-wrap gap-3 items-center">
+      <Button className="rounded-full">
+        <div>All Dishes</div>
+        <div className="bg-black text-white rounded-full px-[10px] py-[2px]">
+          {foodsLength}
+        </div>
+      </Button>
       {categories.map((category) => {
         return (
-          <div
-            className="w-full bg-white p-5 rounded-xl flex gap-5"
-            key={category._id}
-          >
-            <div className="w-full flex ">
-              <Foods
-                categoryId={category._id}
-                categoryName={category.categoryName}
-              />
-            </div>
+          <div key={category._id}>
+            <CountFoods
+              categoryId={category._id}
+              categoryName={category.categoryName}
+            />
           </div>
         );
       })}
+      <AddCategory />
     </div>
   );
 };

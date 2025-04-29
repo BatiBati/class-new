@@ -51,7 +51,6 @@ type FoodsTypes = {
   quantity: number;
 };
 
-
 export const DataTable = () => {
   const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
 
@@ -62,7 +61,6 @@ export const DataTable = () => {
       );
       setFoodOrder(response.data.foodOrder);
       console.log(response);
-
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -75,7 +73,7 @@ export const DataTable = () => {
   return (
     <Table>
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-      <TableHeader className="w-full text-[#71717a]">
+      <TableHeader className="w-full text-[#71717a] ">
         <TableRow>
           <TableHead className="p-4 w-[30px]">
             <Checkbox className="bg-red-500" />
@@ -127,12 +125,6 @@ export const DataTable = () => {
           </TableRow>
         ))}
       </TableBody>
-      {/* <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter> */}
     </Table>
   );
 };

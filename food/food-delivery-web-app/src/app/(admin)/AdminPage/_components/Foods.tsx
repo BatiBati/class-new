@@ -7,9 +7,10 @@ import { FoodResponse, FoodType } from "../foodMenu/page";
 
 type FoodsProps = {
   categoryId: string;
+  categoryName: string;
 };
 
-export const Foods = ({ categoryId }: FoodsProps) => {
+export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
   const [foods, setFoods] = useState<FoodType[]>([]);
 
   const getFood = async () => {
@@ -27,10 +28,12 @@ export const Foods = ({ categoryId }: FoodsProps) => {
     getFood();
   }, []);
 
-  console.log(foods);
-
   return (
     <div className="flex flex-wrap gap-5">
+      <div className="w-full text-[20px] font-semibold">
+        {categoryName} ({foods.length})
+      </div>
+      {/* <div>sss</div> */}
       {foods.map((food) => {
         return (
           <div
@@ -48,11 +51,13 @@ export const Foods = ({ categoryId }: FoodsProps) => {
             </div>
             <div className="w-full gap-2 h-fit flex flex-col justify-between">
               <div className="flex justify-between items-center">
-                <p className="text-[#EF4444] font-medium">Food name Here</p>
-                <p className="text-black text-[12px] font-normal">$</p>
+                <p className="text-[#EF4444] font-medium">{food.foodName}</p>
+                <p className="text-black text-[12px] font-normal">
+                  $ {food.price}
+                </p>
               </div>
               <p className="text-black text-[12px] font-normal">
-                Food Ingeredients here
+                {food.ingredients}
               </p>
             </div>
           </div>

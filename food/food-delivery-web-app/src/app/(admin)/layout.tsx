@@ -5,6 +5,9 @@ import { FoodMenu } from "./AdminPage/_components/assets/FoodMenu";
 import { AdminPageLogo } from "./AdminPage/_components/assets/Logo";
 import { Van } from "./AdminPage/_components/assets/Van";
 import Link from "next/link";
+import { useState } from "react";
+import { AdminPageStyleChange } from "./AdminPage/_components/AdminPageStyleChange";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function AdminPageLayout({
   children,
@@ -13,41 +16,10 @@ export default function AdminPageLayout({
 }>) {
   return (
     <div className="w-screen h-screen flex">
-      <div className="flex flex-col gap-10 h-full w-fit py-9 px-5">
-        <div className="flex gap-2">
-          <div className="w-[40px] h-[40px]">
-            <AdminPageLogo />
-          </div>
-          <div>
-            <div className="text-[18px] font-semibold">NomNom</div>
-            <div className="text-[12px] text-[#71717A]">Swift delivery</div>
-          </div>
-        </div>
-        <div className="flex flex-col gap-6">
-          <Link href={"/AdminPage/foodMenu"}>
-            <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
-              <FoodMenu />
-              <div className="text-[14px] text-[#09090b]">Food menu</div>
-            </div>
-          </Link>
-
-          <Link href={"/AdminPage/orders"}>
-            <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
-              <Van />
-              <div className="text-[14px] text-[#09090b]">Orders</div>
-            </div>
-          </Link>
-
-          <Link href={"/AdminPage/settings"}>
-            <div className="flex items-center gap-[10px] py-2 px-6 cursor-pointer">
-              <Settings />
-              <div className="text-[14px] text-[#09090b]">Settings</div>
-            </div>
-          </Link>
-        </div>
-      </div>
+      <AdminPageStyleChange />
 
       {children}
+      <Toaster />
     </div>
   );
 }

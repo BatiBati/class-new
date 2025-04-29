@@ -1,4 +1,6 @@
-export const Settings = () => {
+import { AdminMenuType } from "./FoodMenu";
+
+export const Settings = ({ adminMenu }: AdminMenuType) => {
   return (
     <svg
       width="18"
@@ -12,12 +14,14 @@ export const Settings = () => {
         stroke="#09090B"
         strokeLinecap="round"
         strokeLinejoin="round"
+        style={adminMenu === "/AdminPage/settings" ? { stroke: "white" } : {}}
       />
       <path
         d="M9 12.7502C10.5188 12.7502 11.75 11.5189 11.75 10.0002C11.75 8.48138 10.5188 7.25016 9 7.25016C7.48122 7.25016 6.25 8.48138 6.25 10.0002C6.25 11.5189 7.48122 12.7502 9 12.7502Z"
         stroke="#09090B"
         strokeLinecap="round"
         strokeLinejoin="round"
+        style={adminMenu === "/AdminPage/settings" ? { stroke: "white" } : {}}
       />
     </svg>
   );

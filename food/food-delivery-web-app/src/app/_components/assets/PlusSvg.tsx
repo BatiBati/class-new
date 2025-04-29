@@ -1,12 +1,12 @@
 export type StokeTpye = {
-  stroke: string
-}
+  stroke: string;
+};
 
 export const PlusSvg = ({ stroke }: StokeTpye) => {
   return (
     <svg
-      width="16"
-      height="16"
+      width="5"
+      height="5"
       viewBox="0 0 12 12"
       fill="red"
       xmlns="http://www.w3.org/2000/svg"

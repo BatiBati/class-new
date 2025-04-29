@@ -1,4 +1,6 @@
-export const Van = () => {
+import { AdminMenuType } from "./FoodMenu";
+
+export const Van = ({ adminMenu }: AdminMenuType) => {
   return (
     <svg
       width="20"
@@ -12,6 +14,7 @@ export const Van = () => {
         stroke="#09090B"
         strokeLinecap="round"
         strokeLinejoin="round"
+        style={adminMenu === "/AdminPage/orders" ? { stroke: "white" } : {}}
       />
     </svg>
   );
