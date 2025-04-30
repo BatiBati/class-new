@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { CountFoods } from "./CountFoods";
 import { Button } from "@/components/ui/button";
 import { AddCategory } from "./AddCategory";
+import { toast } from "sonner";
 
 type Response = {
   category: CategoryType[];
@@ -37,7 +38,7 @@ export const CategoryCompTop = ({ foodsLength }: FoodsLengthType) => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-3 items-center">
+    <div className="flex flex-wrap gap-3 items-center ">
       <Button className="rounded-full">
         <div>All Dishes</div>
         <div className="bg-black text-white rounded-full px-[10px] py-[2px]">
@@ -54,7 +55,7 @@ export const CategoryCompTop = ({ foodsLength }: FoodsLengthType) => {
           </div>
         );
       })}
-      <AddCategory />
+      <AddCategory getCategoryData={getCategoryData} />
     </div>
   );
 };

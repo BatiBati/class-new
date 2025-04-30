@@ -13,31 +13,35 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
+
 import { Loader } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const AddCategory = () => {
+type GetCategoryDataType = {
+  getCategoryData: () => Promise<void>;
+};
+
+export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
+  const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   const handleCreate = async () => {
     setLoading(true);
     try {
       await axios.post("http://localhost:3001/category", {
-        categoryName: { inputValue },
+        categoryName: inputValue,
       });
+      await getCategoryData();
       toast.success("Category created succesfully");
+      setOpen(false);
     } catch {
       toast.error("Failed to create category");
     } finally {
+      setInputValue("");
       setLoading(false);
     }
-  };
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
   };
 
   return (
@@ -64,7 +68,7 @@ export const AddCategory = () => {
             placeholder="Type category name..."
             defaultValue=""
             className="col-span-3"
-            onChange={handleInputChange}
+            onChange={(e) => setInputValue(e.target.value)}
           />
         </div>
         {/* <div className="grid grid-cols-4 items-center gap-4">

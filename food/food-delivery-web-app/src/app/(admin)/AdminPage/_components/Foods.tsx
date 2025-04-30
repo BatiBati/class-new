@@ -4,6 +4,7 @@ import axios from "axios";
 import { EditSvg } from "./assets/EditSvg";
 import { useEffect, useState } from "react";
 import { FoodResponse, FoodType } from "../foodMenu/page";
+import { FoodAddComp } from "./FoodAddComp";
 
 type FoodsProps = {
   categoryId: string;
@@ -29,11 +30,11 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-5">
+    <div className="flex flex-wrap gap-5 ">
       <div className="w-full text-[20px] font-semibold">
         {categoryName} ({foods.length})
       </div>
-      {/* <div>sss</div> */}
+      <FoodAddComp />
       {foods.map((food) => {
         return (
           <div
