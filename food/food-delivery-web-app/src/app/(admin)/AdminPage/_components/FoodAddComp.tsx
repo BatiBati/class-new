@@ -3,12 +3,11 @@ import { PlusSvg } from "@/app/_components/assets/PlusSvg";
 import { Button } from "@/components/ui/button";
 import { use, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +16,6 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -25,13 +23,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AddPictureSvg } from "./assets/AddPictureSvg";
 import { AddFoodImage } from "./AddFoodImage";
 import { Loader } from "lucide-react";
 import axios from "axios";
-
-const UPLOAD_KEY = "Food_images";
-const IMAGE_API_KEY = "dazhij9zy";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   foodName: z
@@ -40,27 +35,38 @@ const formSchema = z.object({
     .max(20, { message: "Max length must be 20 characters" }),
   price: z
     .string()
-    .min(3, { message: "Food name must be at least 3 characters." }),
+    .min(1, { message: "Food price must be at least 1 characters." }),
   // image: z.string().min(8, { message: "Please enter image." }),
   ingredients: z
     .string()
     .min(3, { message: "Ingredients must be at least 3 characters." }),
-  // category: z.string(),
+  category: z.string(),
 });
+type CategoryNameType = {
+  categoryName: string;
+  categoryId: string;
+  getCategoryData: () => Promise<void>;
+  getFood: () => Promise<void>;
+};
 
-export const FoodAddComp = () => {
+export const FoodAddComp = ({
+  categoryName,
+  categoryId,
+  getCategoryData,
+  getFood,
+}: CategoryNameType) => {
+  const [deployedImageUrl, setDeployedImageUrl] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [values, setValues] = useState({});
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       foodName: "aaa",
-      price: "",
-      // image: "/asdasdadasdas",
+      price: "0",
+      // image: deployedImageUrl,
       ingredients: "asdad",
-      // category: "",
+      category: "",
     },
   });
 
@@ -72,19 +78,30 @@ export const FoodAddComp = () => {
           foodName: values.foodName,
           price: Number(values.price),
           ingredients: values.ingredients,
-          image: "./",
-          category: "68060ad5260fe70ac1903223",
+          image: deployedImageUrl,
+          category: categoryId,
         });
+        await getCategoryData();
+        await getFood();
+        toast.success("Food created succesfully.");
+        form.reset({
+          foodName: "",
+          price: "",
+          ingredients: "",
+          // image: deployedImageUrl,
+          category: "",
+        });
+        setOpen(false);
       } catch (error) {
-        console.log(error);
+        toast.error("Failed to create food.");
+      } finally {
+        setLoading(false);
+        setDeployedImageUrl("");
       }
     };
 
     handleCreate();
-    // setValues(values);
   }
-
-  console.log(values);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -97,16 +114,13 @@ export const FoodAddComp = () => {
             <PlusSvg stroke="white " />
           </div>
           <div className="text-[14px] font-medium w-fit">
-            Add new Dish to Appetizers
+            Add new Dish to {categoryName}
           </div>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add new Dish to Appetizers</DialogTitle>
-          {/* <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription> */}
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <Form {...form}>
@@ -151,7 +165,7 @@ export const FoodAddComp = () => {
                         <Input
                           placeholder="List of ingredients"
                           {...field}
-                          className="h-[90px]  "
+                          className="h-full"
                         />
                       </FormControl>
                       <FormMessage />
@@ -159,9 +173,16 @@ export const FoodAddComp = () => {
                   )}
                 />
               </div>
-              <AddFoodImage />
+              <AddFoodImage
+                deployedImageUrl={deployedImageUrl}
+                setDeployedImageUrl={setDeployedImageUrl}
+              />
               <DialogFooter>
-                <Button type="submit" className="bg-black text-white">
+                <Button
+                  type="submit"
+                  disabled={deployedImageUrl === ""}
+                  className="bg-black text-white"
+                >
                   {loading === false ? "Add dish" : <Loader />}
                 </Button>
               </DialogFooter>

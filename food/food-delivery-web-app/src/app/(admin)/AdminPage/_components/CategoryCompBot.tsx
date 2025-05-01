@@ -42,6 +42,7 @@ export const CategoryCompBot = () => {
               <Foods
                 categoryId={category._id}
                 categoryName={category.categoryName}
+                getCategoryData={getCategoryData}
               />
             </div>
           </div>

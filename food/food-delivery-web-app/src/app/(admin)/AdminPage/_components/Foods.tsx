@@ -5,13 +5,20 @@ import { EditSvg } from "./assets/EditSvg";
 import { useEffect, useState } from "react";
 import { FoodResponse, FoodType } from "../foodMenu/page";
 import { FoodAddComp } from "./FoodAddComp";
+import { FoodEditButton } from "./FoodEditButton";
+import { Button } from "@/components/ui/button";
 
 type FoodsProps = {
   categoryId: string;
   categoryName: string;
+  getCategoryData: () => Promise<void>;
 };
 
-export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
+export const Foods = ({
+  categoryId,
+  categoryName,
+  getCategoryData,
+}: FoodsProps) => {
   const [foods, setFoods] = useState<FoodType[]>([]);
 
   const getFood = async () => {
@@ -34,7 +41,12 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
       <div className="w-full text-[20px] font-semibold">
         {categoryName} ({foods.length})
       </div>
-      <FoodAddComp />
+      <FoodAddComp
+        categoryName={categoryName}
+        categoryId={categoryId}
+        getCategoryData={getCategoryData}
+        getFood={getFood}
+      />
       {foods.map((food) => {
         return (
           <div
@@ -42,14 +54,12 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
             key={food._id}
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative ">
-              <img
-                src="/images/TestFoodPic.png"
-                className="h-full w-full rounded-xl"
-              />
+              <img src={`${food.image}`} className="h-full w-full rounded-xl" />
               <div className="absolute right-5 bottom-5 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer">
-                <EditSvg />
+                <FoodEditButton />
               </div>
             </div>
+
             <div className="w-full gap-2 h-fit flex flex-col justify-between">
               <div className="flex justify-between items-center">
                 <p className="text-[#EF4444] font-medium">{food.foodName}</p>
@@ -57,6 +67,7 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
                   $ {food.price}
                 </p>
               </div>
+
               <p className="text-black text-[12px] font-normal">
                 {food.ingredients}
               </p>

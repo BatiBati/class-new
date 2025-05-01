@@ -34,7 +34,7 @@ export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
         categoryName: inputValue,
       });
       await getCategoryData();
-      toast.success("Category created succesfully");
+      toast.success("Category created succesfully.");
       setOpen(false);
     } catch {
       toast.error("Failed to create category");
