@@ -30,6 +30,10 @@ export const CategoryCompBot = () => {
     getCategoryData();
   }, []);
 
+  const handleGetCategoryData = () => {
+    getCategoryData();
+  };
+
   return (
     <div className="flex flex-col gap-5 ">
       {categories.map((category) => {
@@ -42,7 +46,7 @@ export const CategoryCompBot = () => {
               <Foods
                 categoryId={category._id}
                 categoryName={category.categoryName}
-                getCategoryData={getCategoryData}
+                getCategoryData={handleGetCategoryData}
               />
             </div>
           </div>

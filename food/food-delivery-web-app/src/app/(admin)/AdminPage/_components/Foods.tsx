@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 type FoodsProps = {
   categoryId: string;
   categoryName: string;
-  getCategoryData: () => Promise<void>;
+  getCategoryData: () => void;
 };
 
 export const Foods = ({
@@ -36,15 +36,19 @@ export const Foods = ({
     getFood();
   }, []);
 
+  const handleGetCategoryData = () => {
+    getCategoryData();
+  };
+
   return (
-    <div className="flex flex-wrap gap-5 ">
+    <div className="flex flex-wrap gap-5 w-full ">
       <div className="w-full text-[20px] font-semibold">
         {categoryName} ({foods.length})
       </div>
       <FoodAddComp
         categoryName={categoryName}
         categoryId={categoryId}
-        getCategoryData={getCategoryData}
+        getCategoryData={handleGetCategoryData}
         getFood={getFood}
       />
       {foods.map((food) => {
@@ -55,8 +59,18 @@ export const Foods = ({
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative ">
               <img src={`${food.image}`} className="h-full w-full rounded-xl" />
-              <div className="absolute right-5 bottom-5 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer">
-                <FoodEditButton />
+              <div className="absolute right-5 bottom-5 w-11 h-11 rounded-full flex justify-center items-center">
+                <FoodEditButton
+                  categoryId={categoryId}
+                  categoryName={categoryName}
+                  foodId={food._id}
+                  foodName={food.foodName}
+                  foodPrice={food.price}
+                  foodIngredients={food.ingredients}
+                  foodImage={food.image}
+                  getFood={getFood}
+                  getCategoryData={getCategoryData}
+                />
               </div>
             </div>
 

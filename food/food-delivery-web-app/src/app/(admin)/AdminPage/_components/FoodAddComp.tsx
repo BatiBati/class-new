@@ -32,7 +32,7 @@ const formSchema = z.object({
   foodName: z
     .string()
     .min(3, { message: "Food name must be at least 3 characters." })
-    .max(20, { message: "Max length must be 20 characters" }),
+    .max(50, { message: "Max length must be 20 characters" }),
   price: z
     .string()
     .min(1, { message: "Food price must be at least 1 characters." }),
@@ -45,7 +45,7 @@ const formSchema = z.object({
 type CategoryNameType = {
   categoryName: string;
   categoryId: string;
-  getCategoryData: () => Promise<void>;
+  getCategoryData: () => void;
   getFood: () => Promise<void>;
 };
 
@@ -64,7 +64,7 @@ export const FoodAddComp = ({
     defaultValues: {
       foodName: "aaa",
       price: "0",
-      // image: deployedImageUrl,
+      // image: "",
       ingredients: "asdad",
       category: "",
     },
@@ -88,7 +88,7 @@ export const FoodAddComp = ({
           foodName: "",
           price: "",
           ingredients: "",
-          // image: deployedImageUrl,
+          // image: "",
           category: "",
         });
         setOpen(false);

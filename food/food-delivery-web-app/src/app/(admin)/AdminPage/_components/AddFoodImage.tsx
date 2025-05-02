@@ -88,10 +88,10 @@ export const AddFoodImage = ({
             className="w-full h-[138px] rounded-xl"
           />
           <Button
-            className="absolute right-3 top-3 rounded-full"
-            // onClick={() => {
-            //   setDeployedImageUrl("");
-            // }}
+            className="absolute right-3 top-3 rounded-full "
+            onClick={() => {
+              setDeployedImageUrl("");
+            }}
           >
             X
           </Button>
