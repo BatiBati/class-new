@@ -32,6 +32,7 @@ import { DeleteSvg } from "./assets/DeleteSvg";
 import { DeleteFood } from "./DeleteFood";
 import { EditFoodImage } from "./EditFoodImage";
 import { UpdateFoodCategory } from "./UpdateFoodCategory";
+import { Loader } from "lucide-react";
 
 const formSchema = z.object({
   foodName: z
@@ -57,7 +58,6 @@ type DefaultValuesType = {
   foodIngredients: string;
   foodImage: string;
   getFood: () => Promise<void>;
-  getCategoryData: () => void;
 };
 
 export const FoodEditButton = ({
@@ -69,7 +69,6 @@ export const FoodEditButton = ({
   foodIngredients,
   foodImage,
   getFood,
-  getCategoryData,
 }: DefaultValuesType) => {
   const [deployedImageUrl, setDeployedImageUrl] = useState("");
   const [open, setOpen] = useState(false);
@@ -80,7 +79,7 @@ export const FoodEditButton = ({
     defaultValues: {
       foodName: foodName,
       price: String(foodPrice),
-      image: deployedImageUrl,
+      image: foodImage,
       ingredients: foodIngredients,
       category: categoryId,
     },
@@ -94,11 +93,11 @@ export const FoodEditButton = ({
           foodName: values.foodName,
           price: Number(values.price),
           ingredients: values.ingredients,
-          image: "",
+          image: deployedImageUrl,
           category: selectedCategoryId,
         });
         await getFood();
-        location.reload();
+        // location.reload();
         toast.success("Food updated succesfully.");
         setOpen(false);
       } catch (error) {
@@ -190,14 +189,16 @@ export const FoodEditButton = ({
                   </FormItem>
                 )}
               />
-              {/* <EditFoodImage
+              <EditFoodImage
                 deployedImageUrl={deployedImageUrl}
                 setDeployedImageUrl={setDeployedImageUrl}
-              /> */}
+              />
               <div className="flex justify-between">
                 <DeleteFood />
                 <DialogFooter>
-                  <Button type="submit">Save changes</Button>
+                  <Button type="submit" disabled={deployedImageUrl === ""}>
+                    {loading === false ? "Save changes" : <Loader />}
+                  </Button>
                 </DialogFooter>
               </div>
             </form>

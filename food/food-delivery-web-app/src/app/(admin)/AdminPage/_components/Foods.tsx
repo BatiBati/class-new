@@ -11,13 +11,11 @@ import { Button } from "@/components/ui/button";
 type FoodsProps = {
   categoryId: string;
   categoryName: string;
-  getCategoryData: () => void;
 };
 
 export const Foods = ({
   categoryId,
   categoryName,
-  getCategoryData,
 }: FoodsProps) => {
   const [foods, setFoods] = useState<FoodType[]>([]);
 
@@ -36,9 +34,7 @@ export const Foods = ({
     getFood();
   }, []);
 
-  const handleGetCategoryData = () => {
-    getCategoryData();
-  };
+
 
   return (
     <div className="flex flex-wrap gap-5 w-full ">
@@ -48,7 +44,6 @@ export const Foods = ({
       <FoodAddComp
         categoryName={categoryName}
         categoryId={categoryId}
-        getCategoryData={handleGetCategoryData}
         getFood={getFood}
       />
       {foods.map((food) => {
@@ -59,7 +54,7 @@ export const Foods = ({
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative ">
               <img src={`${food.image}`} className="h-full w-full rounded-xl" />
-              <div className="absolute right-5 bottom-5 w-11 h-11 rounded-full flex justify-center items-center">
+              <div className="absolute right-[10px] bottom-[5px] w-11 h-11 rounded-full flex justify-center items-center">
                 <FoodEditButton
                   categoryId={categoryId}
                   categoryName={categoryName}
@@ -69,7 +64,6 @@ export const Foods = ({
                   foodIngredients={food.ingredients}
                   foodImage={food.image}
                   getFood={getFood}
-                  getCategoryData={getCategoryData}
                 />
               </div>
             </div>

@@ -45,14 +45,15 @@ const formSchema = z.object({
 type CategoryNameType = {
   categoryName: string;
   categoryId: string;
-  getCategoryData: () => void;
   getFood: () => Promise<void>;
 };
+
+
+
 
 export const FoodAddComp = ({
   categoryName,
   categoryId,
-  getCategoryData,
   getFood,
 }: CategoryNameType) => {
   const [deployedImageUrl, setDeployedImageUrl] = useState("");
@@ -81,7 +82,6 @@ export const FoodAddComp = ({
           image: deployedImageUrl,
           category: categoryId,
         });
-        await getCategoryData();
         await getFood();
         toast.success("Food created succesfully.");
         form.reset({

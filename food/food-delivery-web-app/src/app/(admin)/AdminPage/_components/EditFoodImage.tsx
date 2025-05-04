@@ -5,7 +5,7 @@ import { AddPictureSvg } from "./assets/AddPictureSvg";
 import { Button } from "@/components/ui/button";
 import { ChangeEvent, useState } from "react";
 
-type ImageType = {
+type EditFoodImageType = {
   deployedImageUrl: string;
   setDeployedImageUrl: () => Promise<void>;
 };
@@ -13,15 +13,22 @@ type ImageType = {
 export const EditFoodImage = ({
   deployedImageUrl,
   setDeployedImageUrl,
-}: ImageType) => {
+}: EditFoodImageType) => {
+
+
+
+
+
+
+
   return (
     <div>
-      {/* {!deployedImageUrl && (
+      {!deployedImageUrl && (
         <div className="w-full h-[140px] relative flex justify-center items-center bg-[#dee6f9] rounded-xl border-[4px] border-dotted border-[#c3c9f5]">
           <input
             type="file"
             className="w-full h-full flex flex-col justify-center items-center absolute text-[#dee6f9] z-10"
-            onChange={deployImg}
+            // onChange={deployImg}
           />
           {loading ? (
             <Loader />
@@ -38,7 +45,7 @@ export const EditFoodImage = ({
         </div>
       )}
 
-      {deployedImageUrl && (
+      {/* {deployedImageUrl && (
         <div className="relative">
           <img
             src={`${deployedImageUrl}`}
