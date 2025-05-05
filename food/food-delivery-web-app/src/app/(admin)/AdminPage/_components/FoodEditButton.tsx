@@ -70,7 +70,7 @@ export const FoodEditButton = ({
   foodImage,
   getFood,
 }: DefaultValuesType) => {
-  const [deployedImageUrl, setDeployedImageUrl] = useState("");
+  const [deployedImageUrl, setDeployedImageUrl] = useState(foodImage);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
@@ -97,7 +97,7 @@ export const FoodEditButton = ({
           category: selectedCategoryId,
         });
         await getFood();
-        // location.reload();
+        location.reload();
         toast.success("Food updated succesfully.");
         setOpen(false);
       } catch (error) {
@@ -194,7 +194,7 @@ export const FoodEditButton = ({
                 setDeployedImageUrl={setDeployedImageUrl}
               />
               <div className="flex justify-between">
-                <DeleteFood />
+                <DeleteFood foodId={foodId} getFood={getFood} />
                 <DialogFooter>
                   <Button type="submit" disabled={deployedImageUrl === ""}>
                     {loading === false ? "Save changes" : <Loader />}
