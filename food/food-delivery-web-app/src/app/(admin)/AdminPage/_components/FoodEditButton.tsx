@@ -73,7 +73,7 @@ export const FoodEditButton = ({
   const [deployedImageUrl, setDeployedImageUrl] = useState(foodImage);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(categoryId);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

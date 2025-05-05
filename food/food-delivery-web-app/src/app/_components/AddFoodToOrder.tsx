@@ -1,0 +1,98 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import { PlusSvg } from "./assets/PlusSvg";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
+import { toast } from "sonner";
+type Food = {
+  foodImage: string;
+  foodName: string;
+  foodIngredients: string;
+  foodPrice: number;
+};
+
+export const AddFoodToOrder = ({
+  foodImage,
+  foodName,
+  foodIngredients,
+  foodPrice,
+}: Food) => {
+  const [foodCount, setFoodCount] = useState(1);
+  const [isUseLoggedIn, setIsUSerLoggedIn] = useState(true);
+
+  const handleMinusFood = () => {
+    if (foodCount === 0) {
+      setFoodCount(0);
+    }
+    if (foodCount !== 0) {
+      setFoodCount(foodCount - 1);
+    }
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          className="absolute right-3 bottom-2 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer"
+          variant={"outline"}
+        >
+          <PlusSvg stroke={"#EF4444"} />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[826px] h-[412px]">
+        <div className="flex gap-5 h-full">
+          <div className="w-[50%] h-full">
+            <img src={`${foodImage}`} className="h-full w-full rounded-xl" />
+          </div>
+          <div className="w-[50%] h-full flex flex-col justify-between">
+            <DialogHeader>
+              <DialogTitle className="text-[30px] text-[#EF4444]">
+                {foodName}
+              </DialogTitle>
+              <div className="w-full">{foodIngredients}</div>
+            </DialogHeader>
+
+            <div className="flex flex-col gap-5">
+              <div className="w-full flex justify-between items-center">
+                <div>
+                  <div className="text-[16px] font-normal">Total price</div>
+                  <div className="font-semibold text-[24px]">${foodPrice}</div>
+                </div>
+                <div className=" flex items-center gap-3">
+                  <Button className="rounded-full" onClick={handleMinusFood}>
+                    -
+                  </Button>
+                  <div>{foodCount}</div>
+                  <Button
+                    className="rounded-full"
+                    onClick={() => setFoodCount(foodCount + 1)}
+                  >
+                    +
+                  </Button>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  className="bg-black text-white rounded-full w-full"
+                  onClick={() =>
+                    toast.success("Food is being added to the cart!")
+                  }
+                >
+                  Add to card
+                </Button>
+              </DialogFooter>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};

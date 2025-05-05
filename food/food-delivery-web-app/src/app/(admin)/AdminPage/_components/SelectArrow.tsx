@@ -18,6 +18,8 @@ type FoodsTypes = {
 };
 
 export const SelectArrow = ({ foodOrderItems }: Props) => {
+  console.log(foodOrderItems);
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -41,7 +43,7 @@ export const SelectArrow = ({ foodOrderItems }: Props) => {
                     className="w-[50px] h-[42px]"
                   />
                 </div>
-                <div className="text-[12px]">{food.food.foodName}</div>
+                <div className="text-[12px]">{food.food?.foodName}</div>
               </div>
               <div className="flex gap-1">
                 {food.quantity && <div>x</div>}

@@ -30,8 +30,6 @@ export const CategoryCompBot = () => {
     getCategoryData();
   }, []);
 
-
-
   return (
     <div className="flex flex-col gap-5 ">
       {categories.map((category) => {

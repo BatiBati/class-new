@@ -1,5 +1,6 @@
 "use client";
 
+import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "../_components/Footer";
 import { Header } from "../_components/Header";
 
@@ -18,6 +19,7 @@ export default function UserLayout({
         <Footer />
       </div>
       ;
+      <Toaster position="top-center" />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PlusSvg } from "./assets/PlusSvg";
+
+import { AddFoodToOrder } from "./AddFoodToOrder";
 type ResponseOfFoodsType = {
   foods: Food[];
 };
@@ -26,6 +27,7 @@ export const FoodCard = ({ id }: IdNumber) => {
         `http://localhost:3001/food?categoryId=${id}`
       );
       setFoods(response.data.foods);
+      console.log(response.data.foods);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -44,10 +46,13 @@ export const FoodCard = ({ id }: IdNumber) => {
             key={food._id}
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative">
-              <img src="/images/TestFoodPic.png" className="h-full w-full" />
-              <div className="absolute right-1 bottom-2 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer">
-                <PlusSvg stroke={"#EF4444"} />
-              </div>
+              <img src={food.image} className="h-full w-full" />
+              <AddFoodToOrder
+                foodImage={food.image}
+                foodName={food.foodName}
+                foodIngredients={food.ingredients}
+                foodPrice={food.price}
+              />
             </div>
             <div className="w-full gap-2 h-fit flex flex-col justify-between">
               <div className="flex justify-between items-center">

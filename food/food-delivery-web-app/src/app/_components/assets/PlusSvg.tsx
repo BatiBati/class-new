@@ -5,8 +5,8 @@ export type StokeTpye = {
 export const PlusSvg = ({ stroke }: StokeTpye) => {
   return (
     <svg
-      width="5"
-      height="5"
+      width="15"
+      height="15"
       viewBox="0 0 12 12"
       fill="red"
       xmlns="http://www.w3.org/2000/svg"

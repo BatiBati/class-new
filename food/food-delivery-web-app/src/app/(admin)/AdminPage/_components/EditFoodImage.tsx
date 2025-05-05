@@ -29,7 +29,7 @@ export const EditFoodImage = ({
     formData.append("upload_preset", UPLOAD_KEY);
 
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${IMAGE_API_KEY}/image/upload`,
         formData,
         {
@@ -56,9 +56,6 @@ export const EditFoodImage = ({
       setLoading(false);
     }
   };
-
-
-
 
   return (
     <div>
@@ -90,9 +87,10 @@ export const EditFoodImage = ({
             src={`${deployedImageUrl}`}
             className="w-full h-[138px] rounded-xl"
           />
-          <Button className="absolute right-3 top-3 rounded-full"
+          <Button
+            className="absolute right-3 top-3 rounded-full"
             onClick={() => {
-              setDeployedImageUrl("")
+              setDeployedImageUrl("");
             }}
           >
             X

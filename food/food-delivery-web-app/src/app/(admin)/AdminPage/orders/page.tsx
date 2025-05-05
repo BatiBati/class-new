@@ -24,6 +24,7 @@ export default function Order() {
   useEffect(() => {
     getFoodOrder();
   }, []);
+
   return (
     <div className="flex flex-col gap-4 bg-[#F4F4F5] p-10 w-full">
       <div className="w-full flex justify-end">

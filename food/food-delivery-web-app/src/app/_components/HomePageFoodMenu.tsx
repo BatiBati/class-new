@@ -21,7 +21,6 @@ export const HomePageFoodMenu = () => {
         "http://localhost:3001/category"
       );
       setCategories(response.data.category);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -34,11 +33,11 @@ export const HomePageFoodMenu = () => {
   return (
     <div className="w-[1440px] flex justify-center bg-[#404040] pb-14">
       <div className="w-[1264px] ">
-        {categories.slice(0, 4).map((category) => {
+        {categories.map((category) => {
           return (
             <div
               key={category._id}
-              className="text-[30px] font-semibold text-white flex flex-col gap-14"
+              className="text-[30px] font-semibold text-white flex flex-col gap-14 "
             >
               <div className="pt-14"> {category.categoryName}</div>
 

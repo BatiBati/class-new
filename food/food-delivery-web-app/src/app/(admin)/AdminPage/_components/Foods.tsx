@@ -13,10 +13,7 @@ type FoodsProps = {
   categoryName: string;
 };
 
-export const Foods = ({
-  categoryId,
-  categoryName,
-}: FoodsProps) => {
+export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
   const [foods, setFoods] = useState<FoodType[]>([]);
 
   const getFood = async () => {
@@ -24,6 +21,7 @@ export const Foods = ({
       const foodResponse = await axios.get<FoodResponse>(
         `http://localhost:3001/food?categoryId=${categoryId}`
       );
+
       setFoods(foodResponse.data.foods);
     } catch (error) {
       console.error("Error fetching foods", error);
@@ -33,8 +31,6 @@ export const Foods = ({
   useEffect(() => {
     getFood();
   }, []);
-
-
 
   return (
     <div className="flex flex-wrap gap-5 w-full ">
