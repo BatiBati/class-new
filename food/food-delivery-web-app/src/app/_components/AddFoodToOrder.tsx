@@ -10,8 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
 type Food = {
   foodImage: string;
   foodName: string;
@@ -19,26 +20,62 @@ type Food = {
   foodPrice: number;
 };
 
+type FoodItem = Food & { quantity: number };
+
 export const AddFoodToOrder = ({
   foodImage,
   foodName,
   foodIngredients,
   foodPrice,
 }: Food) => {
-  const [foodCount, setFoodCount] = useState(1);
-  const [isUseLoggedIn, setIsUSerLoggedIn] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const handleMinusFood = () => {
-    if (foodCount === 0) {
-      setFoodCount(0);
+    if (quantity === 0) {
+      setQuantity(0);
     }
-    if (foodCount !== 0) {
-      setFoodCount(foodCount - 1);
+    if (quantity !== 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCard = () => {
+    const newFoodItem: FoodItem = {
+      foodName,
+      foodIngredients,
+      foodPrice,
+      foodImage,
+      quantity,
+    };
+
+    try {
+      const existing: FoodItem[] = JSON.parse(
+        localStorage.getItem("foodOrder") || "[]"
+      );
+
+      const existingIndex = existing.findIndex(
+        (item) => item.foodName === newFoodItem.foodName
+      );
+
+      if (existingIndex !== -1) {
+        existing[existingIndex].quantity += newFoodItem.quantity;
+        localStorage.setItem("foodOrder", JSON.stringify(existing));
+      } else {
+        const updated = [...existing, newFoodItem];
+        localStorage.setItem("foodOrder", JSON.stringify(updated));
+      }
+
+      toast.success("Food is being added to the cart!");
+      setOpen(false);
+    } catch (error) {
+      toast.error;
+      ("Food add failed");
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           className="absolute right-3 bottom-2 w-11 h-11 bg-white rounded-full flex justify-center items-center cursor-pointer"
@@ -70,10 +107,10 @@ export const AddFoodToOrder = ({
                   <Button className="rounded-full" onClick={handleMinusFood}>
                     -
                   </Button>
-                  <div>{foodCount}</div>
+                  <div>{quantity}</div>
                   <Button
                     className="rounded-full"
-                    onClick={() => setFoodCount(foodCount + 1)}
+                    onClick={() => setQuantity(quantity + 1)}
                   >
                     +
                   </Button>
@@ -82,9 +119,7 @@ export const AddFoodToOrder = ({
               <DialogFooter>
                 <Button
                   className="bg-black text-white rounded-full w-full"
-                  onClick={() =>
-                    toast.success("Food is being added to the cart!")
-                  }
+                  onClick={() => handleAddToCard()}
                 >
                   Add to card
                 </Button>
