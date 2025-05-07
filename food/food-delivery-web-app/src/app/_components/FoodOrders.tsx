@@ -33,16 +33,16 @@ export const FoodOrders = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="bg-white hover:bg-[#ef4444] w-9 h-9 rounded-full relative"
+          className="bg-white w-9 h-9 rounded-full relative"
           variant={"outline"}
         >
           <ShoppingBox width="100px" height="13px" stroke="#000" />
-          <div className="absolute right-[-10px] top-[-10px] w-[20px] h-[20px] bg-[#ef4444] rounded-full">
+          {/* <div className="absolute right-[-10px] top-[-10px] w-[20px] h-[20px] bg-[#ef4444] rounded-full">
             1
-          </div>
+          </div> */}
         </Button>
       </SheetTrigger>
-      <SheetContent className="p-6 bg-[#404040] rounded-tl-[30px] rounded-bl-[30px] border-0">
+      <SheetContent className="!w-[520px] !max-w-none p-3 bg-[#404040] rounded-tl-[30px] rounded-bl-[30px] border-0">
         <SheetHeader>
           <SheetTitle>
             <div className="flex w-full gap-3 items-center">
@@ -55,7 +55,6 @@ export const FoodOrders = () => {
           <div className="flex w-full h-fit ">
             <Tabs
               defaultValue="cart"
-              className="w-[400px]"
               value={selectedTab}
               onValueChange={setSelectedTab}
             >
@@ -63,7 +62,7 @@ export const FoodOrders = () => {
                 <TabsTrigger
                   value="cart"
                   style={
-                    selectedTab === "cart" ? { backgroundColor: "#EF4444" } : {}
+                    selectedTab === "cart" ? { backgroundColor: "#EF4444", color: "white" } : {}
                   }
                   className="rounded-full"
                 >
@@ -73,7 +72,7 @@ export const FoodOrders = () => {
                   value="order"
                   style={
                     selectedTab === "order"
-                      ? { backgroundColor: "#EF4444" }
+                      ? { backgroundColor: "#EF4444", color: "white" }
                       : {}
                   }
                   className="rounded-full"
@@ -81,23 +80,56 @@ export const FoodOrders = () => {
                   Order
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="cart">
+              <TabsContent value="cart" className="flex flex-col gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>My cart</CardTitle>
+                    <CardTitle className="text-[20px] font-semibold">My cart</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    <div className="space-y-1">
-                      <Label htmlFor="name">Name</Label>
-                      <Input id="name" defaultValue="Pedro Duarte" />
+                    <div className="space-y-1 flex w-full gap-[10px]">
+                      <div className="h-[120px]">
+                        <img src="/images/orderFood.png" className="w-full h-full rounded-xl" />
+                      </div>
+                      <div className=" flex flex-col gap-2">
+                        <div className="flex w-full justify-between">
+                          <div className="text-[#EF4444] font-bold text-[16px]">Sunshine Stackers </div>
+                          <Button className="rounded-full border-[1px] border-[#EF4444] text-[#EF4444] hover:text-[#EF4444] cursor-pointer" variant="outline">X</Button>
+                        </div>
+                        <div>Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.</div>
+                      </div>
+
                     </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="username">Username</Label>
-                      <Input id="username" defaultValue="@peduarte" />
+                    <div className="w-full border-[2px] border-dashed"></div>
+                  </CardContent>
+                  <CardFooter>
+
+                    <Button className="w-full rounded-full border-[1px] border-[#EF4444] text-[#EF4444] hover:text-[#EF4444] cursor-pointer">Add food</Button>
+
+                  </CardFooter>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-[20px] font-semibold">Payment info</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <div className="space-y-1 w-full flex flex-col gap-2">
+                      <div className="w-full flex justify-between">
+                        <div className="text-[#71717A]">Items</div>
+                        <div className="text-[#09090B] font-bold text-[16px]">$25.2</div>
+                      </div>
+                      <div className="w-full flex justify-between">
+                        <div className="text-[#71717A]">Shipping</div>
+                        <div className="text-[#09090B] font-bold text-[16px]">$25.2</div>
+                      </div>
+                      <div className="w-full border-[2px] border-dashed"></div>
+                    </div>
+                    <div className="w-full flex justify-between">
+                      <div className="text-[#71717A]">Total</div>
+                      <div className="text-[#09090B] font-bold text-[16px]">$25.2</div>
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button>Save changes</Button>
+                    <Button className="w-full rounded-full border-[1px] bg-[#EF4444] hover:bg-[#EF4444] hover:text-white text-white cursor-pointer">Checkout</Button>
                   </CardFooter>
                 </Card>
               </TabsContent>
@@ -128,11 +160,11 @@ export const FoodOrders = () => {
             </Tabs>
           </div>
         </SheetHeader>
-        <SheetFooter>
+        {/* <SheetFooter>
           <SheetClose asChild>
             <Button type="submit">Save changes</Button>
           </SheetClose>
-        </SheetFooter>
+        </SheetFooter> */}
       </SheetContent>
     </Sheet>
   );
