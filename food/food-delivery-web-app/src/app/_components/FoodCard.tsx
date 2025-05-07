@@ -27,7 +27,6 @@ export const FoodCard = ({ id }: IdNumber) => {
         `http://localhost:3001/food?categoryId=${id}`
       );
       setFoods(response.data.foods);
-      console.log(response.data.foods);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -48,6 +47,7 @@ export const FoodCard = ({ id }: IdNumber) => {
             <div className="rounded-xl overflow-hidden h-[210px] relative">
               <img src={food.image} className="h-full w-full" />
               <AddFoodToOrder
+                foodId={food._id}
                 foodImage={food.image}
                 foodName={food.foodName}
                 foodIngredients={food.ingredients}

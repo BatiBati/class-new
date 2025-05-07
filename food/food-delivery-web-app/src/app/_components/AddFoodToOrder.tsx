@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Food = {
+  foodId: number;
   foodImage: string;
   foodName: string;
   foodIngredients: string;
@@ -23,6 +24,7 @@ type Food = {
 type FoodItem = Food & { quantity: number };
 
 export const AddFoodToOrder = ({
+  foodId,
   foodImage,
   foodName,
   foodIngredients,
@@ -30,6 +32,7 @@ export const AddFoodToOrder = ({
 }: Food) => {
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const totalPrice = quantity * foodPrice;
 
   const handleMinusFood = () => {
     if (quantity === 0) {
@@ -42,35 +45,39 @@ export const AddFoodToOrder = ({
 
   const handleAddToCard = () => {
     const newFoodItem: FoodItem = {
+      foodId,
       foodName,
       foodIngredients,
       foodPrice,
       foodImage,
       quantity,
     };
+    if (quantity > 0) {
+      try {
+        const existing: FoodItem[] = JSON.parse(
+          localStorage.getItem("foodOrder") || "[]"
+        );
 
-    try {
-      const existing: FoodItem[] = JSON.parse(
-        localStorage.getItem("foodOrder") || "[]"
-      );
+        const existingIndex = existing.findIndex(
+          (item) => item.foodName === newFoodItem.foodName
+        );
 
-      const existingIndex = existing.findIndex(
-        (item) => item.foodName === newFoodItem.foodName
-      );
+        if (existingIndex !== -1) {
+          existing[existingIndex].quantity += newFoodItem.quantity;
+          localStorage.setItem("foodOrder", JSON.stringify(existing));
+        } else {
+          const updated = [...existing, newFoodItem];
+          localStorage.setItem("foodOrder", JSON.stringify(updated));
+        }
 
-      if (existingIndex !== -1) {
-        existing[existingIndex].quantity += newFoodItem.quantity;
-        localStorage.setItem("foodOrder", JSON.stringify(existing));
-      } else {
-        const updated = [...existing, newFoodItem];
-        localStorage.setItem("foodOrder", JSON.stringify(updated));
+        toast.success("Food is being added to the cart!");
+        setOpen(false);
+      } catch (error) {
+        toast.error;
+        ("Food add failed");
       }
-
-      toast.success("Food is being added to the cart!");
-      setOpen(false);
-    } catch (error) {
-      toast.error;
-      ("Food add failed");
+    } else {
+      toast.error("Can't order 0 food");
     }
   };
 
@@ -101,7 +108,7 @@ export const AddFoodToOrder = ({
               <div className="w-full flex justify-between items-center">
                 <div>
                   <div className="text-[16px] font-normal">Total price</div>
-                  <div className="font-semibold text-[24px]">${foodPrice}</div>
+                  <div className="font-semibold text-[24px]">${totalPrice}</div>
                 </div>
                 <div className=" flex items-center gap-3">
                   <Button className="rounded-full" onClick={handleMinusFood}>
