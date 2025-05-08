@@ -23,22 +23,32 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-type Food = {
+import { Loader } from "lucide-react";
+import { UserLastOrder } from "./UserLastOrder";
+export type Food = {
   foodId: string;
   foodImage: string;
   foodName: string;
   foodIngredients: string;
   foodPrice: number;
   quantity: number;
+  oneFoodTotalPrice: number;
 };
 
-export const FoodOrderLocalStorage = () => {
+export const GetFoodOrderLocalStorage = () => {
   const [selectedTab, setSelectedTab] = useState("cart");
   const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] = useState<
     Food[]
   >([]);
-  const [totalPrice, setTotalPrice] = useState<number>();
-  const [quantity, setQuantity] = useState<number>();
+  const [loading, setLoading] = useState(false);
+  const [shipping, setShipping] = useState(0.99);
+
+  const ITEMS_TOTAL = foodDataFromLocalStorage.reduce(
+    (acc, item) => acc + item.foodPrice * item.quantity,
+    0
+  );
+
+  const TOTAL_PRICE = ITEMS_TOTAL + shipping;
 
   useEffect(() => {
     const existing: Food[] = JSON.parse(
@@ -49,15 +59,17 @@ export const FoodOrderLocalStorage = () => {
   }, []);
 
   const handleDeleteFood = (foodId: string) => {
+    setLoading(true);
     const updatedData = foodDataFromLocalStorage.filter(
       (food) => food.foodId !== foodId
     );
 
     setFoodDataFromLocalStorage(updatedData);
     localStorage.setItem("foodOrder", JSON.stringify(updatedData));
+    setLoading(false);
   };
 
-  const handlePlusFood = (foodId: string) => {
+  const handlePlusFood = (foodId: string, foodPrice: number) => {
     let updatedData = [...foodDataFromLocalStorage];
 
     updatedData = updatedData.map((item) => {
@@ -65,7 +77,7 @@ export const FoodOrderLocalStorage = () => {
         return {
           ...item,
           quantity: item.quantity + 1,
-          foodPrice: item.foodPrice,
+          oneFoodTotalPrice: item.quantity * foodPrice + item.foodPrice,
         };
       }
       return item;
@@ -75,6 +87,26 @@ export const FoodOrderLocalStorage = () => {
 
     localStorage.setItem("foodOrder", JSON.stringify(updatedData));
   };
+
+  const handleMinusFood = (foodId: string, foodPrice: number) => {
+    let updatedData = [...foodDataFromLocalStorage];
+    updatedData = updatedData.map((item) => {
+      if (item.foodId === foodId) {
+        return {
+          ...item,
+          quantity: item.quantity - 1,
+          oneFoodTotalPrice: item.quantity * foodPrice - item.foodPrice,
+        };
+      }
+      return item;
+    });
+    setFoodDataFromLocalStorage(updatedData);
+
+    localStorage.setItem("foodOrder", JSON.stringify(updatedData));
+    console.log(updatedData);
+  };
+
+  console.log(foodDataFromLocalStorage);
 
   return (
     <SheetHeader>
@@ -128,41 +160,62 @@ export const FoodOrderLocalStorage = () => {
                     {foodDataFromLocalStorage.map((food) => {
                       return (
                         <div key={food.foodId}>
-                          <div className="space-y-1 flex w-full gap-[10px] ">
-                            <img
-                              src={`${food.foodImage}`}
-                              className="w-[120px] h-[135px] rounded-xl"
-                            />
+                          {loading === true ? (
+                            <Loader />
+                          ) : (
+                            <div className="space-y-1 flex w-full gap-[10px]">
+                              <img
+                                src={`${food.foodImage}`}
+                                className="w-[120px] h-[135px] rounded-xl"
+                              />
 
-                            <div className="w-full h-fit flex flex-col gap-2">
-                              <div className="flex w-full justify-between">
-                                <div className="text-[#EF4444] font-bold text-[16px]">
-                                  {food.foodName}
-                                </div>
-                                <Button
-                                  className="rounded-full border-[1px] border-[#EF4444] text-[#EF4444] hover:text-[#EF4444] cursor-pointer"
-                                  variant="outline"
-                                  onClick={() => handleDeleteFood(food.foodId)}
-                                >
-                                  X
-                                </Button>
-                              </div>
-                              <div>{food.foodIngredients}</div>
-                              <div className="w-full flex justify-between items-center">
-                                <div className="flex gap-2 items-center">
-                                  <Button className="rounded-full">-</Button>
-                                  {food.quantity}
+                              <div className="w-full h-fit flex flex-col gap-2">
+                                <div className="flex w-full justify-between">
+                                  <div className="text-[#EF4444] font-bold text-[16px]">
+                                    {food.foodName}
+                                  </div>
                                   <Button
-                                    className="rounded-full"
-                                    onClick={() => handlePlusFood(food.foodId)}
+                                    className="rounded-full border-[1px] border-[#EF4444] text-[#EF4444] hover:text-[#EF4444] cursor-pointer"
+                                    variant="outline"
+                                    onClick={() =>
+                                      handleDeleteFood(food.foodId)
+                                    }
                                   >
-                                    +
+                                    X
                                   </Button>
                                 </div>
-                                <div>${food.foodPrice}</div>
+                                <div>{food.foodIngredients}</div>
+                                <div className="w-full flex justify-between items-center">
+                                  <div className="flex gap-2 items-center">
+                                    <Button
+                                      className="rounded-full"
+                                      onClick={() =>
+                                        handleMinusFood(
+                                          food.foodId,
+                                          food.foodPrice
+                                        )
+                                      }
+                                    >
+                                      -
+                                    </Button>
+                                    {food.quantity}
+                                    <Button
+                                      className="rounded-full"
+                                      onClick={() =>
+                                        handlePlusFood(
+                                          food.foodId,
+                                          food.foodPrice
+                                        )
+                                      }
+                                    >
+                                      +
+                                    </Button>
+                                  </div>
+                                  <div>${food.oneFoodTotalPrice}</div>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          )}
                           {foodDataFromLocalStorage.length! === 0 ? (
                             ""
                           ) : (
@@ -172,11 +225,6 @@ export const FoodOrderLocalStorage = () => {
                       );
                     })}
                   </CardContent>
-                  <CardFooter>
-                    <Button className="w-full rounded-full border-[1px] border-[#EF4444] text-[#EF4444] hover:text-[#EF4444] cursor-pointer">
-                      Add food
-                    </Button>
-                  </CardFooter>
                 </Card>
                 <Card>
                   <CardHeader>
@@ -189,13 +237,13 @@ export const FoodOrderLocalStorage = () => {
                       <div className="w-full flex justify-between">
                         <div className="text-[#71717A]">Items</div>
                         <div className="text-[#09090B] font-bold text-[16px]">
-                          {totalPrice}
+                          {ITEMS_TOTAL}
                         </div>
                       </div>
                       <div className="w-full flex justify-between">
                         <div className="text-[#71717A]">Shipping</div>
                         <div className="text-[#09090B] font-bold text-[16px]">
-                          $25.2
+                          ${shipping}
                         </div>
                       </div>
                       <div className="w-full border-[2px] border-dashed"></div>
@@ -203,7 +251,7 @@ export const FoodOrderLocalStorage = () => {
                     <div className="w-full flex justify-between">
                       <div className="text-[#71717A]">Total</div>
                       <div className="text-[#09090B] font-bold text-[16px]">
-                        $25.2
+                        ${TOTAL_PRICE}
                       </div>
                     </div>
                   </CardContent>
@@ -214,30 +262,7 @@ export const FoodOrderLocalStorage = () => {
                   </CardFooter>
                 </Card>
               </TabsContent>
-              <TabsContent value="order">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Order</CardTitle>
-                    <CardDescription>
-                      Change your password here. After saving, you'll be logged
-                      out.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <div className="space-y-1">
-                      <Label htmlFor="current">Current password</Label>
-                      <Input id="current" type="password" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="new">New password</Label>
-                      <Input id="new" type="password" />
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button>Save password</Button>
-                  </CardFooter>
-                </Card>
-              </TabsContent>
+              <UserLastOrder />
             </div>
           ) : (
             <div className="w-full text-white flex justify-center">

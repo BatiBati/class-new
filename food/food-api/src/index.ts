@@ -5,8 +5,9 @@ import { connectToDataBase } from "./database/connect-todb";
 import { foodRouter } from "./routers/food.route";
 import { categoryRouter } from "./routers/category.route";
 import { foodOrder } from "./routers/foodOrder.route";
-import { user } from "./routers/user.route";
+import { userRouter } from "./routers/user.route";
 import cors from "cors";
+import { authRouter } from "./routers/auth.route";
 
 connectToDataBase();
 
@@ -28,7 +29,8 @@ app.get("/about", (req, res) => {
 app.use("/food", foodRouter);
 app.use("/category", categoryRouter);
 app.use("/foodOrder", foodOrder);
-app.use("/user", user);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port${port}`);

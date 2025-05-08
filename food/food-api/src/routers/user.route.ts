@@ -6,7 +6,7 @@ import {
   updateUserController,
 } from "../controllers/user";
 
-export const user = Router()
+export const userRouter = Router()
   .get("/", getUserController)
   .get("/:id", getUserController)
   .delete("/:id", deleteUserController)

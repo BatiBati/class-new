@@ -25,7 +25,7 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
-import { FoodOrderLocalStorage } from "./FoodOrderLocalStorage";
+import { GetFoodOrderLocalStorage } from "./FoodOrderLocalStorage";
 type Food = {
   foodId: number;
   foodImage: string;
@@ -50,7 +50,7 @@ export const FoodOrders = () => {
         </Button>
       </SheetTrigger>
       <SheetContent className="!w-[520px] !max-w-none p-3 bg-[#404040] rounded-tl-[30px] rounded-bl-[30px] border-0">
-        <FoodOrderLocalStorage />
+        <GetFoodOrderLocalStorage />
       </SheetContent>
     </Sheet>
   );

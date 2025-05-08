@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { number } from "zod";
 
 type Food = {
   foodId: number;
@@ -21,7 +22,9 @@ type Food = {
   foodPrice: number;
 };
 
-type FoodItem = Food & { quantity: number };
+type FoodItem = Food & { quantity: number } & { oneFoodTotalPrice: number } & {
+  totalPrice: number;
+};
 
 export const AddFoodToOrder = ({
   foodId,
@@ -32,7 +35,8 @@ export const AddFoodToOrder = ({
 }: Food) => {
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
-  const totalPrice = quantity * foodPrice;
+  const oneFoodTotalPrice = quantity * foodPrice;
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleMinusFood = () => {
     if (quantity === 0) {
@@ -51,6 +55,8 @@ export const AddFoodToOrder = ({
       foodPrice,
       foodImage,
       quantity,
+      oneFoodTotalPrice,
+      totalPrice,
     };
     if (quantity > 0) {
       try {
@@ -108,7 +114,9 @@ export const AddFoodToOrder = ({
               <div className="w-full flex justify-between items-center">
                 <div>
                   <div className="text-[16px] font-normal">Total price</div>
-                  <div className="font-semibold text-[24px]">${totalPrice}</div>
+                  <div className="font-semibold text-[24px]">
+                    ${oneFoodTotalPrice}
+                  </div>
                 </div>
                 <div className=" flex items-center gap-3">
                   <Button className="rounded-full" onClick={handleMinusFood}>
