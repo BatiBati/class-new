@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
 import { userModel } from "../../models/user.model";
+import jwt from "jsonwebtoken";
 
 export const signIn: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
@@ -22,7 +23,14 @@ export const signIn: RequestHandler = async (req, res) => {
       return;
     }
 
-    // const token = jwt.sign
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        isAdmin: user.role === "ADMIN",
+      },
+      process.env.JWT_SECRET
+    );
+    res.status(200).json({ user: userWithoutPassword, token });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
