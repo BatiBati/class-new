@@ -1,15 +1,15 @@
 "use client";
 
-import { CreateAccount } from "./_components/CreateAccount";
+import { SignUp } from "./_components/SignUp";
 
 export default function AuthenticationPage() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <div>
-        <CreateAccount />
+    <div className="w-screen h-screen flex  items-center">
+      <div className="w-[50%] h-full flex justify-center items-center">
+        <SignUp />
       </div>
-      <div className=" ">
-        <img src="/images/DeliveryMan.png" className="w-[856px] h-[904px]" />
+      <div className="w-[50%] h-full ">
+        <img src="/images/DeliveryMan.png" className="w-full h-full" />
       </div>
     </div>
   );

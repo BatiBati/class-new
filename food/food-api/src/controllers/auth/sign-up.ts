@@ -34,6 +34,7 @@ export const signUp: RequestHandler = async (req, res) => {
       user: userWithoutPassword,
       token,
     });
+    console.log("token", token);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

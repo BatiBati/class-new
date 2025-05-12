@@ -1,19 +1,15 @@
-"use client"
-
-import { CreateAccount } from "../(auth)/AuthenticationPage/_components/CreateAccount"
-
-
+"use client";
 
 export default function Login() {
-
-
-
-    return (<div className="flex  items-center w-">
-        <div className="w-[30%]">
-            <CreateAccount />
-        </div>
-        <div className="w-[70%]">
-            <img src="/images/DeliveryMan.png" className="w-[856px] h-[904px]" />
-        </div>
-    </div>)
+  return (
+    <div></div>
+    // <div className="flex justify-center items-center ">
+    //   <div className="w-[50%] h-screen ">
+    //     <CreateAccount />
+    //   </div>
+    //   <div className="w-[50%] h-screen flex justify-center items-center">
+    //     <img src="/images/DeliveryMan.png" className="w-full h-full" />
+    //   </div>
+    // </div>
+  );
 }
