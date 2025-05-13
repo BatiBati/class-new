@@ -31,6 +31,7 @@ const AuthContext = createContext({} as AuthContextType);
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | undefined>();
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -40,6 +41,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       });
       localStorage.setItem("token", data.token);
       setUser(data.user);
+      if (data.user?.role === "ADMIN") {
+        (router.push("/AdminPage/foodMenu"))
+      } else if (data.user?.role === undefined) {
+        router.push("/")
+      }
       toast.success("Account created.");
     } catch (error) {
       toast.error("Failed to sign in");
@@ -56,7 +62,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setUser(data.user);
       console.log(data);
     } catch (error) {
-      console.error(error);
       toast.error("Failed to sign up");
     }
   };
@@ -69,6 +74,23 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
+    const getUser = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get("http://localhost:3001/auth/me", {
+          headers: {
+            Authorization: `${token}`
+          }
+        })
+        setUser(data)
+      } catch {
+        localStorage.removeItem("token");
+        setUser(undefined);
+      } finally {
+        setLoading(false)
+      }
+    }
+    getUser();
   }, []);
   return (
     <AuthContext.Provider value={{ user, setUser, signIn, signOut, signUp }}>

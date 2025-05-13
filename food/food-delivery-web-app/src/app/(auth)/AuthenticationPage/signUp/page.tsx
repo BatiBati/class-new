@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Loader } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z
   .object({
@@ -33,7 +34,7 @@ const formSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match.",
+    message: "Those password didn't match, Try again.",
     path: ["confirmPassword"],
   });
 
@@ -41,6 +42,7 @@ export default function Home() {
   const [step, setStep] = useState(1);
   const router = useRouter();
   const { user, signUp } = useAuth();
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,6 +58,7 @@ export default function Home() {
     }
     if (step === 2) {
       signUp(values.email, values.password);
+      toast.success("Created user. Log in and HF :)")
       router.push("/AuthenticationPage/signIn");
     }
   }
@@ -63,6 +66,7 @@ export default function Home() {
   const handleNext = () => {
     if (step === 1) {
       setStep((prev) => prev + 1);
+
     }
   };
   const handlePrev = () => {
@@ -112,11 +116,15 @@ export default function Home() {
                       Create a strong password with letters, numbers.
                     </FormDescription>
                     <FormControl>
-                      <Input
-                        placeholder="Password"
-                        {...field}
-                        type="password"
-                      />
+                      {showPassword === true ? (
+                        <Input placeholder="Confirm"
+                          {...field}
+                        />) : (
+                        <Input placeholder="Confirm"
+                          {...field}
+                          type="password"
+                        />
+                      )}
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -128,12 +136,30 @@ export default function Home() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Confirm" {...field} type="password" />
+                      {showPassword === true ? (
+                        <Input placeholder="Confirm"
+                          {...field}
+                        />) : (
+                        <Input placeholder="Confirm"
+                          {...field}
+                          type="password"
+                        />
+                      )}
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <div className="flex items-center gap-2 w-full ">
+
+                <Checkbox id="terms" onClick={() => setShowPassword(!showPassword)} />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Show password
+                </label>
+              </div>
             </div>
           )}
 

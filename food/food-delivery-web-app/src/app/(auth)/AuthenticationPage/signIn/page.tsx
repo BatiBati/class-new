@@ -98,9 +98,8 @@ export default function Home() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input placeholder="Password" {...field} type="password" />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}

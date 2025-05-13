@@ -1,5 +1,5 @@
 "use client";
-
+import { Toaster } from "@/components/ui/sonner";
 export default function AuthLayout({
   children,
 }: Readonly<{
@@ -13,6 +13,8 @@ export default function AuthLayout({
       <div className="w-[50%] h-full ">
         <img src="/images/DeliveryMan.png" className="w-full h-full" />
       </div>
+
+      <Toaster />
     </div>
   );
 }

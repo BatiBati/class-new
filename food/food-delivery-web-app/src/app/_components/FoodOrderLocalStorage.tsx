@@ -106,8 +106,6 @@ export const GetFoodOrderLocalStorage = () => {
     console.log(updatedData);
   };
 
-  console.log(foodDataFromLocalStorage);
-
   return (
     <SheetHeader>
       <SheetTitle>

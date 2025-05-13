@@ -25,17 +25,22 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
-import { GetFoodOrderLocalStorage } from "./FoodOrderLocalStorage";
-type Food = {
-  foodId: number;
-  foodImage: string;
-  foodName: string;
-  foodIngredients: string;
-  foodPrice: number;
-  quantity: number;
-};
+import { Food, GetFoodOrderLocalStorage } from "./FoodOrderLocalStorage";
+import { useAuth } from "../_providers/AuthProvider";
+
 
 export const FoodOrders = () => {
+  const [orderFoods, setOrderFoods] = useState<Food[]>([])
+
+
+  useEffect(() => {
+    const existing: Food[] = JSON.parse(
+      localStorage.getItem("foodOrder") || "[]"
+    );
+
+    setOrderFoods(existing);
+  }, []);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -44,9 +49,10 @@ export const FoodOrders = () => {
           variant={"outline"}
         >
           <ShoppingBox width="100px" height="13px" stroke="#000" />
-          {/* <div className="absolute right-[-10px] top-[-10px] w-[20px] h-[20px] bg-[#ef4444] rounded-full">
-            1
-          </div> */}
+          {orderFoods.length > 0 && <div className="absolute right-[-10px] top-[-10px] w-[20px] h-[20px] bg-[#ef4444] rounded-full">
+            {orderFoods.length}
+          </div>}
+
         </Button>
       </SheetTrigger>
       <SheetContent className="!w-[520px] !max-w-none p-3 bg-[#404040] rounded-tl-[30px] rounded-bl-[30px] border-0">
