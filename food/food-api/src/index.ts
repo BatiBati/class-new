@@ -8,6 +8,9 @@ import { foodOrder } from "./routers/foodOrder.route";
 import { userRouter } from "./routers/user.route";
 import cors from "cors";
 import { authRouter } from "./routers/auth.route";
+import { config } from "dotenv";
+
+config();
 
 connectToDataBase();
 

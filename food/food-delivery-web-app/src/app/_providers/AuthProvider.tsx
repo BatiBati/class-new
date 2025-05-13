@@ -1,27 +1,27 @@
 import axios from "axios";
 import { add } from "date-fns";
 import { useRouter } from "next/navigation";
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { toast } from "sonner";
-import { SignUp } from "../(auth)/AuthenticationPage/_components/SignUp";
 
 type User = {
   _id: string;
-  name: string;
   email: string;
-  image: string;
+  phoneNumber: number;
+  address: string;
+  role: string;
 };
 
 type AuthContextType = {
   user?: User;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (
-    name: string,
-    email: string,
-    password: string,
-    phoneNumber: string,
-    address: string
-  ) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
 };
@@ -29,40 +29,32 @@ type AuthContextType = {
 const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const router = useRouter();
   const [user, setUser] = useState<User | undefined>();
   const [loading, setLoading] = useState(false);
 
-  const SignIn = async (email: string, password: string) => {
+  const signIn = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/auth/signIn", {
+      const { data } = await axios.post("http://localhost:3001/auth/sign-in", {
         email,
         password,
       });
       localStorage.setItem("token", data.token);
       setUser(data.user);
+      toast.success("Account created.");
     } catch (error) {
       toast.error("Failed to sign in");
     }
   };
 
-  const SignUp = async (
-    name: string,
-    email: string,
-    password: string,
-    phoneNumber: string,
-    address: string
-  ) => {
+  const signUp = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/auth/signUp", {
-        name,
+      const { data } = await axios.post("http://localhost:3001/auth/sign-up", {
         email,
         password,
-        phoneNumber,
-        address,
       });
-      localStorage.getItem("token", data.token);
+      localStorage.setItem("token", data.token);
       setUser(data.user);
+      console.log(data);
     } catch (error) {
       console.error(error);
       toast.error("Failed to sign up");
@@ -74,9 +66,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(undefined);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+  }, []);
   return (
-    <AuthContext.Provider value={signOut} signUp={SignUp} signIn={SignIn}>
-      {children}
+    <AuthContext.Provider value={{ user, setUser, signIn, signOut, signUp }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
