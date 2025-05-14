@@ -11,6 +11,6 @@ export const foodOrder = Router()
   .get("/", getFoodOrderController)
   .get("/:id", getOneFoodOrderController)
   .delete("/:id", deleteFoodOrderController)
-  .post("/", createFoodOrderController)
+  .post("/post", createFoodOrderController)
   .patch("/:id", updateFoodOrderController)
   .put("/:id", updateFoodOrderController);

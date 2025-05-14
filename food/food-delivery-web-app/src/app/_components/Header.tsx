@@ -9,6 +9,8 @@ import { FoodOrders } from "./FoodOrders";
 import { useAuth } from "../_providers/AuthProvider";
 import { useState } from "react";
 import { sign } from "crypto";
+import { Input } from "@/components/ui/input";
+import { EnterDeliveryAddress } from "./EnterDeliveryAddress";
 
 export const Header = () => {
   const { user, signOut } = useAuth();
@@ -38,16 +40,7 @@ export const Header = () => {
 
         {user && (
           <div className="flex gap-5 relative">
-            <Button className="w-[251px] h-[36px] bg-white hover:bg-white rounded-full cursor-pointer text-black">
-              <LocationLogo />
-              <span className="text-[#ef4444] text-[12px] font-normal">
-                Delivery address:
-              </span>
-              <span className="text-[#71717a] text-[12px] font-normal">
-                Add location
-              </span>
-              <RightArrow width="5px" height="10px" />
-            </Button>
+            <EnterDeliveryAddress />
 
             <FoodOrders />
 
@@ -59,10 +52,18 @@ export const Header = () => {
               >
                 <Aman />
               </Button>
-              {isUser && (<div className="absolute -bottom-29 -right-15 w-fit h-[110px] rounded-xl p-4 bg-white flex flex-col justify-center gap-4">
-                <div>{user.email}</div>
-                <Button variant="outline" className="rounded-full" onClick={signOut}>Sign out</Button>
-              </div>)}
+              {isUser && (
+                <div className="absolute -bottom-29 -right-15 w-fit h-[110px] rounded-xl p-4 bg-white flex flex-col justify-center gap-4">
+                  <div>{user.email}</div>
+                  <Button
+                    variant="outline"
+                    className="rounded-full"
+                    onClick={signOut}
+                  >
+                    Sign out
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}

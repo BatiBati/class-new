@@ -11,7 +11,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TabsContent } from "@/components/ui/tabs";
 
-export const UserLastOrder = () => {
+type OrderDataType = {
+  foodOrder: FoodsType[];
+};
+
+type FoodsType = {
+  foodOrderItems: OneFood[];
+  status: string;
+  totalPrice: number;
+  user: User;
+};
+type OneFood = {
+food: Food
+quantity:
+_id:
+};
+type Food = {
+  _id: 
+}
+export const UserLastOrder = ({ orderData }: OrderDataType) => {
+  console.log(orderData);
+
   return (
     <TabsContent value="order">
       <Card>

@@ -25,6 +25,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { UserLastOrder } from "./UserLastOrder";
+import axios from "axios";
+import { useAuth } from "../_providers/AuthProvider";
 export type Food = {
   foodId: string;
   foodImage: string;
@@ -36,12 +38,14 @@ export type Food = {
 };
 
 export const GetFoodOrderLocalStorage = () => {
+  const { user } = useAuth();
   const [selectedTab, setSelectedTab] = useState("cart");
   const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] = useState<
     Food[]
   >([]);
   const [loading, setLoading] = useState(false);
   const [shipping, setShipping] = useState(0.99);
+  const [orderData, setOrderData] = useState();
 
   const ITEMS_TOTAL = foodDataFromLocalStorage.reduce(
     (acc, item) => acc + item.foodPrice * item.quantity,
@@ -105,6 +109,37 @@ export const GetFoodOrderLocalStorage = () => {
     localStorage.setItem("foodOrder", JSON.stringify(updatedData));
     console.log(updatedData);
   };
+
+  const foodArray = foodDataFromLocalStorage.map((item) => ({
+    food: item.foodId,
+    quantity: item.quantity,
+  }));
+
+  const putFoodsRequest = async () => {
+    const foodOrderOfUser = axios.post(`http://localhost:3001/foodOrder/post`, {
+      user: user?._id,
+      totalPrice: ITEMS_TOTAL,
+      foodOrderItems: foodArray,
+      status: "PENDING",
+    });
+  };
+
+  const orderFoods = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/foodOrder?userId=${user?._id}`
+      );
+      setOrderData(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    orderFoods();
+  }, []);
+
+  console.log(orderData);
 
   return (
     <SheetHeader>
@@ -254,13 +289,16 @@ export const GetFoodOrderLocalStorage = () => {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button className="w-full rounded-full border-[1px] bg-[#EF4444] hover:bg-[#EF4444] hover:text-white text-white cursor-pointer">
+                    <Button
+                      className="w-full rounded-full border-[1px] bg-[#EF4444] hover:bg-[#EF4444] hover:text-white text-white cursor-pointer"
+                      onClick={() => putFoodsRequest()}
+                    >
                       Checkout
                     </Button>
                   </CardFooter>
                 </Card>
               </TabsContent>
-              <UserLastOrder />
+              <UserLastOrder orderData={orderData} />
             </div>
           ) : (
             <div className="w-full text-white flex justify-center">
