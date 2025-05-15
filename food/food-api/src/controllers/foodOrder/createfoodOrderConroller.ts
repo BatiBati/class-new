@@ -2,13 +2,15 @@ import { RequestHandler } from "express";
 import { foodOrderModel } from "../../models/foodOrder.model";
 
 export const createFoodOrderController: RequestHandler = async (req, res) => {
-  const { user, totalPrice, foodOrderItems, status } = req.body;
+  const { user, totalPrice, foodOrderItems, status, deliveryAddress } =
+    req.body;
   try {
     await foodOrderModel.create({
       user,
       totalPrice,
       foodOrderItems,
       status,
+      deliveryAddress,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

@@ -15,6 +15,8 @@ import { EnterDeliveryAddress } from "./EnterDeliveryAddress";
 export const Header = () => {
   const { user, signOut } = useAuth();
   const [isUser, setIsUser] = useState<boolean>(false);
+  const [deliverAddress, setDeliverAddress] = useState("Deliver address");
+  console.log(deliverAddress);
 
   return (
     <div className="w-full flex justify-center">
@@ -40,9 +42,12 @@ export const Header = () => {
 
         {user && (
           <div className="flex gap-5 relative">
-            <EnterDeliveryAddress />
+            <EnterDeliveryAddress
+              deliverAddress={deliverAddress}
+              setDeliverAddress={setDeliverAddress}
+            />
 
-            <FoodOrders />
+            <FoodOrders deliverAddress={deliverAddress} />
 
             <div className="flex  flex-col  ">
               <Button

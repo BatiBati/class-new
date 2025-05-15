@@ -31,6 +31,10 @@ const foodOrderSchema = new Schema({
     enum: ["PENDING", "CANCELED", "DELIVERED"],
     default: "PENDING",
   },
+  deliveryAddress: {
+    type: String,
+    required: false,
+  },
   createdAt: {
     type: Date,
     required: true,

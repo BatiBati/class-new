@@ -10,51 +10,83 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TabsContent } from "@/components/ui/tabs";
+import { FoodOrdersCard } from "./FoodOrdersCard";
+import { ClockSvg } from "./assets/ClockSvg";
+import { DeliverySvg } from "./assets/DeliverySvg";
+import { NoOrderYet } from "./NoOrderYet";
 
 type OrderDataType = {
   foodOrder: FoodsType[];
 };
 
 type FoodsType = {
-  foodOrderItems: OneFood[];
-  status: string;
+  _id: string;
   totalPrice: number;
-  user: User;
+  status: string;
+  user: UserType;
+  foodOrderItems: foodOrderItems[];
+  createdAt: string;
 };
-type OneFood = {
-food: Food
-quantity:
-_id:
+type UserType = {
+  email: string;
+  password: string;
 };
-type Food = {
-  _id: 
-}
-export const UserLastOrder = ({ orderData }: OrderDataType) => {
-  console.log(orderData);
+export type foodOrderItems = {
+  _id: string;
+  quantity: number;
+  food: OneFood;
+};
+
+export type OneFood = {
+  _id: string;
+  price: number;
+  ingredients: string;
+  image: string;
+  foodName: string;
+};
+
+export const UserLastOrder = ({ foodOrder }: OrderDataType) => {
+  console.log(foodOrder);
 
   return (
-    <TabsContent value="order">
-      <Card>
-        <CardHeader>
-          <CardTitle>Order</CardTitle>
-          <CardDescription>
-            Change your password here. After saving, you'll be logged out.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="current">Current password</Label>
-            <Input id="current" type="password" />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="new">New password</Label>
-            <Input id="new" type="password" />
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button>Save password</Button>
-        </CardFooter>
-      </Card>
-    </TabsContent>
+    <div>
+      {foodOrder.length === 0 ? (
+        <NoOrderYet />
+      ) : (
+        <TabsContent value="order">
+          <Card>
+            <CardHeader>
+              <CardTitle>Order history</CardTitle>
+            </CardHeader>
+
+            <CardContent className="space-y-2 h-[950px] overflow-scroll">
+              {foodOrder.map((order) => {
+                return (
+                  <div className="space-y-1 " key={order._id}>
+                    <div className="w-full flex justify-between">
+                      <div className="text-[16px] font-bold">
+                        ${order.totalPrice + 0.99}
+                      </div>
+                      <div className="w-fit rounded-full border-[#ef4444] border text-[12px] font-semibold p-[10px]">
+                        {order.status}
+                      </div>
+                    </div>
+                    <div className="w-full ">
+                      <FoodOrdersCard orderFoods={order.foodOrderItems} />
+                    </div>
+                    <div className="text-[#71717A] text-[12px] flex gap-3">
+                      <ClockSvg /> {order.createdAt}
+                    </div>
+                    <div>
+                      <DeliverySvg />
+                    </div>
+                  </div>
+                );
+              })}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      )}
+    </div>
   );
 };

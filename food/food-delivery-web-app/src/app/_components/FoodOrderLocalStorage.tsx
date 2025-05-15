@@ -27,6 +27,7 @@ import { Loader } from "lucide-react";
 import { UserLastOrder } from "./UserLastOrder";
 import axios from "axios";
 import { useAuth } from "../_providers/AuthProvider";
+import { NoOrderYet } from "./NoOrderYet";
 export type Food = {
   foodId: string;
   foodImage: string;
@@ -37,7 +38,37 @@ export type Food = {
   oneFoodTotalPrice: number;
 };
 
-export const GetFoodOrderLocalStorage = () => {
+type FoodsType = {
+  _id: string;
+  totalPrice: number;
+  status: string;
+  user: UserType;
+  foodOrderItems: foodOrderItems[];
+};
+type UserType = {
+  email: string;
+  password: string;
+};
+type foodOrderItems = {
+  _id: string;
+  quantity: number;
+  food: OneFood;
+};
+
+type OneFood = {
+  _id: string;
+  price: number;
+  ingredients: string;
+  image: string;
+  foodName: string;
+  createdAt: string;
+};
+
+type PropsType = {
+  deliverAddress: string;
+};
+
+export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   const { user } = useAuth();
   const [selectedTab, setSelectedTab] = useState("cart");
   const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] = useState<
@@ -45,7 +76,7 @@ export const GetFoodOrderLocalStorage = () => {
   >([]);
   const [loading, setLoading] = useState(false);
   const [shipping, setShipping] = useState(0.99);
-  const [orderData, setOrderData] = useState();
+  const [orderData, setOrderData] = useState<FoodsType[]>([]);
 
   const ITEMS_TOTAL = foodDataFromLocalStorage.reduce(
     (acc, item) => acc + item.foodPrice * item.quantity,
@@ -121,25 +152,25 @@ export const GetFoodOrderLocalStorage = () => {
       totalPrice: ITEMS_TOTAL,
       foodOrderItems: foodArray,
       status: "PENDING",
+      deliveryAddress: deliverAddress,
     });
   };
 
-  const orderFoods = async () => {
+  const handleOrderFoods = async () => {
     try {
       const { data } = await axios.get(
         `http://localhost:3001/foodOrder?userId=${user?._id}`
       );
-      setOrderData(data);
+
+      setOrderData(data.foodOrder);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
 
   useEffect(() => {
-    orderFoods();
+    handleOrderFoods();
   }, []);
-
-  console.log(orderData);
 
   return (
     <SheetHeader>
@@ -176,6 +207,7 @@ export const GetFoodOrderLocalStorage = () => {
                   : {}
               }
               className="rounded-full"
+              onClick={() => handleOrderFoods()}
             >
               Order
             </TabsTrigger>
@@ -298,12 +330,11 @@ export const GetFoodOrderLocalStorage = () => {
                   </CardFooter>
                 </Card>
               </TabsContent>
-              <UserLastOrder orderData={orderData} />
+
+              <UserLastOrder foodOrder={orderData} />
             </div>
           ) : (
-            <div className="w-full text-white flex justify-center">
-              Order food is empty
-            </div>
+            ""
           )}
         </Tabs>
       </div>

@@ -27,14 +27,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { Food, GetFoodOrderLocalStorage } from "./FoodOrderLocalStorage";
 import { useAuth } from "../_providers/AuthProvider";
-
-export const FoodOrders = () => {
+import axios from "axios";
+import { toast } from "sonner";
+type DeliveryAddressType = {
+  deliverAddress: string;
+};
+export const FoodOrders = ({ deliverAddress }: DeliveryAddressType) => {
   const [orderFoods, setOrderFoods] = useState<Food[]>([]);
 
   useEffect(() => {
     const existing: Food[] = JSON.parse(
       localStorage.getItem("foodOrder") || "[]"
     );
+    console.log(existing);
 
     setOrderFoods(existing);
   }, []);
@@ -55,7 +60,7 @@ export const FoodOrders = () => {
         </Button>
       </SheetTrigger>
       <SheetContent className="!w-[520px] !max-w-none p-3 bg-[#404040] rounded-tl-[30px] rounded-bl-[30px] border-0">
-        <GetFoodOrderLocalStorage />
+        <GetFoodOrderLocalStorage deliverAddress={deliverAddress} />
       </SheetContent>
     </Sheet>
   );
