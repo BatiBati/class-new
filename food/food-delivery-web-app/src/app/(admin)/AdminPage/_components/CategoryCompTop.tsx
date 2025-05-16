@@ -37,6 +37,13 @@ export const CategoryCompTop = ({ foodsLength }: FoodsLengthType) => {
     getCategoryData();
   }, []);
 
+  const handleCategoryClick = (clickedCategory: CategoryType) => {
+    setCategories((prev) => {
+      const filtered = prev.filter((cat) => cat._id !== clickedCategory._id);
+      return [clickedCategory, ...filtered];
+    });
+  };
+
   return (
     <div className="flex flex-wrap gap-3 items-center ">
       <Button className="rounded-full">
@@ -47,7 +54,11 @@ export const CategoryCompTop = ({ foodsLength }: FoodsLengthType) => {
       </Button>
       {categories.map((category) => {
         return (
-          <div key={category._id}>
+          <div
+            key={category._id}
+            onClick={() => handleCategoryClick(category)}
+            className="cursor-pointer"
+          >
             <CountFoods
               categoryId={category._id}
               categoryName={category.categoryName}

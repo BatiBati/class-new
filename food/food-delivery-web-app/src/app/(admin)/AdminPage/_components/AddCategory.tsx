@@ -34,7 +34,7 @@ export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
         categoryName: inputValue,
       });
       await getCategoryData();
-      toast.success("Category created succesfully.");
+      toast.success("New Category is being added to the menu.");
       setOpen(false);
     } catch {
       toast.error("Failed to create category");
@@ -54,11 +54,7 @@ export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add new category name</DialogTitle>
-          {/* <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription> */}
         </DialogHeader>
-        {/* <div className="grid gap-4 py-4"> */}
         <div className="flex flex-col  gap-4">
           <Label htmlFor="name" className="text-right">
             Category name
@@ -71,17 +67,7 @@ export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
         </div>
-        {/* <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
-          </div> */}
-        {/* </div>  */}
+
         <DialogFooter>
           <Button
             type="submit"

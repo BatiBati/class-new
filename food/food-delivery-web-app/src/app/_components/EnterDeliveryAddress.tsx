@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LocationLogo } from "./assets/Location";
 import { useEffect, useState } from "react";
+import axios from "axios";
 type DeliveryAddressType = {
   deliverAddress: string;
   setDeliverAddress: (address: string) => void;
@@ -29,20 +30,29 @@ export const EnterDeliveryAddress = ({
 
   const handleAddress = () => {
     setDeliverAddress(value);
-
+    // try {
+    //   await axios.post(`http://localhost:3001/user/`, )
+    // }
     setOpen(false);
   };
   return (
-    <div className="w-[280px] h-fit bg-white rounded-full text-black">
+    <div className="w-[380px] h-fit bg-white rounded-full text-black">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <div className="rounded-full flex h-[36px] w-full p-3 items-center gap-3">
-            <LocationLogo />
-            <div className="text-[#ef4444] text-[12px] font-normal">
-              Delivery address:
-            </div>
-            <div className="opacity-50 overflow-hidden w-[200px] h-[20px] flex">
-              {deliverAddress}
+          <div className="rounded-full flex justify-between h-[36px] w-fit px-3 items-center gap-3">
+            <div className="rounded-full flex justify-between h-[36px] px-3 items-center gap-3">
+              <div>
+                <LocationLogo />
+              </div>
+              <div className="text-[#ef4444] text-[12px] font-normal w-[100px]">
+                Delivery address:
+              </div>
+              <input
+                className="opacity-50 overflow-hidden w-fit h-[20px] flex text-[13px]"
+                placeholder="Write address here"
+                onChange={() => value}
+                value={value}
+              />
             </div>
             <RightArrow width="15px" height="15px" />
           </div>

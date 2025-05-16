@@ -8,8 +8,8 @@ import {
 
 export const userRouter = Router()
   .get("/", getUserController)
-  .get("/:id", getUserController)
+  // .get("/:id", getUserController)
   .delete("/:id", deleteUserController)
-  .post("/", createUserController)
+  .post("/:id", createUserController)
   .patch("/:id", updateUserController)
   .put("/:id", updateUserController);

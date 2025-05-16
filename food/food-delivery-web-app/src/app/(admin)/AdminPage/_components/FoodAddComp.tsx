@@ -48,9 +48,6 @@ type CategoryNameType = {
   getFood: () => Promise<void>;
 };
 
-
-
-
 export const FoodAddComp = ({
   categoryName,
   categoryId,
@@ -83,7 +80,7 @@ export const FoodAddComp = ({
           category: categoryId,
         });
         await getFood();
-        toast.success("Food created succesfully.");
+        toast.success("New dish is being added to the menu.");
         form.reset({
           foodName: "",
           price: "",

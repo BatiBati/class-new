@@ -19,7 +19,7 @@ export default function AdminPageLayout({
       <AdminPageStyleChange />
 
       {children}
-      <Toaster />
+      <Toaster position="top-center" />
     </div>
   );
 }

@@ -28,6 +28,7 @@ import { UserLastOrder } from "./UserLastOrder";
 import axios from "axios";
 import { useAuth } from "../_providers/AuthProvider";
 import { NoOrderYet } from "./NoOrderYet";
+import { toast } from "sonner";
 export type Food = {
   foodId: string;
   foodImage: string;
@@ -71,17 +72,17 @@ type PropsType = {
 export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   const { user } = useAuth();
   const [selectedTab, setSelectedTab] = useState("cart");
-  const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] = useState<
-    Food[]
-  >([]);
+  const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] =
+    useState<Food[]>();
   const [loading, setLoading] = useState(false);
   const [shipping, setShipping] = useState(0.99);
   const [orderData, setOrderData] = useState<FoodsType[]>([]);
 
-  const ITEMS_TOTAL = foodDataFromLocalStorage.reduce(
-    (acc, item) => acc + item.foodPrice * item.quantity,
-    0
-  );
+  const ITEMS_TOTAL =
+    foodDataFromLocalStorage?.reduce(
+      (acc, item) => acc + item.foodPrice * item.quantity,
+      0
+    ) || 0;
 
   const TOTAL_PRICE = ITEMS_TOTAL + shipping;
 
@@ -95,7 +96,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
 
   const handleDeleteFood = (foodId: string) => {
     setLoading(true);
-    const updatedData = foodDataFromLocalStorage.filter(
+    const updatedData = foodDataFromLocalStorage?.filter(
       (food) => food.foodId !== foodId
     );
 
@@ -105,7 +106,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   };
 
   const handlePlusFood = (foodId: string, foodPrice: number) => {
-    let updatedData = [...foodDataFromLocalStorage];
+    let updatedData = [...(foodDataFromLocalStorage || [])];
 
     updatedData = updatedData.map((item) => {
       if (item.foodId === foodId) {
@@ -124,7 +125,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   };
 
   const handleMinusFood = (foodId: string, foodPrice: number) => {
-    let updatedData = [...foodDataFromLocalStorage];
+    let updatedData = [...(foodDataFromLocalStorage || [])];
     updatedData = updatedData.map((item) => {
       if (item.foodId === foodId) {
         return {
@@ -141,20 +142,10 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
     console.log(updatedData);
   };
 
-  const foodArray = foodDataFromLocalStorage.map((item) => ({
+  const foodArray = foodDataFromLocalStorage?.map((item) => ({
     food: item.foodId,
     quantity: item.quantity,
   }));
-
-  const putFoodsRequest = async () => {
-    const foodOrderOfUser = axios.post(`http://localhost:3001/foodOrder/post`, {
-      user: user?._id,
-      totalPrice: ITEMS_TOTAL,
-      foodOrderItems: foodArray,
-      status: "PENDING",
-      deliveryAddress: deliverAddress,
-    });
-  };
 
   const handleOrderFoods = async () => {
     try {
@@ -171,6 +162,30 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   useEffect(() => {
     handleOrderFoods();
   }, []);
+
+  const putFoodsRequest = async () => {
+    if (deliverAddress === " ") {
+      toast.error("Please enter deliver address.");
+    }
+    try {
+      const foodOrderOfUser = axios.post(
+        `http://localhost:3001/foodOrder/post`,
+        {
+          user: user?._id,
+          totalPrice: ITEMS_TOTAL,
+          foodOrderItems: foodArray,
+          status: "PENDING",
+          deliveryAddress: deliverAddress,
+        }
+      );
+      localStorage.removeItem("foodOrder");
+      setFoodDataFromLocalStorage([]);
+      setSelectedTab("order");
+      handleOrderFoods();
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  };
 
   return (
     <SheetHeader>
@@ -212,17 +227,20 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
               Order
             </TabsTrigger>
           </TabsList>
-          {foodDataFromLocalStorage.length > 0 ? (
-            <div>
-              <TabsContent value="cart" className="flex flex-col gap-6 w-full">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-[20px] font-semibold">
-                      My cart
-                    </CardTitle>
-                  </CardHeader>
+          <div>
+            <TabsContent value="cart" className="flex flex-col gap-6 w-full">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-[20px] font-semibold">
+                    My cart
+                  </CardTitle>
+                </CardHeader>
+                {!foodDataFromLocalStorage ? null : foodDataFromLocalStorage.length ===
+                  0 ? (
+                  <NoOrderYet />
+                ) : (
                   <CardContent className="space-y-2">
-                    {foodDataFromLocalStorage.map((food) => {
+                    {foodDataFromLocalStorage?.map((food) => {
                       return (
                         <div key={food.foodId}>
                           {loading === true ? (
@@ -290,52 +308,54 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
                       );
                     })}
                   </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-[20px] font-semibold">
-                      Payment info
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <div className="space-y-1 w-full flex flex-col gap-2">
-                      <div className="w-full flex justify-between">
-                        <div className="text-[#71717A]">Items</div>
-                        <div className="text-[#09090B] font-bold text-[16px]">
-                          {ITEMS_TOTAL}
-                        </div>
+                )}
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-[20px] font-semibold">
+                    Payment info
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <div className="space-y-1 w-full flex flex-col gap-2">
+                    <div className="w-full flex justify-between">
+                      <div className="text-[#71717A]">Items</div>
+                      <div className="text-[#09090B] font-bold text-[16px]">
+                        {ITEMS_TOTAL}
                       </div>
-                      <div className="w-full flex justify-between">
-                        <div className="text-[#71717A]">Shipping</div>
-                        <div className="text-[#09090B] font-bold text-[16px]">
-                          ${shipping}
-                        </div>
-                      </div>
-                      <div className="w-full border-[2px] border-dashed"></div>
                     </div>
                     <div className="w-full flex justify-between">
-                      <div className="text-[#71717A]">Total</div>
+                      <div className="text-[#71717A]">Shipping</div>
                       <div className="text-[#09090B] font-bold text-[16px]">
-                        ${TOTAL_PRICE}
+                        {foodDataFromLocalStorage?.length === 0
+                          ? "$0"
+                          : `$${shipping}`}
                       </div>
                     </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      className="w-full rounded-full border-[1px] bg-[#EF4444] hover:bg-[#EF4444] hover:text-white text-white cursor-pointer"
-                      onClick={() => putFoodsRequest()}
-                    >
-                      Checkout
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </TabsContent>
-
-              <UserLastOrder foodOrder={orderData} />
-            </div>
-          ) : (
-            ""
-          )}
+                    <div className="w-full border-[2px] border-dashed"></div>
+                  </div>
+                  <div className="w-full flex justify-between">
+                    <div className="text-[#71717A]">Total</div>
+                    <div className="text-[#09090B] font-bold text-[16px]">
+                      {foodDataFromLocalStorage?.length === 0
+                        ? "$0.00"
+                        : ` $${TOTAL_PRICE}`}
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    className="w-full rounded-full border-[1px] bg-[#EF4444] hover:bg-[#EF4444] hover:text-white text-white cursor-pointer"
+                    onClick={() => putFoodsRequest()}
+                    disabled={foodDataFromLocalStorage?.length === 0}
+                  >
+                    Checkout
+                  </Button>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+          </div>
+          <UserLastOrder foodOrder={orderData} />
         </Tabs>
       </div>
     </SheetHeader>

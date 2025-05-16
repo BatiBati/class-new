@@ -60,7 +60,7 @@ export const DataTable = () => {
         "http://localhost:3001/foodOrder"
       );
       setFoodOrder(response.data.foodOrder);
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -95,7 +95,7 @@ export const DataTable = () => {
         </TableRow>
       </TableHeader>
 
-      <TableBody className="w-full text-[#71717a]">
+      <TableBody className="w-full text-[#71717a] h-fit overflow-scroll">
         {foodOrder.map((order) => (
           <TableRow key={order._id} className="w-full">
             <TableCell className="p-4 w-[30px]">
@@ -112,9 +112,7 @@ export const DataTable = () => {
               </div>
             </TableCell>
             <TableCell className="p-4">{order.createdAt}</TableCell>
-            <TableCell className="p-4 text-red-600">
-              {order.totalPrice}₮
-            </TableCell>
+            <TableCell className="p-4 ">{order.totalPrice}₮</TableCell>
             <TableCell className="p-4 max-w-[500px] overflow-x-scroll">
               {order.deliveryAddress}
             </TableCell>

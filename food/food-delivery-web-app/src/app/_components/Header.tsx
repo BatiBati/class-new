@@ -15,7 +15,7 @@ import { EnterDeliveryAddress } from "./EnterDeliveryAddress";
 export const Header = () => {
   const { user, signOut } = useAuth();
   const [isUser, setIsUser] = useState<boolean>(false);
-  const [deliverAddress, setDeliverAddress] = useState("Deliver address");
+  const [deliverAddress, setDeliverAddress] = useState("");
   console.log(deliverAddress);
 
   return (
