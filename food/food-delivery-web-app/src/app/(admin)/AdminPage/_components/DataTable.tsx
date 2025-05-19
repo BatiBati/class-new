@@ -32,6 +32,7 @@ export type FoodOrderType = {
 };
 
 export type FoodType = {
+  _id: string;
   foodName: string;
   image: string;
   ingredients: string;
@@ -51,8 +52,18 @@ type FoodsTypes = {
   quantity: number;
 };
 
-export const DataTable = () => {
+type PropsType = {
+  checkAll: boolean;
+  setCheckAllAction: React.Dispatch<React.SetStateAction<boolean>>;
+  checkTarget: string[];
+  setCheckTarget: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const DataTable = ({ checkAll, setCheckAllAction, checkTarget, setCheckTarget }: PropsType) => {
   const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
+  const [checkedValue, setCheckedValue] = useState<boolean>(false)
+  console.log(checkedValue);
+  console.log(checkTarget);
 
   const getFoodOrder = async () => {
     try {
@@ -60,7 +71,7 @@ export const DataTable = () => {
         "http://localhost:3001/foodOrder"
       );
       setFoodOrder(response.data.foodOrder);
-      console.log(response.data);
+
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -70,13 +81,18 @@ export const DataTable = () => {
     getFoodOrder();
   }, []);
 
+  // const handleCheck = () => {
+  //   if (checkedValue) {
+  //     setCheckTarget(!checkTarget)
+  //   }
+  // }
+
   return (
     <Table>
-      {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader className="w-full text-[#71717a] ">
         <TableRow>
           <TableHead className="p-4 w-[30px]">
-            <Checkbox className="bg-red-500" />
+            <Checkbox checked={checkAll} onCheckedChange={(value) => setCheckAllAction(!!value)} />
           </TableHead>
           <TableHead className="p-4">№</TableHead>
           <TableHead className="p-4">Customer</TableHead>
@@ -85,6 +101,7 @@ export const DataTable = () => {
             <div className="flex justify-between items-center">
               <div>Date</div>
               <Button className="w-[10px] h-[10px] rounded-full bg-red-500">
+
                 <UpDownArrow />
               </Button>
             </div>
@@ -96,10 +113,20 @@ export const DataTable = () => {
       </TableHeader>
 
       <TableBody className="w-full text-[#71717a] h-fit overflow-scroll">
-        {foodOrder.map((order) => (
+        {foodOrder.slice(0, 10).map((order) => (
           <TableRow key={order._id} className="w-full">
             <TableCell className="p-4 w-[30px]">
-              <Checkbox className="bg-red-500" />
+              {/* {checkAll ? (<Checkbox checked={checkAll} />) : (<Checkbox checked={checkedValue} onCheckedChange={() => setCheckTarget(!checkedValue)} />)} */}
+              <Checkbox
+                checked={checkTarget.includes(order._id)}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    setCheckTarget(prev => [...prev, order._id]);
+                  } else {
+                    setCheckTarget(prev => prev.filter(id => id !== order._id));
+                  }
+                }}
+              />
             </TableCell>
             <TableCell className="p-4 w-[30px] align-middle">1</TableCell>
             <TableCell className="p-4">{order.user.email}</TableCell>
@@ -113,16 +140,15 @@ export const DataTable = () => {
             </TableCell>
             <TableCell className="p-4">{order.createdAt}</TableCell>
             <TableCell className="p-4 ">{order.totalPrice}₮</TableCell>
-            <TableCell className="p-4 max-w-[500px] overflow-x-scroll">
+            <TableCell className="p-4 ">
               {order.deliveryAddress}
             </TableCell>
-
             <TableCell>
               <ChangeDeliveryState order={order} />
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
-    </Table>
+    </Table >
   );
 };

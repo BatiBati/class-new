@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DownArrow } from "./assets/DownArrow";
 import { FoodType } from "./DataTable";
+import { useState } from "react";
 
 type Props = {
   foodOrderItems: FoodsTypes[];
@@ -18,10 +19,10 @@ type FoodsTypes = {
 };
 
 export const SelectArrow = ({ foodOrderItems }: Props) => {
-  console.log(foodOrderItems);
+  const [open, setOpen] = useState(false)
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <div className="w-full h-full flex justify-center items-center">
           <Button className="bg-white hover:bg-white w-4 h-4">
@@ -29,17 +30,17 @@ export const SelectArrow = ({ foodOrderItems }: Props) => {
           </Button>
         </div>
       </PopoverTrigger>
-      <PopoverContent className="p-3 gap-3 rounded-md w-[300px] h-fit flex flex-col">
-        {foodOrderItems.map((food, i) => {
+      {open && (<PopoverContent className="p-3 gap-3 rounded-md w-[300px] h-fit flex flex-col">
+        {foodOrderItems.map((food) => {
           return (
             <div
               className="w-full h-fit flex items-center justify-between gap-[20px]"
-              key={i}
+              key={food.food._id}
             >
               <div className="flex gap-[10px] items-center">
                 <div className="rounded-sm overflow-hidden ">
                   <img
-                    src="/images/TestFoodPic.png"
+                    src={food.food.image}
                     className="w-[50px] h-[42px]"
                   />
                 </div>
@@ -52,7 +53,7 @@ export const SelectArrow = ({ foodOrderItems }: Props) => {
             </div>
           );
         })}
-      </PopoverContent>
+      </PopoverContent>)}
     </Popover>
   );
 };

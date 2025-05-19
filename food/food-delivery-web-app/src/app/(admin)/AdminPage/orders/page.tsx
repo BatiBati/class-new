@@ -6,9 +6,13 @@ import { DatePickerWithRange } from "../_components/DatePickerWithRange";
 import { DataTable, FoodOrderType, Response } from "../_components/DataTable";
 import { PaginationPage } from "../_components/PaginationPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChangeCheckedState } from "../_components/ChangeCheckedState";
+
 
 export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
+  const [checkAll, setCheckAllAction] = useState<boolean>(false)
+  const [checkTarget, setCheckTarget] = useState<string[]>([])
 
   const getFoodOrder = async () => {
     try {
@@ -16,6 +20,8 @@ export default function Order() {
         "http://localhost:3001/foodOrder"
       );
       setOrderLength(response.data.foodOrder);
+
+
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -25,8 +31,10 @@ export default function Order() {
     getFoodOrder();
   }, []);
 
+
+
   return (
-    <div className="flex flex-col gap-4 bg-[#F4F4F5] p-10 w-full">
+    <div className="flex flex-col gap-4 bg-[#F4F4F5] p-10 w-full h-fit">
       <div className="w-full flex justify-end">
         <Avatar className="w-10 h-10">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -41,16 +49,20 @@ export default function Order() {
               {orderLength.length} items
             </div>
           </div>
-          <div className="flex gap-3 ">
+
+          <div className="flex gap-5 items-center">
+            {/* <div className="flex gap-3 "> */}
             <DatePickerWithRange />
+            {/* </div> */}
+            <ChangeCheckedState orderLength={orderLength} setCheckTarget={setCheckTarget} checkTarget={checkTarget} />
           </div>
         </div>
         <div>
-          <DataTable />
+          <DataTable checkAll={checkAll} setCheckAllAction={setCheckAllAction} checkTarget={checkTarget} setCheckTarget={setCheckTarget} />
         </div>
       </div>
       <div className="w-full flex justify-end">
-        <PaginationPage />
+        <PaginationPage orderLength={orderLength} />
       </div>
     </div>
   );

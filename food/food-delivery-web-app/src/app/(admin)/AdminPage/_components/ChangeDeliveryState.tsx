@@ -25,6 +25,7 @@ const changeStatus = ["DELIVERED", "CANCELLED", "PENDING"];
 
 export const ChangeDeliveryState = ({ order }: PropsType) => {
   const [selectedStatus, setSelectedStatus] = useState(order.status);
+  const [open, setOpen] = useState(false)
 
 
   const updateDeliveryState = async () => {
@@ -37,23 +38,26 @@ export const ChangeDeliveryState = ({ order }: PropsType) => {
     } catch (error) {
       console.error("Error updating delivery state:", error);
     }
+    setOpen(false)
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="w-full h-full flex justify-center items-center">
-          <Button
-            variant="outline"
-            className={`rounded-full border-[1px] ${order.status === "PENDING" ? "border-red-500" : ""
-              } ${order.status === "DELIVERED" ? "border-green-500" : ""
-              } flex gap-[10px]`}
-          >
-            {order.status}
-            <div className="w-fit h-fit bg-white ">
-              <UpDownArrow />
-            </div>
-          </Button>
+          <div className="w-[120px]">
+            <Button
+              variant="outline"
+              className={`w-full rounded-full border-[1px] ${order.status === "PENDING" ? "border-red-500" : ""
+                } ${order.status === "DELIVERED" ? "border-green-500" : ""
+                } ${order.status === "CANCELED" ? "border-gray-700" : ""} flex gap-[10px]`}
+            >
+              {order.status}
+              <div className="w-fit h-fit bg-white ">
+                <UpDownArrow />
+              </div>
+            </Button>
+          </div>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] p-6 gap-[24px]">
