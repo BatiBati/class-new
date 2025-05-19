@@ -113,7 +113,7 @@ export const DataTable = ({ checkAll, setCheckAllAction, checkTarget, setCheckTa
       </TableHeader>
 
       <TableBody className="w-full text-[#71717a] h-fit overflow-scroll">
-        {foodOrder.slice(0, 10).map((order) => (
+        {foodOrder.map((order, index) => (
           <TableRow key={order._id} className="w-full">
             <TableCell className="p-4 w-[30px]">
               {/* {checkAll ? (<Checkbox checked={checkAll} />) : (<Checkbox checked={checkedValue} onCheckedChange={() => setCheckTarget(!checkedValue)} />)} */}
@@ -128,7 +128,7 @@ export const DataTable = ({ checkAll, setCheckAllAction, checkTarget, setCheckTa
                 }}
               />
             </TableCell>
-            <TableCell className="p-4 w-[30px] align-middle">1</TableCell>
+            <TableCell className="p-4 w-[30px] align-middle">{index + 1}</TableCell>
             <TableCell className="p-4">{order.user.email}</TableCell>
             <TableCell className="p-4">
               <div className="w-full flex justify-between">

@@ -44,16 +44,19 @@ export default function Home() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (user?.role === "ADMIN") router.push("/AdminPage")
     if (step === 1) {
       setStep((prev) => prev + 1);
     }
     if (step === 2) {
       signIn(values.email, values.password);
       router.push("/");
+
     }
   }
 
   const handleNext = () => {
+
     setStep((prev) => prev + 1);
   };
   const handlePrev = () => {
