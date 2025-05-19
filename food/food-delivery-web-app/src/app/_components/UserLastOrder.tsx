@@ -74,7 +74,7 @@ export const UserLastOrder = ({ foodOrder }: OrderDataType) => {
                   <ClockSvg /> {order.createdAt}
                 </div>
                 <div>
-                  <DeliverySvg />
+                  <DeliverySvg /> {order.deliveryAddress}
                 </div>
               </div>
             );

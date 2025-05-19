@@ -3,8 +3,8 @@ import axios from "axios";
 import { AddPictureSvg } from "./assets/AddPictureSvg";
 import { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Loader } from "lucide-react";
+import Image from "next/image";
 
 const UPLOAD_KEY = "Food_images";
 const IMAGE_API_KEY = "dazhij9zy";
@@ -41,7 +41,7 @@ export const AddFoodImage = ({
       const result = response.data.url;
       return result;
     } catch (error) {
-      return { error: "failed to upload image" };
+      console.error({ error: "failed to upload image" });
     }
   };
 
@@ -82,8 +82,9 @@ export const AddFoodImage = ({
 
       {deployedImageUrl && (
         <div className="relative">
-          <img
+          <Image
             src={`${deployedImageUrl}`}
+            alt="DeployedImageUrl"
             className="w-full h-[138px] rounded-xl"
           />
           <Button

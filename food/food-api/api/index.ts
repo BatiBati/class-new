@@ -1,13 +1,13 @@
 import express from "express";
 
-import { connectToDataBase } from "./database/connect-todb";
+import { connectToDataBase } from "../src/database/connect-todb";
 
-import { foodRouter } from "./routers/food.route";
-import { categoryRouter } from "./routers/category.route";
-import { foodOrder } from "./routers/foodOrder.route";
-import { userRouter } from "./routers/user.route";
+import { foodRouter } from "../src/routers/food.route";
+import { categoryRouter } from "../src/routers/category.route";
+import { foodOrder } from "../src/routers/foodOrder.route";
+import { userRouter } from "../src/routers/user.route";
 import cors from "cors";
-import { authRouter } from "./routers/auth.route";
+import { authRouter } from "../src/routers/auth.route";
 import { config } from "dotenv";
 
 config();

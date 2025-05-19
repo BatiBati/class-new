@@ -1,11 +1,9 @@
 "use client";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CountFoods } from "./CountFoods";
 import { Button } from "@/components/ui/button";
 import { AddCategory } from "./AddCategory";
-import { toast } from "sonner";
 
 type Response = {
   category: CategoryType[];
