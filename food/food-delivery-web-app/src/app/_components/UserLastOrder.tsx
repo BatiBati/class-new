@@ -1,19 +1,9 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { TabsContent } from "@/components/ui/tabs";
 import { FoodOrdersCard } from "./FoodOrdersCard";
 import { ClockSvg } from "./assets/ClockSvg";
 import { DeliverySvg } from "./assets/DeliverySvg";
-import { NoOrderYet } from "./NoOrderYet";
 
 type OrderDataType = {
   foodOrder: FoodsType[];
@@ -25,10 +15,16 @@ type FoodsType = {
   status: string;
   user: UserType;
   foodOrderItems: foodOrderItems[];
+  deliveryAddress: string;
+  createdAt: string;
+  updatedAt: string;
 };
+
 type UserType = {
   email: string;
   password: string;
+  updatedAt: string;
+  createdAt: string;
 };
 export type foodOrderItems = {
   _id: string;
@@ -46,8 +42,6 @@ export type OneFood = {
 };
 
 export const UserLastOrder = ({ foodOrder }: OrderDataType) => {
-  console.log(foodOrder);
-
   return (
     <TabsContent value="order">
       <Card>
@@ -70,10 +64,11 @@ export const UserLastOrder = ({ foodOrder }: OrderDataType) => {
                 <div className="w-full ">
                   <FoodOrdersCard orderFoods={order.foodOrderItems} />
                 </div>
-                <div className="text-[#71717A] text-[12px] flex gap-3">
-                  <ClockSvg /> {order.createdAt}
+                <div className="text-[#71717A] text-[12px] flex gap-3 items-center">
+                  <ClockSvg />
+                  {order.createdAt}
                 </div>
-                <div>
+                <div className="flex items-center gap-3 text-[#71717A] text-[12px]">
                   <DeliverySvg /> {order.deliveryAddress}
                 </div>
               </div>

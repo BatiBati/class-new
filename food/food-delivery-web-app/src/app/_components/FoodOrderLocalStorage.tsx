@@ -1,8 +1,5 @@
 "use client";
-import {
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { ShoppingBox } from "./assets/ShoppingBox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
@@ -36,10 +33,15 @@ type FoodsType = {
   status: string;
   user: UserType;
   foodOrderItems: foodOrderItems[];
+  deliveryAddress: string;
+  createdAt: string;
+  updatedAt: string;
 };
 type UserType = {
   email: string;
   password: string;
+  updatedAt: string;
+  createdAt: string;
 };
 type foodOrderItems = {
   _id: string;
@@ -66,7 +68,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] =
     useState<Food[]>();
   const [loading, setLoading] = useState(false);
-  const shipping = 0.99
+  const shipping = 0.99;
   const [orderData, setOrderData] = useState<FoodsType[]>([]);
 
   const ITEMS_TOTAL =
@@ -153,7 +155,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   }, []);
 
   const putFoodsRequest = async () => {
-    if (deliverAddress === " ") {
+    if (deliverAddress === "") {
       toast.error("Please enter deliver address.");
     }
     try {
@@ -172,7 +174,6 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
       setSelectedTab("order");
       handleOrderFoods();
       console.log(foodOrderOfUser);
-
     } catch (error) {
       console.error("Error placing order:", error);
     }

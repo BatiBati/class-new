@@ -3,15 +3,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DatePickerWithRange } from "../_components/DatePickerWithRange";
-import { DataTable, FoodOrderType, Response } from "../_components/DataTable";
+import { FoodOrderType, Response } from "../_components/DataTable";
 import { PaginationPage } from "../_components/PaginationPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChangeCheckedState } from "../_components/ChangeCheckedState";
 
 export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
-  const [checkAll, setCheckAllAction] = useState<boolean>(false);
-  const [checkTarget, setCheckTarget] = useState<string[]>([]);
+  // const [checkAll, setCheckAllAction] = useState<boolean>(false);
+  // const [checkTarget, setCheckTarget] = useState<string[]>([]);
 
   const getFoodOrder = async () => {
     try {
@@ -48,20 +47,20 @@ export default function Order() {
           <div className="flex gap-5 items-center">
             <DatePickerWithRange />
 
-            <ChangeCheckedState
+            {/* <ChangeCheckedState
               orderLength={orderLength}
               setCheckTarget={setCheckTarget}
               checkTarget={checkTarget}
-            />
+            /> */}
           </div>
         </div>
         <div>
-          <DataTable
-            checkAll={checkAll}
-            setCheckAllAction={setCheckAllAction}
-            checkTarget={checkTarget}
-            setCheckTarget={setCheckTarget}
-          />
+          {/* <DataTable
+          // checkAll={checkAll}
+          // setCheckAllAction={setCheckAllAction}
+          // checkTarget={checkTarget}
+          // setCheckTarget={setCheckTarget}
+          /> */}
         </div>
       </div>
       <div className="w-full flex justify-end">
