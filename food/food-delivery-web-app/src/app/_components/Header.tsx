@@ -11,7 +11,6 @@ export const Header = () => {
   const { user, signOut } = useAuth();
   const [isUser, setIsUser] = useState<boolean>(false);
   const [deliverAddress, setDeliverAddress] = useState("");
-  console.log(deliverAddress);
 
   return (
     <div className="w-full flex justify-center">

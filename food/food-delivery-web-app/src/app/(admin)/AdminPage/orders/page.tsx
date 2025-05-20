@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DatePickerWithRange } from "../_components/DatePickerWithRange";
-import { FoodOrderType, Response } from "../_components/DataTable";
+import { DataTable, FoodOrderType, Response } from "../_components/DataTable";
 import { PaginationPage } from "../_components/PaginationPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { api } from "../../../../../axios";
@@ -51,12 +51,12 @@ export default function Order() {
           </div>
         </div>
         <div>
-          {/* <DataTable
+          <DataTable
           // checkAll={checkAll}
           // setCheckAllAction={setCheckAllAction}
           // checkTarget={checkTarget}
           // setCheckTarget={setCheckTarget}
-          /> */}
+          />
         </div>
       </div>
       <div className="w-full flex justify-end">
