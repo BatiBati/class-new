@@ -3,9 +3,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -66,10 +64,6 @@ export const DataTable = ({
   setCheckTarget,
 }: PropsType) => {
   const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
-  const [checkedValue, setCheckedValue] = useState<boolean>(false);
-  console.log(checkedValue);
-  console.log(checkTarget);
-
   const getFoodOrder = async () => {
     try {
       const response = await axios.get<Response>(
@@ -80,16 +74,9 @@ export const DataTable = ({
       console.error("Error fetching categories:", error);
     }
   };
-
   useEffect(() => {
     getFoodOrder();
   }, []);
-
-  // const handleCheck = () => {
-  //   if (checkedValue) {
-  //     setCheckTarget(!checkTarget)
-  //   }
-  // }
 
   return (
     <div>
@@ -123,18 +110,8 @@ export const DataTable = ({
           {foodOrder.map((order, index) => (
             <TableRow key={order._id} className="w-full">
               <TableCell className="p-4 w-[30px]">
-                {/* {checkAll ? (<Checkbox checked={checkAll} />) : (<Checkbox checked={checkedValue} onCheckedChange={() => setCheckTarget(!checkedValue)} />)} */}
                 <Checkbox
                   checked={checkTarget.includes(order._id)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setCheckTarget((prev) => [...prev, order._id]);
-                    } else {
-                      setCheckTarget((prev) =>
-                        prev.filter((id) => id !== order._id)
-                      );
-                    }
-                  }}
                 />
               </TableCell>
               <TableCell className="p-4 w-[30px] align-middle">

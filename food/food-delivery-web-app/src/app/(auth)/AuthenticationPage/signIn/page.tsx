@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RightArrow } from "@/app/_components/assets/RightArrow";
-import { AuthProvider, useAuth } from "@/app/_providers/AuthProvider";
+import { useAuth } from "@/app/_providers/AuthProvider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+
 import Link from "next/link";
 
 const formSchema = z.object({
@@ -117,10 +117,10 @@ export default function Home() {
             className="w-full justify-center"
             onClick={handleNext}
           >
-            Let's Go
+            Lets Go
           </Button>
           <div className="flex gap-3 justify-center">
-            <p> Don't have an account?</p>
+            <p> Dont have an account?</p>
             <Link href={"/AuthenticationPage/signUp"}>
               <p className="text-blue-500 underline">Sign up</p>
             </Link>

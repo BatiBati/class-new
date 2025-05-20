@@ -1,15 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Logo } from "./assets/Logo";
-import { LocationLogo } from "./assets/Location";
-import { RightArrow } from "./assets/RightArrow";
-import { ShoppingBox } from "./assets/ShoppingBox";
 import { Aman } from "./assets/Aman";
 import Link from "next/link";
 import { FoodOrders } from "./FoodOrders";
 import { useAuth } from "../_providers/AuthProvider";
 import { useState } from "react";
-import { sign } from "crypto";
-import { Input } from "@/components/ui/input";
 import { EnterDeliveryAddress } from "./EnterDeliveryAddress";
 
 export const Header = () => {

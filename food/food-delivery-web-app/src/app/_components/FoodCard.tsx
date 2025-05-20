@@ -45,7 +45,7 @@ export const FoodCard = ({ id }: IdNumber) => {
             key={food._id}
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative">
-              <img src={food.image} className="h-full w-full" />
+              <img src={food.image} alt="FoodImage" className="h-full w-full" />
               <AddFoodToOrder
                 foodId={food._id}
                 foodImage={food.image}

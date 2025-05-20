@@ -41,6 +41,7 @@ export const SelectArrow = ({ foodOrderItems }: Props) => {
                 <div className="rounded-sm overflow-hidden ">
                   <img
                     src={food.food.image}
+                    alt="Food image"
                     className="w-[50px] h-[42px]"
                   />
                 </div>

@@ -1,5 +1,4 @@
-import { Logo } from "./assets/Logo";
-import { LogoCol } from "./assets/LogoCol";
+
 import { LogoHand } from "./assets/LogoHand";
 
 export const NoOrderYet = () => {
@@ -9,8 +8,8 @@ export const NoOrderYet = () => {
         <LogoHand />
         <div>No Orders Yet?</div>
         <div className="w-full flex flex-col items-center">
-          🍕 "You haven't placed any orders yet. Start exploring our menu and
-          satisfy your cravings!"
+          🍕 You havent placed any orders yet. Start exploring our menu and
+          satisfy your cravings!
         </div>
       </div>
     </div>

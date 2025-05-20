@@ -11,7 +11,7 @@ export default function AuthLayout({
         {children}
       </div>
       <div className="w-[50%] h-full ">
-        <img src="/images/DeliveryMan.png" className="w-full h-full" />
+        <img src="/images/DeliveryMan.png" alt="Delivery" className="w-full h-full" />
       </div>
 
       <Toaster />

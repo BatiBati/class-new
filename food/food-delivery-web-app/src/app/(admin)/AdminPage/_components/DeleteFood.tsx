@@ -16,11 +16,10 @@ export const DeleteFood = ({ foodId, getFood }: FoodIdType) => {
       await getFood();
       toast.success("Food deleted succesfully.");
     } catch (error) {
+      console.error("Delete food error:", error);
       toast.error("Failed to delete food.")
     }
   }
-
-
   return (
     <Button type="submit" className="border-red-200 border-[1px]" onClick={deleteFood}>
       <DeleteSvg />

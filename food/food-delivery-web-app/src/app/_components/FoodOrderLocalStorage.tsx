@@ -1,13 +1,7 @@
 "use client";
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingBox } from "./assets/ShoppingBox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,14 +9,11 @@ import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { UserLastOrder } from "./UserLastOrder";
 import axios from "axios";
@@ -75,7 +66,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
   const [foodDataFromLocalStorage, setFoodDataFromLocalStorage] =
     useState<Food[]>();
   const [loading, setLoading] = useState(false);
-  const [shipping, setShipping] = useState(0.99);
+  const shipping = 0.99
   const [orderData, setOrderData] = useState<FoodsType[]>([]);
 
   const ITEMS_TOTAL =
@@ -139,7 +130,6 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
     setFoodDataFromLocalStorage(updatedData);
 
     localStorage.setItem("foodOrder", JSON.stringify(updatedData));
-    console.log(updatedData);
   };
 
   const foodArray = foodDataFromLocalStorage?.map((item) => ({
@@ -152,7 +142,6 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
       const { data } = await axios.get(
         `http://localhost:3001/foodOrder?userId=${user?._id}`
       );
-
       setOrderData(data.foodOrder);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -182,6 +171,8 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
       setFoodDataFromLocalStorage([]);
       setSelectedTab("order");
       handleOrderFoods();
+      console.log(foodOrderOfUser);
+
     } catch (error) {
       console.error("Error placing order:", error);
     }
@@ -249,6 +240,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
                             <div className="space-y-1 flex w-full gap-[10px]">
                               <img
                                 src={`${food.foodImage}`}
+                                alt="FoodImage"
                                 className="w-[120px] h-[135px] rounded-xl"
                               />
 

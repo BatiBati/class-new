@@ -3,20 +3,15 @@ import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { UpDownArrow } from "./assets/UpDownArrow"
 import { FoodOrderType } from "./DataTable"
 import { useState } from "react"
 import axios from "axios"
 
-type OrderStatus = "DELIVERED" | "CANCELLED" | "PENDING";
 type ChangeCheckedStateProps = {
     orderLength: FoodOrderType[];
     checkTarget: boolean
@@ -26,14 +21,10 @@ type ChangeCheckedStateProps = {
 const changeStatus = ["DELIVERED", "CANCELLED", "PENDING"];
 
 
-export const ChangeCheckedState = ({ orderLength, checkTarget, setCheckTarget }: ChangeCheckedStateProps) => {
+export const ChangeCheckedState = ({ checkTarget, setCheckTarget }: ChangeCheckedStateProps) => {
     const [open, setOpen] = useState<boolean>(false)
-    const [changeValue, setChangeValue] = useState<string>("")
     const [saveValue, setSaveValue] = useState<string>("")
-
-
-
-
+    console.log(checkTarget);
 
     const handleChangeDeliverState = async () => {
         try {
@@ -46,8 +37,8 @@ export const ChangeCheckedState = ({ orderLength, checkTarget, setCheckTarget }:
                     console.log(`Updated order ${orderId}:`, response.data);
                 })
             );
-            setCheckTarget([]); // Clear selection
-            setOpen(false); // Close dialog
+            setCheckTarget([]);
+            setOpen(false);
         } catch (error) {
             console.error("Error updating delivery state:", error);
         }
@@ -57,24 +48,16 @@ export const ChangeCheckedState = ({ orderLength, checkTarget, setCheckTarget }:
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-
                 <Button
-                    // variant={"outline"}
                     className="rounded-full bg-black text-white p-4"
-                // className={`w-full rounded-full border-[1px] ${order.status === "PENDING" ? "border-red-500" : ""
-                // } ${order.status === "DELIVERED" ? "border-green-500" : ""
-                // } ${order.status === "CANCELED" ? "border-gray-700" : ""} flex gap-[10px]`}
                 >
                     Change delivery state
                 </Button>
-
-
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] p-6 gap-[20px]">
                 <DialogHeader className="gap-8">
                     <DialogTitle>Change delivery state</DialogTitle>
                     <div className="w-full flex justify-between">
-
                         {changeStatus.map((status) => {
                             return (
                                 <Button
@@ -82,32 +65,17 @@ export const ChangeCheckedState = ({ orderLength, checkTarget, setCheckTarget }:
                                     variant={"destructive"}
                                     key={status}
                                     onClick={() => setSaveValue(status)}
-
-                                // style={{
-                                //     background: stat === selectedStatus ? "red" : "",
-                                // }}
-                                // key={i}
-                                // onClick={() => {
-                                // setSelectedStatus(stat);
-                                // }}
                                 >
                                     {status}
-
                                 </Button>
                             )
                         })}
-
-
-
                     </div>
                 </DialogHeader>
                 <DialogFooter>
                     <Button
-
                         type="submit"
                         className="w-full rounded-full bg-black text-white"
-                        // onClick={updateDeliveryState}
-                        // onClick={() => handleChangeDeliverState(status)}
                         onClick={() => handleChangeDeliverState}
                     >
                         Save

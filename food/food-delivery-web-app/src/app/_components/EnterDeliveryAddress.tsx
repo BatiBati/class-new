@@ -5,24 +5,21 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { LocationLogo } from "./assets/Location";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 type DeliveryAddressType = {
   deliverAddress: string;
   setDeliverAddress: (address: string) => void;
 };
 
 export const EnterDeliveryAddress = ({
-  deliverAddress,
   setDeliverAddress,
 }: DeliveryAddressType) => {
   const [open, setOpen] = useState(false);
@@ -30,9 +27,7 @@ export const EnterDeliveryAddress = ({
 
   const handleAddress = () => {
     setDeliverAddress(value);
-    // try {
-    //   await axios.post(`http://localhost:3001/user/`, )
-    // }
+
     setOpen(false);
   };
   return (

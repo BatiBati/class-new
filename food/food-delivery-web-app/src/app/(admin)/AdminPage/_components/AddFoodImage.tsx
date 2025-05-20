@@ -41,7 +41,7 @@ export const AddFoodImage = ({
       const result = response.data.url;
       return result;
     } catch (error) {
-      console.error({ error: "failed to upload image" });
+      console.error("failed to upload image", error);
     }
   };
 

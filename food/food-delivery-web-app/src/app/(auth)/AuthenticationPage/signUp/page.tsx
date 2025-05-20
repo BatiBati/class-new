@@ -14,12 +14,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RightArrow } from "@/app/_components/assets/RightArrow";
-import { AuthProvider, useAuth } from "@/app/_providers/AuthProvider";
+import { useAuth } from "@/app/_providers/AuthProvider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Loader } from "lucide-react";
+
 import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z
@@ -41,7 +41,7 @@ const formSchema = z
 export default function Home() {
   const [step, setStep] = useState(1);
   const router = useRouter();
-  const { user, signUp } = useAuth();
+  const { signUp } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -169,7 +169,7 @@ export default function Home() {
             className="w-full justify-center"
             onClick={handleNext}
           >
-            Let's Go
+            Lets Go
           </Button>
           <div className="flex gap-3 justify-center">
             <p> Already have an account?</p>

@@ -3,17 +3,17 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { EditSvg } from "./assets/EditSvg";
 
-import { string, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -22,13 +22,13 @@ import { toast } from "sonner";
 import {
   Form,
   FormControl,
-  FormDescription,
+
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { DeleteSvg } from "./assets/DeleteSvg";
+
 import { DeleteFood } from "./DeleteFood";
 import { EditFoodImage } from "./EditFoodImage";
 import { UpdateFoodCategory } from "./UpdateFoodCategory";
@@ -62,7 +62,7 @@ type DefaultValuesType = {
 
 export const FoodEditButton = ({
   categoryId,
-  categoryName,
+
   foodId,
   foodName,
   foodPrice,
@@ -101,6 +101,8 @@ export const FoodEditButton = ({
         toast.success("Food updated succesfully.");
         setOpen(false);
       } catch (error) {
+        console.error("Failed to update food", error);
+
         toast.error("Failed to update food.");
       } finally {
         setLoading(false);
@@ -151,6 +153,7 @@ export const FoodEditButton = ({
                           categoryId={categoryId}
                           setSelectedCategoryId={setSelectedCategoryId}
                         />
+                        {field.name}
                       </FormControl>
                     </div>
                     <FormMessage />

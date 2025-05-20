@@ -25,7 +25,7 @@ export const Order = () => {
   return (
     <div className="flex flex-col gap-2 ">
       <div className="w-full flex justify-end">
-        <img src="/images/AdminAvatar.png" />
+        <img src="/images/AdminAvatar.png" alt="Avatar" />
       </div>
       <div className="h-full w-full bg-white rounded-lg overflow-hidden">
         <div className=" p-4 flex justify-between items-center bg-[#f4f4f5]">

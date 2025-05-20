@@ -13,13 +13,11 @@ type EditFoodImageType = {
   deployedImageUrl: string;
   setDeployedImageUrl: (value: string) => void;
 };
-
 export const EditFoodImage = ({
   deployedImageUrl,
   setDeployedImageUrl,
 }: EditFoodImageType) => {
   const [loading, setLoading] = useState(false);
-
   const uploadImageFunction = async (file: File | undefined) => {
     if (!file) {
       return null;
@@ -27,7 +25,6 @@ export const EditFoodImage = ({
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", UPLOAD_KEY);
-
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${IMAGE_API_KEY}/image/upload`,
@@ -38,11 +35,10 @@ export const EditFoodImage = ({
           },
         }
       );
-
       const result = response.data.url;
       return result;
     } catch (error) {
-      return { error: "failed to upload image" };
+      console.error("failed to upload image", error);
     }
   };
 
@@ -86,6 +82,7 @@ export const EditFoodImage = ({
           <img
             src={`${deployedImageUrl}`}
             className="w-full h-[138px] rounded-xl"
+            alt="DeployedImageUrl"
           />
           <Button
             className="absolute right-3 top-3 rounded-full"

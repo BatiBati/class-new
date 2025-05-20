@@ -86,8 +86,8 @@ export const Footer = () => {
                 <div className="w-fit flex flex-col gap-4">
                   <span className="text-[#71717A]">Follow us</span>
                   <div className="flex gap-4 py-[5px]  h-fit w-fit ">
-                    <img src="/images/Facebook.png" className="w-7 h-6.5" />
-                    <img src="/images/Instagram.png" className="w-7 h-6.5" />
+                    <img src="/images/Facebook.png" alt="Logo" className="w-7 h-6.5" />
+                    <img src="/images/Instagram.png" alt="Logo" className="w-7 h-6.5" />
                   </div>
                 </div>
               </div>

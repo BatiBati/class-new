@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 type Response = {
   category: CategoryType[];

@@ -1,9 +1,9 @@
 "use client";
 import { PlusSvg } from "@/app/_components/assets/PlusSvg";
 import { Button } from "@/components/ui/button";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { string, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -22,7 +22,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { AddFoodImage } from "./AddFoodImage";
 import { Loader } from "lucide-react";
 import axios from "axios";
@@ -36,7 +36,7 @@ const formSchema = z.object({
   price: z
     .string()
     .min(1, { message: "Food price must be at least 1 characters." }),
-  // image: z.string().min(8, { message: "Please enter image." }),
+
   ingredients: z
     .string()
     .min(3, { message: "Ingredients must be at least 3 characters." }),
@@ -85,11 +85,11 @@ export const FoodAddComp = ({
           foodName: "",
           price: "",
           ingredients: "",
-          // image: "",
           category: "",
         });
         setOpen(false);
       } catch (error) {
+        console.error("Failed to create food", error);
         toast.error("Failed to create food.");
       } finally {
         setLoading(false);
