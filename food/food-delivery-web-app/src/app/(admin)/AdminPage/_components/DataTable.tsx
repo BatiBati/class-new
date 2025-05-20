@@ -111,9 +111,7 @@ export const DataTable = (
             {foodOrder.map((order, index) => (
               <TableRow key={order._id} className="w-full">
                 <TableCell className="p-4 w-[30px]">
-                  <Checkbox
-                  // checked={checkTarget.includes(order._id)}
-                  />
+                  <Checkbox checked={checkTarget.includes(order._id)} />
                 </TableCell>
                 <TableCell className="p-4 w-[30px] align-middle">
                   {index + 1}
