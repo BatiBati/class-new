@@ -96,7 +96,7 @@ export const DataTable = (
               <TableHead className="p-4">
                 <div className="flex justify-between items-center">
                   <div>Date</div>
-                  <Button className="w-[10px] h-[10px] rounded-full bg-red-500">
+                  <Button className="w-[10px] h-[10px] rounded-full ">
                     <UpDownArrow />
                   </Button>
                 </div>
