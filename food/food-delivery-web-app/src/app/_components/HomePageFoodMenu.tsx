@@ -1,7 +1,7 @@
 "use client";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { FoodCard } from "./FoodCard";
+import { api } from "../../../axios";
 
 type ResponseOfCategoryType = {
   category: Categries[];
@@ -17,9 +17,7 @@ export const HomePageFoodMenu = () => {
 
   const getCategoryData = async () => {
     try {
-      const response = await axios.get<ResponseOfCategoryType>(
-        "http://localhost:3001/category"
-      );
+      const response = await api.get<ResponseOfCategoryType>(`/category`);
       setCategories(response.data.category);
     } catch (error) {
       console.error("Error fetching categories:", error);

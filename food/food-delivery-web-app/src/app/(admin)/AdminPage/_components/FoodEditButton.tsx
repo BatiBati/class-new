@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -17,12 +16,10 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "sonner";
 import {
   Form,
   FormControl,
-
   FormField,
   FormItem,
   FormLabel,
@@ -33,6 +30,7 @@ import { DeleteFood } from "./DeleteFood";
 import { EditFoodImage } from "./EditFoodImage";
 import { UpdateFoodCategory } from "./UpdateFoodCategory";
 import { Loader } from "lucide-react";
+import { api } from "../../../../../axios";
 
 const formSchema = z.object({
   foodName: z
@@ -89,7 +87,7 @@ export const FoodEditButton = ({
     const handleCreate = async () => {
       setLoading(true);
       try {
-        await axios.put(`http://localhost:3001/food/${foodId}`, {
+        await api.put(`/food/${foodId}`, {
           foodName: values.foodName,
           price: Number(values.price),
           ingredients: values.ingredients,

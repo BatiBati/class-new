@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { LogoCol } from "./assets/LogoCol";
 import { motion } from "framer-motion";
+import { api } from "../../../axios";
 
 const runningWords = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11];
 
@@ -21,9 +21,7 @@ export const Footer = () => {
 
   const getCategoryData = async () => {
     try {
-      const response = await axios.get<Response>(
-        "http://localhost:3001/category"
-      );
+      const response = await api.get<Response>(`/category`);
       setCategory(response.data.category);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -86,8 +84,16 @@ export const Footer = () => {
                 <div className="w-fit flex flex-col gap-4">
                   <span className="text-[#71717A]">Follow us</span>
                   <div className="flex gap-4 py-[5px]  h-fit w-fit ">
-                    <img src="/images/Facebook.png" alt="Logo" className="w-7 h-6.5" />
-                    <img src="/images/Instagram.png" alt="Logo" className="w-7 h-6.5" />
+                    <img
+                      src="/images/Facebook.png"
+                      alt="Logo"
+                      className="w-7 h-6.5"
+                    />
+                    <img
+                      src="/images/Instagram.png"
+                      alt="Logo"
+                      className="w-7 h-6.5"
+                    />
                   </div>
                 </div>
               </div>

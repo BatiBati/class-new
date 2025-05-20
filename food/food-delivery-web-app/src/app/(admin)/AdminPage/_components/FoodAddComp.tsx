@@ -25,8 +25,8 @@ import { Input } from "@/components/ui/input";
 
 import { AddFoodImage } from "./AddFoodImage";
 import { Loader } from "lucide-react";
-import axios from "axios";
 import { toast } from "sonner";
+import { api } from "../../../../../axios";
 
 const formSchema = z.object({
   foodName: z
@@ -72,7 +72,7 @@ export const FoodAddComp = ({
     const handleCreate = async () => {
       setLoading(true);
       try {
-        await axios.post("http://localhost:3001/food", {
+        await api.post(`/food`, {
           foodName: values.foodName,
           price: Number(values.price),
           ingredients: values.ingredients,

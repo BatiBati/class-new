@@ -1,12 +1,9 @@
 "use client";
-
-import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { FoodResponse, FoodType } from "../foodMenu/page";
 import { FoodAddComp } from "./FoodAddComp";
 import { FoodEditButton } from "./FoodEditButton";
-
+import { api } from "../../../../../axios";
 
 type FoodsProps = {
   categoryId: string;
@@ -18,8 +15,8 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
 
   const getFood = async () => {
     try {
-      const foodResponse = await axios.get<FoodResponse>(
-        `http://localhost:3001/food?categoryId=${categoryId}`
+      const foodResponse = await api.get<FoodResponse>(
+        `/food?categoryId=${categoryId}`
       );
 
       setFoods(foodResponse.data.foods);
@@ -49,7 +46,11 @@ export const Foods = ({ categoryId, categoryName }: FoodsProps) => {
             key={food._id}
           >
             <div className="rounded-xl overflow-hidden h-[210px] relative ">
-              <img src={`${food.image}`} alt="Food image" className="h-full w-full rounded-xl" />
+              <img
+                src={`${food.image}`}
+                alt="Food image"
+                className="h-full w-full rounded-xl"
+              />
               <div className="absolute right-[10px] bottom-[5px] w-11 h-11 rounded-full flex justify-center items-center">
                 <FoodEditButton
                   categoryId={categoryId}

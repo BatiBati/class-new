@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Categories, Response } from "./Footer";
-import axios from "axios";
 import {
   Carousel,
   CarouselContent,
@@ -8,15 +7,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { api } from "../../../axios";
 
 export const CategoryNames = () => {
   const [categories, setCategory] = useState<Categories[]>([]);
 
   const getCategoryData = async () => {
     try {
-      const response = await axios.get<Response>(
-        "http://localhost:3001/category"
-      );
+      const response = await api.get<Response>(`/category`);
       setCategory(response.data.category);
     } catch (error) {
       console.error("Error fetching categories", error);

@@ -1,8 +1,8 @@
 "use client";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { AddFoodToOrder } from "./AddFoodToOrder";
+import { api } from "../../../axios";
 type ResponseOfFoodsType = {
   foods: Food[];
 };
@@ -23,8 +23,8 @@ export const FoodCard = ({ id }: IdNumber) => {
 
   const getFoodData = async () => {
     try {
-      const response = await axios.get<ResponseOfFoodsType>(
-        `http://localhost:3001/food?categoryId=${id}`
+      const response = await api.get<ResponseOfFoodsType>(
+        `/food?categoryId=${id}`
       );
       setFoods(response.data.foods);
     } catch (error) {

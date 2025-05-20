@@ -13,10 +13,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 import { UserLastOrder } from "./UserLastOrder";
-import axios from "axios";
 import { useAuth } from "../_providers/AuthProvider";
 import { NoOrderYet } from "./NoOrderYet";
 import { toast } from "sonner";
+import { api } from "../../../axios";
 export type Food = {
   foodId: string;
   foodImage: string;
@@ -141,9 +141,7 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
 
   const handleOrderFoods = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/foodOrder?userId=${user?._id}`
-      );
+      const { data } = await api.get(`/foodOrder?userId=${user?._id}`);
       setOrderData(data.foodOrder);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -159,16 +157,13 @@ export const GetFoodOrderLocalStorage = ({ deliverAddress }: PropsType) => {
       toast.error("Please enter deliver address.");
     }
     try {
-      const foodOrderOfUser = axios.post(
-        `http://localhost:3001/foodOrder/post`,
-        {
-          user: user?._id,
-          totalPrice: ITEMS_TOTAL,
-          foodOrderItems: foodArray,
-          status: "PENDING",
-          deliveryAddress: deliverAddress,
-        }
-      );
+      const foodOrderOfUser = api.post(`/foodOrder/post`, {
+        user: user?._id,
+        totalPrice: ITEMS_TOTAL,
+        foodOrderItems: foodArray,
+        status: "PENDING",
+        deliveryAddress: deliverAddress,
+      });
       localStorage.removeItem("foodOrder");
       setFoodDataFromLocalStorage([]);
       setSelectedTab("order");

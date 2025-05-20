@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
 
 import { Loader } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { api } from "../../../../../axios";
 
 type GetCategoryDataType = {
   getCategoryData: () => Promise<void>;
@@ -29,7 +29,7 @@ export const AddCategory = ({ getCategoryData }: GetCategoryDataType) => {
   const handleCreate = async () => {
     setLoading(true);
     try {
-      await axios.post("http://localhost:3001/category", {
+      await api.post(`/category`, {
         categoryName: inputValue,
       });
       await getCategoryData();

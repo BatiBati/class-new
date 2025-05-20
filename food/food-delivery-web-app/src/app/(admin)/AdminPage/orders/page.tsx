@@ -1,22 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { DatePickerWithRange } from "../_components/DatePickerWithRange";
 import { FoodOrderType, Response } from "../_components/DataTable";
 import { PaginationPage } from "../_components/PaginationPage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { api } from "../../../../../axios";
 
 export default function Order() {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
-  // const [checkAll, setCheckAllAction] = useState<boolean>(false);
-  // const [checkTarget, setCheckTarget] = useState<string[]>([]);
 
   const getFoodOrder = async () => {
     try {
-      const response = await axios.get<Response>(
-        "http://localhost:3001/foodOrder"
-      );
+      const response = await api.get<Response>(`/foodOrder`);
       setOrderLength(response.data.foodOrder);
     } catch (error) {
       console.error("Error fetching categories:", error);

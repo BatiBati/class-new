@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { UpDownArrow } from "./assets/UpDownArrow";
-import axios from "axios";
 import { useState } from "react";
+import { api } from "../../../../../axios";
 
 type PropsType = {
   order: OrderType;
@@ -25,20 +25,19 @@ const changeStatus = ["DELIVERED", "CANCELLED", "PENDING"];
 
 export const ChangeDeliveryState = ({ order }: PropsType) => {
   const [selectedStatus, setSelectedStatus] = useState(order.status);
-  const [open, setOpen] = useState(false)
-
+  const [open, setOpen] = useState(false);
 
   const updateDeliveryState = async () => {
     try {
-      const url = `http://localhost:3001/foodOrder/${order._id}`;
+      const url = `/foodOrder/${order._id}`;
       const data = { status: selectedStatus };
 
-      const response = await axios.put(url, data);
+      const response = await api.put(url, data);
       console.log("Delivery state updated:", response.data);
     } catch (error) {
       console.error("Error updating delivery state:", error);
     }
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
@@ -48,9 +47,11 @@ export const ChangeDeliveryState = ({ order }: PropsType) => {
           <div className="w-[120px]">
             <Button
               variant="outline"
-              className={`w-full rounded-full border-[1px] ${order.status === "PENDING" ? "border-red-500" : ""
-                } ${order.status === "DELIVERED" ? "border-green-500" : ""
-                } ${order.status === "CANCELED" ? "border-gray-700" : ""} flex gap-[10px]`}
+              className={`w-full rounded-full border-[1px] ${
+                order.status === "PENDING" ? "border-red-500" : ""
+              } ${order.status === "DELIVERED" ? "border-green-500" : ""} ${
+                order.status === "CANCELED" ? "border-gray-700" : ""
+              } flex gap-[10px]`}
             >
               {order.status}
               <div className="w-fit h-fit bg-white ">

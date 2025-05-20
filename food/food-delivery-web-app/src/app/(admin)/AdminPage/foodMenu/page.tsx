@@ -1,11 +1,10 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import axios from "axios";
 import { useEffect, useState } from "react";
-
 import { CategoryCompBot } from "../_components/CategoryCompBot";
 import { CategoryCompTop } from "../_components/CategoryCompTop";
+import { api } from "../../../../../axios";
 
 export type FoodResponse = {
   foods: FoodType[];
@@ -32,9 +31,7 @@ export default function Home() {
 
   const getFood = async () => {
     try {
-      const foodResponse = await axios.get<FoodResponse>(
-        `http://localhost:3001/food/`
-      );
+      const foodResponse = await api.get<FoodResponse>(`/food/`);
       setFoods(foodResponse.data.foods);
     } catch (error) {
       console.error("Error fetching foods", error);

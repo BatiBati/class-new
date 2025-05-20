@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { api } from "../../../../../axios";
 
 type Response = {
   category: CategoryType[];
@@ -33,9 +33,7 @@ export const UpdateFoodCategory = ({
 
   const getCategoryData = async () => {
     try {
-      const categoryResponse = await axios.get<Response>(
-        `http://localhost:3001/category/`
-      );
+      const categoryResponse = await api.get<Response>(`/category/`);
 
       setCategory(categoryResponse.data.category);
     } catch (error) {

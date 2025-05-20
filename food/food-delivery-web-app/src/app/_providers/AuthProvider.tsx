@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { useRouter } from "next/navigation";
 import {
   createContext,
@@ -9,6 +7,7 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
+import { api, setAuthToken } from "../../../axios";
 
 type User = {
   _id: string;
@@ -35,7 +34,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/auth/sign-in", {
+      const { data } = await api.post(`/auth/sign-in`, {
         email,
         password,
       });
@@ -55,7 +54,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signUp = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/auth/sign-up", {
+      const { data } = await api.post(`/auth/sign-u`, {
         email,
         password,
       });
@@ -73,27 +72,32 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(undefined);
   };
 
+  const getUser = async () => {
+    const token = localStorage.getItem("token");
+
+    setLoading(true);
+    try {
+      const { data } = await api.get(`/auth/me`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      setUser(data);
+    } catch {
+      localStorage.removeItem("token");
+      setUser(undefined);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const getUser = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get("http://localhost:3001/auth/me", {
-          headers: {
-            Authorization: `${token}`,
-          },
-        });
-        setUser(data);
-      } catch {
-        localStorage.removeItem("token");
-        setUser(undefined);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setAuthToken(token);
     getUser();
   }, []);
+
   return (
     <AuthContext.Provider value={{ user, setUser, signIn, signOut, signUp }}>
       {!loading && children}

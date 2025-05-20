@@ -3,16 +3,14 @@
 import { DataTable, FoodOrderType, Response } from "./DataTable";
 import { DatePickerWithRange } from "./DatePickerWithRange";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../../../../../axios";
 
 export const Order = () => {
   const [orderLength, setOrderLength] = useState<FoodOrderType[]>([]);
 
   const getFoodOrder = async () => {
     try {
-      const response = await axios.get<Response>(
-        "http://localhost:3001/foodOrder"
-      );
+      const response = await api.get<Response>(`/foodOrder`);
       setOrderLength(response.data.foodOrder);
     } catch (error) {
       console.error("Error fetching categories:", error);

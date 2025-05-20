@@ -8,13 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { SelectArrow } from "./SelectArrow";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UpDownArrow } from "./assets/UpDownArrow";
 import { Button } from "@/components/ui/button";
 import { ChangeDeliveryState } from "./ChangeDeliveryState";
+import { api } from "../../../../../axios";
 
 export type Response = {
   foodOrder: FoodOrderType[];
@@ -69,9 +69,7 @@ export const DataTable = (
     const [foodOrder, setFoodOrder] = useState<FoodOrderType[]>([]);
     const getFoodOrder = async () => {
       try {
-        const response = await axios.get<Response>(
-          "http://localhost:3001/foodOrder"
-        );
+        const response = await api.get<Response>(`/foodOrder`);
         setFoodOrder(response.data.foodOrder);
       } catch (error) {
         console.error("Error fetching categories:", error);
