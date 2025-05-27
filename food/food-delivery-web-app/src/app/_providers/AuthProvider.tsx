@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signUp = async (email: string, password: string) => {
     try {
-      const { data } = await api.post(`/auth/sign-u`, {
+      const { data } = await api.post(`/auth/sign-up`, {
         email,
         password,
       });

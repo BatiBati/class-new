@@ -1,18 +1,18 @@
-import { RequsetHandler } from "express";
 import { prisma } from "../../db";
 
-export const checkUserName: RequsetHandler = (req, res) => {
-  const { username } = req.body;
+export const checkUserName = async (req, res) => {
+  const { username } = req.query;
+
   try {
-    const user = prisma.user.findMany({
-      where: { username },
+    const user = await prisma.user.findFirst({
+      where: { username: String(username) },
     });
 
     if (!user) {
-      res.status(200).json({ isExist: false });
-      return;
+      return res.status(200).json(true);
+    } else {
+      return res.status(200).json(false);
     }
-    res.status(200).json({ isExist: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error", error });

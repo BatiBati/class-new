@@ -10,32 +10,36 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { z } from "zod";
+import { z, ZodSchema } from "zod";
+import { FormData } from "../signUp/page";
+import { Dispatch, SetStateAction, useState } from "react";
 
-type SignUpFirstStepProps = {
-  onNext: (data: { username: string }) => void;
-  formSchema: any; // You can type this properly as Zod schema type
-  z: string;
+export type SignUpStepProps = {
+  formData: FormData;
+  handleFormData: Dispatch<SetStateAction<FormData>>;
+  next: () => void;
 };
 
-export const SignUpFirstStep = ({
-  onNext,
-  formSchema,
-}: SignUpFirstStepProps) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+const usernameSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters."),
+});
+
+export const SignUpFirstStep = ({ handleFormData, next }: SignUpStepProps) => {
+  const form = useForm<z.infer<typeof usernameSchema>>({
+    resolver: zodResolver(usernameSchema),
     defaultValues: {
       username: "",
     },
   });
 
-  function onSubmit(values: any) {
-    onNext(values);
-  }
+  const handleSubmit = form.handleSubmit((values) => {
+    handleFormData((prev) => ({ ...prev, username: values.username }));
+    next();
+  });
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8 w-[27%]">
         <FormField
           control={form.control}
           name="username"

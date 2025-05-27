@@ -1,2 +1,6 @@
 import { Router } from "express";
-export const authRouter = Router().post("check-username", )
+import { checkUserName, getMe, signUp } from "../controllers/auth";
+export const authRouter = Router()
+  .post("/sign-up", signUp)
+  .get("/get-me", getMe)
+  .get("/check-username", checkUserName);
