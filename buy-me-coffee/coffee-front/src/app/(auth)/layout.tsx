@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { LeftSide } from "./_components/LeftSide";
 
 export default function RootLayout({
@@ -10,6 +11,7 @@ export default function RootLayout({
       <LeftSide />
 
       {children}
+      <Toaster position="top-center" />
     </div>
   );
 }

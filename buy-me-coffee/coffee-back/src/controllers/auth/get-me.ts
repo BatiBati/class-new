@@ -1,5 +1,4 @@
 import { prisma } from "../../db";
-import { RequestHandler } from "express";
 export const getMe = async (req, res) => {
   try {
     const userId = req.id;

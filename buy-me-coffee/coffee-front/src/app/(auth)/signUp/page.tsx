@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SignUpFirstStep } from "../_components/SignUpFirstStep";
 import { SignUpSecondStep } from "../_components/SignUpSecondStep";
+import { useRouter } from "next/navigation";
 
 export type FormData = {
   username: string;
@@ -24,23 +25,14 @@ export default function Home() {
     setStep((prev) => prev + 1);
   };
 
-  // const handleFirstStepComplete = (data: { username: string }) => {
-  //   setFormData((prev) => ({ ...prev, ...data }));
-  //   setStep(2);
-  // };
-
-  // const handleSecondStepComplete = (data: {
-  //   email: string;
-  //   password: string;
-  // }) => {
-  //   setFormData((prev) => ({ ...prev, ...data }));
-  //   console.log("Full signup data:", { ...formData, ...data });
-  // };
+  const router = useRouter();
 
   return (
     <div className="w-[50%] p-10 relative">
       <div className="absolute right-10 top-10">
-        <Button variant="outline">Log in</Button>
+        <Button variant="outline" onClick={() => router.push("/signIn")}>
+          Log in
+        </Button>
       </div>
       <div className="w-full h-full flex flex-col justify-center items-center gap-10">
         {step === 1 && (

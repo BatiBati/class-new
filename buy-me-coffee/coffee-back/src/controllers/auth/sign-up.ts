@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 export const signUp: RequestHandler = async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(username, email);
   try {
     const existingUsers = await prisma.user.findFirst({
       where: {
@@ -39,7 +40,7 @@ export const signUp: RequestHandler = async (req, res) => {
         },
         process.env.SECRET
       );
-      res.status(201).json({
+      res.status(200).json({
         user: userWithoutPassword,
         token,
       });
