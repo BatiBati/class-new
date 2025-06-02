@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 export const signUp: RequestHandler = async (req, res) => {
   const { username, email, password } = req.body;
-  console.log(username, email);
   try {
     const existingUsers = await prisma.user.findFirst({
       where: {
@@ -36,7 +35,7 @@ export const signUp: RequestHandler = async (req, res) => {
       const { password: userPassword, ...userWithoutPassword } = newUser;
       const token = jwt.sign(
         {
-          user: newUser.id,
+          userId: newUser.id,
         },
         process.env.SECRET
       );

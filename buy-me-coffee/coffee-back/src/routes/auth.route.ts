@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { checkUserName, getMe, signIn, signUp } from "../controllers/auth";
+import { authenticationMiddleware } from "../controllers/middlewares";
 export const authRouter = Router()
-  .post("/sign-up", signUp)
-  .get("/get-me", getMe)
+  .post("/sign-up", authenticationMiddleware, signUp)
+  .get("/get-me", authenticationMiddleware, getMe)
   .get("/check-username", checkUserName)
-  .get("/sign-in", signIn);
+  .post("/sign-in", signIn);

@@ -16,6 +16,7 @@ import { api } from "../../../../axios";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/_providers/AuthProvider";
 
 const emailPasswordSchema = z.object({
   email: z
@@ -26,8 +27,8 @@ const emailPasswordSchema = z.object({
 });
 
 export const SignUpSecondStep = ({ formData }: SignUpStepProps) => {
-  const router = useRouter();
-  const [user, setUser] = useState();
+  const { signUp } = useAuth();
+
   const form = useForm({
     resolver: zodResolver(emailPasswordSchema),
     defaultValues: {
@@ -37,21 +38,7 @@ export const SignUpSecondStep = ({ formData }: SignUpStepProps) => {
   });
 
   const onSubmit = form.handleSubmit(async (values) => {
-    try {
-      const { data } = await api.post(`/auth/sign-up`, {
-        username: formData.username,
-        email: values.email,
-        password: values.password,
-      });
-
-      localStorage.setItem("token", data.token);
-      setUser(data.user);
-      toast.success("User successfully created. Please Sign in");
-      await router.push("/signIn");
-    } catch (error) {
-      console.error("Failed to sign in", error);
-      toast.error("Failed to sign up.");
-    }
+    signUp(formData.username, values.email, values.password);
   });
 
   return (

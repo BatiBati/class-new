@@ -1,5 +1,7 @@
+"use client";
 import { Toaster } from "@/components/ui/sonner";
 import { LeftSide } from "./_components/LeftSide";
+import { AuthProvider } from "../_providers/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -9,7 +11,6 @@ export default function RootLayout({
   return (
     <div className="flex w-screen h-screen ">
       <LeftSide />
-
       {children}
       <Toaster position="top-center" />
     </div>
