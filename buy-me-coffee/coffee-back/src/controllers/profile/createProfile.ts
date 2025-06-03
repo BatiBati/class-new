@@ -37,15 +37,3 @@ export const createProfile = async (req, res) => {
     res.status(500).json({ error, message: "Server Error" });
   }
 };
-
-// id              Int      @id @default(autoincrement())
-// name            String   @unique
-// about           String
-// avatarImage     String
-// socialMediaUrl  String
-// backgroundImage String
-// successMessage  String
-// userId          Int      @unique
-// user            User     @relation(fields: [userId], references: [id])
-// createdAt       DateTime
-// updatedAt       DateTime

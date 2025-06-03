@@ -21,15 +21,6 @@ export default function Home() {
           </div>
         </>
       )}
-
-      {/* <div className="absolute right-10 top-10">
-        <Button variant="outline" onClick={() => router.push("/signUp")}>
-          Sign up
-        </Button>
-      </div>
-      <div className="w-full h-full flex flex-col justify-center items-center gap-10">
-        <SignInStep />
-      </div> */}
     </div>
   );
 }

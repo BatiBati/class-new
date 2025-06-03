@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { useAuth } from "@/app/_providers/AuthProvider";
+import { useRouter } from "next/navigation";
 
 const userSchema = z.object({
   email: z.string().min(3, "Username must be at least 3 characters.").email(),
@@ -19,7 +20,8 @@ const userSchema = z.object({
 });
 
 export const SignInStep = () => {
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),

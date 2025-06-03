@@ -2,7 +2,9 @@
 import {
   Children,
   createContext,
+  Dispatch,
   PropsWithChildren,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -18,11 +20,22 @@ type AuthContextType = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 };
-type User = {
+export type User = {
   email: string;
   password: string;
   username: string;
+  profile: Profile;
+};
+
+type Profile = {
+  name: string;
+  about: string;
+  avatarImage: string;
+  socialMediaUrl: string;
+  successMessage: string;
+  userId: number;
 };
 
 const AuthContext = createContext({} as AuthContextType);
@@ -40,10 +53,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         password,
       });
       localStorage.setItem("token", data.token);
-      setUser(data);
+      setUser(data.userWithoutPassword);
 
-      if (data) {
-        router.push("/");
+      if (data.userWithoutPassword) {
+        router.push(user?.profile === null ? "/" : "/profile");
       } else if (data.user === undefined) {
         router.push("/signIn");
       }
@@ -110,7 +123,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, signIn, signUp, signOut, loading }}
+      value={{ user, setUser, signIn, signUp, signOut, loading, setLoading }}
     >
       {!loading && children}
     </AuthContext.Provider>

@@ -12,7 +12,7 @@ export const Header = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full py-2 px-4 flex justify-center ">
+    <div className="w-full h-[50%] py-2 px-4 flex justify-center">
       <div className="relative">
         <div className="flex w-[1240px] justify-between">
           <div className="flex text-4 font-bold items-center gap-[8px]">
@@ -24,6 +24,7 @@ export const Header = () => {
             <AvatarComp
               avatarButton={avatarButton}
               setAvatarButton={setAvatarButton}
+              user={user}
             />
           ) : (
             <Button onClick={() => router.push(`/signIn`)} variant={"outline"}>
@@ -32,7 +33,7 @@ export const Header = () => {
           )}
         </div>
         {avatarButton && (
-          <div className="absolute right-0 ">
+          <div className="absolute right-0">
             <Button
               variant={"outline"}
               className="w-[150px]"
