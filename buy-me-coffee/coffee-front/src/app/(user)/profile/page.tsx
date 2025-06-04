@@ -16,9 +16,10 @@ import { PhotoSvg } from "./_components/assets/PhotoSvg";
 import { useState } from "react";
 import { useAuth } from "@/app/_providers/AuthProvider";
 import axios from "axios";
+import Image from "next/image";
 
 const profileSchema = z.object({
-  image: z.string().min(3, { message: "Please enter your profile image." }),
+  // image: z.string().min(3, { message: "Please enter your profile image." }),
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
@@ -35,7 +36,7 @@ export default function Home() {
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      image: "",
+      // image: uploadedImage[0],
       name: "",
       about: "",
       socialMediaUrl: "",
@@ -46,13 +47,14 @@ export default function Home() {
     if (!file) {
       return null;
     }
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_KEY!);
 
     try {
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
         formData,
         {
           headers: {
@@ -77,13 +79,17 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = form.handleSubmit((values) => {});
+  function onSubmit(values: z.infer<typeof profileSchema>) {
+    const handleCreate = async () => {
+      setLoading(true);
+    };
+  }
 
   return (
     <div className="w-full h-full flex justify-center items-center">
       <div className="w-fit h-fit">
         <Form {...form}>
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
               control={form.control}
               name="image"
@@ -108,7 +114,11 @@ export default function Home() {
                       />
                     </div>
                     <div className="w-fit h-fit absolute">
-                      <PhotoSvg />
+                      {form.image ? (
+                        <Image src={`${uploadedImage}`} alt="uploadedImage" />
+                      ) : (
+                        <PhotoSvg />
+                      )}
                     </div>
                   </div>
                   <FormControl className="w-full"></FormControl>
