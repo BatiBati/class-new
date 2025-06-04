@@ -9,8 +9,6 @@ export const createProfile = async (req, res) => {
     backgroundImage,
     successMessage,
     userId,
-    createdAt,
-    updatedAt,
   } = req.body;
 
   if (!userId) {
