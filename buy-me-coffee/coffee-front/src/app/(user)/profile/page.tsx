@@ -33,7 +33,7 @@ const profileSchema = z.object({
 export default function Home() {
   const [uploadedImage, setUploadedImage] = useState("");
   const { loading, setLoading } = useAuth();
-  const form = useForm<z.infer<typeof profileSchema>>({
+  const { register, formState, watch } = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       // image: uploadedImage[0],
@@ -70,12 +70,10 @@ export default function Home() {
   };
 
   const handleInputFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const files = e.target.files?.[0];
     if (files) {
-      setLoading(true);
-      const result = await uploadedImageFunction(files[0]);
+      const result = await uploadedImageFunction(files);
       setUploadedImage(result);
-      setLoading(false);
     }
   };
 
