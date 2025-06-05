@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { useAuth } from "@/app/_providers/AuthProvider";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const userSchema = z.object({
   email: z.string().min(3, "Username must be at least 3 characters.").email(),
@@ -33,6 +34,9 @@ export const SignInStep = () => {
 
   const handleSubmit = form.handleSubmit((values) => {
     signIn(values.email, values.password);
+    // if(user.profile  (router.push("/profile"): ("/"))
+    if (user?.profile) { router.push("/profile") } else router.push("/"); toast.success("Create your profile.")
+
   });
 
   return (

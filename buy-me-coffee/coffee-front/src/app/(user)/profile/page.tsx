@@ -19,7 +19,7 @@ import axios from "axios";
 import Image from "next/image";
 
 const profileSchema = z.object({
-  // image: z.string().min(3, { message: "Please enter your profile image." }),
+  image: z.string().min(3, { message: "Please enter your profile image." }),
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
@@ -33,10 +33,10 @@ const profileSchema = z.object({
 export default function Home() {
   const [uploadedImage, setUploadedImage] = useState("");
   const { loading, setLoading } = useAuth();
-  const { register, formState, watch } = useForm<z.infer<typeof profileSchema>>({
+  const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      // image: uploadedImage[0],
+      image: uploadedImage[0],
       name: "",
       about: "",
       socialMediaUrl: "",
@@ -79,9 +79,14 @@ export default function Home() {
 
   function onSubmit(values: z.infer<typeof profileSchema>) {
     const handleCreate = async () => {
-      setLoading(true);
+      // try {
+      //   setLoading(true);
+      //   const createProfileData = await.post()
+      // }
+
     };
   }
+
 
   return (
     <div className="w-full h-full flex justify-center items-center">
@@ -112,8 +117,8 @@ export default function Home() {
                       />
                     </div>
                     <div className="w-fit h-fit absolute">
-                      {form.image ? (
-                        <Image src={`${uploadedImage}`} alt="uploadedImage" />
+                      {uploadedImage ? (
+                        <Image src={`${uploadedImage}`} alt="uploadedImage" width={150} height={150} />
                       ) : (
                         <PhotoSvg />
                       )}
