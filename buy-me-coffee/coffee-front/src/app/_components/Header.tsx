@@ -12,7 +12,7 @@ export const Header = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full h-[50%] py-2 px-4 flex justify-center">
+    <div className="w-full h-fit py-2 px-4 flex justify-center">
       <div className="relative">
         <div className="flex w-[1240px] justify-between">
           <div className="flex text-4 font-bold items-center gap-[8px]">

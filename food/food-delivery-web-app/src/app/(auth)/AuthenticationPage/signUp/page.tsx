@@ -66,7 +66,6 @@ export default function Home() {
   const handleNext = () => {
     if (step === 1) {
       setStep((prev) => prev + 1);
-
     }
   };
   const handlePrev = () => {

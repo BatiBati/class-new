@@ -17,7 +17,7 @@ model User {
     bankCard  BankCard?
     createdAt DateTime
     updatedAt DateTime
-}
+}       
 
 model Profile {
     id              Int      @id @default(autoincrement())
@@ -25,7 +25,7 @@ model Profile {
     about           String
     avatarImage     String
     socialMediaUrl  String
-    backgroundImage String
+    backGroundImage String
     successMessage  String
     userId          Int      @unique
     user            User     @relation(fields: [userId], references: [id])

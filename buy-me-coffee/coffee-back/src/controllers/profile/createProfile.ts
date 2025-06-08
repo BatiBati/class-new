@@ -1,6 +1,7 @@
+import { RequestHandler } from "express";
 import { prisma } from "../../db";
 
-export const createProfile = async (req, res) => {
+export const createProfile: RequestHandler = async (req, res) => {
   const {
     name,
     about,
@@ -12,7 +13,7 @@ export const createProfile = async (req, res) => {
   } = req.body;
 
   if (!userId) {
-    return res.status(400).json({ message: "User id is required" });
+    res.status(400).json({ message: "User id is required" });
   }
 
   try {

@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const token = localStorage.getItem("token");
     setLoading(true);
     try {
-      const { data } = await api.get(`auth/get-me`, {
+      const { data } = await api.get(`/auth/get-me`, {
         headers: {
           Authorization: `${token}`,
         },
@@ -113,6 +113,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setLoading(false);
     }
   };
+
+const createProfile = async () => {
+
+}
 
   useEffect(() => {
     const token = localStorage.getItem("token");

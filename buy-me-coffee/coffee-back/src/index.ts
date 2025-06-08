@@ -13,6 +13,7 @@ app.use(express.json()).use(cors());
 app.get("/", (req, res) => {
   res.send("Home");
 });
+
 app.use("/auth", authRouter).use("/profile", profileRouter);
 
 app.listen(port, () => {
